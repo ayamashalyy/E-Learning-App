@@ -22,6 +22,8 @@
 		03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */; };
 		03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */; };
 		03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */; };
+		038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */; };
+		038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,11 @@
 		03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCollectionViewCell.swift; sourceTree = "<group>"; };
+		038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContinueCollectionViewCell.xib; sourceTree = "<group>"; };
+		038230042CED375100F96ACB /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		038230052CED375C00F96ACB /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		038230062CED376F00F96ACB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +81,7 @@
 		0377D4662CEBBA0E006C60F6 /* E-Learning */ = {
 			isa = PBXGroup;
 			children = (
+				038230032CED36E500F96ACB /* Fonts */,
 				03822FF82CECE83100F96ACB /* Onboarding */,
 				03822FF52CECE14500F96ACB /* Profile */,
 				03822FF22CECE11B00F96ACB /* MyLearning */,
@@ -124,6 +132,8 @@
 				03822FEA2CECC97C00F96ACB /* HomeViewController.swift */,
 				03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */,
 				03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */,
+				03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */,
+				038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -206,6 +216,16 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		038230032CED36E500F96ACB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				038230042CED375100F96ACB /* Roboto-Light.ttf */,
+				038230052CED375C00F96ACB /* Roboto-Bold.ttf */,
+				038230062CED376F00F96ACB /* Roboto-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0377D4802CEBC26D006C60F6 /* Second.storyboard in Resources */,
+				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
 				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
@@ -289,6 +310,7 @@
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
 				03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */,
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
+				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
