@@ -22,6 +22,7 @@
 		03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */; };
 		03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */; };
 		03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */; };
+		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				03822FEA2CECC97C00F96ACB /* HomeViewController.swift */,
 				03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */,
 				03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */,
+				7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */,
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
+				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
 				03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */,
