@@ -20,6 +20,8 @@
 		03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FE82CECC93700F96ACB /* ProfileViewController.swift */; };
 		03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FEA2CECC97C00F96ACB /* HomeViewController.swift */; };
 		03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */; };
+		03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */; };
+		03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		03822FE82CECC93700F96ACB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		03822FEA2CECC97C00F96ACB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				03822FEA2CECC97C00F96ACB /* HomeViewController.swift */,
+				03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */,
+				03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 				0377D4802CEBC26D006C60F6 /* Second.storyboard in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
+				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
 				03822FE32CECC27B00F96ACB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +286,7 @@
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
+				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
 				03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */,
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
 			);
