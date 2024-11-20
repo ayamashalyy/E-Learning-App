@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-class SectionHeaderView: UICollectionReusableView {
-    static let reuseIdentifier = "SectionHeaderView"
+class SectionHeaderView: UICollectionViewCell {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -32,7 +31,7 @@ class SectionHeaderView: UICollectionReusableView {
         addSubview(actionButton)
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
@@ -44,7 +43,7 @@ class SectionHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(title: String, section: Int, target: Any?, action: Selector) {
+    func configure(title: String) {
         titleLabel.text = title
 //        titleLabel.font = UIFont(name: "Roboto-Bold", size: 24.0)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
@@ -58,8 +57,6 @@ class SectionHeaderView: UICollectionReusableView {
           // Adjust the button layout to place the image on the right
           actionButton.semanticContentAttribute = .forceRightToLeft
           actionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0) // Space between text and image
-        actionButton.tag = section
-        actionButton.addTarget(target, action: action, for: .touchUpInside)
-    }
+        }
 
 }
