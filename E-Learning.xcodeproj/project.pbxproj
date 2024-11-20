@@ -22,9 +22,11 @@
 		03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */; };
 		03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */; };
 		03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */; };
-		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 		038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */; };
 		038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */; };
+		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
+		7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */; };
+		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,12 +47,14 @@
 		03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
-		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
 		03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCollectionViewCell.swift; sourceTree = "<group>"; };
 		038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContinueCollectionViewCell.xib; sourceTree = "<group>"; };
 		038230042CED375100F96ACB /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		038230052CED375C00F96ACB /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		038230062CED376F00F96ACB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coursesTitlesCellCollectionViewCell.swift; sourceTree = "<group>"; };
+		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +140,9 @@
 				03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */,
 				7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */,
 				03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */,
+				7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */,
 				038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */,
+				7D89CE922CED542800A5B64A /* SectionHeaderView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -305,9 +311,11 @@
 			files = (
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */,
+				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,
 				0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */,
 				03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */,
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
+				7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,

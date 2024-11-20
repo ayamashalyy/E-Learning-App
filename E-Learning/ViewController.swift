@@ -90,7 +90,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate{
            guard let tabBarItemView = tabBar.subviews[safe: adjustedIndex] else { return }
         
             let iconFrame = tabBarItemView.frame
-            print("frame\(iconFrame)")
             let size = CGSize(width: iconFrame.width * 0.6, height: iconFrame.height * 0.65)
             let origin = CGPoint(
                 x: iconFrame.midX - (size.width / 2) ,

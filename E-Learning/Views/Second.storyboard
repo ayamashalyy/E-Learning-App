@@ -46,6 +46,14 @@
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9d3-09-rcc">
                                     <rect key="frame" x="0.0" y="0.0" width="339" height="233"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNO-Um-aRN">
+                                            <rect key="frame" x="53" y="62" width="203" height="142"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="arro" title="Button"/>
+                                        </button>
+                                    </subviews>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="339" height="233"/>
                             </collectionViewCell>
@@ -62,6 +70,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arro" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
