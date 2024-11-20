@@ -94,7 +94,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: coursesTitleCellIdentifier, for: indexPath) as! coursesTitlesCellCollectionViewCell
             let title = coursesTitles[indexPath.row]
             let itemWidth = collectionView.bounds.width * 0.3
-            let itemHeight: CGFloat = 40
+            let itemHeight = collectionView.bounds.height * 0.05
 
             coursesTitleCell.configure(title: title, useFirstImage: useFirstImage, width: itemWidth, height: itemHeight)
             useFirstImage = !useFirstImage
@@ -104,7 +104,8 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             let coursesTitle = sectionTitles[1]
             coursesTitleCell.configure(title:coursesTitle )
             return coursesTitleCell
-            // case 5
+            
+        // case 5
             
             
             
@@ -116,7 +117,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             coursesTitleCell.configure(title:coursesTitle )
             return coursesTitleCell
             
-            /// 77
+        /// case 7
             ///
             ///
             ///
@@ -128,11 +129,10 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             coursesTitleCell.configure(title:coursesTitle )
             return coursesTitleCell
             
-            // 9
+    // case 9
             
             
-            
-            
+        
             
             
             
@@ -143,7 +143,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             coursesTitleCell.configure(title:coursesTitle )
             return coursesTitleCell
             
-            // case 11
+      // case 11
             
             
             
