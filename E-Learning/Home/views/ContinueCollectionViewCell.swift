@@ -8,7 +8,7 @@
 import UIKit
 
 class ContinueCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var outerView: UIView!
     @IBAction func arrow(_ sender: UIButton) {
     }
@@ -35,5 +35,5 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         
         
     }
-
+    
 }

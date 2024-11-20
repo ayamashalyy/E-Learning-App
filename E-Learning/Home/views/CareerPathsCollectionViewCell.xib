@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CareerCell" id="gTV-IL-0wX" customClass="CareerPathsCollectionViewCell" customModule="E_Learning" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="407" height="290"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="407" height="290"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bgg-8j-vCe">
+                        <rect key="frame" x="8" y="8" width="391" height="274"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 3" translatesAutoresizingMaskIntoConstraints="NO" id="vYm-sF-jKV">
+                                <rect key="frame" x="0.0" y="0.0" width="391" height="144"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UX Design" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edk-97-DOm">
+                                <rect key="frame" x="10" y="154" width="371" height="14.333333333333343"/>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiX-gO-r5a">
+                                <rect key="frame" x="5" y="176.33333333333334" width="200" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professional Certificate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENi-Jk-nKT">
+                                        <rect key="frame" x="14" y="11" width="160" height="18"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="careerPath"/>
+                                <constraints>
+                                    <constraint firstItem="ENi-Jk-nKT" firstAttribute="top" secondItem="eiX-gO-r5a" secondAttribute="top" constant="11" id="8xB-3C-3AG"/>
+                                    <constraint firstItem="ENi-Jk-nKT" firstAttribute="leading" secondItem="eiX-gO-r5a" secondAttribute="leading" constant="14" id="bEY-QK-MBB"/>
+                                    <constraint firstAttribute="trailing" secondItem="ENi-Jk-nKT" secondAttribute="trailing" constant="26" id="oUK-Sf-1w0"/>
+                                    <constraint firstAttribute="width" constant="200" id="rzB-Yg-VNp"/>
+                                    <constraint firstAttribute="bottom" secondItem="ENi-Jk-nKT" secondAttribute="bottom" constant="11" id="yFM-31-0RM"/>
+                                    <constraint firstAttribute="height" constant="40" id="zuw-9y-KOh"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="5 Courses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cU-TH-HbK">
+                                <rect key="frame" x="10" y="224.33333333333334" width="361" height="17.666666666666657"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="myCustom"/>
+                        <constraints>
+                            <constraint firstItem="6cU-TH-HbK" firstAttribute="leading" secondItem="Bgg-8j-vCe" secondAttribute="leading" constant="10" id="12k-4J-TEU"/>
+                            <constraint firstItem="vYm-sF-jKV" firstAttribute="top" secondItem="Bgg-8j-vCe" secondAttribute="top" id="5lk-bZ-K3Z"/>
+                            <constraint firstItem="edk-97-DOm" firstAttribute="leading" secondItem="Bgg-8j-vCe" secondAttribute="leading" constant="10" id="7Qu-9Q-PJe"/>
+                            <constraint firstItem="vYm-sF-jKV" firstAttribute="leading" secondItem="Bgg-8j-vCe" secondAttribute="leading" id="ABr-Gw-CFW"/>
+                            <constraint firstAttribute="trailing" secondItem="vYm-sF-jKV" secondAttribute="trailing" id="ECf-YH-RZ6"/>
+                            <constraint firstItem="eiX-gO-r5a" firstAttribute="top" secondItem="edk-97-DOm" secondAttribute="bottom" constant="8" id="FPi-gW-nrY"/>
+                            <constraint firstAttribute="bottom" secondItem="6cU-TH-HbK" secondAttribute="bottom" constant="32" id="KBc-aA-DbN"/>
+                            <constraint firstAttribute="trailing" secondItem="6cU-TH-HbK" secondAttribute="trailing" constant="20" id="bSy-mu-PxP"/>
+                            <constraint firstAttribute="bottom" secondItem="vYm-sF-jKV" secondAttribute="bottom" constant="130" id="bWc-0k-rMX"/>
+                            <constraint firstItem="6cU-TH-HbK" firstAttribute="top" secondItem="eiX-gO-r5a" secondAttribute="bottom" constant="8" id="eGA-yV-sH1"/>
+                            <constraint firstItem="edk-97-DOm" firstAttribute="top" secondItem="vYm-sF-jKV" secondAttribute="bottom" constant="10" id="gbP-gH-KoR"/>
+                            <constraint firstItem="eiX-gO-r5a" firstAttribute="leading" secondItem="Bgg-8j-vCe" secondAttribute="leading" constant="5" id="qLN-sV-LNu"/>
+                            <constraint firstAttribute="trailing" secondItem="edk-97-DOm" secondAttribute="trailing" constant="10" id="v47-Xz-stl"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Bgg-8j-vCe" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="0kA-wx-4bq"/>
+                <constraint firstItem="Bgg-8j-vCe" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="9u7-Ac-Ght"/>
+                <constraint firstAttribute="bottom" secondItem="Bgg-8j-vCe" secondAttribute="bottom" constant="8" id="H6U-aW-8OW"/>
+                <constraint firstAttribute="trailing" secondItem="Bgg-8j-vCe" secondAttribute="trailing" constant="8" id="ZzN-Ep-C6A"/>
+            </constraints>
+            <size key="customSize" width="407" height="290"/>
+            <connections>
+                <outlet property="careerPathCertificate" destination="6cU-TH-HbK" id="byf-c2-sWh"/>
+                <outlet property="careerPathImage" destination="vYm-sF-jKV" id="wjx-ID-6jU"/>
+                <outlet property="careerPathTitle" destination="edk-97-DOm" id="0Ek-gt-xeM"/>
+                <outlet property="innerView" destination="eiX-gO-r5a" id="8K2-Gy-gH2"/>
+                <outlet property="outerView" destination="Bgg-8j-vCe" id="617-OX-Zju"/>
+            </connections>
+            <point key="canvasLocation" x="329.00763358778624" y="-11.971830985915494"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Rectangle 3" width="223" height="80"/>
+        <namedColor name="careerPath">
+            <color red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="0.23999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="myCustom">
+            <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */; };
+		0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */; };
+		0328C1112CEE325500CC1DCF /* CoursesSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */; };
+		0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1122CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift */; };
+		0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C1132CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib */; };
+		0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1162CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift */; };
+		0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */; };
+		0328C11B2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C1192CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib */; };
+		0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */; };
 		0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */; };
 		0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */; };
 		0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D46B2CEBBA0E006C60F6 /* ViewController.swift */; };
@@ -30,6 +39,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCollectionViewCell.swift; sourceTree = "<group>"; };
+		0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoursesCollectionViewCell.xib; sourceTree = "<group>"; };
+		0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesSectionCell.swift; sourceTree = "<group>"; };
+		0328C1122CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCoursesCollectionViewCell.swift; sourceTree = "<group>"; };
+		0328C1132CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedCoursesCollectionViewCell.xib; sourceTree = "<group>"; };
+		0328C1162CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCoursesCollectionView.swift; sourceTree = "<group>"; };
+		0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathsCollectionViewCell.swift; sourceTree = "<group>"; };
+		0328C1192CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CareerPathsCollectionViewCell.xib; sourceTree = "<group>"; };
+		0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathCollectionView.swift; sourceTree = "<group>"; };
 		0377D4642CEBBA0E006C60F6 /* E-Learning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Learning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +161,15 @@
 				7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */,
 				038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */,
 				7D89CE922CED542800A5B64A /* SectionHeaderView.swift */,
+				0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */,
+				0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */,
+				0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */,
+				0328C1122CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift */,
+				0328C1132CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib */,
+				0328C1162CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift */,
+				0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */,
+				0328C1192CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib */,
+				0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -294,10 +321,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0377D4802CEBC26D006C60F6 /* Second.storyboard in Resources */,
+				0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */,
+				0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
 				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
+				0328C11B2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib in Resources */,
 				03822FE32CECC27B00F96ACB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,14 +345,20 @@
 				0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */,
 				03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */,
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
+				0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */,
+				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
 				7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
+				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
+				0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */,
+				0328C1112CEE325500CC1DCF /* CoursesSectionCell.swift in Sources */,
 				03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */,
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
+				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

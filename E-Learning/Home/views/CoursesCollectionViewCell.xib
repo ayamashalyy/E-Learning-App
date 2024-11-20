@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CoursesCell" id="gTV-IL-0wX" customClass="CoursesCollectionViewCell" customModule="E_Learning" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="257" height="93"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="257" height="93"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DzR-U9-xyd">
+                        <rect key="frame" x="8" y="8" width="241" height="77"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test1" translatesAutoresizingMaskIntoConstraints="NO" id="cfK-sv-tGd">
+                                <rect key="frame" x="0.0" y="0.0" width="241" height="77"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7l-6w-gEZ">
+                                <rect key="frame" x="0.0" y="0.0" width="241" height="77"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Science" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1q-f0-Eab">
+                                        <rect key="frame" x="20" y="10" width="201" height="57"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="F1q-f0-Eab" secondAttribute="bottom" constant="10" id="EyW-hk-4Vb"/>
+                                    <constraint firstItem="F1q-f0-Eab" firstAttribute="top" secondItem="R7l-6w-gEZ" secondAttribute="top" constant="10" id="Hv0-tJ-LAn"/>
+                                    <constraint firstAttribute="trailing" secondItem="F1q-f0-Eab" secondAttribute="trailing" constant="20" id="ZEw-dZ-61d"/>
+                                    <constraint firstItem="F1q-f0-Eab" firstAttribute="leading" secondItem="R7l-6w-gEZ" secondAttribute="leading" constant="20" id="kUc-6u-YEk"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="R7l-6w-gEZ" secondAttribute="bottom" id="1cB-rT-KDr"/>
+                            <constraint firstAttribute="trailing" secondItem="R7l-6w-gEZ" secondAttribute="trailing" id="8wt-Kg-UxG"/>
+                            <constraint firstItem="cfK-sv-tGd" firstAttribute="top" secondItem="DzR-U9-xyd" secondAttribute="top" id="bh3-Zz-oG1"/>
+                            <constraint firstItem="R7l-6w-gEZ" firstAttribute="top" secondItem="DzR-U9-xyd" secondAttribute="top" id="isU-63-VdJ"/>
+                            <constraint firstItem="cfK-sv-tGd" firstAttribute="leading" secondItem="DzR-U9-xyd" secondAttribute="leading" id="itE-dO-Qvw"/>
+                            <constraint firstItem="R7l-6w-gEZ" firstAttribute="leading" secondItem="DzR-U9-xyd" secondAttribute="leading" id="qUm-Mf-aBO"/>
+                            <constraint firstAttribute="trailing" secondItem="cfK-sv-tGd" secondAttribute="trailing" id="qYE-PI-sUA"/>
+                            <constraint firstAttribute="bottom" secondItem="cfK-sv-tGd" secondAttribute="bottom" id="uHK-vo-pfA"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="DzR-U9-xyd" secondAttribute="bottom" constant="8" id="4ls-n4-iwp"/>
+                <constraint firstItem="DzR-U9-xyd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="E7R-w1-YqH"/>
+                <constraint firstItem="DzR-U9-xyd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="NUx-au-Wc9"/>
+                <constraint firstAttribute="trailing" secondItem="DzR-U9-xyd" secondAttribute="trailing" constant="8" id="xrQ-4v-Dzj"/>
+            </constraints>
+            <size key="customSize" width="257" height="93"/>
+            <connections>
+                <outlet property="courseImage" destination="cfK-sv-tGd" id="TZc-5F-ZiE"/>
+                <outlet property="innerView" destination="R7l-6w-gEZ" id="epc-dT-Eh1"/>
+                <outlet property="outerView" destination="DzR-U9-xyd" id="ngt-z2-zBu"/>
+                <outlet property="titleCourse" destination="F1q-f0-Eab" id="6jx-UG-wsq"/>
+            </connections>
+            <point key="canvasLocation" x="267.93893129770993" y="-21.47887323943662"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="test1" width="320" height="480"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

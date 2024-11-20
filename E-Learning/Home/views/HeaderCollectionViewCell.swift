@@ -21,8 +21,8 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     
     func configureCell(user: String) {
         userLabel.text = user
-       
+        
     }
-
-
+    
+    
 }
