@@ -7,6 +7,149 @@
 
 import UIKit
 
+
+private let reuseIdentifier = "HeaderCustomCell"
+private let reuseIdentifier1 = "ContinueCell"
+private let headerReuseIdentifier = "SectionHeaderView"
+private let coursesTitleCellIdentifier = "CoursesTitleCell"
+private let sectionHeaderViewCell = "SectionHeaderViewCell"
+
+class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+    let sectionTitles = ["Courses Categories", "Featured Courses", "Most Popular", "Career Path", "Latest Courses"]
+    let coursesTitles = ["Data Science", "Design", "Business", "Law"]
+    private var useFirstImage: Bool = true
+
+    // MARK: - Initializers
+    init() {
+        super.init(collectionViewLayout: HomeViewController.createLayout())
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        configureCollectionView()
+    }
+
+    // MARK: - CollectionView Setup
+    private func configureCollectionView() {
+        let headerNib = UINib(nibName: "HeaderCollectionViewCell", bundle: nil)
+        collectionView.register(headerNib, forCellWithReuseIdentifier: reuseIdentifier)
+
+        let continueNib = UINib(nibName: "ContinueCollectionViewCell", bundle: nil)
+        collectionView.register(continueNib, forCellWithReuseIdentifier: reuseIdentifier1)
+
+        collectionView.register(coursesTitlesCellCollectionViewCell.self, forCellWithReuseIdentifier: coursesTitleCellIdentifier)
+        collectionView.register(SectionHeaderView.self, forCellWithReuseIdentifier: sectionHeaderViewCell)
+
+        collectionView.backgroundColor = .white
+    }
+
+    // MARK: - CollectionView DataSource
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sectionTitles.count
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return section == 0 ? 1 : (section == 3 ? coursesTitles.count : 1)
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            let headerCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HeaderCollectionViewCell
+            headerCell.configureCell(user: "Aya")
+            return headerCell
+
+        case 1:
+            let continueCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath) as! ContinueCollectionViewCell
+            return continueCell
+
+        case 2, 4, 6, 8, 10:
+            let sectionHeaderCell = collectionView.dequeueReusableCell(withReuseIdentifier: sectionHeaderViewCell, for: indexPath) as! SectionHeaderView
+            let sectionTitle = sectionTitles[indexPath.section / 2] // Adjust index for headers
+            sectionHeaderCell.configure(title: sectionTitle)
+            return sectionHeaderCell
+
+        case 3:
+            let coursesCell = collectionView.dequeueReusableCell(withReuseIdentifier: coursesTitleCellIdentifier, for: indexPath) as! coursesTitlesCellCollectionViewCell
+            let title = coursesTitles[indexPath.row]
+            let itemWidth = collectionView.bounds.width * 0.27
+            let itemHeight = collectionView.bounds.height * 0.05
+
+            coursesCell.configure(title: title, useFirstImage: useFirstImage, width: itemWidth, height: itemHeight)
+            useFirstImage.toggle()
+            return coursesCell
+
+        default:
+            return UICollectionViewCell()
+        }
+    }
+
+    // MARK: - CollectionView Layout
+    static func createLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { sectionIndex, _ in
+            switch sectionIndex {
+            case 0:
+                return Self.createHeaderSection()
+            case 1:
+                return Self.createFeaturedSection()
+            case 2, 4, 6, 8, 10:
+                return Self.createTitleSection()
+            case 3:
+                return Self.createCoursesSection()
+            default:
+                return nil
+            }
+        }
+    }
+
+    static func createHeaderSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        return section
+    }
+
+    static func createFeaturedSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .absolute(210))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(210))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        return section
+    }
+
+    static func createTitleSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        return NSCollectionLayoutSection(group: group)
+    }
+
+    static func createCoursesSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.27), heightDimension: .absolute(40))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(40))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        return section
+    }
+}
+
+
+
+/*
 private let reuseIdentifier = "HeaderCustomCell"
 private let reuseIdentifier1 = "ContinueCell"
 private let headerReuseIdentifier = "SectionHeaderView"
@@ -67,7 +210,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 2 , 4 , 6 , 8 , 10:
             return CGSize(width: collectionView.bounds.width - 20, height: 50)
         case 3:
-            return CGSize(width: collectionView.bounds.width * 0.3, height: 40)
+            return CGSize(width: collectionView.bounds.width * 0.27, height: 40)
         default:
             return .zero
         }
@@ -93,7 +236,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 3:
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: coursesTitleCellIdentifier, for: indexPath) as! coursesTitlesCellCollectionViewCell
             let title = coursesTitles[indexPath.row]
-            let itemWidth = collectionView.bounds.width * 0.3
+            let itemWidth = collectionView.bounds.width * 0.27
             let itemHeight = collectionView.bounds.height * 0.05
 
             coursesTitleCell.configure(title: title, useFirstImage: useFirstImage, width: itemWidth, height: itemHeight)
@@ -190,3 +333,4 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             }
         }
     }
+*/

@@ -11,7 +11,7 @@ class coursesTitlesCellCollectionViewCell: UICollectionViewCell {
     
 private let actionButton: UIButton = {
             let button = UIButton(type: .system)
-            button.layer.cornerRadius = 20
+            button.layer.cornerRadius = 15
             button.layer.masksToBounds = true
             button.setTitleColor(.white, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +26,7 @@ private let actionButton: UIButton = {
             NSLayoutConstraint.activate([
                       actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
                       actionButton.topAnchor.constraint(equalTo: topAnchor, constant: 8)])
+            
         }
 
         required init?(coder: NSCoder) {
