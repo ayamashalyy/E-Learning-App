@@ -6,18 +6,14 @@
 	<string>Main</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>Roboto-Regular.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Light.ttf</string>
 	</array>
-	<key>item 0</key>
-	<string>Roboto-Light.ttf</string>
-	<key>item 1</key>
-	<string>Roboto-Bold.ttf</string>
-	<key>item 2</key>
-	<string>Roboto-Regular.ttf</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
+		<true/>
 		<key>UISceneConfigurations</key>
 		<dict>
 			<key>UIWindowSceneSessionRoleApplication</key>

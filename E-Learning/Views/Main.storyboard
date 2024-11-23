@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -9,11 +9,6 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Roboto-Bold.ttf">
-            <string>Roboto-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -94,7 +89,7 @@
                                     <constraint firstAttribute="height" constant="40" id="Ucc-SD-uDa"/>
                                     <constraint firstAttribute="width" constant="250" id="ZVL-EE-hEH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -172,10 +167,220 @@
             </objects>
             <point key="canvasLocation" x="2399" y="-39"/>
         </scene>
+        <!--Privacy And Policy View Controller-->
+        <scene sceneID="j1u-1W-PM2">
+            <objects>
+                <viewController id="rx1-et-mlS" customClass="PrivacyAndPolicyViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z1C-5F-BUL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nis-bX-H5X">
+                                <rect key="frame" x="0.0" y="59" width="377" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="393" id="1Il-K5-p0h"/>
+                                </constraints>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Privacy &amp; Policy" id="VzU-ft-mGa">
+                                        <barButtonItem key="leftBarButtonItem" image="Icon 1" id="PEl-il-iIJ"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Effective: February 26, 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkN-fR-idu">
+                                <rect key="frame" x="99" y="127" width="217" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="HmK-og-a2V"/>
+                                    <constraint firstAttribute="width" constant="217" id="ukU-xu-vT0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="policy"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xpx-xj-ASz">
+                                <rect key="frame" x="20" y="158" width="337" height="305"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="305" id="edD-Un-S2x"/>
+                                </constraints>
+                                <string key="text">Welcome to Vinsys Inc.’s Privacy Policy. This Policy explains how we collect and use your data and how you can control your information. Looking for a quick summary on our privacy practices? Check out this page or this video. And if you’re looking for specific product privacy information, for example, how we process your Chats and Snaps, take a look at our Privacy by Product page. In addition to these documents, we also show in-app notices that provide you more information about our products and services.</string>
+                                <color key="textColor" name="policy2"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wox-rA-lVC">
+                                <rect key="frame" x="20" y="467" width="337" height="310"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="310" id="AcG-fi-oM5"/>
+                                </constraints>
+                                <string key="text">Transparency is one of our core values at Vinsys. We believe there shouldn’t be any surprises about the data we collect and how we use it — that’s why we’re upfront with how we process it. For example, we process your information to provide you a more personalized experience, including to show you content and information that is most relevant to your experience, as well as more relevant advertisements. Understanding your interests and preferences help us provide a better product experience.</string>
+                                <color key="textColor" name="policy2"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="y7X-hy-GXQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="y7X-hy-GXQ" firstAttribute="trailing" secondItem="Xpx-xj-ASz" secondAttribute="trailing" constant="20" id="4C8-Wu-XWa"/>
+                            <constraint firstItem="nis-bX-H5X" firstAttribute="leading" secondItem="y7X-hy-GXQ" secondAttribute="leading" id="BNA-pF-C2Z"/>
+                            <constraint firstItem="nis-bX-H5X" firstAttribute="top" secondItem="y7X-hy-GXQ" secondAttribute="top" id="Eet-9k-J9u"/>
+                            <constraint firstItem="Wox-rA-lVC" firstAttribute="top" secondItem="Xpx-xj-ASz" secondAttribute="bottom" constant="4" id="G8m-cq-zgd"/>
+                            <constraint firstItem="y7X-hy-GXQ" firstAttribute="trailing" secondItem="pkN-fR-idu" secondAttribute="trailing" constant="61" id="RLn-aI-Dsm"/>
+                            <constraint firstItem="nis-bX-H5X" firstAttribute="trailing" secondItem="y7X-hy-GXQ" secondAttribute="trailing" id="SKe-K0-gbd"/>
+                            <constraint firstItem="pkN-fR-idu" firstAttribute="leading" secondItem="y7X-hy-GXQ" secondAttribute="leading" constant="99" id="Ue9-BT-AGt"/>
+                            <constraint firstItem="Xpx-xj-ASz" firstAttribute="leading" secondItem="y7X-hy-GXQ" secondAttribute="leading" constant="20" id="Y4C-gj-dJC"/>
+                            <constraint firstItem="y7X-hy-GXQ" firstAttribute="trailing" secondItem="Wox-rA-lVC" secondAttribute="trailing" constant="20" id="YBG-eW-OVF"/>
+                            <constraint firstItem="pkN-fR-idu" firstAttribute="top" secondItem="nis-bX-H5X" secondAttribute="bottom" constant="24" id="Yhb-aJ-O4T"/>
+                            <constraint firstItem="Wox-rA-lVC" firstAttribute="leading" secondItem="y7X-hy-GXQ" secondAttribute="leading" constant="20" id="iSF-Kz-4Qe"/>
+                            <constraint firstItem="Xpx-xj-ASz" firstAttribute="top" secondItem="pkN-fR-idu" secondAttribute="bottom" constant="10" id="r4J-Cw-SZF"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ljq-YY-70g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3142.7480916030531" y="-39.436619718309863"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="Tct-7M-MkA">
+            <objects>
+                <viewController id="uir-To-av3" customClass="AboutViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="82g-ax-nnU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-MU-Pxl">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="About VINSYS" id="RVA-Ee-XOd">
+                                        <barButtonItem key="leftBarButtonItem" image="Icon 1" id="sgt-5Q-SyI"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i0D-dU-qjP">
+                                <rect key="frame" x="20" y="115" width="357" height="309"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="309" id="RbX-Gk-PgV"/>
+                                </constraints>
+                                <string key="text">Welcome to Vinsys Inc.’s Privacy Policy. This Policy explains how we collect and use your data and how you can control your information. Looking for a quick summary on our privacy practices? Check out this page or this video. And if you’re looking for specific product privacy information, for example, how we process your Chats and Snaps, take a look at our Privacy by Product page. In addition to these documents, we also show in-app notices that provide you more information about our products and services.</string>
+                                <color key="textColor" name="policy2"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0cw-qf-FGJ">
+                                <rect key="frame" x="20" y="432" width="357" height="350"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="aYz-1D-TlU"/>
+                                </constraints>
+                                <string key="text">Transparency is one of our core values at Vinsys. We believe there shouldn’t be any surprises about the data we collect and how we use it — that’s why we’re upfront with how we process it. For example, we process your information to provide you a more personalized experience, including to show you content and information that is most relevant to your experience, as well as more relevant advertisements. Understanding your interests and preferences help us provide a better product experience.</string>
+                                <color key="textColor" name="policy2"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zL4-PM-wVJ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zL4-PM-wVJ" firstAttribute="trailing" secondItem="i0D-dU-qjP" secondAttribute="trailing" constant="16" id="2hK-JM-mU2"/>
+                            <constraint firstItem="0cw-qf-FGJ" firstAttribute="top" secondItem="i0D-dU-qjP" secondAttribute="bottom" constant="8" id="6mc-Nu-due"/>
+                            <constraint firstItem="zL4-PM-wVJ" firstAttribute="trailing" secondItem="0cw-qf-FGJ" secondAttribute="trailing" constant="16" id="AV7-i7-8db"/>
+                            <constraint firstItem="0cw-qf-FGJ" firstAttribute="leading" secondItem="zL4-PM-wVJ" secondAttribute="leading" constant="20" id="BYt-GY-EEz"/>
+                            <constraint firstItem="LcM-MU-Pxl" firstAttribute="top" secondItem="zL4-PM-wVJ" secondAttribute="top" id="D6d-75-uwU"/>
+                            <constraint firstItem="i0D-dU-qjP" firstAttribute="leading" secondItem="zL4-PM-wVJ" secondAttribute="leading" constant="20" id="dwR-lx-KXc"/>
+                            <constraint firstItem="i0D-dU-qjP" firstAttribute="top" secondItem="LcM-MU-Pxl" secondAttribute="bottom" constant="12" id="hYR-HM-Nxu"/>
+                            <constraint firstItem="LcM-MU-Pxl" firstAttribute="trailing" secondItem="zL4-PM-wVJ" secondAttribute="trailing" id="x3C-fL-iw1"/>
+                            <constraint firstItem="LcM-MU-Pxl" firstAttribute="leading" secondItem="zL4-PM-wVJ" secondAttribute="leading" id="zKW-JN-FIy"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HT1-Ob-hBW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3802.2900763358775" y="-41.549295774647888"/>
+        </scene>
+        <!--Terms And Conditions View Controller-->
+        <scene sceneID="hsW-c8-ofF">
+            <objects>
+                <viewController id="QKY-Ii-JxR" customClass="TermsAndConditionsViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DoP-bs-97e">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="BxZ-KP-LKd">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Terms and Conditions" id="R3G-ee-8sD">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="Icon 1" id="lHt-Mk-00y"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kgP-Ss-DQL">
+                                <rect key="frame" x="16" y="115" width="361" height="310"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="310" id="78b-sX-xjk"/>
+                                    <constraint firstAttribute="width" constant="361" id="q4U-p6-hkU"/>
+                                </constraints>
+                                <string key="text">Welcome to Vinsys Inc.’s Privacy Policy. This Policy explains how we collect and use your data and how you can control your information. Looking for a quick summary on our privacy practices? Check out this page or this video. And if you’re looking for specific product privacy information, for example, how we process your Chats and Snaps, take a look at our Privacy by Product page. In addition to these documents, we also show in-app notices that provide you more information about our products and services.</string>
+                                <color key="textColor" name="policy2"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Cgd-gB-EV3">
+                                <rect key="frame" x="16" y="433" width="361" height="347"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="361" id="aGe-g6-aLM"/>
+                                    <constraint firstAttribute="height" constant="347" id="gbn-lc-gCb"/>
+                                </constraints>
+                                <string key="text">Transparency is one of our core values at Vinsys. We believe there shouldn’t be any surprises about the data we collect and how we use it — that’s why we’re upfront with how we process it. For example, we process your information to provide you a more personalized experience, including to show you content and information that is most relevant to your experience, as well as more relevant advertisements. Understanding your interests and preferences help us provide a better product experience.</string>
+                                <color key="textColor" name="policy2"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OX6-Hz-a99"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BxZ-KP-LKd" firstAttribute="trailing" secondItem="OX6-Hz-a99" secondAttribute="trailing" id="7NP-ae-LBS"/>
+                            <constraint firstItem="kgP-Ss-DQL" firstAttribute="top" secondItem="BxZ-KP-LKd" secondAttribute="bottom" constant="12" id="ChV-La-C4p"/>
+                            <constraint firstItem="BxZ-KP-LKd" firstAttribute="top" secondItem="OX6-Hz-a99" secondAttribute="top" id="F0q-ne-9Gq"/>
+                            <constraint firstItem="BxZ-KP-LKd" firstAttribute="leading" secondItem="OX6-Hz-a99" secondAttribute="leading" id="J9G-Nc-1QV"/>
+                            <constraint firstItem="kgP-Ss-DQL" firstAttribute="leading" secondItem="OX6-Hz-a99" secondAttribute="leading" constant="16" id="eoY-dd-gIj"/>
+                            <constraint firstItem="Cgd-gB-EV3" firstAttribute="top" secondItem="kgP-Ss-DQL" secondAttribute="bottom" constant="8" id="lTA-fi-17c"/>
+                            <constraint firstItem="Cgd-gB-EV3" firstAttribute="leading" secondItem="OX6-Hz-a99" secondAttribute="leading" constant="16" id="naK-XT-Zi6"/>
+                            <constraint firstItem="OX6-Hz-a99" firstAttribute="trailing" secondItem="Cgd-gB-EV3" secondAttribute="trailing" constant="16" id="uMO-Ur-tq6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n2h-Tr-Af1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4507.6335877862593" y="-39.436619718309863"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Icon 1" width="10" height="16"/>
         <namedColor name="myCustom">
             <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="policy">
+            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="policy2">
+            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

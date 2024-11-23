@@ -35,6 +35,9 @@
 		03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */; };
 		038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */; };
 		038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */; };
+		038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */; };
+		038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */; };
+		038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */; };
 		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
@@ -74,6 +77,9 @@
 		038230042CED375100F96ACB /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		038230052CED375C00F96ACB /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		038230062CED376F00F96ACB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndPolicyViewController.swift; sourceTree = "<group>"; };
+		038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coursesTitlesCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				03822FE82CECC93700F96ACB /* ProfileViewController.swift */,
+				038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */,
+				038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */,
+				038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -389,10 +398,12 @@
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,
+				038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */,
 				0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */,
 				03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */,
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
 				0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */,
+				038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */,
 				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
 				7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
@@ -407,6 +418,7 @@
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
 				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
+				038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
