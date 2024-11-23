@@ -3,16 +3,22 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="ViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,8 +80,103 @@
             </objects>
             <point key="canvasLocation" x="915" y="-39"/>
         </scene>
+        <!--My Learning View Controller-->
+        <scene sceneID="zFb-H6-NVI">
+            <objects>
+                <viewController storyboardIdentifier="1" id="B3d-3g-Csj" customClass="MyLearningViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4We-0Y-Y3Y">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Learning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfz-pL-ozf">
+                                <rect key="frame" x="70" y="67" width="250" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ucc-SD-uDa"/>
+                                    <constraint firstAttribute="width" constant="250" id="ZVL-EE-hEH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ACi-48-zjy">
+                                <rect key="frame" x="20" y="127" width="350" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="h0J-Zh-0nX"/>
+                                    <constraint firstAttribute="height" constant="48" id="xRx-27-Gyf"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="In Progress"/>
+                                    <segment title="Assigned"/>
+                                    <segment title="Completed"/>
+                                </segments>
+                                <color key="selectedSegmentTintColor" name="myCustom"/>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MMs-h6-TGN">
+                                <rect key="frame" x="0.0" y="195" width="393" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="f5M-Wf-adG">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f5M-Wf-adG" id="fjS-7O-RkO">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kDy-pu-0NT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="MMs-h6-TGN" firstAttribute="trailing" secondItem="kDy-pu-0NT" secondAttribute="trailing" id="Eeu-gp-3Lv"/>
+                            <constraint firstItem="ACi-48-zjy" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" constant="20" id="Isk-eg-fyC"/>
+                            <constraint firstItem="Jfz-pL-ozf" firstAttribute="top" secondItem="kDy-pu-0NT" secondAttribute="top" constant="8" id="Mpq-4E-eot"/>
+                            <constraint firstItem="kDy-pu-0NT" firstAttribute="bottom" secondItem="MMs-h6-TGN" secondAttribute="bottom" id="QDn-Dq-Bta"/>
+                            <constraint firstItem="Jfz-pL-ozf" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" constant="70" id="Rma-Gd-L8D"/>
+                            <constraint firstItem="MMs-h6-TGN" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" id="SPR-dO-Oq7"/>
+                            <constraint firstItem="MMs-h6-TGN" firstAttribute="top" secondItem="ACi-48-zjy" secondAttribute="bottom" constant="20" id="Zna-xy-Xq5"/>
+                            <constraint firstItem="ACi-48-zjy" firstAttribute="top" secondItem="Jfz-pL-ozf" secondAttribute="bottom" constant="20" id="u8b-5s-92S"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mySegmentedControl" destination="ACi-48-zjy" id="2d4-pa-3XI"/>
+                        <outlet property="tabelView" destination="MMs-h6-TGN" id="gyc-Zl-AZh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RHT-J1-TID" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1635.8778625954199" y="-39.436619718309863"/>
+        </scene>
+        <!--Search View Controller-->
+        <scene sceneID="gzd-tk-vU9">
+            <objects>
+                <viewController storyboardIdentifier="2" id="dHj-Yg-i2b" customClass="SearchViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zlu-50-I7q">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aya" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfW-Rd-EoF">
+                                <rect key="frame" x="182" y="372" width="28" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Lgs-SS-2hP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MhM-7B-aDB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2399" y="-39"/>
+        </scene>
     </scenes>
     <resources>
+        <namedColor name="myCustom">
+            <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

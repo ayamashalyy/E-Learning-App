@@ -16,6 +16,8 @@
 		0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */; };
 		0328C11B2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C1192CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib */; };
 		0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */; };
+		03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */; };
+		03323E722CF14D36008AF673 /* MyLearningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */; };
 		0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */; };
 		0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */; };
 		0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D46B2CEBBA0E006C60F6 /* ViewController.swift */; };
@@ -48,6 +50,8 @@
 		0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0328C1192CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CareerPathsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathCollectionView.swift; sourceTree = "<group>"; };
+		03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningTableViewCell.swift; sourceTree = "<group>"; };
+		03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLearningTableViewCell.xib; sourceTree = "<group>"; };
 		0377D4642CEBBA0E006C60F6 /* E-Learning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Learning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				03822FE62CECC90900F96ACB /* MyLearningViewController.swift */,
+				03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */,
+				03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -361,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0377D4802CEBC26D006C60F6 /* Second.storyboard in Resources */,
+				03323E722CF14D36008AF673 /* MyLearningTableViewCell.xib in Resources */,
 				0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */,
 				0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
@@ -392,6 +399,7 @@
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
+				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
 				0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */,
 				0328C1112CEE325500CC1DCF /* CoursesSectionCell.swift in Sources */,
