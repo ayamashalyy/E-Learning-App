@@ -25,6 +25,8 @@
 		0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0377D4732CEBBA3D006C60F6 /* Assets.xcassets */; };
 		0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0377D4752CEBBA3D006C60F6 /* LaunchScreen.storyboard */; };
 		0377D4802CEBC26D006C60F6 /* Second.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0377D47F2CEBC26D006C60F6 /* Second.storyboard */; };
+		037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037F20F12CF384FE00691EF0 /* SelectOrganizationViewController.swift */; };
+		037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037F20F62CF3A17000691EF0 /* LoginViewController.swift */; };
 		03822FE32CECC27B00F96ACB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03822FE22CECC27A00F96ACB /* Main.storyboard */; };
 		03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FE42CECC71500F96ACB /* SearchViewController.swift */; };
 		03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FE62CECC90900F96ACB /* MyLearningViewController.swift */; };
@@ -64,6 +66,8 @@
 		0377D4762CEBBA3D006C60F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0377D4782CEBBA3D006C60F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0377D47F2CEBC26D006C60F6 /* Second.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Second.storyboard; sourceTree = "<group>"; };
+		037F20F12CF384FE00691EF0 /* SelectOrganizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrganizationViewController.swift; sourceTree = "<group>"; };
+		037F20F62CF3A17000691EF0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		03822FE22CECC27A00F96ACB /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		03822FE42CECC71500F96ACB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		03822FE62CECC90900F96ACB /* MyLearningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 		0377D4662CEBBA0E006C60F6 /* E-Learning */ = {
 			isa = PBXGroup;
 			children = (
+				037F20F32CF3A0FA00691EF0 /* Auth */,
 				03B43C1E2CF0C7000018A306 /* Model */,
 				03B43C1C2CF0C6960018A306 /* Services */,
 				03B43C1B2CF0C63B0018A306 /* Utility */,
@@ -138,6 +143,31 @@
 				0377D47F2CEBC26D006C60F6 /* Second.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		037F20F32CF3A0FA00691EF0 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				037F20F52CF3A11600691EF0 /* view */,
+				037F20F42CF3A10B00691EF0 /* viewModel */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		037F20F42CF3A10B00691EF0 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		037F20F52CF3A11600691EF0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				037F20F12CF384FE00691EF0 /* SelectOrganizationViewController.swift */,
+				037F20F62CF3A17000691EF0 /* LoginViewController.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		03822FEC2CECE0A400F96ACB /* Home */ = {
@@ -412,12 +442,14 @@
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
+				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,
 				0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */,
 				0328C1112CEE325500CC1DCF /* CoursesSectionCell.swift in Sources */,
 				03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */,
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
 				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
+				037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */,
 				038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

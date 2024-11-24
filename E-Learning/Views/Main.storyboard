@@ -176,7 +176,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nis-bX-H5X">
-                                <rect key="frame" x="0.0" y="59" width="377" height="44"/>
+                                <rect key="frame" x="0.0" y="59" width="376.66666666666669" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="393" id="1Il-K5-p0h"/>
                                 </constraints>
@@ -191,7 +191,7 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Effective: February 26, 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkN-fR-idu">
-                                <rect key="frame" x="99" y="127" width="217" height="21"/>
+                                <rect key="frame" x="98.999999999999986" y="127" width="216.66666666666663" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="HmK-og-a2V"/>
                                     <constraint firstAttribute="width" constant="217" id="ukU-xu-vT0"/>
@@ -201,7 +201,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xpx-xj-ASz">
-                                <rect key="frame" x="20" y="158" width="337" height="305"/>
+                                <rect key="frame" x="20" y="158" width="336.66666666666669" height="305"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="305" id="edD-Un-S2x"/>
@@ -212,7 +212,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wox-rA-lVC">
-                                <rect key="frame" x="20" y="467" width="337" height="310"/>
+                                <rect key="frame" x="20" y="467" width="336.66666666666669" height="310"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="310" id="AcG-fi-oM5"/>
@@ -377,10 +377,10 @@
             <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="policy">
-            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="policy2">
-            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="0.60000002384185791" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
