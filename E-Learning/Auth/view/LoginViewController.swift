@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import MaterialComponents
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController , UITextFieldDelegate{
     
     var organizationNameText: UILabel!
     var welcomeBackText: UILabel!
-    var emailTextField: UITextField!
-    var passwordTextField: UITextField!
+    var emailTextField: MDCTextField!
+    var emailController: MDCTextInputControllerOutlined!
+    var passwordTextField: MDCTextField!
+    var passwordController: MDCTextInputControllerOutlined!
     var goToYourOrgaizationButton: UIButton!
     var eyeButton: UIButton!
     var rememberMeCheckbox: UIButton!
@@ -22,7 +25,7 @@ class LoginViewController: UIViewController {
     var loginButton: UIButton!
     
     
-    var isPasswordVisible = false
+    var isPasswordVisible = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,33 +56,45 @@ class LoginViewController: UIViewController {
         welcomeBackText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(welcomeBackText)
         
-        emailTextField = UITextField()
-        emailTextField.placeholder = "   Enter your email"
-        emailTextField.font = UIFont.systemFont(ofSize: 14)
-        emailTextField.borderStyle = .roundedRect
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.borderWidth = 1
-        emailTextField.layer.borderColor = UIColor.lightGray.cgColor
+        emailTextField = MDCTextField()
+        emailTextField.font = UIFont.systemFont(ofSize: 12)
+        emailTextField.text = "Enter your email"
+        emailTextField.textColor = .lightGray
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emailTextField)
         
-        passwordTextField = UITextField()
-        passwordTextField.placeholder = "   Enter your password"
-        passwordTextField.font = UIFont.systemFont(ofSize: 14)
-        passwordTextField.borderStyle = .roundedRect
-        passwordTextField.layer.cornerRadius = 10
-        passwordTextField.layer.borderWidth = 1
-        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
+        
+        emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
+        emailController.placeholderText = "Email"
+        emailController.normalColor = .lightGray
+        emailController.activeColor = .lightGray;     emailController.floatingPlaceholderActiveColor = .black
+        emailController.floatingPlaceholderScale = 0.8
+        emailController.borderRadius = 8
+        
+        emailTextField.delegate = self
+        
+        passwordTextField = MDCTextField()
+        passwordTextField.font = UIFont.systemFont(ofSize: 12)
+        passwordTextField.text = "Enter your password"
+        passwordTextField.textColor = .lightGray
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.isSecureTextEntry = true
         view.addSubview(passwordTextField)
         
+        
+        passwordController = MDCTextInputControllerOutlined(textInput: passwordTextField)
+        passwordController.placeholderText = "Password"
+        passwordController.normalColor = .lightGray
+        passwordController.activeColor = .lightGray;     passwordController.floatingPlaceholderActiveColor = .black
+        passwordController.floatingPlaceholderScale = 0.8
+        passwordController.borderRadius = 8
+        
+        passwordTextField.delegate = self
+        
         eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        eyeButton.setImage(UIImage(named: "view"), for: .normal)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         passwordTextField.rightView = eyeButton
-        eyeButton.frame = CGRect(x: 50, y: 0, width: 100, height: 100)
         passwordTextField.rightViewMode = .always
         
         rememberMeCheckbox = UIButton(type: .custom)
@@ -213,10 +228,14 @@ class LoginViewController: UIViewController {
         isPasswordVisible.toggle()
         
         passwordTextField.isSecureTextEntry = !isPasswordVisible
-        let iconName = isPasswordVisible ? "eye" : "eye.slash"
-        let iconImage = UIImage(systemName: iconName)
-        eyeButton.setImage(iconImage?.withTintColor(UIColor(named: "myCustom") ?? .red), for: .normal)
+        print("Password visibility: \(isPasswordVisible)")
+        let iconName = isPasswordVisible ? "view" : "hide"
+        let iconImage = UIImage(named: iconName)?.withTintColor(UIColor(named: "myCustom") ?? .red, renderingMode: .alwaysOriginal)
+        eyeButton.setImage(iconImage, for: .normal)
     }
+    
+    
+    
     
     @objc func toggleRememberMe() {
         rememberMeCheckbox.isSelected.toggle()
@@ -226,6 +245,8 @@ class LoginViewController: UIViewController {
     @objc func forgetPasswordTapped() {
         print("Forget Password? tapped")
         
+        let nextViewController = ForgetPasswordViewController()
+        navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func loginButtonTapped() {
@@ -234,6 +255,31 @@ class LoginViewController: UIViewController {
         //        navigationController?.pushViewController(nextViewController, animated: true)
         
     }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Remove placeholder text when editing begins
+        if textField == emailTextField && textField.text == "Enter your email" {
+            textField.text = ""
+            textField.textColor = .black
+        } else if textField == passwordTextField && textField.text == "Enter your password" {
+            textField.text = ""
+            textField.textColor = .black
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // Restore placeholder text if field is empty
+        if textField == emailTextField && (textField.text?.isEmpty ?? true) {
+            textField.text = "Enter your email"
+            textField.textColor = .lightGray
+        } else if textField == passwordTextField && (textField.text?.isEmpty ?? true) {
+            textField.text = "Enter your password"
+            textField.textColor = .lightGray
+        }
+    }
+    
     
     
     
