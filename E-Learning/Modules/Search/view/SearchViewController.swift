@@ -22,6 +22,7 @@ class SearchViewController: UIViewController {
     var cancelButton = UIButton()
     var tableView = UITableView()
     var searchLabel = UILabel()
+    var noRecentSearchImageView: UIImageView!
     
     
     var recentSearches: [String] = []
@@ -39,6 +40,7 @@ class SearchViewController: UIViewController {
         
         currentState = .recentSearches
         tableView.reloadData()
+        updateNoRecentSearchImage()
     }
     
     
@@ -85,12 +87,25 @@ class SearchViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         view.addSubview(tableView)
+        
+        noRecentSearchImageView = UIImageView(image: UIImage(named: "search"))
+        noRecentSearchImageView.contentMode = .scaleAspectFit
+        noRecentSearchImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(noRecentSearchImageView)
     }
     
     func setupConstraints() {
+        
+        NSLayoutConstraint.activate([
+            noRecentSearchImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noRecentSearchImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noRecentSearchImageView.widthAnchor.constraint(equalToConstant: 200),
+            noRecentSearchImageView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
         NSLayoutConstraint.activate([
             searchLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
+            searchLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 65),
             searchLabel.widthAnchor.constraint(equalToConstant: 300),
             searchLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -148,6 +163,7 @@ class SearchViewController: UIViewController {
         tableView.reloadData()
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
+        updateNoRecentSearchImage()
     }
     
     @objc func cancelButtonTapped() {
@@ -155,6 +171,7 @@ class SearchViewController: UIViewController {
         searchTextField.resignFirstResponder()
         currentState = .recentSearches
         tableView.reloadData()
+        updateNoRecentSearchImage()
     }
     
 }
@@ -207,6 +224,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.onCancelTapped = { [weak self] in
                 self?.recentSearches.remove(at: indexPath.row)
                 self?.saveRecentSearches()
+                self?.updateNoRecentSearchImage()
                 tableView.reloadData()
             }
             
@@ -228,6 +246,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if recentSearches.isEmpty && currentState == .recentSearches {
+            return nil
+        }
         
         let headerView = UIView()
         headerView.backgroundColor = .white
@@ -268,10 +289,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             ])
         }
         
-        return headerView    }
+        return headerView
+    }
+    
     
     @objc func filterButtonTapped() {
         print("Filter button tapped")
+        let nextViewController = FilterViewController()
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     
@@ -296,4 +323,14 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             return 50
         }
     }
+    
+    func updateNoRecentSearchImage() {
+        if recentSearches.isEmpty {
+            noRecentSearchImageView.isHidden = false
+        } else {
+            noRecentSearchImageView.isHidden = true
+        }
+    }
+    
+    
 }

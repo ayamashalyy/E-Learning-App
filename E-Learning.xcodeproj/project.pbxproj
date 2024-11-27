@@ -22,6 +22,10 @@
 		0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */; };
 		0359D08E2CF4CB17006B393C /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */; };
 		0359D0902CF4D5A6006B393C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */; };
+		036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A8C7D2CF7518100F01CE5 /* FilterViewController.swift */; };
+		036A8C852CF7923700F01CE5 /* FiltrationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A8C832CF7923700F01CE5 /* FiltrationCollectionViewCell.swift */; };
+		036A8C862CF7923700F01CE5 /* FiltrationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036A8C842CF7923700F01CE5 /* FiltrationCollectionViewCell.xib */; };
+		036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A8C872CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift */; };
 		0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */; };
 		0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */; };
 		0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D46B2CEBBA0E006C60F6 /* ViewController.swift */; };
@@ -69,6 +73,10 @@
 		035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchesTableViewCell.xib; sourceTree = "<group>"; };
 		0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		036A8C7D2CF7518100F01CE5 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		036A8C832CF7923700F01CE5 /* FiltrationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationCollectionViewCell.swift; sourceTree = "<group>"; };
+		036A8C842CF7923700F01CE5 /* FiltrationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FiltrationCollectionViewCell.xib; sourceTree = "<group>"; };
+		036A8C872CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSectionHeaderViewCollectionReusableView.swift; sourceTree = "<group>"; };
 		0377D4642CEBBA0E006C60F6 /* E-Learning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Learning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -251,6 +259,10 @@
 				035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */,
 				03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */,
 				03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */,
+				036A8C7D2CF7518100F01CE5 /* FilterViewController.swift */,
+				036A8C832CF7923700F01CE5 /* FiltrationCollectionViewCell.swift */,
+				036A8C842CF7923700F01CE5 /* FiltrationCollectionViewCell.xib */,
+				036A8C872CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -457,6 +469,7 @@
 				0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */,
 				03AA80E72CF6631300141A0E /* TotalResultsTableViewCell.xib in Resources */,
 				0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */,
+				036A8C862CF7923700F01CE5 /* FiltrationCollectionViewCell.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */,
@@ -516,6 +529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036A8C852CF7923700F01CE5 /* FiltrationCollectionViewCell.swift in Sources */,
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,
@@ -542,6 +556,8 @@
 				03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */,
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
 				0359D08E2CF4CB17006B393C /* ForgetPasswordViewController.swift in Sources */,
+				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
+				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
 				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
 				037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */,

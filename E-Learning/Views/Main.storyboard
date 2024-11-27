@@ -84,7 +84,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Learning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfz-pL-ozf">
-                                <rect key="frame" x="70" y="67" width="250" height="40"/>
+                                <rect key="frame" x="70" y="61" width="250" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ucc-SD-uDa"/>
                                     <constraint firstAttribute="width" constant="250" id="ZVL-EE-hEH"/>
@@ -94,7 +94,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ACi-48-zjy">
-                                <rect key="frame" x="20" y="127" width="350" height="49"/>
+                                <rect key="frame" x="20" y="121" width="350" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="h0J-Zh-0nX"/>
                                     <constraint firstAttribute="height" constant="48" id="xRx-27-Gyf"/>
@@ -107,7 +107,7 @@
                                 <color key="selectedSegmentTintColor" name="myCustom"/>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MMs-h6-TGN">
-                                <rect key="frame" x="0.0" y="195" width="393" height="623"/>
+                                <rect key="frame" x="0.0" y="189" width="393" height="629"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="f5M-Wf-adG">
@@ -126,7 +126,7 @@
                         <constraints>
                             <constraint firstItem="MMs-h6-TGN" firstAttribute="trailing" secondItem="kDy-pu-0NT" secondAttribute="trailing" id="Eeu-gp-3Lv"/>
                             <constraint firstItem="ACi-48-zjy" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" constant="20" id="Isk-eg-fyC"/>
-                            <constraint firstItem="Jfz-pL-ozf" firstAttribute="top" secondItem="kDy-pu-0NT" secondAttribute="top" constant="8" id="Mpq-4E-eot"/>
+                            <constraint firstItem="Jfz-pL-ozf" firstAttribute="top" secondItem="kDy-pu-0NT" secondAttribute="top" constant="2" id="Mpq-4E-eot"/>
                             <constraint firstItem="kDy-pu-0NT" firstAttribute="bottom" secondItem="MMs-h6-TGN" secondAttribute="bottom" id="QDn-Dq-Bta"/>
                             <constraint firstItem="Jfz-pL-ozf" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" constant="70" id="Rma-Gd-L8D"/>
                             <constraint firstItem="MMs-h6-TGN" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" id="SPR-dO-Oq7"/>
