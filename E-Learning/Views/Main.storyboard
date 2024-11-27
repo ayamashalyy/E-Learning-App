@@ -143,22 +143,13 @@
             </objects>
             <point key="canvasLocation" x="1635.8778625954199" y="-39.436619718309863"/>
         </scene>
-        <!--Search View Controller-->
+        <!--View Controller-->
         <scene sceneID="gzd-tk-vU9">
             <objects>
-                <viewController storyboardIdentifier="2" id="dHj-Yg-i2b" customClass="SearchViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dHj-Yg-i2b" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zlu-50-I7q">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aya" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfW-Rd-EoF">
-                                <rect key="frame" x="182" y="372" width="28" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Lgs-SS-2hP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>

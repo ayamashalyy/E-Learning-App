@@ -18,6 +18,8 @@
 		0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */; };
 		03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */; };
 		03323E722CF14D36008AF673 /* MyLearningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */; };
+		0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035409882CF632A40030CA0B /* RecentSearchesTableViewCell.swift */; };
+		0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */; };
 		0359D08E2CF4CB17006B393C /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */; };
 		0359D0902CF4D5A6006B393C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */; };
 		0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */; };
@@ -42,6 +44,8 @@
 		038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */; };
 		038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */; };
 		038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */; };
+		03AA80E62CF6631300141A0E /* TotalResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */; };
+		03AA80E72CF6631300141A0E /* TotalResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */; };
 		03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */; };
@@ -61,6 +65,8 @@
 		0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathCollectionView.swift; sourceTree = "<group>"; };
 		03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningTableViewCell.swift; sourceTree = "<group>"; };
 		03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLearningTableViewCell.xib; sourceTree = "<group>"; };
+		035409882CF632A40030CA0B /* RecentSearchesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesTableViewCell.swift; sourceTree = "<group>"; };
+		035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchesTableViewCell.xib; sourceTree = "<group>"; };
 		0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		0377D4642CEBBA0E006C60F6 /* E-Learning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E-Learning.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +96,8 @@
 		038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndPolicyViewController.swift; sourceTree = "<group>"; };
 		038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
+		03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalResultsTableViewCell.swift; sourceTree = "<group>"; };
+		03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TotalResultsTableViewCell.xib; sourceTree = "<group>"; };
 		03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
@@ -239,6 +247,10 @@
 			isa = PBXGroup;
 			children = (
 				03822FE42CECC71500F96ACB /* SearchViewController.swift */,
+				035409882CF632A40030CA0B /* RecentSearchesTableViewCell.swift */,
+				035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */,
+				03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */,
+				03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -443,9 +455,11 @@
 				0377D4802CEBC26D006C60F6 /* Second.storyboard in Resources */,
 				03323E722CF14D36008AF673 /* MyLearningTableViewCell.xib in Resources */,
 				0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */,
+				03AA80E72CF6631300141A0E /* TotalResultsTableViewCell.xib in Resources */,
 				0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
+				0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
 				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
 				0328C11B2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib in Resources */,
@@ -512,10 +526,12 @@
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
 				0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */,
 				038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */,
+				03AA80E62CF6631300141A0E /* TotalResultsTableViewCell.swift in Sources */,
 				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
 				7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
+				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,

@@ -31,12 +31,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             fatalError("MyLearningViewController could not be instantiated. Ensure its Storyboard ID is set.")
         }
         
-        guard let mySearchVC = storyboard.instantiateViewController(withIdentifier: "2") as? SearchViewController else {
-            fatalError("SearchViewController could not be instantiated. Ensure its Storyboard ID is set.")
-        }
         
         let homeVC = HomeViewController()
         let profileVC = ProfileViewController()
+        let mySearchVC = SearchViewController()
         
         homeVC.title = "Home"
         mySearchVC.title = "Search"
