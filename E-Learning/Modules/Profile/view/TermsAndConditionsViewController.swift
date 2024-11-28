@@ -8,12 +8,15 @@
 import UIKit
 
 class TermsAndConditionsViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      
+        
+        
     }
- 
-
+    
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
 }

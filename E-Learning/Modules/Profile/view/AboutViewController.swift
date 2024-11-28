@@ -8,13 +8,13 @@
 import UIKit
 
 class AboutViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
-
-   
-
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
 }

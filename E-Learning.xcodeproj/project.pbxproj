@@ -22,6 +22,7 @@
 		0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */; };
 		0359D08E2CF4CB17006B393C /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */; };
 		0359D0902CF4D5A6006B393C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */; };
+		035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A5CEA2CF8DB0300929234 /* ProfileItemCell.swift */; };
 		036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A8C7D2CF7518100F01CE5 /* FilterViewController.swift */; };
 		036A8C852CF7923700F01CE5 /* FiltrationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A8C832CF7923700F01CE5 /* FiltrationCollectionViewCell.swift */; };
 		036A8C862CF7923700F01CE5 /* FiltrationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 036A8C842CF7923700F01CE5 /* FiltrationCollectionViewCell.xib */; };
@@ -73,6 +74,7 @@
 		035409892CF632A40030CA0B /* RecentSearchesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchesTableViewCell.xib; sourceTree = "<group>"; };
 		0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		035A5CEA2CF8DB0300929234 /* ProfileItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemCell.swift; sourceTree = "<group>"; };
 		036A8C7D2CF7518100F01CE5 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		036A8C832CF7923700F01CE5 /* FiltrationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrationCollectionViewCell.swift; sourceTree = "<group>"; };
 		036A8C842CF7923700F01CE5 /* FiltrationCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FiltrationCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */,
 				038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */,
 				038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */,
+				035A5CEA2CF8DB0300929234 /* ProfileItemCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
+				035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,

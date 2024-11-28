@@ -161,13 +161,13 @@
         <!--Privacy And Policy View Controller-->
         <scene sceneID="j1u-1W-PM2">
             <objects>
-                <viewController id="rx1-et-mlS" customClass="PrivacyAndPolicyViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrivacyAndPolicy" id="rx1-et-mlS" customClass="PrivacyAndPolicyViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z1C-5F-BUL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nis-bX-H5X">
-                                <rect key="frame" x="0.0" y="59" width="376.66666666666669" height="44"/>
+                                <rect key="frame" x="0.0" y="42" width="376.66666666666669" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="393" id="1Il-K5-p0h"/>
                                 </constraints>
@@ -177,12 +177,16 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Privacy &amp; Policy" id="VzU-ft-mGa">
-                                        <barButtonItem key="leftBarButtonItem" image="Icon 1" id="PEl-il-iIJ"/>
+                                        <barButtonItem key="leftBarButtonItem" image="Icon 1" id="PEl-il-iIJ">
+                                            <connections>
+                                                <action selector="back:" destination="rx1-et-mlS" id="lDV-xV-nyp"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Effective: February 26, 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pkN-fR-idu">
-                                <rect key="frame" x="98.999999999999986" y="127" width="216.66666666666663" height="21"/>
+                                <rect key="frame" x="98.999999999999986" y="110" width="216.66666666666663" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="HmK-og-a2V"/>
                                     <constraint firstAttribute="width" constant="217" id="ukU-xu-vT0"/>
@@ -192,7 +196,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xpx-xj-ASz">
-                                <rect key="frame" x="20" y="158" width="336.66666666666669" height="305"/>
+                                <rect key="frame" x="20" y="141" width="336.66666666666669" height="305"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="305" id="edD-Un-S2x"/>
@@ -203,7 +207,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Wox-rA-lVC">
-                                <rect key="frame" x="20" y="467" width="336.66666666666669" height="310"/>
+                                <rect key="frame" x="20" y="450" width="336.66666666666669" height="310"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="310" id="AcG-fi-oM5"/>
@@ -219,7 +223,7 @@
                         <constraints>
                             <constraint firstItem="y7X-hy-GXQ" firstAttribute="trailing" secondItem="Xpx-xj-ASz" secondAttribute="trailing" constant="20" id="4C8-Wu-XWa"/>
                             <constraint firstItem="nis-bX-H5X" firstAttribute="leading" secondItem="y7X-hy-GXQ" secondAttribute="leading" id="BNA-pF-C2Z"/>
-                            <constraint firstItem="nis-bX-H5X" firstAttribute="top" secondItem="y7X-hy-GXQ" secondAttribute="top" id="Eet-9k-J9u"/>
+                            <constraint firstItem="nis-bX-H5X" firstAttribute="top" secondItem="y7X-hy-GXQ" secondAttribute="top" constant="-17" id="Eet-9k-J9u"/>
                             <constraint firstItem="Wox-rA-lVC" firstAttribute="top" secondItem="Xpx-xj-ASz" secondAttribute="bottom" constant="4" id="G8m-cq-zgd"/>
                             <constraint firstItem="y7X-hy-GXQ" firstAttribute="trailing" secondItem="pkN-fR-idu" secondAttribute="trailing" constant="61" id="RLn-aI-Dsm"/>
                             <constraint firstItem="nis-bX-H5X" firstAttribute="trailing" secondItem="y7X-hy-GXQ" secondAttribute="trailing" id="SKe-K0-gbd"/>
@@ -239,25 +243,29 @@
         <!--About View Controller-->
         <scene sceneID="Tct-7M-MkA">
             <objects>
-                <viewController id="uir-To-av3" customClass="AboutViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="About" id="uir-To-av3" customClass="AboutViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="82g-ax-nnU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="LcM-MU-Pxl">
-                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="42" width="393" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="About VINSYS" id="RVA-Ee-XOd">
-                                        <barButtonItem key="leftBarButtonItem" image="Icon 1" id="sgt-5Q-SyI"/>
+                                        <barButtonItem key="leftBarButtonItem" image="Icon 1" id="sgt-5Q-SyI">
+                                            <connections>
+                                                <action selector="back:" destination="uir-To-av3" id="DrF-sz-HiG"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i0D-dU-qjP">
-                                <rect key="frame" x="20" y="115" width="357" height="309"/>
+                                <rect key="frame" x="20" y="98" width="357" height="309"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="309" id="RbX-Gk-PgV"/>
@@ -268,7 +276,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0cw-qf-FGJ">
-                                <rect key="frame" x="20" y="432" width="357" height="350"/>
+                                <rect key="frame" x="20" y="415" width="357" height="350"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="350" id="aYz-1D-TlU"/>
@@ -286,7 +294,7 @@
                             <constraint firstItem="0cw-qf-FGJ" firstAttribute="top" secondItem="i0D-dU-qjP" secondAttribute="bottom" constant="8" id="6mc-Nu-due"/>
                             <constraint firstItem="zL4-PM-wVJ" firstAttribute="trailing" secondItem="0cw-qf-FGJ" secondAttribute="trailing" constant="16" id="AV7-i7-8db"/>
                             <constraint firstItem="0cw-qf-FGJ" firstAttribute="leading" secondItem="zL4-PM-wVJ" secondAttribute="leading" constant="20" id="BYt-GY-EEz"/>
-                            <constraint firstItem="LcM-MU-Pxl" firstAttribute="top" secondItem="zL4-PM-wVJ" secondAttribute="top" id="D6d-75-uwU"/>
+                            <constraint firstItem="LcM-MU-Pxl" firstAttribute="top" secondItem="zL4-PM-wVJ" secondAttribute="top" constant="-17" id="D6d-75-uwU"/>
                             <constraint firstItem="i0D-dU-qjP" firstAttribute="leading" secondItem="zL4-PM-wVJ" secondAttribute="leading" constant="20" id="dwR-lx-KXc"/>
                             <constraint firstItem="i0D-dU-qjP" firstAttribute="top" secondItem="LcM-MU-Pxl" secondAttribute="bottom" constant="12" id="hYR-HM-Nxu"/>
                             <constraint firstItem="LcM-MU-Pxl" firstAttribute="trailing" secondItem="zL4-PM-wVJ" secondAttribute="trailing" id="x3C-fL-iw1"/>
@@ -301,25 +309,29 @@
         <!--Terms And Conditions View Controller-->
         <scene sceneID="hsW-c8-ofF">
             <objects>
-                <viewController id="QKY-Ii-JxR" customClass="TermsAndConditionsViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TermsAndConditions" id="QKY-Ii-JxR" customClass="TermsAndConditionsViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DoP-bs-97e">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="BxZ-KP-LKd">
-                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="42" width="393" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Terms and Conditions" id="R3G-ee-8sD">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" image="Icon 1" id="lHt-Mk-00y"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="Icon 1" id="lHt-Mk-00y">
+                                            <connections>
+                                                <action selector="back:" destination="QKY-Ii-JxR" id="n4M-Yb-pg0"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kgP-Ss-DQL">
-                                <rect key="frame" x="16" y="115" width="361" height="310"/>
+                                <rect key="frame" x="16" y="98" width="361" height="310"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="310" id="78b-sX-xjk"/>
@@ -331,7 +343,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Cgd-gB-EV3">
-                                <rect key="frame" x="16" y="433" width="361" height="347"/>
+                                <rect key="frame" x="16" y="416" width="361" height="347"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="361" id="aGe-g6-aLM"/>
@@ -348,7 +360,7 @@
                         <constraints>
                             <constraint firstItem="BxZ-KP-LKd" firstAttribute="trailing" secondItem="OX6-Hz-a99" secondAttribute="trailing" id="7NP-ae-LBS"/>
                             <constraint firstItem="kgP-Ss-DQL" firstAttribute="top" secondItem="BxZ-KP-LKd" secondAttribute="bottom" constant="12" id="ChV-La-C4p"/>
-                            <constraint firstItem="BxZ-KP-LKd" firstAttribute="top" secondItem="OX6-Hz-a99" secondAttribute="top" id="F0q-ne-9Gq"/>
+                            <constraint firstItem="BxZ-KP-LKd" firstAttribute="top" secondItem="OX6-Hz-a99" secondAttribute="top" constant="-17" id="F0q-ne-9Gq"/>
                             <constraint firstItem="BxZ-KP-LKd" firstAttribute="leading" secondItem="OX6-Hz-a99" secondAttribute="leading" id="J9G-Nc-1QV"/>
                             <constraint firstItem="kgP-Ss-DQL" firstAttribute="leading" secondItem="OX6-Hz-a99" secondAttribute="leading" constant="16" id="eoY-dd-gIj"/>
                             <constraint firstItem="Cgd-gB-EV3" firstAttribute="top" secondItem="kgP-Ss-DQL" secondAttribute="bottom" constant="8" id="lTA-fi-17c"/>
