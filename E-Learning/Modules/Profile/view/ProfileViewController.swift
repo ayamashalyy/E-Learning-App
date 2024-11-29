@@ -179,7 +179,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 print("section 1 item 1")
                 
             } else if indexPath.row == 1 {
-                print("section 1 item 2")
+                
+                let nextViewController = AccountCenterViewController()
+                let navigationController = UINavigationController(rootViewController: nextViewController)
+                navigationController.modalPresentationStyle = .fullScreen
+                present(navigationController, animated: true, completion: nil)
                 
             } else {
                 print("section 1 item 3")
