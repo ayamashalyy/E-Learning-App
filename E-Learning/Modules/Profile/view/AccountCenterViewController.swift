@@ -14,6 +14,8 @@ class AccountCenterViewController: UIViewController {
     var passwordStackView = UIStackView()
     var textLabel = UILabel()
     var passwordRequirementsLabel = UILabel()
+    var passwordCriteriaLabel = UILabel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,7 @@ class AccountCenterViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backButton
         
         setupUI()
+        setupButtons()
         
     }
     
@@ -34,6 +37,29 @@ class AccountCenterViewController: UIViewController {
     
     func setupUI() {
         
+        passwordCriteriaLabel.text = "Your password must meet the following criteria:"
+        passwordCriteriaLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        passwordCriteriaLabel.textColor = .black
+        passwordCriteriaLabel.textAlignment = .left
+        passwordCriteriaLabel.isHidden = true
+        passwordCriteriaLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(passwordCriteriaLabel)
+        
+        passwordRequirementsLabel.text = "At least one uppercase letter (A-Z)\n" +
+        "At least one number (0-9)\n" +
+        "At least one special character (#, @, $, etc.)\n" +
+        "Minimum length of 8 characters\n" +
+        "Please update your password to meet these requirements."
+        
+        passwordRequirementsLabel.font = UIFont.systemFont(ofSize: 14)
+        passwordRequirementsLabel.textColor = UIColor(named: "onboradColor")
+        passwordRequirementsLabel.textAlignment = .left
+        passwordRequirementsLabel.isHidden = true
+        passwordRequirementsLabel.numberOfLines = 0
+        passwordRequirementsLabel.lineBreakMode = .byWordWrapping
+        passwordRequirementsLabel.translatesAutoresizingMaskIntoConstraints = false
+        passwordRequirementsLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(passwordRequirementsLabel)
         
         textLabel = UILabel()
         textLabel.text = "Make changes to your personal information"
@@ -50,7 +76,7 @@ class AccountCenterViewController: UIViewController {
         
         let mainStack = UIStackView(arrangedSubviews: [nameStackView, emailStackView, passwordStackView])
         mainStack.axis = .vertical
-        mainStack.spacing = 20
+        mainStack.spacing = 15
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(mainStack)
@@ -61,9 +87,18 @@ class AccountCenterViewController: UIViewController {
             textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             mainStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            mainStack.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 40),
+            mainStack.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 30),
             mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            passwordCriteriaLabel.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor, constant: 10),
+            passwordCriteriaLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            passwordCriteriaLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            passwordRequirementsLabel.topAnchor.constraint(equalTo: passwordCriteriaLabel.bottomAnchor, constant: 10),
+            passwordRequirementsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            passwordRequirementsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
     
@@ -124,8 +159,8 @@ class AccountCenterViewController: UIViewController {
             
             NSLayoutConstraint.activate([
                 eyeButton1.trailingAnchor.constraint(equalTo: firstTextField.trailingAnchor, constant: -10),
-                eyeButton1.widthAnchor.constraint(equalToConstant: 24),
-                eyeButton1.heightAnchor.constraint(equalToConstant: 24)
+                eyeButton1.widthAnchor.constraint(equalToConstant: 90),
+                eyeButton1.heightAnchor.constraint(equalToConstant: 90)
             ])
             
         }
@@ -160,8 +195,8 @@ class AccountCenterViewController: UIViewController {
                 secondTextField.heightAnchor.constraint(equalToConstant: 50),
                 secondTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
                 secondTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
-                eyeButton2.widthAnchor.constraint(equalToConstant: 24),
-                eyeButton2.heightAnchor.constraint(equalToConstant: 24)
+                eyeButton2.widthAnchor.constraint(equalToConstant: 90),
+                eyeButton2.heightAnchor.constraint(equalToConstant: 90)
             ])
             
         }
@@ -211,7 +246,62 @@ class AccountCenterViewController: UIViewController {
                 }
             }
             
+            if stack == passwordStackView {
+                passwordCriteriaLabel.isHidden.toggle()
+                passwordRequirementsLabel.isHidden.toggle()
+            }
+            
         }
+    }
+    
+    func setupButtons() {
+        
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        cancelButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        cancelButton.backgroundColor = .clear
+        cancelButton.layer.cornerRadius = 8
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.layer.cornerRadius = 32
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
+        cancelButton.addTarget(self, action: #selector(cancelChanges), for: .touchUpInside)
+        
+        
+        let saveButton = UIButton(type: .system)
+        saveButton.setTitle("Save Changes", for: .normal)
+        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.backgroundColor = UIColor(named: "myCustom")
+        saveButton.layer.cornerRadius = 32
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.addTarget(self, action: #selector(saveChanges), for: .touchUpInside)
+        
+        let buttonStack = UIStackView(arrangedSubviews: [cancelButton, saveButton])
+        buttonStack.axis = .horizontal
+        buttonStack.spacing = 10
+        buttonStack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(buttonStack)
+        
+        NSLayoutConstraint.activate([
+            buttonStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            buttonStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            buttonStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            cancelButton.heightAnchor.constraint(equalToConstant: 65),
+            cancelButton.widthAnchor.constraint(equalToConstant: 95),
+            saveButton.heightAnchor.constraint(equalToConstant: 60),
+            saveButton.widthAnchor.constraint(equalToConstant: 230)
+        ])
+    }
+    
+    @objc func cancelChanges() {
+        print("Changes cancelled")
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func saveChanges() {
+        print("Changes saved")
     }
     
     @objc func togglePasswordVisibility(_ sender: UIButton) {
