@@ -53,8 +53,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         view.addSubview(descriptionForgetPasswordText)
         
         emailTextField = MDCTextField()
-        emailTextField.font = UIFont.systemFont(ofSize: 12)
-        emailTextField.text = "Enter your email"
+        emailTextField.font = UIFont.systemFont(ofSize: 14)
         emailTextField.textColor = .lightGray
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emailTextField)
@@ -66,8 +65,6 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         emailController.activeColor = .lightGray;     emailController.floatingPlaceholderActiveColor = .black
         emailController.floatingPlaceholderScale = 0.8
         emailController.borderRadius = 8
-        
-        emailTextField.delegate = self
         
         getVerificationCodeButton = UIButton(type: .system)
         getVerificationCodeButton.setTitle("Get verification code", for: .normal)
@@ -127,25 +124,4 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
     }
-    
-    // MARK: - UITextFieldDelegate
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Remove placeholder text when editing begins
-        if textField == emailTextField && textField.text == "Enter your email" {
-            textField.text = ""
-            textField.textColor = .black
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // Restore placeholder text if field is empty
-        if textField == emailTextField && (textField.text?.isEmpty ?? true) {
-            textField.text = "Enter your email"
-            textField.textColor = .lightGray
-        }
-    }
-    
-    
-    
 }

@@ -210,9 +210,4 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         return false
     }
-    
-    
-    
-    
-    
 }

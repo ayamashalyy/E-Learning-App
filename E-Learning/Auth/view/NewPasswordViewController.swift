@@ -39,8 +39,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     func setupViews() {
         
         newPasswordTextField = MDCTextField()
-        newPasswordTextField.font = UIFont.systemFont(ofSize: 12)
-        newPasswordTextField.text = "New password"
+        newPasswordTextField.font = UIFont.systemFont(ofSize: 14)
         newPasswordTextField.textColor = .lightGray
         newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newPasswordTextField)
@@ -53,12 +52,8 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         newPasswordController.floatingPlaceholderScale = 0.8
         newPasswordController.borderRadius = 8
         
-        newPasswordTextField.delegate = self
-        
-        
         confirmNewPasswordTextField = MDCTextField()
-        confirmNewPasswordTextField.font = UIFont.systemFont(ofSize: 12)
-        confirmNewPasswordTextField.text = "Confirm new password"
+        confirmNewPasswordTextField.font = UIFont.systemFont(ofSize: 14)
         confirmNewPasswordTextField.textColor = .lightGray
         confirmNewPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(confirmNewPasswordTextField)
@@ -70,8 +65,6 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         confirmNewPasswordController.activeColor = .lightGray;     confirmNewPasswordController.floatingPlaceholderActiveColor = .black
         confirmNewPasswordController.floatingPlaceholderScale = 0.8
         confirmNewPasswordController.borderRadius = 8
-        
-        confirmNewPasswordTextField.delegate = self
         
         eyeButton = UIButton(type: .custom)
         eyeButton.setImage(UIImage(named: "view"), for: .normal)
@@ -157,32 +150,4 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     @objc func cancelTapped() {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    // MARK: - UITextFieldDelegate
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Remove placeholder text when editing begins
-        if textField == newPasswordTextField && textField.text == "New password" {
-            textField.text = ""
-            textField.textColor = .black
-        } else if textField == confirmNewPasswordTextField && textField.text == "Confirm new password" {
-            textField.text = ""
-            textField.textColor = .black
-        }
-        
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // Restore placeholder text if field is empty
-        if textField == newPasswordTextField && (textField.text?.isEmpty ?? true) {
-            textField.text = "New password"
-            textField.textColor = .lightGray
-        } else if textField == confirmNewPasswordTextField && (textField.text?.isEmpty ?? true) {
-            textField.text = "Confirm new password"
-            textField.textColor = .lightGray
-        }
-    }
-    
-    
-    
 }

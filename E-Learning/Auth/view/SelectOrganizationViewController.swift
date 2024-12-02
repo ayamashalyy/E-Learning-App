@@ -34,8 +34,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(enterOrganizationNameText)
         
         organizationNameTextField = MDCTextField()
-        organizationNameTextField.font = UIFont.systemFont(ofSize: 12)
-        organizationNameTextField.text = "Enter your organization name"
+        organizationNameTextField.font = UIFont.systemFont(ofSize: 14)
         organizationNameTextField.textColor = .lightGray
         organizationNameTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(organizationNameTextField)
@@ -60,7 +59,6 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         
         goToYourOrgaizationButton.addTarget(self, action: #selector(goToYourOrgaizationButtonTapped), for: .touchUpInside)
         
-        organizationNameTextField.delegate = self
     }
     
     func setupConstraints() {
@@ -88,23 +86,5 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     @objc func goToYourOrgaizationButtonTapped() {
         let nextViewController = LoginViewController()
         navigationController?.pushViewController(nextViewController, animated: true)
-    }
-    
-    // MARK: - UITextFieldDelegate
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Remove placeholder text when editing begins
-        if textField.text == "Enter your organization name" {
-            textField.text = ""
-            textField.textColor = .black
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // Restore placeholder text if field is empty
-        if textField.text?.isEmpty ?? true {
-            textField.text = "Enter your organization name"
-            textField.textColor = .lightGray
-        }
     }
 }
