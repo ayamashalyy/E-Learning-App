@@ -27,7 +27,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Jj-tO-api">
-                        <rect key="frame" x="8" y="8" width="369" height="231"/>
+                        <rect key="frame" x="4" y="10" width="373" height="229"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue where you left off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQY-OL-2nV">
                                 <rect key="frame" x="16" y="16" width="257" height="23"/>
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzx-fi-pbR">
-                                <rect key="frame" x="329" y="16" width="24" height="24"/>
+                                <rect key="frame" x="333" y="16" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="mdh-BP-Szp"/>
                                     <constraint firstAttribute="height" constant="24" id="zwE-bI-wDh"/>
@@ -133,8 +133,8 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3Jj-tO-api" secondAttribute="trailing" constant="8" id="4HL-YK-Wcv"/>
-                <constraint firstItem="3Jj-tO-api" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="hUJ-WS-yVY"/>
-                <constraint firstItem="3Jj-tO-api" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="otJ-3u-0QF"/>
+                <constraint firstItem="3Jj-tO-api" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="hUJ-WS-yVY"/>
+                <constraint firstItem="3Jj-tO-api" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="otJ-3u-0QF"/>
                 <constraint firstAttribute="bottom" secondItem="3Jj-tO-api" secondAttribute="bottom" constant="8" id="u6H-xI-ULA"/>
             </constraints>
             <size key="customSize" width="385" height="247"/>

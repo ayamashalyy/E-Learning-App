@@ -55,7 +55,6 @@
 		03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */; };
 		03E1F0E42CFE5C22005646D7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F0E32CFE5C21005646D7 /* Constants.swift */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
-		7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */; };
 		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 		F3E13565B343003F348549F4 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */; };
 /* End PBXBuildFile section */
@@ -115,7 +114,6 @@
 		03E1F0E32CFE5C21005646D7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
-		7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coursesTitlesCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
 		925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF061A0A7105B2598020CB7E /* Pods-E-Learning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.debug.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.debug.xcconfig"; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 				03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */,
 				7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */,
 				03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */,
-				7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */,
 				038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */,
 				7D89CE922CED542800A5B64A /* SectionHeaderView.swift */,
 				0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */,
@@ -551,7 +548,6 @@
 				038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */,
 				03AA80E62CF6631300141A0E /* TotalResultsTableViewCell.swift in Sources */,
 				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
-				7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,

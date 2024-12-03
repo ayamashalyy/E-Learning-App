@@ -27,13 +27,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgl-Fh-8MR">
-                        <rect key="frame" x="8" y="8" width="259" height="256"/>
+                        <rect key="frame" x="4" y="8" width="267" height="256"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 1" translatesAutoresizingMaskIntoConstraints="NO" id="6Ty-wa-B1T">
-                                <rect key="frame" x="0.0" y="0.0" width="259" height="136"/>
+                                <rect key="frame" x="0.0" y="0.0" width="267" height="136"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google UX Design" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2y-u2-NfX">
-                                <rect key="frame" x="5" y="144" width="220" height="60"/>
+                                <rect key="frame" x="8" y="144" width="220" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="LhN-vM-Bdm"/>
                                     <constraint firstAttribute="width" constant="220" id="riF-fR-lR5"/>
@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jacob Jones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Wc-1f-sXK">
-                                <rect key="frame" x="5" y="208" width="220" height="21"/>
+                                <rect key="frame" x="8" y="208" width="220" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="YUW-MB-lYm"/>
                                     <constraint firstAttribute="height" constant="21" id="juB-xP-ZrG"/>
@@ -62,7 +62,7 @@
                             <constraint firstItem="7Wc-1f-sXK" firstAttribute="top" secondItem="S2y-u2-NfX" secondAttribute="bottom" constant="4" id="f2K-JO-S3R"/>
                             <constraint firstAttribute="trailing" secondItem="6Ty-wa-B1T" secondAttribute="trailing" id="h1U-ny-4lz"/>
                             <constraint firstItem="7Wc-1f-sXK" firstAttribute="trailing" secondItem="S2y-u2-NfX" secondAttribute="trailing" id="rcx-EY-K4l"/>
-                            <constraint firstItem="S2y-u2-NfX" firstAttribute="leading" secondItem="wgl-Fh-8MR" secondAttribute="leading" constant="5" id="uHr-aN-4mZ"/>
+                            <constraint firstItem="S2y-u2-NfX" firstAttribute="leading" secondItem="wgl-Fh-8MR" secondAttribute="leading" constant="8" id="uHr-aN-4mZ"/>
                             <constraint firstAttribute="bottom" secondItem="6Ty-wa-B1T" secondAttribute="bottom" constant="120" id="xhi-9q-0v4"/>
                         </constraints>
                     </view>
@@ -71,8 +71,8 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="wgl-Fh-8MR" secondAttribute="bottom" constant="8" id="3Gr-ue-3FA"/>
-                <constraint firstItem="wgl-Fh-8MR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="6Ur-cB-pBx"/>
-                <constraint firstAttribute="trailing" secondItem="wgl-Fh-8MR" secondAttribute="trailing" constant="8" id="VZ7-OG-cXM"/>
+                <constraint firstItem="wgl-Fh-8MR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="6Ur-cB-pBx"/>
+                <constraint firstAttribute="trailing" secondItem="wgl-Fh-8MR" secondAttribute="trailing" constant="4" id="VZ7-OG-cXM"/>
                 <constraint firstItem="wgl-Fh-8MR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="VvL-yB-JZC"/>
             </constraints>
             <size key="customSize" width="275" height="272"/>
@@ -82,7 +82,7 @@
                 <outlet property="courseTitle" destination="S2y-u2-NfX" id="A1B-Sa-yVJ"/>
                 <outlet property="outerView" destination="wgl-Fh-8MR" id="fJ8-8B-29P"/>
             </connections>
-            <point key="canvasLocation" x="136.64122137404578" y="-76.760563380281695"/>
+            <point key="canvasLocation" x="135.1145038167939" y="-76.760563380281695"/>
         </collectionViewCell>
     </objects>
     <resources>

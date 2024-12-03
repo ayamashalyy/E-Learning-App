@@ -41,7 +41,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         
         let nib = UINib(nibName: "HeaderCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
         let continueNib = UINib(nibName: "ContinueCollectionViewCell", bundle: nil)
         collectionView.register(continueNib, forCellWithReuseIdentifier: reuseIdentifier1)
         
@@ -49,7 +49,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         collectionView.register(FeaturedCoursesCollectionView.self, forCellWithReuseIdentifier: FeaturedCoursesCollectionView.identifier)
         collectionView.register(SectionHeaderView.self, forCellWithReuseIdentifier: SectionHeaderViewCell)
         collectionView.register(CareerPathCollectionView.self, forCellWithReuseIdentifier: CareerPathCollectionView.identifier)
-
+        
         
     }
     
@@ -58,17 +58,17 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return 1
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: collectionView.bounds.width, height: 100)
+            return CGSize(width: collectionView.bounds.width, height: 80)
         case 1:
             return CGSize(width: collectionView.bounds.width - 20, height: 210)
         case 2 , 4 , 6 , 8 , 10:
-            return CGSize(width: collectionView.bounds.width - 20, height: 40)
+            return CGSize(width: collectionView.bounds.width - 20, height: 30)
         case 3:
             return CGSize(width: collectionView.bounds.width , height: 80)
         case 5:
@@ -79,7 +79,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return CGSize(width: collectionView.bounds.width , height: 230)
         case 11:
             return CGSize(width: collectionView.bounds.width , height: 230)
-
+            
             
         default:
             return .zero
@@ -114,7 +114,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             coursesTitleCell.configure(title:coursesTitle )
             return coursesTitleCell
             
-       case 5:
+        case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
             return cell
@@ -127,9 +127,9 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return coursesTitleCell
             
         case 7:
-             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
-             cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
-             return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
+            cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            return cell
             
         case 8:
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderViewCell, for: indexPath) as! SectionHeaderView
@@ -141,7 +141,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CareerPathCollectionView.identifier, for: indexPath) as! CareerPathCollectionView
             cell.configure(with: ["UX Design", "UX Design", "UX Design"])
             return cell
-
+            
             
         case 10:
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderViewCell, for: indexPath) as! SectionHeaderView
@@ -151,9 +151,9 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return coursesTitleCell
             
         case 11:
-             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
-             cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
-             return cell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
+            cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            return cell
             
         default:
             return UICollectionViewCell()

@@ -14,8 +14,9 @@ class FeaturedCoursesCollectionView: UICollectionViewCell {
     private let innerFeaturedCoursesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 230, height: 240)
+        layout.itemSize = CGSize(width: 195, height: 230)
         layout.minimumLineSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -55,10 +56,10 @@ extension FeaturedCoursesCollectionView: UICollectionViewDataSource, UICollectio
         let course = courses[indexPath.item]
         cell.courseTitle.text = course
         cell.configureCourseTitle()
-
+        
         return cell
     }
-
+    
     
 }
 

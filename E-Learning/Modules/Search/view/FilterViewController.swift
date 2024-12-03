@@ -36,10 +36,17 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = sections[indexPath.section].items[indexPath.row]
         let labelWidth = item.width(usingFont: UIFont.systemFont(ofSize: 14))
-        let padding: CGFloat = 40
+        let padding: CGFloat = 50
         return CGSize(width: labelWidth + padding, height: 55)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {
@@ -56,7 +63,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let bottomInset: CGFloat = 15
+        let bottomInset: CGFloat = 10
         return UIEdgeInsets(top: 5, left: 10, bottom: bottomInset, right: 10)
     }
     
@@ -75,5 +82,19 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         collectionView.reloadItems(at: [indexPath])
+        
+        /*
+         choose item only from section
+         if let previousSelection = selectedFilters[sectionTitle]?.first {
+               if let previousIndex = sections[indexPath.section].items.firstIndex(of: previousSelection) {
+                   selectedFilters[sectionTitle]?.removeAll()
+                   let previousIndexPath = IndexPath(item: previousIndex, section: indexPath.section)
+                   collectionView.reloadItems(at: [previousIndexPath])
+               }
+           }
+           
+           selectedFilters[sectionTitle] = [selectedItem]
+           collectionView.reloadItems(at: [indexPath])
+         */
     }
 }

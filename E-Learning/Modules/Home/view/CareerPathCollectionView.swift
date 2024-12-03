@@ -14,8 +14,9 @@ class CareerPathCollectionView: UICollectionViewCell {
     private let innerCareerPathCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 300, height: 230)
+        layout.itemSize = CGSize(width: 280, height: 230)
         layout.minimumLineSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -61,7 +62,7 @@ extension CareerPathCollectionView: UICollectionViewDataSource, UICollectionView
             color = UIColor(named: "second") ?? UIColor.blue
         }
         cell.configure(color: color)
-
+        
         return cell
     }
     

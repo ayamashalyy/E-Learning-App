@@ -23,16 +23,16 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DzR-U9-xyd">
-                        <rect key="frame" x="8" y="8" width="241" height="77"/>
+                        <rect key="frame" x="4" y="8" width="249" height="77"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test1" translatesAutoresizingMaskIntoConstraints="NO" id="cfK-sv-tGd">
-                                <rect key="frame" x="0.0" y="0.0" width="241" height="77"/>
+                                <rect key="frame" x="0.0" y="0.0" width="249" height="77"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7l-6w-gEZ">
-                                <rect key="frame" x="0.0" y="0.0" width="241" height="77"/>
+                                <rect key="frame" x="0.0" y="0.0" width="249" height="77"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Science" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1q-f0-Eab">
-                                        <rect key="frame" x="20" y="10" width="201" height="57"/>
+                                        <rect key="frame" x="20" y="10" width="209" height="57"/>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -65,8 +65,8 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="DzR-U9-xyd" secondAttribute="bottom" constant="8" id="4ls-n4-iwp"/>
                 <constraint firstItem="DzR-U9-xyd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="E7R-w1-YqH"/>
-                <constraint firstItem="DzR-U9-xyd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="NUx-au-Wc9"/>
-                <constraint firstAttribute="trailing" secondItem="DzR-U9-xyd" secondAttribute="trailing" constant="8" id="xrQ-4v-Dzj"/>
+                <constraint firstItem="DzR-U9-xyd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="NUx-au-Wc9"/>
+                <constraint firstAttribute="trailing" secondItem="DzR-U9-xyd" secondAttribute="trailing" constant="4" id="xrQ-4v-Dzj"/>
             </constraints>
             <size key="customSize" width="257" height="93"/>
             <connections>

@@ -153,7 +153,7 @@ class SearchViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            searchView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            searchView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             searchView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
             searchView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             searchView.widthAnchor.constraint(equalToConstant: 250),
@@ -190,8 +190,8 @@ class SearchViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            filterContainerView.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 30),
-            filterContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            filterContainerView.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 25),
+            filterContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             filterContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             filterContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
@@ -214,8 +214,6 @@ class SearchViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         layout.itemSize = CGSize(width: 250, height: 40)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
         
