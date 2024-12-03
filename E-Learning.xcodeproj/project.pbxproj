@@ -53,6 +53,7 @@
 		03AA80E62CF6631300141A0E /* TotalResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */; };
 		03AA80E72CF6631300141A0E /* TotalResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */; };
 		03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */; };
+		03E1F0E42CFE5C22005646D7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F0E32CFE5C21005646D7 /* Constants.swift */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		7D89CE952CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */; };
 		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
@@ -111,6 +112,7 @@
 		03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalResultsTableViewCell.swift; sourceTree = "<group>"; };
 		03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TotalResultsTableViewCell.xib; sourceTree = "<group>"; };
 		03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
+		03E1F0E32CFE5C21005646D7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		7D89CE942CED5E5C00A5B64A /* coursesTitlesCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coursesTitlesCellCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				038230032CED36E500F96ACB /* Fonts */,
+				03E1F0E32CFE5C21005646D7 /* Constants.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */,
 				038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */,
 				0359D0902CF4D5A6006B393C /* ResetPasswordViewController.swift in Sources */,
+				03E1F0E42CFE5C22005646D7 /* Constants.swift in Sources */,
 				0344D8A52CF9FD5A0065290E /* AccountCenterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

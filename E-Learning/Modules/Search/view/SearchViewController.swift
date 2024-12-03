@@ -12,10 +12,24 @@ class SearchViewController: UIViewController {
     enum SearchState {
         case recentSearches
         case totalResults
+        case filterView
     }
     
-    var currentState: SearchState = .recentSearches
+    struct Section {
+        let title: String
+        let items: [String]
+    }
     
+    let sections: [Section] = [
+        Section(title: "Category", items: ["Data Science", "Design", "Business", "Language Learning"]),
+        Section(title: "Learning Type", items: ["Course", "Career Path"]),
+        Section(title: "Level", items: ["Beginner", "Intermediate", "Advanced"]),
+        Section(title: "Price", items: ["Paid", "Free"]),
+        Section(title: "Language", items: ["English", "Arabic"])
+    ]
+    
+    var currentState: SearchState = .recentSearches
+    var recentSearches: [String] = []
     var searchView = UIView()
     var searchTextField = UITextField()
     var searchButton = UIButton()
@@ -23,35 +37,63 @@ class SearchViewController: UIViewController {
     var tableView = UITableView()
     var searchLabel = UILabel()
     var noRecentSearchImageView: UIImageView!
-    
-    
-    var recentSearches: [String] = []
+    var filterContainerView: UIView!
+    var selectedFilters: [String: [String]] = [:]
+    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationItem.title = "Search"
+        configureNavigationBar()
         loadRecentSearches()
         setupViews()
         setupConstraints()
+        collectionView.allowsMultipleSelection = true
+        
     }
+    
+    private func configureNavigationBar() {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            .foregroundColor: UIColor.black
+        ]
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
+    }
+    
+    private func saveRecentSearches() {
+        UserDefaults.standard.set(recentSearches, forKey: Constants.recentSearchesKey)
+    }
+    
+    private func loadRecentSearches() {
+        if let savedSearches = UserDefaults.standard.array(forKey: Constants.recentSearchesKey) as? [String] {
+            recentSearches = savedSearches
+        }
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        currentState = .recentSearches
-        tableView.reloadData()
-        updateNoRecentSearchImage()
+        if currentState == .filterView {
+            currentState = .totalResults
+            noRecentSearchImageView.isHidden = true
+            filterContainerView.isHidden = true
+            tableView.isHidden = false
+            self.title = "Search"
+            self.navigationItem.leftBarButtonItem = nil
+            tableView.reloadData()
+            
+        } else {
+            currentState = .recentSearches
+            tableView.reloadData()
+            updateNoRecentSearchImage()
+        }
     }
     
     
     
     func setupViews() {
-        searchLabel = UILabel()
-        searchLabel.text = "Search"
-        searchLabel.textAlignment = .center
-        searchLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        searchLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(searchLabel)
         
         searchView = UIView()
         searchView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +134,13 @@ class SearchViewController: UIViewController {
         noRecentSearchImageView.contentMode = .scaleAspectFit
         noRecentSearchImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(noRecentSearchImageView)
+        
+        filterContainerView = UIView()
+        filterContainerView.translatesAutoresizingMaskIntoConstraints = false
+        filterContainerView.isHidden = true
+        view.addSubview(filterContainerView)
+        
+        setupFilterView()
     }
     
     func setupConstraints() {
@@ -104,14 +153,7 @@ class SearchViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            searchLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 65),
-            searchLabel.widthAnchor.constraint(equalToConstant: 300),
-            searchLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            searchView.topAnchor.constraint(equalTo: searchLabel.bottomAnchor, constant: 20),
+            searchView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             searchView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
             searchView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
             searchView.widthAnchor.constraint(equalToConstant: 250),
@@ -146,6 +188,45 @@ class SearchViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            filterContainerView.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 30),
+            filterContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            filterContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            filterContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    
+    func setupFilterView() {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(UINib(nibName: "FiltrationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FiltrationCollectionViewCell")
+        collectionView.register(
+            FilterSectionHeaderViewCollectionReusableView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: FilterSectionHeaderViewCollectionReusableView.identifier
+        )
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        layout.itemSize = CGSize(width: 250, height: 40)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .white
+        
+        filterContainerView.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: filterContainerView.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: filterContainerView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: filterContainerView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: filterContainerView.bottomAnchor)
+        ])
     }
     
     @objc func searchButtonTapped() {
@@ -170,8 +251,11 @@ class SearchViewController: UIViewController {
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
         currentState = .recentSearches
+        tableView.isHidden = false
+        filterContainerView.isHidden = true
         tableView.reloadData()
         updateNoRecentSearchImage()
+        
     }
     
 }
@@ -186,37 +270,24 @@ extension SearchViewController: UITextFieldDelegate {
 }
 
 
-extension SearchViewController {
-    func saveRecentSearches() {
-        UserDefaults.standard.set(recentSearches, forKey: "recentSearches")
-    }
-    
-    func loadRecentSearches() {
-        if let savedSearches = UserDefaults.standard.array(forKey: "recentSearches") as? [String] {
-            recentSearches = savedSearches
-        }
-    }
-    
-}
-
 
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch currentState {
-        case .recentSearches:
+        if currentState == .recentSearches {
             return recentSearches.count
-        case .totalResults:
+        } else if currentState == .totalResults {
             return 20
         }
+        return 0
     }
+    
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch currentState {
-        case .recentSearches:
+        if currentState == .recentSearches {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RecentSearchesTableViewCell else {
                 return UITableViewCell()
             }
@@ -227,20 +298,20 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 self?.updateNoRecentSearchImage()
                 tableView.reloadData()
             }
-            
             return cell
+        }
+        else if currentState == .totalResults {
             
-        case .totalResults:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TotalResultsTableViewCell", for: indexPath) as? TotalResultsTableViewCell else {
                 return UITableViewCell()
             }
-            
             cell.totalResultSearchCategory.text = "Design"
             cell.totalResultSearchNameCourse.text = "Google UX Design"
             cell.totalResultSearchConstractorName.text = "Jacob Jones"
             cell.totalResultSearchImage.image = UIImage(named: "myLearning")
-            
             return cell
+        } else {
+            return UITableViewCell()
         }
     }
     
@@ -258,12 +329,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         titleLabel.textColor = UIColor(named: "myCustom")
         
-        switch currentState {
-        case .recentSearches:
+        if currentState == .recentSearches {
             titleLabel.text = "Recent Searches"
-        case .totalResults:
+        } else if currentState == .totalResults {
             titleLabel.text = "210 Total Results"
         }
+        
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
@@ -294,11 +365,49 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     @objc func filterButtonTapped() {
-        print("Filter button tapped")
-        let nextViewController = FilterViewController()
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        currentState = .filterView
+        tableView.isHidden = true
+        noRecentSearchImageView.isHidden = true
+        filterContainerView.isHidden = false
+        
+        self.title = "Filtration"
+        if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
+            tabBarItem.title = "Search"
+        }
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            .foregroundColor: UIColor.black
+        ]
+        
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
+        
+        let backButtonImage = UIImage(named: "Icon 1")
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backToSearch))
+        self.navigationItem.leftBarButtonItem = backButton
+        
+    }
+    
+    @objc func backToSearch() {
+        currentState = .totalResults
+        tableView.isHidden = false
+        noRecentSearchImageView.isHidden = true
+        filterContainerView.isHidden = true
+        tableView.reloadData()
+        
+        self.title = "Search"
+        if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
+            tabBarItem.title = "Search"
+        }
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            .foregroundColor: UIColor.black
+        ]
+        
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
+        
+        self.navigationItem.leftBarButtonItem = nil
     }
     
     
@@ -316,13 +425,14 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch currentState {
-        case .totalResults:
+        if currentState == .totalResults {
             return 120
-        case .recentSearches:
+        } else if currentState == .recentSearches {
             return 50
         }
+        return 0
     }
+    
     
     func updateNoRecentSearchImage() {
         if recentSearches.isEmpty {

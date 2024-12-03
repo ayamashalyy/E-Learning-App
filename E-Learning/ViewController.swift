@@ -9,14 +9,6 @@ import UIKit
 
 class ViewController: UITabBarController, UITabBarControllerDelegate {
     
-    private let selectedBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(named: "selectedItem")
-        view.layer.cornerRadius = 15
-        view.isUserInteractionEnabled = false
-        return view
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -31,21 +23,23 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             fatalError("MyLearningViewController could not be instantiated. Ensure its Storyboard ID is set.")
         }
         
-        
         let homeVC = HomeViewController()
         let profileVC = ProfileViewController()
         let mySearchVC = SearchViewController()
+        let navigationController = UINavigationController(rootViewController: mySearchVC)
+        navigationController.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.pushViewController(navigationController, animated: true)
         
         homeVC.title = "Home"
         mySearchVC.title = "Search"
         myLearningVC.title = "My Learning"
         profileVC.title = "Profile"
         
-        self.setViewControllers([homeVC, mySearchVC, myLearningVC, profileVC], animated: false)
+        self.setViewControllers([homeVC, navigationController, myLearningVC, profileVC], animated: false)
         
         guard let items = self.tabBar.items else { return }
-        let images = ["1", "2", "3", "4"]
-        let selectedImages = ["1", "2", "3", "4"]
+        let images = ["1", "2", "3", "4"] 
+        let selectedImages = ["image 3", "image 2", "image 6", "image 5"]
         
         for (index, item) in items.enumerated() {
             item.image = UIImage(named: images[index])
@@ -64,43 +58,5 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             item.setTitleTextAttributes(attributes, for: .normal)
             item.setTitleTextAttributes(selectedAttributes, for: .selected)
         }
-        
-        self.tabBar.tintColor = UIColor(named: "myCustom")
-        
-        tabBar.addSubview(selectedBackgroundView)
-        tabBar.sendSubviewToBack(selectedBackgroundView)
-        
-        if let firstItem = tabBar.items?.first {
-            updateSelectedBackground(for: firstItem, isFirstItem: true)
-        }
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if let selectedItem = tabBar.selectedItem {
-            updateSelectedBackground(for: selectedItem, isFirstItem: false)
-        }
-    }
-    
-    private func updateSelectedBackground(for item: UITabBarItem?, isFirstItem: Bool) {
-        guard let item = item,
-              let index = tabBar.items?.firstIndex(of: item) else { return }
-        
-        let adjustedIndex = isFirstItem ? index + 1 : index + 2
-        
-        guard let tabBarItemView = tabBar.subviews[safe: adjustedIndex] else { return }
-        
-        let iconFrame = tabBarItemView.frame
-        let size = CGSize(width: iconFrame.width * 0.6, height: iconFrame.height * 0.65)
-        let origin = CGPoint(
-            x: iconFrame.midX - (size.width / 2),
-            y: iconFrame.midY - (size.height / 2) - 8
-        )
-        selectedBackgroundView.frame = CGRect(origin: origin, size: size)
-    }
-}
-
-extension Collection {
-    subscript(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
     }
 }
