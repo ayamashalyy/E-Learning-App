@@ -15,7 +15,8 @@ class AccountCenterViewController: UIViewController {
     var textLabel = UILabel()
     var passwordRequirementsLabel = UILabel()
     var passwordCriteriaLabel = UILabel()
-    
+    var scrollView: UIScrollView!
+    var contentView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class AccountCenterViewController: UIViewController {
         let backButtonImage = UIImage(named: "Icon 1")
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.leftBarButtonItem = backButton
-        
+        setupScrollView()
         setupUI()
         setupButtons()
         
@@ -34,16 +35,43 @@ class AccountCenterViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func setupScrollView() {
+        
+        scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .clear
+        view.addSubview(scrollView)
+        
+        contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .clear
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
+        ])
+    }
+    
+    
     
     func setupUI() {
-        
         passwordCriteriaLabel.text = "Your password must meet the following criteria:"
         passwordCriteriaLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         passwordCriteriaLabel.textColor = .black
         passwordCriteriaLabel.textAlignment = .left
         passwordCriteriaLabel.isHidden = true
         passwordCriteriaLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(passwordCriteriaLabel)
+        contentView.addSubview(passwordCriteriaLabel)
         
         passwordRequirementsLabel.text = "At least one uppercase letter (A-Z)\n" +
         "At least one number (0-9)\n" +
@@ -58,8 +86,7 @@ class AccountCenterViewController: UIViewController {
         passwordRequirementsLabel.numberOfLines = 0
         passwordRequirementsLabel.lineBreakMode = .byWordWrapping
         passwordRequirementsLabel.translatesAutoresizingMaskIntoConstraints = false
-        passwordRequirementsLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(passwordRequirementsLabel)
+        contentView.addSubview(passwordRequirementsLabel)
         
         textLabel = UILabel()
         textLabel.text = "Make changes to your personal information"
@@ -67,8 +94,7 @@ class AccountCenterViewController: UIViewController {
         textLabel.textAlignment = .center
         textLabel.textColor = UIColor(named: "onboradColor")
         textLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(textLabel)
-        
+        contentView.addSubview(textLabel)
         
         configureStack(stack: nameStackView, title: "Name", icon: "lucide_user-cog")
         configureStack(stack: emailStackView, title: "Email address", icon: "mage_email")
@@ -78,27 +104,25 @@ class AccountCenterViewController: UIViewController {
         mainStack.axis = .vertical
         mainStack.spacing = 15
         mainStack.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(mainStack)
+        contentView.addSubview(mainStack)
         
         NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            textLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            textLabel.topAnchor.constraint(equalTo: view.topAnchor,constant: 120),
-            textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            mainStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             mainStack.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 30),
-            mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ])
         
         NSLayoutConstraint.activate([
             passwordCriteriaLabel.topAnchor.constraint(equalTo: passwordStackView.bottomAnchor, constant: 10),
-            passwordCriteriaLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            passwordCriteriaLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            passwordCriteriaLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            passwordCriteriaLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             passwordRequirementsLabel.topAnchor.constraint(equalTo: passwordCriteriaLabel.bottomAnchor, constant: 10),
-            passwordRequirementsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            passwordRequirementsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            passwordRequirementsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            passwordRequirementsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     
@@ -255,7 +279,6 @@ class AccountCenterViewController: UIViewController {
     }
     
     func setupButtons() {
-        
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -267,7 +290,6 @@ class AccountCenterViewController: UIViewController {
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
         cancelButton.addTarget(self, action: #selector(cancelChanges), for: .touchUpInside)
-        
         
         let saveButton = UIButton(type: .system)
         saveButton.setTitle("Save Changes", for: .normal)

@@ -83,18 +83,53 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         collectionView.reloadItems(at: [indexPath])
         
+        applyFilters()
+        tableView.reloadData()
+        
         /*
          choose item only from section
          if let previousSelection = selectedFilters[sectionTitle]?.first {
-               if let previousIndex = sections[indexPath.section].items.firstIndex(of: previousSelection) {
-                   selectedFilters[sectionTitle]?.removeAll()
-                   let previousIndexPath = IndexPath(item: previousIndex, section: indexPath.section)
-                   collectionView.reloadItems(at: [previousIndexPath])
-               }
-           }
-           
-           selectedFilters[sectionTitle] = [selectedItem]
-           collectionView.reloadItems(at: [indexPath])
+         if let previousIndex = sections[indexPath.section].items.firstIndex(of: previousSelection) {
+         selectedFilters[sectionTitle]?.removeAll()
+         let previousIndexPath = IndexPath(item: previousIndex, section: indexPath.section)
+         collectionView.reloadItems(at: [previousIndexPath])
+         }
+         }
+         
+         selectedFilters[sectionTitle] = [selectedItem]
+         collectionView.reloadItems(at: [indexPath])
          */
     }
+    
+    func applyFilters() {
+        filteredResults = allResults.filter { course in
+            
+            for (filterKey, selectedValues) in selectedFilters {
+                
+                if let courseValue = courseValueForKey(filterKey, course),
+                   !selectedValues.contains(courseValue) {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+    
+    func courseValueForKey(_ key: String, _ course: Course) -> String? {
+        switch key {
+        case "Category":
+            return course.category
+        case "Learning Type":
+            return course.learningType
+        case "Level":
+            return course.level
+        case "Price":
+            return course.price
+        case "Language":
+            return course.language
+        default:
+            return nil
+        }
+    }
+    
 }

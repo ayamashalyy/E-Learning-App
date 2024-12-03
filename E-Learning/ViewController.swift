@@ -14,8 +14,8 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         
         self.tabBar.barTintColor = .white
+        self.tabBar.backgroundColor = .white
         self.tabBar.tintColor = UIColor(named: "myCustom")
-        self.tabBar.unselectedItemTintColor = .gray
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -38,7 +38,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         self.setViewControllers([homeVC, navigationController, myLearningVC, profileVC], animated: false)
         
         guard let items = self.tabBar.items else { return }
-        let images = ["1", "2", "3", "4"] 
+        let images = ["1", "2", "3", "4"]
         let selectedImages = ["image 3", "image 2", "image 6", "image 5"]
         
         for (index, item) in items.enumerated() {

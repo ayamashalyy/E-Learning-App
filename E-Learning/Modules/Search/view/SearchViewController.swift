@@ -11,7 +11,8 @@ class SearchViewController: UIViewController {
     
     enum SearchState {
         case recentSearches
-        case totalResults
+        case totalResultsBeforeFilter
+        case totalResultsAfterFilter
         case filterView
     }
     
@@ -38,6 +39,8 @@ class SearchViewController: UIViewController {
     var searchLabel = UILabel()
     var noRecentSearchImageView: UIImageView!
     var filterContainerView: UIView!
+    var allResults: [Course] = []
+    var filteredResults: [Course] = []
     var selectedFilters: [String: [String]] = [:]
     var collectionView: UICollectionView!
     
@@ -76,7 +79,7 @@ class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if currentState == .filterView {
-            currentState = .totalResults
+            currentState = .totalResultsBeforeFilter
             noRecentSearchImageView.isHidden = true
             filterContainerView.isHidden = true
             tableView.isHidden = false
@@ -238,7 +241,7 @@ class SearchViewController: UIViewController {
         
         recentSearches.insert(text, at: 0)
         saveRecentSearches()
-        currentState = .totalResults
+        currentState = .totalResultsBeforeFilter
         tableView.reloadData()
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
@@ -273,12 +276,18 @@ extension SearchViewController: UITextFieldDelegate {
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if currentState == .recentSearches {
+        
+        switch currentState {
+        case .recentSearches:
             return recentSearches.count
-        } else if currentState == .totalResults {
+        case .totalResultsBeforeFilter:
             return 20
+        case .totalResultsAfterFilter:
+            return 10
+        case .filterView:
+            return 0
         }
-        return 0
+        
     }
     
     
@@ -298,7 +307,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell
         }
-        else if currentState == .totalResults {
+        else if currentState == .totalResultsBeforeFilter {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TotalResultsTableViewCell", for: indexPath) as? TotalResultsTableViewCell else {
                 return UITableViewCell()
@@ -308,9 +317,20 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.totalResultSearchConstractorName.text = "Jacob Jones"
             cell.totalResultSearchImage.image = UIImage(named: "myLearning")
             return cell
+        } else if currentState == .totalResultsAfterFilter {
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TotalResultsTableViewCell", for: indexPath) as? TotalResultsTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.totalResultSearchCategory.text = "Design"
+            cell.totalResultSearchNameCourse.text = "Google UX Design"
+            cell.totalResultSearchConstractorName.text = "Jacob Jones"
+            cell.totalResultSearchImage.image = UIImage(named: "myLearning")
+            return cell
+            
         } else {
-            return UITableViewCell()
         }
+        return UITableViewCell()
     }
     
     
@@ -329,7 +349,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         if currentState == .recentSearches {
             titleLabel.text = "Recent Searches"
-        } else if currentState == .totalResults {
+        } else if currentState == .totalResultsBeforeFilter {
             titleLabel.text = "210 Total Results"
         }
         
@@ -337,7 +357,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
         
-        if currentState == .totalResults {
+        if currentState == .totalResultsBeforeFilter {
             let filterButton = UIButton(type: .system)
             filterButton.setImage(UIImage(named: "ion_filter"), for: .normal)
             filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
@@ -387,7 +407,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     @objc func backToSearch() {
-        currentState = .totalResults
+        currentState = .totalResultsBeforeFilter
         tableView.isHidden = false
         noRecentSearchImageView.isHidden = true
         filterContainerView.isHidden = true
@@ -423,7 +443,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if currentState == .totalResults {
+        if currentState == .totalResultsBeforeFilter {
             return 120
         } else if currentState == .recentSearches {
             return 50
