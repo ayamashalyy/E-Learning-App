@@ -23,10 +23,7 @@ class SearchViewController: UIViewController {
     
     let sections: [Section] = [
         Section(title: "Category", items: ["Data Science", "Design", "Business", "Language Learning"]),
-        Section(title: "Learning Type", items: ["Course", "Career Path"]),
         Section(title: "Level", items: ["Beginner", "Intermediate", "Advanced"]),
-        Section(title: "Price", items: ["Paid", "Free"]),
-        Section(title: "Language", items: ["English", "Arabic"])
     ]
     
     var currentState: SearchState = .recentSearches

@@ -373,6 +373,66 @@
             </objects>
             <point key="canvasLocation" x="4507.6335877862593" y="-39.436619718309863"/>
         </scene>
+        <!--Course Info View Controller-->
+        <scene sceneID="5If-Jx-D0Q">
+            <objects>
+                <viewController storyboardIdentifier="CourseInfoViewController" id="f8g-zi-OCl" customClass="CourseInfoViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qnh-Ty-RUm">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MAF-dt-AcY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7CQ-u6-Gr7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5178" y="-39"/>
+        </scene>
+        <!--Course Content View Controller-->
+        <scene sceneID="Req-f5-bd6">
+            <objects>
+                <viewController storyboardIdentifier="CourseContentViewController" id="gj8-hM-3iH" customClass="CourseContentViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3fQ-gm-a6i">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="4CJ-HQ-Z1Y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GD6-A5-24M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5822" y="-39"/>
+        </scene>
+        <!--Course Interactions View Controller-->
+        <scene sceneID="DPQ-YE-dCM">
+            <objects>
+                <viewController storyboardIdentifier="CourseInteractionsViewController" id="qF5-pg-hGV" customClass="CourseInteractionsViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N0N-Zp-UPR">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0Im-Vn-Cz0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gEf-LM-seV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6463" y="-39"/>
+        </scene>
+        <!--Course View Controller-->
+        <scene sceneID="V4G-zw-rmm">
+            <objects>
+                <viewController storyboardIdentifier="CourseViewController" id="V5D-lt-V8R" customClass="CourseViewController" customModule="E_Learning" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Uqn-O9-PC1">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="LKz-0x-fdI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4nL-B6-UWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7150" y="-39"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon 1" width="10" height="16"/>

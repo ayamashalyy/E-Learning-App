@@ -6,6 +6,40 @@
 //
 
 import UIKit
+//
+//class FilterViewController: UIViewController {
+//
+//    struct Section {
+//        let title: String
+//        let items: [String]
+//    }
+//
+//    let sections: [Section] = [
+//        Section(title: "Category", items: ["Data Science", "Design", "Business", "Language Learning"]),
+//        Section(title: "Level", items: ["Beginner", "Intermediate", "Advanced"]),
+//    ]
+//
+//    var collectionView: UICollectionView!
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        view.backgroundColor = .white
+//        self.navigationItem.title = "Search"
+//
+//        collectionView.allowsMultipleSelection = true
+//
+//    }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//    
+//}
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     

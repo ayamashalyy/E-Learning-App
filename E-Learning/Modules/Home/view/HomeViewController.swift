@@ -174,6 +174,12 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             print("Selected Course: \(selectedCourse)")
         case 4:
             print("Selected Section Header Cell at section 4, item \(indexPath.item)")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
+                let navigationController = UINavigationController(rootViewController: nextViewController)
+                navigationController.modalPresentationStyle = .fullScreen
+                present(navigationController, animated: true, completion: nil)
+            }
         case 5 :
             print("Selected Section Header Cell at section 5")
         case 6:
