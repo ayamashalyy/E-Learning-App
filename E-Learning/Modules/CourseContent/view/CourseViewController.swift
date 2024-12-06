@@ -41,7 +41,7 @@ class CourseViewController: UIViewController {
     
     private func setupVideoPlayer() {
         
-        guard let url = URL(string: "https://www.youtube.com/watch?v=TTgzLTyXt7s") else {
+        guard let url = URL(string: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4") else {
             print("Invalid video URL")
             return
         }
@@ -49,10 +49,27 @@ class CourseViewController: UIViewController {
         player = AVPlayer(url: url)
         
         playerLayer = AVPlayerLayer(player: player)
+        print("Video URL: \(url)")
         playerLayer?.frame = videoContainerView.bounds
         playerLayer?.videoGravity = .resizeAspectFill
         videoContainerView.layer.addSublayer(playerLayer!)
         player?.play()
+        print("Started playing video")
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapOnVideo))
+        videoContainerView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func handleTapOnVideo() {
+        if player?.rate == 0 {
+            // If the video is paused, start playing it
+            player?.play()
+            print("Video resumed playing")
+        } else {
+            // If the video is playing, pause it
+            player?.pause()
+            print("Video paused")
+        }
     }
     
     private func setupUI() {
@@ -68,7 +85,7 @@ class CourseViewController: UIViewController {
         scrollView.addSubview(contentView)
         
         videoContainerView = UIView()
-        videoContainerView.backgroundColor = .red
+        videoContainerView.backgroundColor = .clear
         videoContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(videoContainerView)
         

@@ -11,7 +11,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
     
     var delegate: callDataBack?
     var headerView = UIView()
-    var comments: [String] = []
+    var comments: [(text: String, date: Date)] = []
     var tableView = UITableView()
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
     
     private func setupHeaderView() {
         
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 150)
         headerView.backgroundColor = .white
         
         let stackView = UIStackView()
@@ -98,7 +98,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         addCommentButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
         addCommentButton.translatesAutoresizingMaskIntoConstraints = false
         addCommentButton.addTarget(self, action: #selector(addComment), for: .touchUpInside)
-        addCommentButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        addCommentButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         addCommentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
         addCommentButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
@@ -124,12 +124,20 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
     }
     
     private func setupTableView() {
-        tableView.frame = CGRect(x: 0, y: 200, width: view.frame.width, height: view.frame.height - 200)
+        
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CommentCell")
-        tableView.separatorStyle = .singleLine
+        tableView.register(CommentCell.self, forCellReuseIdentifier: "CommentCell")
+        tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     @objc func addComment() {
@@ -140,11 +148,18 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         }
         
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-            if let comment = alert.textFields?.first?.text, !comment.isEmpty {
-                self?.comments.append(comment)
+            if let commentText = alert.textFields?.first?.text, !commentText.isEmpty {
+                let currentDate = Date()
+                self?.comments.append((text: commentText, date: currentDate))
                 self?.tableView.reloadData()
+            } else {
+                
+                let errorAlert = UIAlertController(title: "Error", message: "The text field is empty. Please enter a comment.", preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(errorAlert, animated: true, completion: nil)
             }
         }
+        
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
@@ -160,8 +175,19 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath)
-        cell.textLabel?.text = comments[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentCell else {
+            return UITableViewCell()
+        }
+        
+        let comment = comments[indexPath.row]
+        
+        cell.profileImageView.image = UIImage(named: "profile_placeholder")
+        cell.nameLabel.text = "User \(indexPath.row + 1)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        cell.dateLabel.text = dateFormatter.string(from: comment.date)
+        cell.commentLabel.text = comment.text
+        
         return cell
     }
     

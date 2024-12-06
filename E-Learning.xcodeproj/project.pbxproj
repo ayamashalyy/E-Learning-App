@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030519592D03544F003B991F /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030519582D03544F003B991F /* CommentCell.swift */; };
 		0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */; };
 		0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */; };
 		0328C1112CEE325500CC1DCF /* CoursesSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */; };
@@ -66,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030519582D03544F003B991F /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCollectionViewCell.swift; sourceTree = "<group>"; };
 		0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoursesCollectionViewCell.xib; sourceTree = "<group>"; };
 		0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesSectionCell.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				0341D1E52D00D52E0008136C /* CourseContentViewController.swift */,
 				0341D1E72D00D5780008136C /* CourseInteractionsViewController.swift */,
 				037C5C352D01F96900905CE9 /* CourseContentTableViewCell.swift */,
+				030519582D03544F003B991F /* CommentCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				036A8C852CF7923700F01CE5 /* FiltrationCollectionViewCell.swift in Sources */,
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */,
+				030519592D03544F003B991F /* CommentCell.swift in Sources */,
 				037C5C362D01F96900905CE9 /* CourseContentTableViewCell.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,
 				038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */,
