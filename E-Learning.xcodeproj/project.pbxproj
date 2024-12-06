@@ -195,7 +195,6 @@
 		0377D4662CEBBA0E006C60F6 /* E-Learning */ = {
 			isa = PBXGroup;
 			children = (
-				037F20F32CF3A0FA00691EF0 /* Auth */,
 				03B43C1E2CF0C7000018A306 /* Model */,
 				03B43C1C2CF0C6960018A306 /* Services */,
 				03B43C1B2CF0C63B0018A306 /* Utility */,
@@ -395,6 +394,7 @@
 		03B43C1A2CF0C5210018A306 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				037F20F32CF3A0FA00691EF0 /* Auth */,
 				0341D1DE2D0093330008136C /* CourseContent */,
 				03822FF52CECE14500F96ACB /* Profile */,
 				03822FF22CECE11B00F96ACB /* MyLearning */,
