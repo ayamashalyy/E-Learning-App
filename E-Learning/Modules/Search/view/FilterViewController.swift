@@ -6,40 +6,6 @@
 //
 
 import UIKit
-//
-//class FilterViewController: UIViewController {
-//
-//    struct Section {
-//        let title: String
-//        let items: [String]
-//    }
-//
-//    let sections: [Section] = [
-//        Section(title: "Category", items: ["Data Science", "Design", "Business", "Language Learning"]),
-//        Section(title: "Level", items: ["Beginner", "Intermediate", "Advanced"]),
-//    ]
-//
-//    var collectionView: UICollectionView!
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        view.backgroundColor = .white
-//        self.navigationItem.title = "Search"
-//
-//        collectionView.allowsMultipleSelection = true
-//
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//    
-//}
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -63,6 +29,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.outerView.backgroundColor = UIColor(named: "myCustom")
         } else {
             cell.outerView.backgroundColor = UIColor(named: "myLearning")
+            cell.FiltrationCategory.textColor = .black
         }
         return cell
     }
@@ -147,20 +114,17 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
             return true
         }
+        
+        selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }
+
     }
     
     func courseValueForKey(_ key: String, _ course: Course) -> String? {
         switch key {
         case "Category":
             return course.category
-        case "Learning Type":
-            return course.learningType
         case "Level":
             return course.level
-        case "Price":
-            return course.price
-        case "Language":
-            return course.language
         default:
             return nil
         }

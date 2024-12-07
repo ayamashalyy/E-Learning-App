@@ -98,10 +98,9 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         addCommentButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
         addCommentButton.translatesAutoresizingMaskIntoConstraints = false
         addCommentButton.addTarget(self, action: #selector(addComment), for: .touchUpInside)
-        addCommentButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         addCommentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
-        addCommentButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        addCommentButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
         
         stackViewComments.addArrangedSubview(addCommentButton)
         
@@ -115,8 +114,8 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
             
             commentsLabel.centerYAnchor.constraint(equalTo: stackViewComments.centerYAnchor),
             addCommentButton.centerYAnchor.constraint(equalTo: stackViewComments.centerYAnchor),
-            addCommentButton.heightAnchor.constraint(equalToConstant: 50),
-            addCommentButton.widthAnchor.constraint(equalToConstant: 150)
+            addCommentButton.heightAnchor.constraint(equalToConstant: 40),
+            addCommentButton.widthAnchor.constraint(equalToConstant: 130)
             
         ])
         

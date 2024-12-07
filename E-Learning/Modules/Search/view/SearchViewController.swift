@@ -40,6 +40,8 @@ class SearchViewController: UIViewController {
     var filteredResults: [Course] = []
     var selectedFilters: [String: [String]] = [:]
     var collectionView: UICollectionView!
+    var applyButton: UIButton!
+    var selectedFiltersCount: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +82,7 @@ class SearchViewController: UIViewController {
             noRecentSearchImageView.isHidden = true
             filterContainerView.isHidden = true
             tableView.isHidden = false
+            searchView.isHidden = false
             self.title = "Search"
             self.navigationItem.leftBarButtonItem = nil
             tableView.reloadData()
@@ -190,7 +193,7 @@ class SearchViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            filterContainerView.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 25),
+            filterContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
             filterContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             filterContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             filterContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -225,6 +228,25 @@ class SearchViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: filterContainerView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: filterContainerView.bottomAnchor)
         ])
+        
+        applyButton = UIButton(type: .system)
+        applyButton.setTitle("Apply", for: .normal)
+        applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        applyButton.setTitleColor(UIColor.white, for: .normal)
+        applyButton.backgroundColor = UIColor(named: "myCustom")
+        applyButton.layer.cornerRadius = 20
+        applyButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(applyButton)
+        applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
+        filterContainerView.addSubview(applyButton)
+        
+        NSLayoutConstraint.activate([
+            applyButton.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16),
+            applyButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16),
+            applyButton.bottomAnchor.constraint(equalTo: filterContainerView.bottomAnchor, constant: -100),
+            applyButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
     }
     
     @objc func searchButtonTapped() {
@@ -240,8 +262,6 @@ class SearchViewController: UIViewController {
         saveRecentSearches()
         currentState = .totalResultsBeforeFilter
         tableView.reloadData()
-        searchTextField.text = ""
-        searchTextField.resignFirstResponder()
         updateNoRecentSearchImage()
     }
     
@@ -347,9 +367,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if currentState == .recentSearches {
             titleLabel.text = "Recent Searches"
         } else if currentState == .totalResultsBeforeFilter {
-            titleLabel.text = "210 Total Results"
+            titleLabel.text = "\(20) Total Results"
         }
-        
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(titleLabel)
@@ -368,6 +387,48 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 filterButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
                 filterButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10)
             ])
+        } else if currentState == .totalResultsAfterFilter {
+            let resultsCountLabel = UILabel()
+            resultsCountLabel.text = "10"
+            resultsCountLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            resultsCountLabel.textColor = UIColor(named: "myCustom")
+            resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
+            headerView.addSubview(resultsCountLabel)
+            
+            let resultsTextLabel = UILabel()
+            resultsTextLabel.text = "Total Results"
+            resultsTextLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            resultsTextLabel.textColor = UIColor(named: "myCustom")
+            resultsTextLabel.translatesAutoresizingMaskIntoConstraints = false
+            headerView.addSubview(resultsTextLabel)
+            
+            let filtersLabel = UILabel()
+            filtersLabel.text = "(\(selectedFiltersCount ?? 0) filters)"
+            filtersLabel.font = UIFont.boldSystemFont(ofSize: 16)
+            filtersLabel.textColor = UIColor(named: "myCustom")
+            filtersLabel.translatesAutoresizingMaskIntoConstraints = false
+            headerView.addSubview(filtersLabel)
+            
+            let filterButton = UIButton(type: .system)
+            filterButton.setImage(UIImage(named: "icon_filter-remove"), for: .normal)
+            filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+            filterButton.translatesAutoresizingMaskIntoConstraints = false
+            headerView.addSubview(filterButton)
+            
+            NSLayoutConstraint.activate([
+                resultsCountLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
+                resultsCountLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+                
+                resultsTextLabel.leadingAnchor.constraint(equalTo: resultsCountLabel.trailingAnchor, constant: 5),
+                resultsTextLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+                
+                filtersLabel.leadingAnchor.constraint(equalTo: resultsTextLabel.trailingAnchor, constant: 5),
+                filtersLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+                
+                filterButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
+                filterButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            ])
+            
         } else {
             NSLayoutConstraint.activate([
                 titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
@@ -382,6 +443,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     @objc func filterButtonTapped() {
         currentState = .filterView
         tableView.isHidden = true
+        searchView.isHidden = true
         noRecentSearchImageView.isHidden = true
         filterContainerView.isHidden = false
         
@@ -398,16 +460,18 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         
         let backButtonImage = UIImage(named: "Icon 1")
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backToSearch))
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(applyButtonTapped))
         self.navigationItem.leftBarButtonItem = backButton
         
     }
     
-    @objc func backToSearch() {
-        currentState = .totalResultsBeforeFilter
+    @objc func applyButtonTapped() {
+        
+        applyFilters()
+        currentState = .totalResultsAfterFilter
         tableView.isHidden = false
-        noRecentSearchImageView.isHidden = true
         filterContainerView.isHidden = true
+        searchView.isHidden = false
         tableView.reloadData()
         
         self.title = "Search"
@@ -444,6 +508,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             return 120
         } else if currentState == .recentSearches {
             return 50
+        } else if currentState == .totalResultsAfterFilter {
+            return 120
         }
         return 0
     }
