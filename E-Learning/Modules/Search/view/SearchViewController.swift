@@ -263,6 +263,7 @@ class SearchViewController: UIViewController {
         currentState = .totalResultsBeforeFilter
         tableView.reloadData()
         updateNoRecentSearchImage()
+        resetFilters()
     }
     
     @objc func cancelButtonTapped() {

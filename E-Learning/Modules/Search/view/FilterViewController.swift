@@ -85,7 +85,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.reloadItems(at: [indexPath])
         
         applyFilters()
-        tableView.reloadData()
+        collectionView.reloadData()
         
         /*
          choose item only from section
@@ -116,8 +116,21 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }
-
+        
     }
+    
+    func resetFilters() {
+        // Clear all selected filters
+        selectedFilters = [:]
+        
+        // Reset filtered results to show all results
+        filteredResults = allResults
+        
+        // Reload UI
+        collectionView.reloadData()
+        tableView.reloadData()
+    }
+    
     
     func courseValueForKey(_ key: String, _ course: Course) -> String? {
         switch key {
