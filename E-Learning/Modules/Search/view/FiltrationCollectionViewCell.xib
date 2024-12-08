@@ -21,7 +21,7 @@
                         <rect key="frame" x="4" y="8" width="282" height="97"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vso-0d-Ixi">
-                                <rect key="frame" x="5" y="10" width="272" height="77"/>
+                                <rect key="frame" x="4" y="8" width="274" height="81"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -29,10 +29,10 @@
                         </subviews>
                         <color key="backgroundColor" name="myLearning"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Vso-0d-Ixi" secondAttribute="trailing" constant="5" id="0Y4-X8-S54"/>
-                            <constraint firstItem="Vso-0d-Ixi" firstAttribute="top" secondItem="j6Q-eB-Bv1" secondAttribute="top" constant="10" id="4DL-1a-yFg"/>
-                            <constraint firstItem="Vso-0d-Ixi" firstAttribute="leading" secondItem="j6Q-eB-Bv1" secondAttribute="leading" constant="5" id="4zz-UK-DfI"/>
-                            <constraint firstAttribute="bottom" secondItem="Vso-0d-Ixi" secondAttribute="bottom" constant="10" id="tJ9-r1-Jrq"/>
+                            <constraint firstAttribute="trailing" secondItem="Vso-0d-Ixi" secondAttribute="trailing" constant="4" id="0Y4-X8-S54"/>
+                            <constraint firstItem="Vso-0d-Ixi" firstAttribute="top" secondItem="j6Q-eB-Bv1" secondAttribute="top" constant="8" id="4DL-1a-yFg"/>
+                            <constraint firstItem="Vso-0d-Ixi" firstAttribute="leading" secondItem="j6Q-eB-Bv1" secondAttribute="leading" constant="4" id="4zz-UK-DfI"/>
+                            <constraint firstAttribute="bottom" secondItem="Vso-0d-Ixi" secondAttribute="bottom" constant="8" id="tJ9-r1-Jrq"/>
                         </constraints>
                     </view>
                 </subviews>

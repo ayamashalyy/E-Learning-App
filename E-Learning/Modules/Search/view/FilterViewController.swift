@@ -64,7 +64,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let bottomInset: CGFloat = 10
+        let bottomInset: CGFloat = 20
         return UIEdgeInsets(top: 5, left: 10, bottom: bottomInset, right: 10)
     }
     

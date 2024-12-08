@@ -28,6 +28,7 @@ class FiltrationCollectionViewCell: UICollectionViewCell {
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
         
+        FiltrationCategory.translatesAutoresizingMaskIntoConstraints = false
         outerView.translatesAutoresizingMaskIntoConstraints = false
     }
     

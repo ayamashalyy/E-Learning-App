@@ -91,6 +91,7 @@ class SearchViewController: UIViewController {
             currentState = .recentSearches
             tableView.reloadData()
             updateNoRecentSearchImage()
+            searchTextField.text = ""
         }
     }
     
@@ -205,7 +206,6 @@ class SearchViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(UINib(nibName: "FiltrationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FiltrationCollectionViewCell")
@@ -216,7 +216,7 @@ class SearchViewController: UIViewController {
         )
         collectionView.delegate = self
         collectionView.dataSource = self
-        layout.itemSize = CGSize(width: 250, height: 40)
+        collectionView.collectionViewLayout.invalidateLayout()
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .white
         
