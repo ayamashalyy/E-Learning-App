@@ -317,6 +317,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
             cell.recentSearchLabel.text = recentSearches[indexPath.row]
+            cell.selectionStyle = .none
             cell.onCancelTapped = { [weak self] in
                 self?.recentSearches.remove(at: indexPath.row)
                 self?.saveRecentSearches()
@@ -334,6 +335,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.totalResultSearchNameCourse.text = "Google UX Design"
             cell.totalResultSearchConstractorName.text = "Jacob Jones"
             cell.totalResultSearchImage.image = UIImage(named: "myLearning")
+            cell.selectionStyle = .none
             return cell
         } else if currentState == .totalResultsAfterFilter {
             
@@ -344,6 +346,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.totalResultSearchNameCourse.text = "Google UX Design"
             cell.totalResultSearchConstractorName.text = "Jacob Jones"
             cell.totalResultSearchImage.image = UIImage(named: "myLearning")
+            cell.selectionStyle = .none
             return cell
             
         } else {

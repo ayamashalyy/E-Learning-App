@@ -143,7 +143,7 @@ class CourseContentTableViewCell: UITableViewCell {
         innerTypeLabel.backgroundColor = lesson.isCompleted ? UIColor(named: "myLearning") : .white
         
         outerView.backgroundColor = lesson.isCompleted ? .white : UIColor(named: "myLearning")
-        outerView.layer.cornerRadius = 30
+        outerView.layer.cornerRadius = 35
         outerView.layer.borderWidth = 1.0
         outerView.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
         outerView.layer.shadowColor = UIColor.black.cgColor

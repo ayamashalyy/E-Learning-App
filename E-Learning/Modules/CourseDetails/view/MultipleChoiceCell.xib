@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MultipleChoiceCell" customModule="E_Learning" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="98"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="98"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnl-kG-7sX">
+                        <rect key="frame" x="2" y="4" width="363" height="90"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ozt-pG-gDo">
+                                <rect key="frame" x="0.0" y="0.0" width="363" height="90"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsH-uu-o7n">
+                                        <rect key="frame" x="0.0" y="37" width="16" height="16"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="BH8-Vg-aGq"/>
+                                            <constraint firstAttribute="height" constant="16" id="Dlk-qe-LfX"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_box_outline_blank" translatesAutoresizingMaskIntoConstraints="NO" id="7uV-TJ-fyr">
+                                        <rect key="frame" x="28" y="33" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="CgN-cy-ins"/>
+                                            <constraint firstAttribute="height" constant="24" id="jgq-l4-p56"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuL-Yg-ZJE">
+                                        <rect key="frame" x="64" y="35" width="299" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ozt-pG-gDo" firstAttribute="leading" secondItem="gnl-kG-7sX" secondAttribute="leading" id="3Vx-ek-Qt4"/>
+                            <constraint firstItem="ozt-pG-gDo" firstAttribute="top" secondItem="gnl-kG-7sX" secondAttribute="top" id="gfs-47-i1s"/>
+                            <constraint firstAttribute="trailing" secondItem="ozt-pG-gDo" secondAttribute="trailing" id="kuK-4N-5Ot"/>
+                            <constraint firstAttribute="bottom" secondItem="ozt-pG-gDo" secondAttribute="bottom" id="pG3-To-cG4"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="gnl-kG-7sX" secondAttribute="bottom" constant="4" id="ANm-Ux-JVl"/>
+                <constraint firstItem="gnl-kG-7sX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="CYJ-zg-Jl3"/>
+                <constraint firstAttribute="trailing" secondItem="gnl-kG-7sX" secondAttribute="trailing" constant="4" id="kQB-sL-H8S"/>
+                <constraint firstItem="gnl-kG-7sX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="oRJ-3D-c77"/>
+            </constraints>
+            <size key="customSize" width="369" height="98"/>
+            <connections>
+                <outlet property="checkButton" destination="7uV-TJ-fyr" id="Hj1-z2-1Ns"/>
+                <outlet property="optionLabel" destination="nuL-Yg-ZJE" id="4Hz-MA-7IC"/>
+                <outlet property="outerView" destination="gnl-kG-7sX" id="ca4-Tn-j9C"/>
+            </connections>
+            <point key="canvasLocation" x="253" y="-15"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="check_box_outline_blank" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

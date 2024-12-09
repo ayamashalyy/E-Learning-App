@@ -12,10 +12,20 @@ class QuizViewModel {
     private var questions: [QuizQuestion] = []
     private(set) var currentQuestionIndex: Int = 0
     var selectedAnswers: [Int] = []
+    var selectedOptionIndex: Int? = nil
     
     var currentQuestion: QuizQuestion {
+        guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
+            fatalError("currentQuestionIndex out of bounds!")
+        }
         return questions[currentQuestionIndex]
     }
+    
+    
+    var totalQuestions: Int {
+        return questions.count
+    }
+    
     
     func loadQuestions() {
         
@@ -25,17 +35,19 @@ class QuizViewModel {
                          correctAnswers: [0],
                          questionType: .singleChoice),
             
-            QuizQuestion(questionText: "How is the waterfall method different?",
+            QuizQuestion(questionText: "True or False?",
                          options: ["True", "False"],
                          correctAnswers: [0],
                          questionType: .trueFalse),
             
-            QuizQuestion(questionText: "How is the waterfall method different?",
-                         options: ["Comprehensive documentation", "Another option", "Option 3"],
-                         correctAnswers: [0,1],
+            QuizQuestion(questionText: "Choose multiple options",
+                         options: ["Option A", "Option B", "Option C"],
+                         correctAnswers: [0, 1],
                          questionType: .multipleChoice),
             
         ]
+        selectedAnswers = []
+        selectedOptionIndex = nil 
     }
     
     func moveToNextQuestion() -> Bool {

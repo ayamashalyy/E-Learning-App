@@ -43,7 +43,7 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -61,10 +61,18 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
         
         let lesson = lessons[indexPath.row]
         cell.configure(with: lesson)
+        cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextViewController = QuizViewController()
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }

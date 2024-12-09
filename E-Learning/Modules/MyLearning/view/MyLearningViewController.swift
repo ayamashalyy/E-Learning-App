@@ -79,14 +79,17 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
             print("0")
             let isInProgress = true
             cell.configureCell(isInProgress: isInProgress)
+            cell.selectionStyle = .none
         case 1:
             print("1")
-            let isInAssigned = true  
+            let isInAssigned = true
             cell.configureCell(isInAssigned: isInAssigned)
+            cell.selectionStyle = .none
         case 2:
             print("2")
             let isInCompleted = true
             cell.configureCell(isInCompleted: isInCompleted)
+            cell.selectionStyle = .none
         default:
             print("unknown")
         }

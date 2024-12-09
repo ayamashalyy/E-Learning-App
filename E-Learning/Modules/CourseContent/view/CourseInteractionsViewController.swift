@@ -186,6 +186,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         dateFormatter.dateFormat = "dd/MM/yyyy"
         cell.dateLabel.text = dateFormatter.string(from: comment.date)
         cell.commentLabel.text = comment.text
+        cell.selectionStyle = .none
         
         return cell
     }
