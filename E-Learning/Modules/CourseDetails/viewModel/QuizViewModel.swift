@@ -45,9 +45,18 @@ class QuizViewModel {
                          correctAnswers: [0, 1],
                          questionType: .multipleChoice),
             
+            QuizQuestion(questionText: "Match the following:",
+                         matchingPairs: [
+                            MatchingOption(leftOption: "Apple", rightOption: "iPhone"),
+                            MatchingOption(leftOption: "Microsoft", rightOption: "Windows"),
+                            MatchingOption(leftOption: "Google", rightOption: "Android")
+                         ],
+                         correctAnswers: [0, 1, 2],
+                         questionType: .matching)
+            
         ]
         selectedAnswers = []
-        selectedOptionIndex = nil 
+        selectedOptionIndex = nil
     }
     
     func moveToNextQuestion() -> Bool {

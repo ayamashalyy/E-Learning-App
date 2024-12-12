@@ -66,6 +66,8 @@
 		038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */; };
 		03AA80E62CF6631300141A0E /* TotalResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */; };
 		03AA80E72CF6631300141A0E /* TotalResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */; };
+		03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BCA38F2D08C0C80025B833 /* MatchingCell.swift */; };
+		03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03BCA3902D08C0C80025B833 /* MatchingCell.xib */; };
 		03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */; };
 		03E1F0E42CFE5C22005646D7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F0E32CFE5C21005646D7 /* Constants.swift */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
@@ -138,6 +140,8 @@
 		038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalResultsTableViewCell.swift; sourceTree = "<group>"; };
 		03AA80E52CF6631300141A0E /* TotalResultsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TotalResultsTableViewCell.xib; sourceTree = "<group>"; };
+		03BCA38F2D08C0C80025B833 /* MatchingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingCell.swift; sourceTree = "<group>"; };
+		03BCA3902D08C0C80025B833 /* MatchingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchingCell.xib; sourceTree = "<group>"; };
 		03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		03E1F0E32CFE5C21005646D7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				0352509D2D075F2B0027C270 /* SingleChoiceCell.xib */,
 				035250A02D07717C0027C270 /* MultipleChoiceCell.swift */,
 				035250A12D07717C0027C270 /* MultipleChoiceCell.xib */,
+				03BCA38F2D08C0C80025B833 /* MatchingCell.swift */,
+				03BCA3902D08C0C80025B833 /* MatchingCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -569,6 +575,7 @@
 				036A8C862CF7923700F01CE5 /* FiltrationCollectionViewCell.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
+				03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */,
 				0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
 				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
@@ -648,6 +655,7 @@
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
+				03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */,
 				035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				0341D1E82D00D5780008136C /* CourseInteractionsViewController.swift in Sources */,

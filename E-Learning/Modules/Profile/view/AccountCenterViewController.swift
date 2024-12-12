@@ -158,81 +158,127 @@ class AccountCenterViewController: UIViewController {
         horizontalStack.addArrangedSubview(actionButton)
         stack.addArrangedSubview(horizontalStack)
         
-        let firstTextField = UITextField()
-        firstTextField.font = UIFont.systemFont(ofSize: 16)
-        firstTextField.textColor = UIColor(named: "textfield")
-        firstTextField.isHidden = true
-        firstTextField.placeholder = title == "Name" ? "Moaz Mohamed" :
-        title == "Email address" ? "Username@gmail.com" : "Current password"
-        firstTextField.backgroundColor = UIColor(named: "myLearning")
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        firstTextField.leftView = paddingView
-        firstTextField.leftViewMode = .always
-        firstTextField.textAlignment = .left
-        firstTextField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            horizontalStack.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 20),
+            horizontalStack.topAnchor.constraint(equalTo: stack.topAnchor, constant: 20),
+            horizontalStack.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 20),
+        ])
+        
+        
+        if title == "Name" {
+            let nameTextField = UITextField()
+            nameTextField.font = UIFont.systemFont(ofSize: 16)
+            nameTextField.textColor = UIColor(named: "textfield")
+            nameTextField.isHidden = true
+            nameTextField.placeholder = "Moaz Mohamed"
+            nameTextField.backgroundColor = UIColor(named: "myLearning")
+            let paddingViewName = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            nameTextField.leftView = paddingViewName
+            nameTextField.leftViewMode = .always
+            nameTextField.textAlignment = .left
+            nameTextField.translatesAutoresizingMaskIntoConstraints = false
+            
+            stack.addArrangedSubview(nameTextField)
+            
+            NSLayoutConstraint.activate([
+                nameTextField.heightAnchor.constraint(equalToConstant: 50),
+                nameTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
+                nameTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
+                
+            ])
+        }
+        
+        if title == "Email address" {
+            let emailTextField = UITextField()
+            emailTextField.font = UIFont.systemFont(ofSize: 16)
+            emailTextField.textColor = UIColor(named: "textfield")
+            emailTextField.isHidden = true
+            emailTextField.placeholder = "Username@gmail.com"
+            emailTextField.backgroundColor = UIColor(named: "myLearning")
+            let paddingViewEmail = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            emailTextField.leftView = paddingViewEmail
+            emailTextField.leftViewMode = .always
+            emailTextField.textAlignment = .left
+            emailTextField.translatesAutoresizingMaskIntoConstraints = false
+            
+            stack.addArrangedSubview(emailTextField)
+            
+            NSLayoutConstraint.activate([
+                emailTextField.heightAnchor.constraint(equalToConstant: 50),
+                emailTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
+                emailTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20)
+            ])
+        }
+        
         
         if title == "Password" {
+            
+            let currentPasswordTextField = UITextField()
+            currentPasswordTextField.font = UIFont.systemFont(ofSize: 16)
+            currentPasswordTextField.textColor = UIColor(named: "textfield")
+            currentPasswordTextField.isHidden = true
+            currentPasswordTextField.placeholder = "Current password"
+            currentPasswordTextField.backgroundColor = UIColor(named: "myLearning")
+            let paddingViewCurrentPasswordTextField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            currentPasswordTextField.leftView = paddingViewCurrentPasswordTextField
+            currentPasswordTextField.leftViewMode = .always
+            currentPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+            
             let eyeButton1 = UIButton(type: .system)
             eyeButton1.setImage(UIImage(named: "view"), for: .normal)
             eyeButton1.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             
             eyeButton1.tag = 1
-            firstTextField.rightViewMode = .always
-            firstTextField.rightView = eyeButton1
-            firstTextField.addSubview(eyeButton1)
+            currentPasswordTextField.rightViewMode = .always
+            currentPasswordTextField.rightView = eyeButton1
+            currentPasswordTextField.addSubview(eyeButton1)
             
-            NSLayoutConstraint.activate([
-                eyeButton1.trailingAnchor.constraint(equalTo: firstTextField.trailingAnchor, constant: -10),
-                eyeButton1.widthAnchor.constraint(equalToConstant: 90),
-                eyeButton1.heightAnchor.constraint(equalToConstant: 90)
-            ])
+            stack.addArrangedSubview(currentPasswordTextField)
             
-        }
-        
-        stack.addArrangedSubview(firstTextField)
-        
-        if title == "Password" {
-            let secondTextField = UITextField()
-            secondTextField.font = UIFont.systemFont(ofSize: 16)
-            secondTextField.textColor = UIColor(named: "textfield")
-            secondTextField.isHidden = true
-            secondTextField.placeholder = "New password"
-            secondTextField.backgroundColor = UIColor(named: "myLearning")
+            
+            let newPasswordTextField = UITextField()
+            newPasswordTextField.font = UIFont.systemFont(ofSize: 16)
+            newPasswordTextField.textColor = UIColor(named: "textfield")
+            newPasswordTextField.isHidden = true
+            newPasswordTextField.placeholder = "New password"
+            newPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            secondTextField.leftView = paddingView
-            secondTextField.leftViewMode = .always
-            secondTextField.translatesAutoresizingMaskIntoConstraints = false
+            newPasswordTextField.leftView = paddingView
+            newPasswordTextField.leftViewMode = .always
+            newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
             
             
             let eyeButton2 = UIButton(type: .system)
             eyeButton2.setImage(UIImage(named: "view"), for: .normal)
             eyeButton2.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             eyeButton2.tag = 2
-            secondTextField.rightViewMode = .always
-            secondTextField.rightView = eyeButton2
-            secondTextField.addSubview(eyeButton2)
+            newPasswordTextField.rightViewMode = .always
+            newPasswordTextField.rightView = eyeButton2
+            newPasswordTextField.addSubview(eyeButton2)
             eyeButton2.translatesAutoresizingMaskIntoConstraints = false
-            stack.addArrangedSubview(secondTextField)
+            stack.addArrangedSubview(newPasswordTextField)
             
             NSLayoutConstraint.activate([
-                secondTextField.topAnchor.constraint(equalTo: firstTextField.bottomAnchor, constant: 0),
-                secondTextField.heightAnchor.constraint(equalToConstant: 50),
-                secondTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                secondTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
+                
+                currentPasswordTextField.heightAnchor.constraint(equalToConstant: 50),
+                currentPasswordTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
+                currentPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
+                
+                eyeButton1.trailingAnchor.constraint(equalTo: currentPasswordTextField.trailingAnchor, constant: -10),
+                eyeButton1.widthAnchor.constraint(equalToConstant: 90),
+                eyeButton1.heightAnchor.constraint(equalToConstant: 90),
+                
+                newPasswordTextField.topAnchor.constraint(equalTo: currentPasswordTextField.bottomAnchor, constant: 0),
+                newPasswordTextField.heightAnchor.constraint(equalToConstant: 50),
+                newPasswordTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
+                
+                newPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
                 eyeButton2.widthAnchor.constraint(equalToConstant: 90),
                 eyeButton2.heightAnchor.constraint(equalToConstant: 90)
+                
             ])
             
         }
-        
-        NSLayoutConstraint.activate([
-            horizontalStack.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 20),
-            horizontalStack.topAnchor.constraint(equalTo: stack.topAnchor, constant: 20),
-            horizontalStack.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 20),
-            firstTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-            firstTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
-            firstTextField.heightAnchor.constraint(equalToConstant: 50),
-        ])
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackTapped(_:)))
         horizontalStack.addGestureRecognizer(tapGesture)

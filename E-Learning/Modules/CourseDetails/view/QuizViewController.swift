@@ -65,7 +65,7 @@ class QuizViewController: UIViewController {
     @objc func nextButtonTapped() {
         if viewModel.moveToNextQuestion() {
             viewModel.selectedOptionIndex = nil
-            viewModel.selectedAnswers = [] 
+            viewModel.selectedAnswers = []
             updateUI()
             updateButtonStates()
             collectionView.reloadData()
@@ -110,6 +110,8 @@ class QuizViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "SingleChoiceCell")
         let nibMultipleChoiceCell = UINib(nibName: "MultipleChoiceCell", bundle: nil)
         collectionView.register(nibMultipleChoiceCell, forCellWithReuseIdentifier: "MultipleChoiceCell")
+        let nibMatchingCell = UINib(nibName: "MatchingCell", bundle: nil)
+        collectionView.register(nibMatchingCell, forCellWithReuseIdentifier: "MatchingCell")
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .white
@@ -205,7 +207,23 @@ class QuizViewController: UIViewController {
 extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.currentQuestion.options.count
+        let question = viewModel.currentQuestion
+        
+        switch question.questionType {
+        case .singleChoice, .trueFalse, .multipleChoice:
+            if let options = question.options {
+                return options.count
+            } else {
+                return 0
+            }
+            
+        case .matching:
+            if let matchingPairs = question.matchingPairs {
+                return matchingPairs.count
+            } else {
+                return 0
+            }
+        }
     }
     
     
@@ -213,25 +231,16 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
         
         let question = viewModel.currentQuestion
         switch question.questionType {
-        case .singleChoice:
+        case .singleChoice, .trueFalse:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleChoiceCell", for: indexPath) as? SingleChoiceCell else {
                 return UICollectionViewCell()
             }
             
-            let optionText = viewModel.currentQuestion.options[indexPath.row]
-            let isSelected = viewModel.selectedOptionIndex == indexPath.row
-            cell.configure(optionText: optionText, isSelected: isSelected)
-            return cell
-            
-            
-        case .trueFalse:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleChoiceCell", for: indexPath) as? SingleChoiceCell else {
-                return UICollectionViewCell()
+            if let options = question.options {
+                let optionText = options[indexPath.row]
+                let isSelected = viewModel.selectedOptionIndex == indexPath.row
+                cell.configure(optionText: optionText, isSelected: isSelected)
             }
-            
-            let optionText = viewModel.currentQuestion.options[indexPath.row]
-            let isSelected = viewModel.selectedOptionIndex == indexPath.row
-            cell.configure(optionText: optionText, isSelected: isSelected)
             return cell
             
         case .multipleChoice:
@@ -239,25 +248,36 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return UICollectionViewCell()
             }
             
-            let optionText = viewModel.currentQuestion.options[indexPath.row]
-            let isSelected = viewModel.selectedAnswers.contains(indexPath.row)
-            cell.configure(optionText: optionText, isSelected: isSelected)
+            if let options = question.options {
+                let optionText = options[indexPath.row]
+                let isSelected = viewModel.selectedAnswers.contains(indexPath.row)
+                cell.configure(optionText: optionText, isSelected: isSelected)
+            }
             return cell
             
         case .matching:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MultipleChoiceCell", for: indexPath) as? MultipleChoiceCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MatchingCell", for: indexPath) as? MatchingCell else {
                 return UICollectionViewCell()
             }
             
-            let optionText = viewModel.currentQuestion.options[indexPath.row]
-            let isSelected = viewModel.selectedOptionIndex == indexPath.row
-            cell.configure(optionText: optionText, isSelected: isSelected)
+            if let matchingPairs = question.matchingPairs {
+                let matchingPair = matchingPairs[indexPath.row]
+                let isSelected = viewModel.selectedAnswers.contains(indexPath.row)
+                cell.configure(optionText: matchingPair.leftOption, isSelected: isSelected)
+            }
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 60)
+        let question = viewModel.currentQuestion
+        
+        switch question.questionType {
+        case .trueFalse, .singleChoice, .multipleChoice:
+            return CGSize(width: collectionView.frame.width, height: 60)
+        case .matching:
+            return CGSize(width: collectionView.frame.width / 2, height: 60)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

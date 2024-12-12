@@ -7,9 +7,15 @@
 
 import Foundation
 
+struct MatchingOption {
+    let leftOption: String
+    let rightOption: String
+}
+
 struct QuizQuestion {
     var questionText: String
-    var options: [String]
+    var options: [String]?
+    var matchingPairs: [MatchingOption]?
     var correctAnswers: [Int]
     var questionType: QuestionType
 }
