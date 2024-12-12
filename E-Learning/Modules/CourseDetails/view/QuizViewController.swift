@@ -208,22 +208,7 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let question = viewModel.currentQuestion
-        
-        switch question.questionType {
-        case .singleChoice, .trueFalse, .multipleChoice:
-            if let options = question.options {
-                return options.count
-            } else {
-                return 0
-            }
-            
-        case .matching:
-            if let matchingPairs = question.matchingPairs {
-                return matchingPairs.count
-            } else {
-                return 0
-            }
-        }
+        return question.options.count
     }
     
     
@@ -236,11 +221,9 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return UICollectionViewCell()
             }
             
-            if let options = question.options {
-                let optionText = options[indexPath.row]
-                let isSelected = viewModel.selectedOptionIndex == indexPath.row
-                cell.configure(optionText: optionText, isSelected: isSelected)
-            }
+            let optionText = question.options[indexPath.row]
+            let isSelected = viewModel.selectedOptionIndex == indexPath.row
+            cell.configure(optionText: optionText, isSelected: isSelected)
             return cell
             
         case .multipleChoice:
@@ -248,11 +231,9 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return UICollectionViewCell()
             }
             
-            if let options = question.options {
-                let optionText = options[indexPath.row]
-                let isSelected = viewModel.selectedAnswers.contains(indexPath.row)
-                cell.configure(optionText: optionText, isSelected: isSelected)
-            }
+            let optionText = question.options[indexPath.row]
+            let isSelected = viewModel.selectedOptionIndex == indexPath.row
+            cell.configure(optionText: optionText, isSelected: isSelected)
             return cell
             
         case .matching:
@@ -260,11 +241,11 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
                 return UICollectionViewCell()
             }
             
-            if let matchingPairs = question.matchingPairs {
-                let matchingPair = matchingPairs[indexPath.row]
-                let isSelected = viewModel.selectedAnswers.contains(indexPath.row)
-                cell.configure(optionText: matchingPair.leftOption, isSelected: isSelected)
+            let optionText = question.options[indexPath.row]
+            let isSelected = viewModel.selectedOptionIndex == indexPath.row
+            cell.configure(optionText: optionText, isSelected: isSelected)
             }
+            
             return cell
         }
     }
@@ -276,7 +257,7 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
         case .trueFalse, .singleChoice, .multipleChoice:
             return CGSize(width: collectionView.frame.width, height: 60)
         case .matching:
-            return CGSize(width: collectionView.frame.width / 2, height: 60)
+            return CGSize(width: collectionView.frame.width / 2 - 10, height: 60)
         }
     }
     
@@ -294,7 +275,8 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
                 viewModel.selectedAnswers.append(indexPath.row)
             }
         case .matching:
-            break
+            viewModel.selectedOptionIndex = indexPath.row
+            viewModel.selectedAnswers = [indexPath.row]
         }
         
         collectionView.reloadData()

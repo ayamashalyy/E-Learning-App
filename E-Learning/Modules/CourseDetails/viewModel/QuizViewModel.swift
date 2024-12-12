@@ -46,11 +46,7 @@ class QuizViewModel {
                          questionType: .multipleChoice),
             
             QuizQuestion(questionText: "Match the following:",
-                         matchingPairs: [
-                            MatchingOption(leftOption: "Apple", rightOption: "iPhone"),
-                            MatchingOption(leftOption: "Microsoft", rightOption: "Windows"),
-                            MatchingOption(leftOption: "Google", rightOption: "Android")
-                         ],
+                         options: ["Apple","Microsoft","Google","iPhone","Windows","Android"],
                          correctAnswers: [0, 1, 2],
                          questionType: .matching)
             
