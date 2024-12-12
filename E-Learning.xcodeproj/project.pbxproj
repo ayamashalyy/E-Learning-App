@@ -51,6 +51,8 @@
 		037C5C362D01F96900905CE9 /* CourseContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C5C352D01F96900905CE9 /* CourseContentTableViewCell.swift */; };
 		037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037F20F12CF384FE00691EF0 /* SelectOrganizationViewController.swift */; };
 		037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037F20F62CF3A17000691EF0 /* LoginViewController.swift */; };
+		037F7DEB2D0B7165001A411A /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037F7DEA2D0B7165001A411A /* SuccessViewController.swift */; };
+		037F7DED2D0B7193001A411A /* FailureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037F7DEC2D0B7193001A411A /* FailureViewController.swift */; };
 		03822FE32CECC27B00F96ACB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03822FE22CECC27A00F96ACB /* Main.storyboard */; };
 		03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FE42CECC71500F96ACB /* SearchViewController.swift */; };
 		03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FE62CECC90900F96ACB /* MyLearningViewController.swift */; };
@@ -122,6 +124,8 @@
 		037C5C352D01F96900905CE9 /* CourseContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentTableViewCell.swift; sourceTree = "<group>"; };
 		037F20F12CF384FE00691EF0 /* SelectOrganizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOrganizationViewController.swift; sourceTree = "<group>"; };
 		037F20F62CF3A17000691EF0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		037F7DEA2D0B7165001A411A /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		037F7DEC2D0B7193001A411A /* FailureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureViewController.swift; sourceTree = "<group>"; };
 		03822FE22CECC27A00F96ACB /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		03822FE42CECC71500F96ACB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		03822FE62CECC90900F96ACB /* MyLearningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 				035250A12D07717C0027C270 /* MultipleChoiceCell.xib */,
 				03BCA38F2D08C0C80025B833 /* MatchingCell.swift */,
 				03BCA3902D08C0C80025B833 /* MatchingCell.xib */,
+				037F7DEA2D0B7165001A411A /* SuccessViewController.swift */,
+				037F7DEC2D0B7193001A411A /* FailureViewController.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -662,6 +668,7 @@
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
+				037F7DED2D0B7193001A411A /* FailureViewController.swift in Sources */,
 				0364129A2CFF6508008EE23F /* Course.swift in Sources */,
 				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,
 				0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */,
@@ -676,6 +683,7 @@
 				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
 				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
+				037F7DEB2D0B7165001A411A /* SuccessViewController.swift in Sources */,
 				0341D1E22D0093F30008136C /* CourseViewController.swift in Sources */,
 				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
 				037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */,

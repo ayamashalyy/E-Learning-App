@@ -11,7 +11,6 @@ class QuizViewModel {
     
     private var questions: [QuizQuestion] = []
     private(set) var currentQuestionIndex: Int = 0
-    var selectedAnswers: [Int] = []
     var selectedOptionIndex: Int? = nil
     
     var currentQuestion: QuizQuestion {
@@ -42,7 +41,7 @@ class QuizViewModel {
             
             QuizQuestion(questionText: "Choose multiple options",
                          options: ["Option A", "Option B", "Option C"],
-                         correctAnswers: [0, 1],
+                         correctAnswers: [0, 1, 2],
                          questionType: .multipleChoice),
             
             QuizQuestion(questionText: "Match the following:",
@@ -51,7 +50,6 @@ class QuizViewModel {
                          questionType: .matching)
             
         ]
-        selectedAnswers = []
         selectedOptionIndex = nil
     }
     
@@ -70,4 +68,17 @@ class QuizViewModel {
         }
         return false
     }
+    
+    var correctAnswersCount: Int {
+        return questions.filter { $0.isCorrect }.count
+    }
+
+    var score: Int {
+        return (correctAnswersCount * 100) / totalQuestions
+    }
+    
+    func updateSelectedAnswers(_ answers: [Int]) {
+           questions[currentQuestionIndex].selectedAnswers = answers
+       }
+    
 }

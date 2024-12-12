@@ -11,7 +11,12 @@ struct QuizQuestion {
     var questionText: String
     var options: [String]
     var correctAnswers: [Int]
+    var selectedAnswers: [Int] = []
     var questionType: QuestionType
+    
+    var isCorrect: Bool {
+           return correctAnswers.sorted() == selectedAnswers.sorted()
+       }
 }
 
 enum QuestionType {

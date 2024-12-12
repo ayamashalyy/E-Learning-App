@@ -43,8 +43,8 @@ class QuizViewController: UIViewController {
     
     func updateButtonStates() {
         previousButton.isHidden = viewModel.currentQuestionIndex == 0
-        nextButton.isHidden = viewModel.currentQuestionIndex >= viewModel.totalQuestions - 1
-        imageView.isHidden = viewModel.currentQuestionIndex > 0 && viewModel.currentQuestionIndex < viewModel.totalQuestions - 1
+        nextButton.isHidden = false
+        imageView.isHidden = viewModel.currentQuestionIndex > 0 && viewModel.currentQuestionIndex < viewModel.totalQuestions
         
         
     }
@@ -60,12 +60,30 @@ class QuizViewController: UIViewController {
         let currentQuestion = viewModel.currentQuestion
         questionNumberLabel.text = "Question \(viewModel.currentQuestionIndex + 1) / \(10)"
         questionLabel.text =  " \(viewModel.currentQuestionIndex + 1) - \(currentQuestion.questionText)"
+        collectionView.reloadData()
     }
     
     @objc func nextButtonTapped() {
-        if viewModel.moveToNextQuestion() {
+        if viewModel.currentQuestionIndex == viewModel.totalQuestions - 1 {
+            
+            let score = viewModel.score
+            
+            if score > 85 {
+                
+                let successViewController = SuccessViewController()
+                successViewController.modalPresentationStyle = .fullScreen
+                successViewController.score = score
+                present(successViewController, animated: true, completion: nil)
+            } else {
+                
+                let failureViewController = FailureViewController()
+                failureViewController.modalPresentationStyle = .fullScreen
+                failureViewController.score = score
+                present(failureViewController, animated: true, completion: nil)
+            }
+            
+        } else if viewModel.moveToNextQuestion() {
             viewModel.selectedOptionIndex = nil
-            viewModel.selectedAnswers = []
             updateUI()
             updateButtonStates()
             collectionView.reloadData()
@@ -215,6 +233,8 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let question = viewModel.currentQuestion
+        let isSelected = question.selectedAnswers.contains(indexPath.row)
+        
         switch question.questionType {
         case .singleChoice, .trueFalse:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleChoiceCell", for: indexPath) as? SingleChoiceCell else {
@@ -222,7 +242,6 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             
             let optionText = question.options[indexPath.row]
-            let isSelected = viewModel.selectedOptionIndex == indexPath.row
             cell.configure(optionText: optionText, isSelected: isSelected)
             return cell
             
@@ -232,7 +251,6 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             
             let optionText = question.options[indexPath.row]
-            let isSelected = viewModel.selectedOptionIndex == indexPath.row
             cell.configure(optionText: optionText, isSelected: isSelected)
             return cell
             
@@ -242,7 +260,6 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             
             let optionText = question.options[indexPath.row]
-            let isSelected = viewModel.selectedOptionIndex == indexPath.row
             cell.configure(optionText: optionText, isSelected: isSelected)
             
             return cell
@@ -261,23 +278,23 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let question = viewModel.currentQuestion
+        var question = viewModel.currentQuestion
         
         switch question.questionType {
         case .trueFalse, .singleChoice:
             viewModel.selectedOptionIndex = indexPath.row
-            viewModel.selectedAnswers = [indexPath.row]
+            question.selectedAnswers = [indexPath.row]
         case .multipleChoice:
-            if viewModel.selectedAnswers.contains(indexPath.row) {
-                viewModel.selectedAnswers.removeAll { $0 == indexPath.row }
+            if question.selectedAnswers.contains(indexPath.row) {
+                question.selectedAnswers.removeAll { $0 == indexPath.row }
             } else {
-                viewModel.selectedAnswers.append(indexPath.row)
+                question.selectedAnswers.append(indexPath.row)
             }
         case .matching:
             viewModel.selectedOptionIndex = indexPath.row
-            viewModel.selectedAnswers = [indexPath.row]
+            question.selectedAnswers = [indexPath.row]
         }
-        
+        viewModel.updateSelectedAnswers(question.selectedAnswers)
         collectionView.reloadData()
     }
     
