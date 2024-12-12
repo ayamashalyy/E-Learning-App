@@ -159,20 +159,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard let TermsAndConditionsVC = storyboard.instantiateViewController(withIdentifier: "TermsAndConditions") as? TermsAndConditionsViewController else {
-            fatalError("TermsAndConditionsViewController could not be instantiated. Ensure its Storyboard ID is set.")
-        }
-        
-        guard let AboutVC = storyboard.instantiateViewController(withIdentifier: "About") as? AboutViewController else {
-            fatalError("AboutViewController could not be instantiated. Ensure its Storyboard ID is set.")
-        }
-        
-        guard let PrivacyAndPolicyVC = storyboard.instantiateViewController(withIdentifier: "PrivacyAndPolicy") as? PrivacyAndPolicyViewController else {
-            fatalError("PrivacyAndPolicyViewController could not be instantiated. Ensure its Storyboard ID is set.")
-        }
-        
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
@@ -191,19 +177,22 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             if indexPath.row == 0 {
                 
-                let navigationController = UINavigationController(rootViewController: AboutVC)
+                let nextController = AboutViewController()
+                let navigationController = UINavigationController(rootViewController: nextController)
                 navigationController.modalPresentationStyle = .fullScreen
                 present(navigationController, animated: true, completion: nil)
                 
             } else if indexPath.row == 1 {
                 
-                let navigationController = UINavigationController(rootViewController: TermsAndConditionsVC)
+                let nextController = TermsAndConditionsViewController()
+                let navigationController = UINavigationController(rootViewController: nextController)
                 navigationController.modalPresentationStyle = .fullScreen
                 present(navigationController, animated: true, completion: nil)
                 
             } else {
                 
-                let navigationController = UINavigationController(rootViewController: PrivacyAndPolicyVC)
+                let nextController = PrivacyAndPolicyViewController()
+                let navigationController = UINavigationController(rootViewController: nextController)
                 navigationController.modalPresentationStyle = .fullScreen
                 present(navigationController, animated: true, completion: nil)
             }
@@ -216,7 +205,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             break
             
         }
-        
     }
 }
 

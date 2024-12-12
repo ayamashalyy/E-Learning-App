@@ -244,7 +244,6 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
             let optionText = question.options[indexPath.row]
             let isSelected = viewModel.selectedOptionIndex == indexPath.row
             cell.configure(optionText: optionText, isSelected: isSelected)
-            }
             
             return cell
         }
