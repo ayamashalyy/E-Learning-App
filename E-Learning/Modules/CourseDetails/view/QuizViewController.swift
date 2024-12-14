@@ -71,6 +71,7 @@ class QuizViewController: UIViewController {
             if score > 85 {
                 
                 let successViewController = SuccessViewController()
+                successViewController.quizViewModel = self.viewModel
                 successViewController.modalPresentationStyle = .fullScreen
                 successViewController.score = score
                 present(successViewController, animated: true, completion: nil)
@@ -291,8 +292,11 @@ extension QuizViewController: UICollectionViewDataSource, UICollectionViewDelega
                 question.selectedAnswers.append(indexPath.row)
             }
         case .matching:
-            viewModel.selectedOptionIndex = indexPath.row
-            question.selectedAnswers = [indexPath.row]
+            if question.selectedAnswers.contains(indexPath.row) {
+                question.selectedAnswers.removeAll { $0 == indexPath.row }
+            } else {
+                question.selectedAnswers.append(indexPath.row)
+            }
         }
         viewModel.updateSelectedAnswers(question.selectedAnswers)
         collectionView.reloadData()

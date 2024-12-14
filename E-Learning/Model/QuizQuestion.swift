@@ -15,8 +15,8 @@ struct QuizQuestion {
     var questionType: QuestionType
     
     var isCorrect: Bool {
-           return correctAnswers.sorted() == selectedAnswers.sorted()
-       }
+        return correctAnswers.sorted() == selectedAnswers.sorted()
+    }
 }
 
 enum QuestionType {

@@ -10,6 +10,7 @@ import UIKit
 class SuccessViewController: UIViewController {
     
     var score: Int?
+    var quizViewModel: QuizViewModel?
     var stackView = UIStackView()
     var imageGrowth = UIImageView()
     var scoreNum = UILabel()
@@ -23,6 +24,10 @@ class SuccessViewController: UIViewController {
         view.backgroundColor = .white
         setupUI()
         setupConstraints()
+        
+        if let score = score {
+            scoreNum.text = "\(score)% Score"
+        }
     }
     
     func setupUI() {
@@ -52,7 +57,6 @@ class SuccessViewController: UIViewController {
         ])
         
         scoreNum = UILabel()
-        scoreNum.text = "85% Score"
         scoreNum.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         scoreNum.textColor = UIColor(named: "scoreColor")
         scoreNum.textAlignment = .center
@@ -129,6 +133,15 @@ class SuccessViewController: UIViewController {
     
     @objc func reviewButtonTapped() {
         print("Review")
+        guard let quizViewModel = quizViewModel else {
+            print("QuizViewModel is nil")
+            return
+            
+        }
+        let quizViewController = QuizViewController()
+        quizViewController.viewModel = quizViewModel
+        quizViewController.modalPresentationStyle = .fullScreen
+        present(quizViewController, animated: true, completion: nil)
     }
     
 }

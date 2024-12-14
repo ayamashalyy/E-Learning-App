@@ -22,6 +22,10 @@ class FailureViewController: UIViewController {
         view.backgroundColor = .white
         setupUI()
         setupConstraints()
+        
+        if let score = score {
+            scoreNum.text = "\(score)% Score"
+        }
     }
     
     func setupUI() {
@@ -51,7 +55,6 @@ class FailureViewController: UIViewController {
         ])
         
         scoreNum = UILabel()
-        scoreNum.text = "60% Score"
         scoreNum.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         scoreNum.textColor = UIColor(named: "failureColor")
         scoreNum.textAlignment = .center
@@ -112,6 +115,9 @@ class FailureViewController: UIViewController {
     
     @objc func tryAgainButtonTapped() {
         print("Try Again")
+        let failureViewController = QuizViewController()
+        failureViewController.modalPresentationStyle = .fullScreen
+        present(failureViewController, animated: true, completion: nil)
     }
     
     

@@ -72,13 +72,13 @@ class QuizViewModel {
     var correctAnswersCount: Int {
         return questions.filter { $0.isCorrect }.count
     }
-
+    
     var score: Int {
         return (correctAnswersCount * 100) / totalQuestions
     }
     
     func updateSelectedAnswers(_ answers: [Int]) {
-           questions[currentQuestionIndex].selectedAnswers = answers
-       }
+        questions[currentQuestionIndex].selectedAnswers = answers
+    }
     
 }
