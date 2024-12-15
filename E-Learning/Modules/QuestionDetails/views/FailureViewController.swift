@@ -115,10 +115,10 @@ class FailureViewController: UIViewController {
     
     @objc func tryAgainButtonTapped() {
         print("Try Again")
-        let failureViewController = QuizViewController()
-        failureViewController.modalPresentationStyle = .fullScreen
-        present(failureViewController, animated: true, completion: nil)
+        
+        let nextController = PageViewController()
+        let navigationController = UINavigationController(rootViewController: nextController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
-    
-    
 }

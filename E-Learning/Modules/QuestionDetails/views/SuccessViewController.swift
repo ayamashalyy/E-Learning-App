@@ -10,7 +10,6 @@ import UIKit
 class SuccessViewController: UIViewController {
     
     var score: Int?
-    var quizViewModel: QuizViewModel?
     var stackView = UIStackView()
     var imageGrowth = UIImageView()
     var scoreNum = UILabel()
@@ -94,15 +93,15 @@ class SuccessViewController: UIViewController {
         view.addSubview(continueButton)
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         
-        reviewButton = UIButton(type: .system)
-        reviewButton.setTitle("Review", for: .normal)
-        reviewButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        reviewButton.setTitleColor(UIColor.white, for: .normal)
-        reviewButton.backgroundColor = UIColor(named: "second")
-        reviewButton.layer.cornerRadius = 25
-        reviewButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(reviewButton)
-        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        //        reviewButton = UIButton(type: .system)
+        //        reviewButton.setTitle("Review", for: .normal)
+        //        reviewButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        //        reviewButton.setTitleColor(UIColor.white, for: .normal)
+        //        reviewButton.backgroundColor = UIColor(named: "second")
+        //        reviewButton.layer.cornerRadius = 25
+        //        reviewButton.translatesAutoresizingMaskIntoConstraints = false
+        //        view.addSubview(reviewButton)
+        //        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
     }
     
     func setupConstraints() {
@@ -116,32 +115,36 @@ class SuccessViewController: UIViewController {
             continueButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            reviewButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 15),
-            reviewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            reviewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            //            reviewButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 15),
+            //            reviewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            //            reviewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             continueButton.widthAnchor.constraint(equalToConstant: 340),
             continueButton.heightAnchor.constraint(equalToConstant: 50),
-            reviewButton.widthAnchor.constraint(equalToConstant: 340),
-            reviewButton.heightAnchor.constraint(equalToConstant: 50)
+            //            reviewButton.widthAnchor.constraint(equalToConstant: 340),
+            //            reviewButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
     }
     
     @objc func continueButtonTapped() {
         print("Continue")
+        let nextController = CourseViewController()
+        let navigationController = UINavigationController(rootViewController: nextController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
     
-    @objc func reviewButtonTapped() {
-        print("Review")
-        guard let quizViewModel = quizViewModel else {
-            print("QuizViewModel is nil")
-            return
-            
-        }
-        let quizViewController = QuizViewController()
-        quizViewController.viewModel = quizViewModel
-        quizViewController.modalPresentationStyle = .fullScreen
-        present(quizViewController, animated: true, completion: nil)
-    }
+    //    @objc func reviewButtonTapped() {
+    //        print("Review")
+    //        guard let quizViewModel = quizViewModel else {
+    //            print("QuizViewModel is nil")
+    //            return
+    //
+    //        }
+    //        let quizViewController = QuizViewController()
+    //        quizViewController.viewModel = quizViewModel
+    //        quizViewController.modalPresentationStyle = .fullScreen
+    //        present(quizViewController, animated: true, completion: nil)
+    //    }
     
 }

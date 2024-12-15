@@ -29,6 +29,15 @@ class PageViewController: UIPageViewController {
     var previousButton: UIButton!
     var imageView = UIImageView()
     var titleLabel: UILabel!
+    private var score: Int = 80
+    
+    init() {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     
     override func viewDidLoad() {
@@ -92,7 +101,7 @@ class PageViewController: UIPageViewController {
         nextButton.semanticContentAttribute = .forceRightToLeft
         nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
         nextButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
-        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
+        nextButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         // Button Stack View
         let buttonStackView = UIStackView(arrangedSubviews: [previousButton, nextButton])
@@ -104,7 +113,7 @@ class PageViewController: UIPageViewController {
         self.view.addSubview(buttonStackView)
         
         imageView = UIImageView()
-        imageView.image = UIImage(named: "")
+        imageView.image = nil
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         let bigStackView = UIStackView(arrangedSubviews: [imageView, buttonStackView])
@@ -132,7 +141,23 @@ class PageViewController: UIPageViewController {
 
 extension PageViewController {
     @objc private func nextButtonPressed() {
-        goToNextPage()
+        guard let currentViewController = self.viewControllers?.first as? QuestionVC,
+              let currentQuestion = currentViewController.question else { return }
+        
+        let isAnswerSelected = currentQuestion.answers.contains { $0.isSelected }
+        
+        if isAnswerSelected {
+            goToNextPage()
+        } else {
+            showAlert(message: "Please select an answer before proceeding to the next question.")
+        }
+    }
+    
+    private func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @objc private func previousButtonPressed() {
@@ -157,6 +182,39 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         imageView.isHidden = currentIndex > 0 && currentIndex < subVC.count
         
         titleLabel.text = dataSourace[currentIndex].title
+        
+        if currentIndex == subVC.count - 1 {
+            nextButton.setTitle("Show Results", for: .normal)
+            nextButton.removeTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+            nextButton.addTarget(self, action: #selector(showResults), for: .touchUpInside)
+        } else {
+            nextButton.setTitle("Next", for: .normal)
+            nextButton.removeTarget(self, action: #selector(showResults), for: .touchUpInside)
+            nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func showResults() {
+        guard let currentViewController = self.viewControllers?.first as? QuestionVC,
+              let currentQuestion = currentViewController.question else { return }
+        
+        let isAnswerSelected = currentQuestion.answers.contains { $0.isSelected }
+        
+        if isAnswerSelected {
+            if score > 85 {
+                let successViewController = SuccessViewController()
+                successViewController.modalPresentationStyle = .fullScreen
+                successViewController.score = score
+                present(successViewController, animated: true, completion: nil)
+            } else {
+                let failureViewController = FailureViewController()
+                failureViewController.modalPresentationStyle = .fullScreen
+                failureViewController.score = score
+                present(failureViewController, animated: true, completion: nil)
+            }
+        } else {
+            showAlert(message: "Please select an answer before proceeding to the results.")
+        }
     }
     
     
