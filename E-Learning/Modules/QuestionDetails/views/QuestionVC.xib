@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1E5-ie-1vn">
-                    <rect key="frame" x="16" y="119" width="361" height="619"/>
+                    <rect key="frame" x="16" y="119" width="361" height="639"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdK-l7-CKl">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="20"/>
@@ -33,7 +33,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Cyn-7r-CLY">
-                            <rect key="frame" x="0.0" y="40" width="361" height="579"/>
+                            <rect key="frame" x="0.0" y="40" width="361" height="599"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LRe-7e-OAd">
                                 <size key="itemSize" width="128" height="128"/>
@@ -50,7 +50,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1E5-ie-1vn" secondAttribute="trailing" constant="16" id="31e-86-A8u"/>
                 <constraint firstItem="1E5-ie-1vn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="BM2-ur-L20"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1E5-ie-1vn" secondAttribute="bottom" constant="80" id="Dfi-Ey-pX4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1E5-ie-1vn" secondAttribute="bottom" constant="60" id="Dfi-Ey-pX4"/>
                 <constraint firstItem="1E5-ie-1vn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zhX-tn-4Tc"/>
             </constraints>
             <point key="canvasLocation" x="106" y="-11"/>

@@ -29,7 +29,7 @@ class PageViewController: UIPageViewController {
     var previousButton: UIButton!
     var imageView = UIImageView()
     var titleLabel: UILabel!
-    private var score: Int = 80
+    private var score: Int = 90
     
     init() {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -133,7 +133,7 @@ class PageViewController: UIPageViewController {
             
             bigStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25),
             bigStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25),
-            bigStackView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -50),
+            bigStackView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor,constant: -20),
             bigStackView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }

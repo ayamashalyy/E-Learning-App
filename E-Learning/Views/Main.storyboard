@@ -130,6 +130,7 @@
                             <constraint firstItem="kDy-pu-0NT" firstAttribute="bottom" secondItem="MMs-h6-TGN" secondAttribute="bottom" id="QDn-Dq-Bta"/>
                             <constraint firstItem="Jfz-pL-ozf" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" constant="70" id="Rma-Gd-L8D"/>
                             <constraint firstItem="MMs-h6-TGN" firstAttribute="leading" secondItem="kDy-pu-0NT" secondAttribute="leading" id="SPR-dO-Oq7"/>
+                            <constraint firstItem="kDy-pu-0NT" firstAttribute="trailing" secondItem="ACi-48-zjy" secondAttribute="trailing" constant="23" id="X8C-Jb-dI2"/>
                             <constraint firstItem="MMs-h6-TGN" firstAttribute="top" secondItem="ACi-48-zjy" secondAttribute="bottom" constant="20" id="Zna-xy-Xq5"/>
                             <constraint firstItem="ACi-48-zjy" firstAttribute="top" secondItem="Jfz-pL-ozf" secondAttribute="bottom" constant="20" id="u8b-5s-92S"/>
                         </constraints>

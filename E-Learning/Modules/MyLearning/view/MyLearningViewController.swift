@@ -98,7 +98,7 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 220
+        return 210
     }
     
     
