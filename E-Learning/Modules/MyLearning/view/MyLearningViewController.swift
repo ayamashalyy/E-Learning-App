@@ -69,6 +69,7 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
         }
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyLearningTableViewCell", for: indexPath) as? MyLearningTableViewCell else {
             fatalError("Unable to dequeue MyLearningTableViewCell")
@@ -98,10 +99,6 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 210
+        return 190
     }
-    
-    
-    
-    
 }

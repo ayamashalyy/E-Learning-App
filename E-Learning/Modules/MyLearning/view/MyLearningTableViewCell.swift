@@ -10,7 +10,6 @@ import UIKit
 class MyLearningTableViewCell: UITableViewCell {
     
     @IBOutlet weak var outerView: UIView!
-    @IBOutlet weak var myLearningImage: UIView!
     @IBOutlet weak var myLearningCategory: UILabel!
     @IBOutlet weak var myLearningNameCourse: UILabel!
     @IBOutlet weak var myLearningConstractorName: UILabel!
@@ -20,7 +19,6 @@ class MyLearningTableViewCell: UITableViewCell {
     @IBOutlet weak var myLearningProgress: UIProgressView!
     @IBOutlet weak var myLearningImage2: UIImageView!
     @IBOutlet weak var checkImage: UIImageView!
-    @IBOutlet weak var shareCertificationBtn: UIButton!
     
     
     
@@ -30,8 +28,8 @@ class MyLearningTableViewCell: UITableViewCell {
         
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
-        myLearningImage.layer.cornerRadius = 8
-        myLearningImage.layer.masksToBounds = true
+        myLearningImage2.layer.cornerRadius = 8
+        myLearningImage2.layer.masksToBounds = true
         
         innerView.layer.cornerRadius = 4
         innerView.layer.masksToBounds = true
@@ -52,6 +50,7 @@ class MyLearningTableViewCell: UITableViewCell {
         myLearningBtn.backgroundColor = UIColor(named: "myCustom")
         myLearningBtn.layer.borderColor = nil
         myLearningBtn.tintColor = nil
+        myLearningBtn.titleLabel?.font = UIFont.systemFont(ofSize: 8)
         myLearningBtn.layer.borderWidth = 0
         myLearningBtn.layer.shadowOpacity = 0
         print("Button frame: \(myLearningBtn.frame)")
@@ -74,27 +73,34 @@ class MyLearningTableViewCell: UITableViewCell {
     
     func configureCell(isInProgress: Bool = false, isInAssigned: Bool = false, isInCompleted: Bool = false) {
         
+        myLearningImage2.removeConstraints(myLearningImage2.constraints)
+        
+        
         checkImage.isHidden = isInProgress || isInAssigned
         myLearningProgress.isHidden = isInAssigned
         myLearningProgressLabel.isHidden = isInAssigned
-        shareCertificationBtn.isHidden = isInProgress || isInAssigned
+        myLearningBtn.imageView?.isHidden = isInProgress || isInAssigned
         
+        
+        myLearningImage2.translatesAutoresizingMaskIntoConstraints = false
         if isInProgress {
-            
+            myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
+            myLearningImage2.heightAnchor.constraint(equalToConstant: 40).isActive = true
             myLearningProgress.setProgress(0.5, animated: true)
             myLearningProgressLabel.text = "50%"
-            myLearningBtn.setTitle("Continue!", for: .normal)
+            myLearningBtn.setTitle("   Continue!", for: .normal)
         } else if isInAssigned {
-            
-            myLearningBtn.setTitle("Start now!", for: .normal)
+            myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
+            myLearningImage2.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            myLearningBtn.setTitle("   Start now!", for: .normal)
         } else if isInCompleted {
-            
+            myLearningImage2.widthAnchor.constraint(equalToConstant: 80).isActive = true
+            myLearningImage2.heightAnchor.constraint(equalToConstant: 70).isActive = true
             myLearningProgress.setProgress(1.0, animated: true)
             myLearningProgressLabel.text = "100%"
             myLearningBtn.setTitle("Share Certification", for: .normal)
         }
+        
+        self.layoutIfNeeded()
     }
-    
-    
-    
 }
