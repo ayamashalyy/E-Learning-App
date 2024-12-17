@@ -29,7 +29,7 @@ class PageViewController: UIPageViewController {
     var previousButton: UIButton!
     var imageView = UIImageView()
     var titleLabel: UILabel!
-    private var score: Int = 90
+    private var score: Int = 80
     
     init() {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -69,7 +69,7 @@ class PageViewController: UIPageViewController {
     func setupButtonsUI() {
         
         titleLabel = UILabel()
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        titleLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         titleLabel.textColor = UIColor(named: "second")
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)

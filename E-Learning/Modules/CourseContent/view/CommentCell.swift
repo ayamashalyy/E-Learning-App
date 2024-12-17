@@ -44,7 +44,7 @@ class CommentCell: UITableViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont(name: "Roboto-Medium", size: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -52,7 +52,7 @@ class CommentCell: UITableViewCell {
     
     let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont(name: "Roboto-Regular", size: 14)
         label.textColor = UIColor(named: "onboradColor")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -60,7 +60,7 @@ class CommentCell: UITableViewCell {
     
     let commentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont(name: "Roboto-Regular", size: 14)
         label.textColor = UIColor(named: "commentLabel")
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false

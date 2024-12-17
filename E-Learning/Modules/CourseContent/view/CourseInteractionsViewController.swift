@@ -41,7 +41,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         
         let shareButton = UIButton(type: .system)
         shareButton.setTitle("Share this course", for: .normal)
-        shareButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        shareButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
         shareButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         
         let shareStackView = UIStackView(arrangedSubviews: [shareImageView, shareButton])
@@ -57,7 +57,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         let discussionButton = UIButton(type: .system)
         discussionButton.setTitle("Discussion Forum", for: .normal)
         discussionButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
-        discussionButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        discussionButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
         
         let discussionStackView = UIStackView(arrangedSubviews: [discussionImageView, discussionButton])
         discussionStackView.axis = .horizontal
@@ -82,7 +82,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         
         let commentsLabel = UILabel()
         commentsLabel.text = "Comments"
-        commentsLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        commentsLabel.font = UIFont(name: "Roboto-Bold", size: 20)
         commentsLabel.translatesAutoresizingMaskIntoConstraints = false
         stackViewComments.addArrangedSubview(commentsLabel)
         
@@ -92,7 +92,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         addCommentButton.tintColor = UIColor(named: "myCustom")
         addCommentButton.backgroundColor = UIColor(named: "addCommet")
         addCommentButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
-        addCommentButton.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        addCommentButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 12)
         addCommentButton.layer.cornerRadius = 10
         addCommentButton.layer.borderWidth = 1.0
         addCommentButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor

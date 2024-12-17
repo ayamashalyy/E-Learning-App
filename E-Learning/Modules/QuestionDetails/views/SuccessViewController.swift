@@ -56,7 +56,7 @@ class SuccessViewController: UIViewController {
         ])
         
         scoreNum = UILabel()
-        scoreNum.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        scoreNum.font = UIFont(name: "Roboto-Medium", size: 18)
         scoreNum.textColor = UIColor(named: "scoreColor")
         scoreNum.textAlignment = .center
         scoreNum.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -65,7 +65,7 @@ class SuccessViewController: UIViewController {
         
         congratulationLabel = UILabel()
         congratulationLabel.text = "Congratulation!"
-        congratulationLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        congratulationLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         congratulationLabel.textColor = .black
         congratulationLabel.textAlignment = .center
         congratulationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -74,7 +74,7 @@ class SuccessViewController: UIViewController {
         
         passedMassage = UILabel()
         passedMassage.text = "You have successfully passed the Quiz,\n\nclick Continue to complete your educational journey"
-        passedMassage.font = UIFont.systemFont(ofSize: 12)
+        passedMassage.font = UIFont(name: "Roboto-Regular", size: 12)
         passedMassage.textColor = UIColor(named: "onboradColor")
         passedMassage.textAlignment = .center
         passedMassage.lineBreakMode = .byWordWrapping
@@ -85,7 +85,7 @@ class SuccessViewController: UIViewController {
         
         continueButton = UIButton(type: .system)
         continueButton.setTitle("Continue", for: .normal)
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        continueButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         continueButton.setTitleColor(UIColor.white, for: .normal)
         continueButton.backgroundColor = UIColor(named: "myCustom")
         continueButton.layer.cornerRadius = 25

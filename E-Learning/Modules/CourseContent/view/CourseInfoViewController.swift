@@ -44,14 +44,14 @@ class CourseInfoViewController: UIViewController, sendData {
         
         introductionLabel.translatesAutoresizingMaskIntoConstraints = false
         introductionLabel.text = "Introduction to Scrum Master"
-        introductionLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        introductionLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         view.addSubview(introductionLabel)
         
         introductionDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         introductionDescriptionLabel.numberOfLines = 0
         introductionDescriptionLabel.textColor = UIColor(named: "onboradColor")
         introductionDescriptionLabel.text = "This course is designed to help Scrum beginners learn the foundational knowledge to become proficient with Agile Scrum. Throughout the course, learners will explore Agile methodologies and benefits of building incrementally."
-        introductionDescriptionLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        introductionDescriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         view.addSubview(introductionDescriptionLabel)
         
         stackView = UIStackView()
@@ -108,13 +108,13 @@ class CourseInfoViewController: UIViewController, sendData {
         label1.text = "42 h   51 min"
         label1.numberOfLines = 0
         label1.textColor = UIColor(named: "myCustom")
-        label1.font = UIFont.systemFont(ofSize: 14)
+        label1.font = UIFont(name: "Roboto-Regular", size: 14)
         label1.translatesAutoresizingMaskIntoConstraints = false
         let label2 = UILabel()
         label2.text = "23 Lessons"
         label2.numberOfLines = 0
         label2.textColor = UIColor(named: "myCustom")
-        label2.font = UIFont.systemFont(ofSize: 14)
+        label2.font = UIFont(name: "Roboto-Regular", size: 14)
         label2.translatesAutoresizingMaskIntoConstraints = false
         button1.addSubview(imageView1)
         button1.addSubview(label1)
@@ -151,7 +151,7 @@ class CourseInfoViewController: UIViewController, sendData {
         let labelView2 = UILabel()
         labelView2.text = "Quizzes"
         labelView2.textColor = UIColor(named: "myCustom")
-        labelView2.font = UIFont.systemFont(ofSize: 14)
+        labelView2.font = UIFont(name: "Roboto-Regular", size: 14)
         labelView2.translatesAutoresizingMaskIntoConstraints = false
         button2.addSubview(imageView2)
         button2.addSubview(labelView2)
@@ -184,7 +184,7 @@ class CourseInfoViewController: UIViewController, sendData {
         labelView3.text = "  Certificate of completion"
         labelView3.numberOfLines = 0
         labelView3.textColor = UIColor(named: "myCustom")
-        labelView3.font = UIFont.systemFont(ofSize: 14)
+        labelView3.font = UIFont(name: "Roboto-Regular", size: 14)
         labelView3.translatesAutoresizingMaskIntoConstraints = false
         button3.addSubview(imageView3)
         button3.addSubview(labelView3)
@@ -236,7 +236,7 @@ class CourseInfoViewController: UIViewController, sendData {
         
         let nameLabel = UILabel()
         nameLabel.text = "Clifford Lampe"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        nameLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         nameLabel.textColor = .black
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         instractorView.addSubview(nameLabel)
@@ -248,7 +248,7 @@ class CourseInfoViewController: UIViewController, sendData {
         
         let titleLabel = UILabel()
         titleLabel.text = "Title"
-        titleLabel.font = UIFont.systemFont(ofSize: 14)
+        titleLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         instractorView.addSubview(titleLabel)
@@ -260,7 +260,7 @@ class CourseInfoViewController: UIViewController, sendData {
         
         let descriptionLabel = UILabel()
         descriptionLabel.text = "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         descriptionLabel.textColor = UIColor(named: "onboradColor")
         descriptionLabel.numberOfLines = 0
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false

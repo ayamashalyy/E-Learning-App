@@ -39,7 +39,7 @@ class CourseContentTableViewCell: UITableViewCell {
         innerDurationLabel.translatesAutoresizingMaskIntoConstraints = false
         innerDurationLabel.layer.cornerRadius = 8
         
-        durationLabel.font = UIFont.systemFont(ofSize: 10)
+        durationLabel.font = UIFont(name: "Roboto-Medium", size: 10)
         durationLabel.textAlignment = .center
         durationLabel.translatesAutoresizingMaskIntoConstraints = false
         innerDurationLabel.addSubview(durationLabel)
@@ -56,7 +56,7 @@ class CourseContentTableViewCell: UITableViewCell {
         innerTypeLabel.layer.cornerRadius = 8
         innerTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         typeLabel.textAlignment = .center
-        typeLabel.font = UIFont.systemFont(ofSize: 10)
+        typeLabel.font = UIFont(name: "Roboto-Medium", size: 10)
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         innerTypeLabel.addSubview(typeLabel)
         
@@ -84,10 +84,10 @@ class CourseContentTableViewCell: UITableViewCell {
         numberLabel.layer.cornerRadius = 20
         numberLabel.layer.masksToBounds = true
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        numberLabel.font = UIFont(name: "Roboto-Bold", size: 16)
         outerView.addSubview(numberLabel)
         
-        titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        titleLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         outerView.addSubview(titleLabel)
         

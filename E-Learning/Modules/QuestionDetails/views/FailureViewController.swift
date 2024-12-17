@@ -55,7 +55,7 @@ class FailureViewController: UIViewController {
         ])
         
         scoreNum = UILabel()
-        scoreNum.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        scoreNum.font = UIFont(name: "Roboto-Medium", size: 18)
         scoreNum.textColor = UIColor(named: "failureColor")
         scoreNum.textAlignment = .center
         scoreNum.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -64,7 +64,7 @@ class FailureViewController: UIViewController {
         
         congratulationLabel = UILabel()
         congratulationLabel.text = "You did not pass the quiz!"
-        congratulationLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        congratulationLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         congratulationLabel.textColor = .black
         congratulationLabel.textAlignment = .center
         congratulationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -73,7 +73,7 @@ class FailureViewController: UIViewController {
         
         retryMassage = UILabel()
         retryMassage.text = "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey."
-        retryMassage.font = UIFont.systemFont(ofSize: 12)
+        retryMassage.font = UIFont(name: "Roboto-Regular", size: 12)
         retryMassage.textColor = UIColor(named: "onboradColor")
         retryMassage.textAlignment = .center
         retryMassage.lineBreakMode = .byWordWrapping
@@ -84,7 +84,7 @@ class FailureViewController: UIViewController {
         
         tryAgainButton = UIButton(type: .system)
         tryAgainButton.setTitle("Try Again", for: .normal)
-        tryAgainButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        tryAgainButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         tryAgainButton.setTitleColor(UIColor.white, for: .normal)
         tryAgainButton.backgroundColor = UIColor(named: "myCustom")
         tryAgainButton.layer.cornerRadius = 25
