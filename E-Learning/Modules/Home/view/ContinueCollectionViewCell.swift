@@ -18,7 +18,7 @@ class ContinueCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var constratorNameCourse: UILabel!
     @IBOutlet weak var courseProgressRaico: UILabel!
     @IBOutlet weak var courseProgress: UIProgressView!
-    @IBOutlet weak var innerView: UIView!
+    @IBOutlet weak var innerView: UIStackView!
     override func awakeFromNib() {
         super.awakeFromNib()
         

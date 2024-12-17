@@ -64,7 +64,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: collectionView.bounds.width, height: 80)
+            return CGSize(width: collectionView.bounds.width, height: 90)
         case 1:
             return CGSize(width: collectionView.bounds.width - 20, height: 210)
         case 2 , 4 , 6 , 8 , 10:
