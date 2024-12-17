@@ -11,17 +11,6 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-    func printAllFonts() {
-        for family in UIFont.familyNames {
-            let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family)")
-            for name in names {
-                print("  Font: \(name)")
-            }
-        }
-    }
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         printAllFonts()
