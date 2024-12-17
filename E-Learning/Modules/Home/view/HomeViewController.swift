@@ -68,17 +68,17 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 1:
             return CGSize(width: collectionView.bounds.width - 20, height: 210)
         case 2 , 4 , 6 , 8 , 10:
-            return CGSize(width: collectionView.bounds.width - 20, height: 30)
+            return CGSize(width: collectionView.bounds.width - 20, height: 40)
         case 3:
-            return CGSize(width: collectionView.bounds.width , height: 80)
+            return CGSize(width: collectionView.bounds.width , height: 60)
         case 5:
-            return CGSize(width: collectionView.bounds.width , height: 230)
+            return CGSize(width: collectionView.bounds.width , height: 200)
         case 7:
-            return CGSize(width: collectionView.bounds.width , height: 230)
+            return CGSize(width: collectionView.bounds.width , height: 200)
         case 9:
-            return CGSize(width: collectionView.bounds.width , height: 230)
+            return CGSize(width: collectionView.bounds.width , height: 220)
         case 11:
-            return CGSize(width: collectionView.bounds.width , height: 230)
+            return CGSize(width: collectionView.bounds.width , height: 200)
             
             
         default:

@@ -14,13 +14,15 @@ class CareerPathsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var careerPathCertificate: UILabel!
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var careerPathTitle: UILabel!
+    @IBOutlet weak var professionalCertificateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         outerView.layer.cornerRadius = 15
         outerView.layer.masksToBounds = true
         
-        innerView.layer.cornerRadius = 15
+        innerView.layer.cornerRadius = 10
         innerView.layer.masksToBounds = true
         
         outerView.layer.shadowColor = UIColor.gray.cgColor
