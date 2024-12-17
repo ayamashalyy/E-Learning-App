@@ -243,7 +243,7 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             applyButton.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16),
             applyButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16),
-            applyButton.bottomAnchor.constraint(equalTo: filterContainerView.bottomAnchor, constant: -100),
+            applyButton.bottomAnchor.constraint(equalTo: filterContainerView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             applyButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         

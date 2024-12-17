@@ -122,30 +122,30 @@
                                                         <rect key="frame" x="0.0" y="66" width="195" height="50"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sl1-1o-3Cc">
-                                                                <rect key="frame" x="0.0" y="0.0" width="8" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="4" height="50"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="8" id="eYk-TE-ULZ"/>
+                                                                    <constraint firstAttribute="width" constant="4" id="eYk-TE-ULZ"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDR-Dt-20l">
-                                                                <rect key="frame" x="8" y="0.0" width="130" height="50"/>
+                                                                <rect key="frame" x="4" y="0.0" width="120" height="50"/>
                                                                 <subviews>
                                                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9Ah-zC-hBm">
-                                                                        <rect key="frame" x="2" y="23" width="126" height="4"/>
+                                                                        <rect key="frame" x="2" y="23" width="116" height="4"/>
                                                                         <color key="progressTintColor" name="second"/>
                                                                     </progressView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstItem="9Ah-zC-hBm" firstAttribute="centerY" secondItem="PDR-Dt-20l" secondAttribute="centerY" id="V7q-S3-kjL"/>
-                                                                    <constraint firstAttribute="width" constant="130" id="Yww-on-TzS"/>
+                                                                    <constraint firstAttribute="width" constant="120" id="Yww-on-TzS"/>
                                                                     <constraint firstItem="9Ah-zC-hBm" firstAttribute="centerX" secondItem="PDR-Dt-20l" secondAttribute="centerX" id="cgv-TQ-ia7"/>
                                                                     <constraint firstItem="9Ah-zC-hBm" firstAttribute="leading" secondItem="PDR-Dt-20l" secondAttribute="leading" constant="2" id="eO1-Dh-h7e"/>
                                                                 </constraints>
                                                             </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4r-b9-4zC">
-                                                                <rect key="frame" x="138" y="0.0" width="57" height="50"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4r-b9-4zC">
+                                                                <rect key="frame" x="124" y="0.0" width="71" height="50"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
