@@ -13,7 +13,7 @@ class FilterSectionHeaderViewCollectionReusableView: UICollectionReusableView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name: "Roboto-Medium", size: 16)
         label.textColor = .black
         return label
     }()

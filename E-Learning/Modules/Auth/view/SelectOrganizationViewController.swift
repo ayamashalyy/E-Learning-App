@@ -26,7 +26,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         
         enterOrganizationNameText = UILabel()
         enterOrganizationNameText.text = "Enter Your Organization Name"
-        enterOrganizationNameText.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        enterOrganizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
         enterOrganizationNameText.textColor = UIColor(named: "myCustom") ?? .black
         enterOrganizationNameText.textAlignment = .center
         enterOrganizationNameText.numberOfLines = 0
@@ -34,7 +34,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(enterOrganizationNameText)
         
         organizationNameTextField = MDCTextField()
-        organizationNameTextField.font = UIFont.systemFont(ofSize: 14)
+        organizationNameTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         organizationNameTextField.textColor = .lightGray
         organizationNameTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(organizationNameTextField)
@@ -43,14 +43,15 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         organizationNameController = MDCTextInputControllerOutlined(textInput: organizationNameTextField)
         organizationNameController.placeholderText = "Organization Name"
         organizationNameController.normalColor = .lightGray
-        organizationNameController.activeColor = .lightGray;     organizationNameController.floatingPlaceholderActiveColor = .black
+        organizationNameController.activeColor = .lightGray
+        organizationNameController.floatingPlaceholderActiveColor = .black
         organizationNameController.floatingPlaceholderScale = 0.8
         organizationNameController.borderRadius = 8
         
         
         goToYourOrgaizationButton = UIButton(type: .system)
         goToYourOrgaizationButton.setTitle("Go To Your Organization", for: .normal)
-        goToYourOrgaizationButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(.white, for: .normal)
         goToYourOrgaizationButton.backgroundColor = UIColor(named: "myCustom") ?? .black
         goToYourOrgaizationButton.layer.cornerRadius = 25

@@ -23,6 +23,4 @@ class HeaderCollectionViewCell: UICollectionViewCell {
         userLabel.text = user
         
     }
-    
-    
 }

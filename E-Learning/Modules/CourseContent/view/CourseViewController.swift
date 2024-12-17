@@ -101,7 +101,7 @@ class CourseViewController: UIViewController {
         button1.setTitle("Course Info", for: .normal)
         button1.setTitleColor(UIColor.gray, for: .normal)
         button1.setTitleColor(UIColor(named: "myCustom"), for: .selected)
-        button1.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        button1.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
         button1.translatesAutoresizingMaskIntoConstraints = false
         button1.tag = 1
         button1.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
@@ -129,7 +129,7 @@ class CourseViewController: UIViewController {
         button2.setTitle("Content", for: .normal)
         button2.setTitleColor(UIColor.gray, for: .normal)
         button2.setTitleColor(UIColor(named: "myCustom"), for: .selected)
-        button2.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        button2.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
         button2.translatesAutoresizingMaskIntoConstraints = false
         button2.tag = 2
         button2.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
@@ -157,7 +157,7 @@ class CourseViewController: UIViewController {
         button3.setTitle("Interactions", for: .normal)
         button3.setTitleColor(UIColor.gray, for: .normal)
         button3.setTitleColor(UIColor(named: "myCustom"), for: .selected)
-        button3.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        button3.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
         button3.translatesAutoresizingMaskIntoConstraints = false
         button3.tag = 3
         button3.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)

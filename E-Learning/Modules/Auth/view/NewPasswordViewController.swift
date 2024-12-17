@@ -39,7 +39,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     func setupViews() {
         
         newPasswordTextField = MDCTextField()
-        newPasswordTextField.font = UIFont.systemFont(ofSize: 14)
+        newPasswordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         newPasswordTextField.textColor = .lightGray
         newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(newPasswordTextField)
@@ -48,12 +48,13 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         newPasswordController = MDCTextInputControllerOutlined(textInput: newPasswordTextField)
         newPasswordController.placeholderText = "New password"
         newPasswordController.normalColor = .lightGray
-        newPasswordController.activeColor = .lightGray;     newPasswordController.floatingPlaceholderActiveColor = .black
+        newPasswordController.activeColor = .lightGray
+        newPasswordController.floatingPlaceholderActiveColor = .black
         newPasswordController.floatingPlaceholderScale = 0.8
         newPasswordController.borderRadius = 8
         
         confirmNewPasswordTextField = MDCTextField()
-        confirmNewPasswordTextField.font = UIFont.systemFont(ofSize: 14)
+        confirmNewPasswordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         confirmNewPasswordTextField.textColor = .lightGray
         confirmNewPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(confirmNewPasswordTextField)
@@ -62,7 +63,8 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         confirmNewPasswordController = MDCTextInputControllerOutlined(textInput: confirmNewPasswordTextField)
         confirmNewPasswordController.placeholderText = "Confirm new password"
         confirmNewPasswordController.normalColor = .lightGray
-        confirmNewPasswordController.activeColor = .lightGray;     confirmNewPasswordController.floatingPlaceholderActiveColor = .black
+        confirmNewPasswordController.activeColor = .lightGray
+        confirmNewPasswordController.floatingPlaceholderActiveColor = .black
         confirmNewPasswordController.floatingPlaceholderScale = 0.8
         confirmNewPasswordController.borderRadius = 8
         
@@ -83,7 +85,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         
         saveButton = UIButton(type: .system)
         saveButton.setTitle("Save", for: .normal)
-        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        saveButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.backgroundColor = UIColor(named: "myCustom")
         saveButton.layer.cornerRadius = 25

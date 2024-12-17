@@ -12,7 +12,6 @@ class SectionHeaderView: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,10 +30,10 @@ class SectionHeaderView: UICollectionViewCell {
         addSubview(actionButton)
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             actionButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
@@ -45,11 +44,12 @@ class SectionHeaderView: UICollectionViewCell {
     
     func configure(title: String) {
         titleLabel.text = title
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
+        titleLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         actionButton.setTitle("See all ", for: .normal)
+        actionButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
-        let smallerImage = UIImage(named: "arrow2", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
+        let smallerImage = UIImage(named: "navigate_next", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
         let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
         actionButton.setImage(tintedArrowImage, for: .normal)
         
@@ -57,7 +57,6 @@ class SectionHeaderView: UICollectionViewCell {
             actionButton.tintColor = customColor
         }
         actionButton.semanticContentAttribute = .forceRightToLeft
-        actionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0) 
+        actionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
     }
-    
 }

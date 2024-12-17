@@ -35,7 +35,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         descriptionResetPasswordText = UITextView()
         descriptionResetPasswordText.text = "Please enter the code we just sent to email"
-        descriptionResetPasswordText.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        descriptionResetPasswordText.font = UIFont(name: "Roboto-Regular", size: 14)
         descriptionResetPasswordText.textAlignment = .center
         descriptionResetPasswordText.textColor = UIColor(named: "onboradColor")
         descriptionResetPasswordText.isEditable = false
@@ -45,7 +45,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         emailLabel.text = "username@gmail.com"
         emailLabel.textAlignment = .center
-        emailLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        emailLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         emailLabel.textColor = UIColor(named: "onboradColor")
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emailLabel)
@@ -54,7 +54,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         for _ in 0..<4 {
             let textField = UITextField()
             textField.textAlignment = .center
-            textField.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+            textField.font = UIFont(name: "Roboto-Bold", size: 20)
             textField.layer.borderColor = UIColor.lightGray.cgColor
             textField.layer.cornerRadius = 8
             textField.backgroundColor = UIColor(named: "reset")
@@ -67,7 +67,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         checkReceiveOTPLabel.text = "Didn’t receive OTP?"
         checkReceiveOTPLabel.textAlignment = .center
-        checkReceiveOTPLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        checkReceiveOTPLabel.font = UIFont(name: "Roboto-Medium", size: 12)
         checkReceiveOTPLabel.textColor = UIColor(named: "onboradColor")
         checkReceiveOTPLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(checkReceiveOTPLabel)
@@ -76,10 +76,10 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         let attributedString = NSAttributedString(
             string: "Resend code",
             attributes: [
-                .foregroundColor: UIColor(named: "myCustom"),
-                .font: UIFont.systemFont(ofSize: 14, weight: .semibold),
+                .foregroundColor: UIColor(named: "myCustom") ?? .blue,
+                .font: UIFont(name: "Roboto-Medium", size: 12) ?? .boldSystemFont(ofSize: 12),
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .underlineColor:  UIColor(named: "myCustom")
+                .underlineColor:  UIColor(named: "myCustom") ?? .blue
             ]
         )
         resendButton.setAttributedTitle(attributedString, for: .normal)
@@ -91,7 +91,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         verifyButton = UIButton()
         verifyButton.setTitle("Verify", for: .normal)
-        verifyButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        verifyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         verifyButton.setTitleColor(.white, for: .normal)
         verifyButton.backgroundColor = UIColor(named: "myCustom") ?? .black
         verifyButton.layer.cornerRadius = 25

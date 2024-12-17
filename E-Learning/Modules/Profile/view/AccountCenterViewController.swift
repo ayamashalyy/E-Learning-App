@@ -66,7 +66,7 @@ class AccountCenterViewController: UIViewController {
     
     func setupUI() {
         passwordCriteriaLabel.text = "Your password must meet the following criteria:"
-        passwordCriteriaLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        passwordCriteriaLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         passwordCriteriaLabel.textColor = .black
         passwordCriteriaLabel.textAlignment = .left
         passwordCriteriaLabel.isHidden = true
@@ -79,7 +79,7 @@ class AccountCenterViewController: UIViewController {
         "Minimum length of 8 characters\n" +
         "Please update your password to meet these requirements."
         
-        passwordRequirementsLabel.font = UIFont.systemFont(ofSize: 14)
+        passwordRequirementsLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         passwordRequirementsLabel.textColor = UIColor(named: "onboradColor")
         passwordRequirementsLabel.textAlignment = .left
         passwordRequirementsLabel.isHidden = true
@@ -90,7 +90,7 @@ class AccountCenterViewController: UIViewController {
         
         textLabel = UILabel()
         textLabel.text = "Make changes to your personal information"
-        textLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        textLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         textLabel.textAlignment = .center
         textLabel.textColor = UIColor(named: "onboradColor")
         textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -145,7 +145,7 @@ class AccountCenterViewController: UIViewController {
         
         let titleLabel = UILabel()
         titleLabel.text = title
-        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.font = UIFont(name: "Roboto-Regular", size: 16)
         titleLabel.textColor = .black
         
         let actionButton = UIButton(type: .system)
@@ -167,7 +167,7 @@ class AccountCenterViewController: UIViewController {
         
         if title == "Name" {
             let nameTextField = UITextField()
-            nameTextField.font = UIFont.systemFont(ofSize: 16)
+            nameTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             nameTextField.textColor = UIColor(named: "textfield")
             nameTextField.isHidden = true
             nameTextField.placeholder = "Moaz Mohamed"
@@ -190,7 +190,7 @@ class AccountCenterViewController: UIViewController {
         
         if title == "Email address" {
             let emailTextField = UITextField()
-            emailTextField.font = UIFont.systemFont(ofSize: 16)
+            emailTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             emailTextField.textColor = UIColor(named: "textfield")
             emailTextField.isHidden = true
             emailTextField.placeholder = "Username@gmail.com"
@@ -214,7 +214,7 @@ class AccountCenterViewController: UIViewController {
         if title == "Password" {
             
             let currentPasswordTextField = UITextField()
-            currentPasswordTextField.font = UIFont.systemFont(ofSize: 16)
+            currentPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             currentPasswordTextField.textColor = UIColor(named: "textfield")
             currentPasswordTextField.isHidden = true
             currentPasswordTextField.placeholder = "Current password"
@@ -237,7 +237,7 @@ class AccountCenterViewController: UIViewController {
             
             
             let newPasswordTextField = UITextField()
-            newPasswordTextField.font = UIFont.systemFont(ofSize: 16)
+            newPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             newPasswordTextField.textColor = UIColor(named: "textfield")
             newPasswordTextField.isHidden = true
             newPasswordTextField.placeholder = "New password"
@@ -327,7 +327,7 @@ class AccountCenterViewController: UIViewController {
     func setupButtons() {
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        cancelButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         cancelButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         cancelButton.backgroundColor = .clear
         cancelButton.layer.cornerRadius = 8
@@ -339,7 +339,7 @@ class AccountCenterViewController: UIViewController {
         
         let saveButton = UIButton(type: .system)
         saveButton.setTitle("Save Changes", for: .normal)
-        saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        saveButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = UIColor(named: "myCustom")
         saveButton.layer.cornerRadius = 32

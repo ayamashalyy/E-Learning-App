@@ -36,7 +36,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = sections[indexPath.section].items[indexPath.row]
-        let labelWidth = item.width(usingFont: UIFont.systemFont(ofSize: 14))
+        let labelWidth = item.width(usingFont: UIFont(name: "Roboto-Medium", size: 14) ?? .boldSystemFont(ofSize: 14))
         let padding: CGFloat = 50
         return CGSize(width: labelWidth + padding, height: 55)
     }
@@ -142,5 +142,4 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return nil
         }
     }
-    
 }

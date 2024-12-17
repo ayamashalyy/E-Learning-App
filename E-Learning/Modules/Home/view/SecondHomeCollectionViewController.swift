@@ -47,7 +47,4 @@ class SecondHomeCollectionViewController: UICollectionViewController {
         cell.configureCell(user: "Aya")
         return cell
     }
-    
-    
-    
 }

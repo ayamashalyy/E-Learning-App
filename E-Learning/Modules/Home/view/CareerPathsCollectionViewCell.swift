@@ -45,5 +45,4 @@ class CareerPathsCollectionViewCell: UICollectionViewCell {
     func configure(color: UIColor) {
         outerView.layer.backgroundColor = color.cgColor
     }
-    
 }

@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjt-6t-8gw">
-                                <rect key="frame" x="8" y="55" width="340" height="120"/>
+                                <rect key="frame" x="8" y="55" width="357" height="120"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2" translatesAutoresizingMaskIntoConstraints="NO" id="0gL-Es-PZY">
                                         <rect key="frame" x="0.0" y="0.0" width="152" height="120"/>
@@ -82,15 +82,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1aT-1E-MHs">
-                                        <rect key="frame" x="160" y="73" width="140" height="5"/>
+                                        <rect key="frame" x="160" y="73" width="120" height="4"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="140" id="2SG-BG-JLh"/>
-                                            <constraint firstAttribute="height" constant="5" id="JkQ-am-81y"/>
+                                            <constraint firstAttribute="width" constant="120" id="2SG-BG-JLh"/>
+                                            <constraint firstAttribute="height" constant="4" id="JkQ-am-81y"/>
                                         </constraints>
                                         <color key="progressTintColor" name="second"/>
                                     </progressView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usw-2q-StN">
-                                        <rect key="frame" x="305" y="68" width="30" height="14"/>
+                                        <rect key="frame" x="285" y="68" width="30" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="2zJ-Xk-xkF"/>
                                             <constraint firstAttribute="width" constant="30" id="gfu-H3-SZQ"/>
@@ -104,7 +104,7 @@
                                 <constraints>
                                     <constraint firstItem="xx6-tP-5gW" firstAttribute="leading" secondItem="0gL-Es-PZY" secondAttribute="trailing" constant="8" id="2D2-tu-qyJ"/>
                                     <constraint firstItem="xx6-tP-5gW" firstAttribute="top" secondItem="yjt-6t-8gw" secondAttribute="top" constant="14" id="Flc-kL-GTs"/>
-                                    <constraint firstAttribute="width" constant="340" id="GCc-rb-bd4"/>
+                                    <constraint firstAttribute="width" constant="357" id="GCc-rb-bd4"/>
                                     <constraint firstItem="1aT-1E-MHs" firstAttribute="leading" secondItem="0gL-Es-PZY" secondAttribute="trailing" constant="8" id="OaU-tZ-Hsg"/>
                                     <constraint firstItem="0gL-Es-PZY" firstAttribute="leading" secondItem="yjt-6t-8gw" secondAttribute="leading" id="SHs-Q5-SYb"/>
                                     <constraint firstItem="0gL-Es-PZY" firstAttribute="top" secondItem="yjt-6t-8gw" secondAttribute="top" id="XJX-R7-7ha"/>
@@ -126,6 +126,7 @@
                             <constraint firstAttribute="trailing" secondItem="gzx-fi-pbR" secondAttribute="trailing" constant="16" id="cwG-Zi-fN8"/>
                             <constraint firstItem="yjt-6t-8gw" firstAttribute="leading" secondItem="3Jj-tO-api" secondAttribute="leading" constant="8" id="fAn-s8-vhc"/>
                             <constraint firstItem="yjt-6t-8gw" firstAttribute="top" secondItem="jQY-OL-2nV" secondAttribute="bottom" constant="16" id="hk9-Lw-UNA"/>
+                            <constraint firstAttribute="trailing" secondItem="yjt-6t-8gw" secondAttribute="trailing" constant="8" id="mBo-rx-4vs"/>
                         </constraints>
                     </view>
                 </subviews>

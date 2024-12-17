@@ -68,7 +68,7 @@ extension CoursesSectionCell: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = courses[indexPath.item]
-        let font = UIFont.systemFont(ofSize: 20)
+        let font = UIFont(name: "Roboto-Bold", size: 16) ?? .boldSystemFont(ofSize: 14)
         let textWidth = text.width(usingFont: font)
         let padding: CGFloat = 50
         return CGSize(width: textWidth + padding, height: 60)

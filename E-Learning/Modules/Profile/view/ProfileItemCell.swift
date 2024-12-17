@@ -37,7 +37,7 @@ class ProfileItemCell: UITableViewCell {
         englishButton = UIButton(type: .custom)
         englishButton.translatesAutoresizingMaskIntoConstraints = false
         englishButton.setTitle("English", for: .normal)
-        englishButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        englishButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16)
         englishButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         englishButton.contentHorizontalAlignment = .left
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]

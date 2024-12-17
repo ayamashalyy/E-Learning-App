@@ -13,7 +13,7 @@ class OnboardingViewController: UIViewController {
     var welcomeText: UILabel!
     var descriptionText: UITextView!
     var registerButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -31,14 +31,14 @@ class OnboardingViewController: UIViewController {
         
         welcomeText = UILabel()
         welcomeText.text = "Welcome to Vinsys Academy"
-        welcomeText.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        welcomeText.font = UIFont(name: "Roboto-Medium", size: 20)
         welcomeText.textAlignment = .center
         welcomeText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(welcomeText)
         
         descriptionText = UITextView()
         descriptionText.text = "Access a wide range of courses tailored to help you succeed in your personal and professional life."
-        descriptionText.font = UIFont.systemFont(ofSize: 16)
+        descriptionText.font = UIFont(name: "Roboto-Regular", size: 16)
         descriptionText.textAlignment = .center
         descriptionText.textColor = UIColor(named: "onboradColor")
         descriptionText.isEditable = false
@@ -48,7 +48,7 @@ class OnboardingViewController: UIViewController {
         
         registerButton = UIButton(type: .system)
         registerButton.setTitle("Register", for: .normal)
-        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        registerButton.titleLabel?.font =  UIFont(name: "Roboto-Bold", size: 16)
         registerButton.setTitleColor(UIColor.white, for: .normal)
         registerButton.backgroundColor = UIColor(named: "myCustom")
         registerButton.layer.cornerRadius = 25

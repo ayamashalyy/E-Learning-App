@@ -13,10 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func printAllFonts() {
-        for familyName in UIFont.familyNames {
-            print("Font Family: \(familyName)")
-            for fontName in UIFont.fontNames(forFamilyName: familyName) {
-                print("    Font Name: \(fontName)")
+        for family in UIFont.familyNames {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family)")
+            for name in names {
+                print("  Font: \(name)")
             }
         }
     }

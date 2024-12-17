@@ -57,7 +57,7 @@ class SearchViewController: UIViewController {
     
     private func configureNavigationBar() {
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
         self.navigationController?.navigationBar.titleTextAttributes = attributes
@@ -231,7 +231,7 @@ class SearchViewController: UIViewController {
         
         applyButton = UIButton(type: .system)
         applyButton.setTitle("Apply", for: .normal)
-        applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        applyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 15)
         applyButton.setTitleColor(UIColor.white, for: .normal)
         applyButton.backgroundColor = UIColor(named: "myCustom")
         applyButton.layer.cornerRadius = 20
@@ -365,11 +365,12 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         let titleLabel = UILabel()
         titleLabel.textAlignment = .left
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
-        titleLabel.textColor = UIColor(named: "myCustom")
+        titleLabel.font = UIFont(name: "Roboto-Bold", size: 16)
+        
         
         if currentState == .recentSearches {
             titleLabel.text = "Recent Searches"
+            titleLabel.textColor = UIColor(named: "myCustom")
         } else if currentState == .totalResultsBeforeFilter {
             titleLabel.text = "\(20) Total Results"
         }
@@ -394,22 +395,19 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         } else if currentState == .totalResultsAfterFilter {
             let resultsCountLabel = UILabel()
             resultsCountLabel.text = "10"
-            resultsCountLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            resultsCountLabel.textColor = UIColor(named: "myCustom")
+            resultsCountLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(resultsCountLabel)
             
             let resultsTextLabel = UILabel()
             resultsTextLabel.text = "Total Results"
-            resultsTextLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            resultsTextLabel.textColor = UIColor(named: "myCustom")
+            resultsTextLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             resultsTextLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(resultsTextLabel)
             
             let filtersLabel = UILabel()
             filtersLabel.text = "(\(selectedFiltersCount ?? 0) filters)"
-            filtersLabel.font = UIFont.boldSystemFont(ofSize: 16)
-            filtersLabel.textColor = UIColor(named: "myCustom")
+            filtersLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             filtersLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(filtersLabel)
             
@@ -457,7 +455,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
         
@@ -484,7 +482,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 20, weight: .bold),
+            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
         
@@ -497,7 +495,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor(named: "myCustom")
-            header.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            header.textLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
             header.widthAnchor.constraint(equalToConstant: 40).isActive = true
         }
     }
@@ -526,6 +524,4 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             noRecentSearchImageView.isHidden = true
         }
     }
-    
-    
 }

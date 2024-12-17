@@ -46,12 +46,12 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             item.selectedImage = UIImage(named: selectedImages[index])
             
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 13),
+                .font: UIFont(name: "Roboto-Bold", size: 12) ?? .boldSystemFont(ofSize: 12),
                 .foregroundColor: UIColor.gray
             ]
             
             let selectedAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 13),
+                .font: UIFont(name: "Roboto-Bold", size: 12) ?? .boldSystemFont(ofSize: 12),
                 .foregroundColor: UIColor(named: "myCustom") ?? .black
             ]
             

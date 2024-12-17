@@ -36,7 +36,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         
         ForgetPasswordText = UILabel()
         ForgetPasswordText.text = "Forget Password!"
-        ForgetPasswordText.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        ForgetPasswordText.font = UIFont(name: "Roboto-Bold", size: 24)
         ForgetPasswordText.textAlignment = .center
         ForgetPasswordText.textColor = UIColor(named: "myCustom")
         ForgetPasswordText.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         
         descriptionForgetPasswordText = UITextView()
         descriptionForgetPasswordText.text = "Please enter the email address associated with you account"
-        descriptionForgetPasswordText.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        descriptionForgetPasswordText.font = UIFont(name: "Roboto-Regular", size: 15)
         descriptionForgetPasswordText.textAlignment = .center
         descriptionForgetPasswordText.textColor = UIColor(named: "onboradColor")
         descriptionForgetPasswordText.isEditable = false
@@ -53,7 +53,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         view.addSubview(descriptionForgetPasswordText)
         
         emailTextField = MDCTextField()
-        emailTextField.font = UIFont.systemFont(ofSize: 14)
+        emailTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         emailTextField.textColor = .lightGray
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emailTextField)
@@ -62,13 +62,14 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
         emailController.placeholderText = "Email"
         emailController.normalColor = .lightGray
-        emailController.activeColor = .lightGray;     emailController.floatingPlaceholderActiveColor = .black
+        emailController.activeColor = .lightGray
+        emailController.floatingPlaceholderActiveColor = .black
         emailController.floatingPlaceholderScale = 0.8
         emailController.borderRadius = 8
         
         getVerificationCodeButton = UIButton(type: .system)
         getVerificationCodeButton.setTitle("Get verification code", for: .normal)
-        getVerificationCodeButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        getVerificationCodeButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         getVerificationCodeButton.setTitleColor(.white, for: .normal)
         getVerificationCodeButton.backgroundColor = UIColor(named: "myCustom") ?? .black
         getVerificationCodeButton.layer.cornerRadius = 25

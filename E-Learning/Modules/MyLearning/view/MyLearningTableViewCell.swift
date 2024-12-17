@@ -50,7 +50,7 @@ class MyLearningTableViewCell: UITableViewCell {
         myLearningBtn.backgroundColor = UIColor(named: "myCustom")
         myLearningBtn.layer.borderColor = nil
         myLearningBtn.tintColor = nil
-        myLearningBtn.titleLabel?.font = UIFont.systemFont(ofSize: 8)
+        myLearningBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 8)
         myLearningBtn.layer.borderWidth = 0
         myLearningBtn.layer.shadowOpacity = 0
         print("Button frame: \(myLearningBtn.frame)")
@@ -98,7 +98,7 @@ class MyLearningTableViewCell: UITableViewCell {
             myLearningImage2.heightAnchor.constraint(equalToConstant: 70).isActive = true
             myLearningProgress.setProgress(1.0, animated: true)
             myLearningProgressLabel.text = "100%"
-            myLearningBtn.setTitle("Share Certification", for: .normal)
+            myLearningBtn.setTitle("   Share Certification", for: .normal)
         }
         
         self.layoutIfNeeded()

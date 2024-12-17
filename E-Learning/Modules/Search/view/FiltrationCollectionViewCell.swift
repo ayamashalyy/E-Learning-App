@@ -37,5 +37,4 @@ class FiltrationCollectionViewCell: UICollectionViewCell {
         
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
-    
 }

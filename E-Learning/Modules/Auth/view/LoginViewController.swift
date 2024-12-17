@@ -40,7 +40,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         organizationNameText = UILabel()
         organizationNameText.text = "Vinsys Academy"
-        organizationNameText.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        organizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
         organizationNameText.textColor = UIColor(named: "myCustom")
         organizationNameText.textAlignment = .center
         organizationNameText.numberOfLines = 0
@@ -49,7 +49,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         welcomeBackText = UILabel()
         welcomeBackText.text = " Welcome back!"
-        welcomeBackText.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        welcomeBackText.font = UIFont(name: "Roboto-Medium", size: 16)
         welcomeBackText.textColor = UIColor(named: "second")
         welcomeBackText.textAlignment = .center
         welcomeBackText.numberOfLines = 0
@@ -57,7 +57,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         view.addSubview(welcomeBackText)
         
         emailTextField = MDCTextField()
-        emailTextField.font = UIFont.systemFont(ofSize: 14)
+        emailTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         emailTextField.textColor = .lightGray
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emailTextField)
@@ -66,13 +66,14 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
         emailController.placeholderText = "Email"
         emailController.normalColor = .lightGray
-        emailController.activeColor = .lightGray;     emailController.floatingPlaceholderActiveColor = .black
+        emailController.activeColor = .lightGray
+        emailController.floatingPlaceholderActiveColor = .black
         emailController.floatingPlaceholderScale = 0.8
         emailController.borderRadius = 8
         
         
         passwordTextField = MDCTextField()
-        passwordTextField.font = UIFont.systemFont(ofSize: 14)
+        passwordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         passwordTextField.textColor = .lightGray
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(passwordTextField)
@@ -81,7 +82,8 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         passwordController = MDCTextInputControllerOutlined(textInput: passwordTextField)
         passwordController.placeholderText = "Password"
         passwordController.normalColor = .lightGray
-        passwordController.activeColor = .lightGray;     passwordController.floatingPlaceholderActiveColor = .black
+        passwordController.activeColor = .lightGray
+        passwordController.floatingPlaceholderActiveColor = .black
         passwordController.floatingPlaceholderScale = 0.8
         passwordController.borderRadius = 8
         
@@ -103,7 +105,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         rememberMeLabel = UILabel()
         rememberMeLabel.text = "Remember me"
-        rememberMeLabel.font = UIFont.systemFont(ofSize: 14)
+        rememberMeLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         rememberMeLabel.textColor = .darkGray
         rememberMeLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rememberMeLabel)
@@ -111,7 +113,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         forgetPasswordButton = UIButton(type: .system)
         forgetPasswordButton.setTitle("Forget Password?", for: .normal)
         forgetPasswordButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
-        forgetPasswordButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        forgetPasswordButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 12)
         forgetPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordTapped), for: .touchUpInside)
         view.addSubview(forgetPasswordButton)
@@ -119,7 +121,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         goToYourOrgaizationButton = UIButton(type: .system)
         goToYourOrgaizationButton.setTitle("Login", for: .normal)
-        goToYourOrgaizationButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(UIColor.white, for: .normal)
         goToYourOrgaizationButton.backgroundColor = UIColor(named: "myCustom")
         goToYourOrgaizationButton.layer.cornerRadius = 25
@@ -129,7 +131,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         alreadyHaveAccountLabel = UILabel()
         alreadyHaveAccountLabel.text = "Already have an account?"
-        alreadyHaveAccountLabel.font = UIFont.systemFont(ofSize: 14)
+        alreadyHaveAccountLabel.font = UIFont(name: "Roboto-Medium", size: 12)
         alreadyHaveAccountLabel.textColor = .gray
         alreadyHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alreadyHaveAccountLabel)
@@ -137,7 +139,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         loginButton = UIButton(type: .system)
         loginButton.setTitle("Log in", for: .normal)
         loginButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
-        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        loginButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 12)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         view.addSubview(loginButton)

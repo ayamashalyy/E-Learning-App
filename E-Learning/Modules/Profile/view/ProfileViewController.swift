@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController {
         profileLabel = UILabel()
         profileLabel.text = "Profile"
         profileLabel.textAlignment = .center
-        profileLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        profileLabel.font = UIFont(name: "Roboto-Bold", size: 20)
         profileLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileLabel)
         
@@ -56,12 +56,12 @@ class ProfileViewController: UIViewController {
         
         nameLabel = UILabel()
         nameLabel.text = "Moaz Mohamed"
-        nameLabel.font = .boldSystemFont(ofSize: 18)
+        nameLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         emailLabel = UILabel()
         emailLabel.text = "mohamedmoaz176@gmail.com"
-        emailLabel.font = .systemFont(ofSize: 14)
+        emailLabel.font = UIFont(name: "Roboto-Medium", size: 14)
         emailLabel.textColor = .gray
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         

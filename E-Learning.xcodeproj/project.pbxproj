@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		030519592D03544F003B991F /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030519582D03544F003B991F /* CommentCell.swift */; };
+		032179852D10CCDC00557B77 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032179842D10CCDC00557B77 /* Roboto-Bold.ttf */; };
+		032179872D10CCEF00557B77 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032179862D10CCEF00557B77 /* Roboto-Regular.ttf */; };
+		032179892D10CCFB00557B77 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 032179882D10CCFB00557B77 /* Roboto-Light.ttf */; };
+		0321798B2D10D4E500557B77 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0321798A2D10D4E500557B77 /* Roboto-Medium.ttf */; };
 		0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */; };
 		0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */; };
 		0328C1112CEE325500CC1DCF /* CoursesSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */; };
@@ -81,6 +85,10 @@
 
 /* Begin PBXFileReference section */
 		030519582D03544F003B991F /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		032179842D10CCDC00557B77 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		032179862D10CCEF00557B77 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		032179882D10CCFB00557B77 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		0321798A2D10D4E500557B77 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		0328C10C2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesCollectionViewCell.swift; sourceTree = "<group>"; };
 		0328C10D2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoursesCollectionViewCell.xib; sourceTree = "<group>"; };
 		0328C1102CEE325500CC1DCF /* CoursesSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesSectionCell.swift; sourceTree = "<group>"; };
@@ -140,9 +148,6 @@
 		03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
 		03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCollectionViewCell.swift; sourceTree = "<group>"; };
 		038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContinueCollectionViewCell.xib; sourceTree = "<group>"; };
-		038230042CED375100F96ACB /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
-		038230052CED375C00F96ACB /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		038230062CED376F00F96ACB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndPolicyViewController.swift; sourceTree = "<group>"; };
 		038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
@@ -445,9 +450,10 @@
 		038230032CED36E500F96ACB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				038230042CED375100F96ACB /* Roboto-Light.ttf */,
-				038230052CED375C00F96ACB /* Roboto-Bold.ttf */,
-				038230062CED376F00F96ACB /* Roboto-Regular.ttf */,
+				0321798A2D10D4E500557B77 /* Roboto-Medium.ttf */,
+				032179882D10CCFB00557B77 /* Roboto-Light.ttf */,
+				032179862D10CCEF00557B77 /* Roboto-Regular.ttf */,
+				032179842D10CCDC00557B77 /* Roboto-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -580,6 +586,7 @@
 			files = (
 				03323E722CF14D36008AF673 /* MyLearningTableViewCell.xib in Resources */,
 				0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */,
+				032179892D10CCFB00557B77 /* Roboto-Light.ttf in Resources */,
 				03AA80E72CF6631300141A0E /* TotalResultsTableViewCell.xib in Resources */,
 				03678B002D0E3E2800371403 /* PageViewController.xib in Resources */,
 				0352509F2D075F2B0027C270 /* SingleChoiceCell.xib in Resources */,
@@ -592,6 +599,9 @@
 				03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */,
 				0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
+				032179852D10CCDC00557B77 /* Roboto-Bold.ttf in Resources */,
+				032179872D10CCEF00557B77 /* Roboto-Regular.ttf in Resources */,
+				0321798B2D10D4E500557B77 /* Roboto-Medium.ttf in Resources */,
 				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
 				0328C11B2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.xib in Resources */,
 				03822FE32CECC27B00F96ACB /* Main.storyboard in Resources */,

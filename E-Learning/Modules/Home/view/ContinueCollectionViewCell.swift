@@ -33,7 +33,5 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         innerView.layer.borderColor = UIColor.gray.cgColor
         innerView.layer.borderWidth = 1.0
         
-        
     }
-    
 }

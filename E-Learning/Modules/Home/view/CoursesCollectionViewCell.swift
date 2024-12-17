@@ -20,18 +20,12 @@ class CoursesCollectionViewCell: UICollectionViewCell {
         outerView.layer.masksToBounds = true
         outerView.layer.borderColor = UIColor.gray.cgColor
         outerView.layer.borderWidth = 1.0
-        
-        
-        
-        
     }
     
     func configure(with text: String, color: UIColor) {
         titleCourse.text = text
-        titleCourse.font = UIFont.systemFont(ofSize: 16)
         titleCourse.textAlignment = .center
         innerView.layer.backgroundColor = color.cgColor
         
     }
-    
 }
