@@ -17,10 +17,7 @@ private let reuseIdentifier3 = "FeaturedCell"
 private let reuseIdentifier4 = "CareerCell"
 
 
-
-
-
-class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
+class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate {
     
     let sectionTitles = ["Courses Categories", "Featured Courses", "Most Popular", "Career Paths", "Latest Courses"]
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
@@ -117,6 +114,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            cell.delegate = self
             return cell
             
             
@@ -129,6 +127,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 7:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            cell.delegate = self
             return cell
             
         case 8:
@@ -153,6 +152,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 11:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            cell.delegate = self
             return cell
             
         default:
@@ -174,12 +174,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             print("Selected Course: \(selectedCourse)")
         case 4:
             print("Selected Section Header Cell at section 4, item \(indexPath.item)")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
-                let navigationController = UINavigationController(rootViewController: nextViewController)
-                navigationController.modalPresentationStyle = .fullScreen
-                present(navigationController, animated: true, completion: nil)
-            }
         case 5 :
             print("Selected Section Header Cell at section 5")
         case 6:
@@ -201,4 +195,15 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             break
         }
     }
+    
+    func didSelectCourse(_ course: String) {
+           print("تم اختيار الدورة: \(course)")
+           let storyboard = UIStoryboard(name: "Main", bundle: nil)
+           if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
+               //nextViewController.courseTitle = course
+               let navigationController = UINavigationController(rootViewController: nextViewController)
+               navigationController.modalPresentationStyle = .fullScreen
+               present(navigationController, animated: true, completion: nil)
+           }
+       }
 }

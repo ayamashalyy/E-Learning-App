@@ -56,11 +56,17 @@ class SearchViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [
+            .font: UIFont(name: "Roboto-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
             .foregroundColor: UIColor.black
         ]
-        self.navigationController?.navigationBar.titleTextAttributes = attributes
+        appearance.backgroundColor = .white
+        appearance.shadowColor = .clear
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func saveRecentSearches() {

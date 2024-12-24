@@ -22,7 +22,7 @@ var items: [ProfileItem] = [
     ProfileItem(title: "Log out", imageName: "tabler_logout"),
 ]
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var profileLabel = UILabel()
     var tableView = UITableView(frame: .zero, style: .grouped)
@@ -53,6 +53,9 @@ class ProfileViewController: UIViewController {
         profileImageView.layer.cornerRadius = 50
         profileImageView.clipsToBounds = true
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectImage))
+        profileImageView.addGestureRecognizer(tapGesture)
         
         nameLabel = UILabel()
         nameLabel.text = "Moaz Mohamed"
@@ -80,11 +83,34 @@ class ProfileViewController: UIViewController {
         
     }
     
+    @objc func selectImage() {
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.modalPresentationStyle = .fullScreen
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+        
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let selectedImage = info[.originalImage] as? UIImage {
+            profileImageView.image = selectedImage
+            profileImageView.layer.cornerRadius = 50
+            profileImageView.clipsToBounds = true
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
             profileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 65),
+            profileLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             profileLabel.widthAnchor.constraint(equalToConstant: 300),
             profileLabel.heightAnchor.constraint(equalToConstant: 30)
         ])

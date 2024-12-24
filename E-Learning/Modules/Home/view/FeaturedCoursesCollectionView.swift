@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol FeaturedCoursesCollectionViewDelegate: AnyObject {
+    func didSelectCourse(_ course: String)
+}
+
+
 class FeaturedCoursesCollectionView: UICollectionViewCell {
     static let identifier = "FeaturedCoursesnCell"
     private var courses: [String] = []
+    weak var delegate: FeaturedCoursesCollectionViewDelegate?
     
     private let innerFeaturedCoursesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -58,6 +64,11 @@ extension FeaturedCoursesCollectionView: UICollectionViewDataSource, UICollectio
         cell.configureCourseTitle()
         cell.selectedBackgroundView = .none
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCourse = courses[indexPath.item]
+        delegate?.didSelectCourse(selectedCourse)
     }
 }
 
