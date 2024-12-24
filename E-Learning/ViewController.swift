@@ -23,7 +23,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             fatalError("MyLearningViewController could not be instantiated. Ensure its Storyboard ID is set.")
         }
         
-        let homeVC = HomeViewController()
+        guard let homeVC = storyboard.instantiateViewController(withIdentifier: "homeVC") as? HomeViewController else {
+            fatalError("HomeViewController could not be instantiated. Ensure its Storyboard ID is set.")
+        }
+        
         let profileVC = ProfileViewController()
         let mySearchVC = SearchViewController()
         let navigationController = UINavigationController(rootViewController: mySearchVC)

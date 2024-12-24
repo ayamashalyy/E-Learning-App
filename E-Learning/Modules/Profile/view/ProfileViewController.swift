@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var profileImageView = UIImageView()
     var nameLabel = UILabel()
     var emailLabel = UILabel()
+    lazy var imagePickerController = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,13 +86,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @objc func selectImage() {
         
-        let imagePickerController = UIImagePickerController()
+        imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.modalPresentationStyle = .fullScreen
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true, completion: nil)
         
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let selectedImage = info[.originalImage] as? UIImage {

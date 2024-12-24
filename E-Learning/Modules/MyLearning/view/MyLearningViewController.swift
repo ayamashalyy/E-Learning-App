@@ -44,7 +44,7 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightGray], for: .normal)
         segmentedControl.setTitleTextAttributes([
             .foregroundColor: UIColor.white,
-            .font: UIFont(name: "Roboto-Medium", size: 15)
+            .font: UIFont(name: "Roboto-Medium", size: 15) ?? .systemFont(ofSize: 15, weight: .medium)
         ], for: .selected)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)], for: .normal)
         

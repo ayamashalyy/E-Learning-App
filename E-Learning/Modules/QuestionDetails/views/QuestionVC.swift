@@ -68,7 +68,6 @@ extension QuestionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             cell.configure(optionText: answer.text, isSelected: answer.isSelected)
             return cell
         }
-        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

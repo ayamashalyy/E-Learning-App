@@ -166,7 +166,6 @@ class SearchViewController: UIViewController {
             searchView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             searchView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 18),
             searchView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -18),
-            searchView.widthAnchor.constraint(equalToConstant: 250),
             searchView.heightAnchor.constraint(equalToConstant: 50)
         ])
         
