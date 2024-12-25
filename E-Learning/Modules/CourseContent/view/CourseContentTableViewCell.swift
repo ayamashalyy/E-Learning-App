@@ -84,7 +84,7 @@ class CourseContentTableViewCell: UITableViewCell {
         numberLabel.layer.cornerRadius = 20
         numberLabel.layer.masksToBounds = true
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
-        numberLabel.font = UIFont(name: "Roboto-Bold", size: 16)
+        numberLabel.font = UIFont(name: "Roboto-Bold", size: 20)
         outerView.addSubview(numberLabel)
         
         titleLabel.font = UIFont(name: "Roboto-Medium", size: 16)
@@ -114,10 +114,10 @@ class CourseContentTableViewCell: UITableViewCell {
             numberLabel.heightAnchor.constraint(equalToConstant: 40),
             
             titleLabel.leadingAnchor.constraint(equalTo: numberLabel.trailingAnchor, constant: 16),
-            titleLabel.topAnchor.constraint(equalTo: outerView.topAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: outerView.topAnchor, constant: 8),
             
             stackView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
+            stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
             
             completedIcon.trailingAnchor.constraint(equalTo: outerView.trailingAnchor, constant: -16),
             completedIcon.centerYAnchor.constraint(equalTo: outerView.centerYAnchor),
@@ -133,8 +133,12 @@ class CourseContentTableViewCell: UITableViewCell {
         numberLabel.textColor = lesson.isCompleted ? .white : UIColor(named: "onboradColor")
         
         titleLabel.text = lesson.title
+        titleLabel.textColor = lesson.isCompleted ? .black : UIColor(named: "policy2")
+        
         durationLabel.text = lesson.duration
+        durationLabel.textColor = lesson.isCompleted ? .black : UIColor(named: "policy2")
         typeLabel.text = lesson.type
+        typeLabel.textColor = lesson.isCompleted ? .black : UIColor(named: "policy2")
         
         completedIcon.image = lesson.isCompleted ? UIImage(named: "Vector (1)") : nil
         

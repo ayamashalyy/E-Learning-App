@@ -1,25 +1,18 @@
 //
-//  CourseContentViewController.swift
+//  courseContentOverviewViewController.swift
 //  E-Learning
 //
-//  Created by aya on 04/12/2024.
+//  Created by aya on 25/12/2024.
 //
 
 import UIKit
 
-struct Lesson {
-    let number: Int
-    let title: String
-    let duration: String
-    let type: String
-    let isCompleted: Bool
-}
-
-class CourseContentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class courseContentOverviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     
     let lessons: [Lesson] = [
-        Lesson(number: 1, title: "Lesson 1", duration: "10 min", type: "Video", isCompleted: true),
-        Lesson(number: 2, title: "Lesson 2", duration: "10 min", type: "Video", isCompleted: true),
+        Lesson(number: 1, title: "Lesson 1", duration: "10 min", type: "Video", isCompleted: false),
+        Lesson(number: 2, title: "Lesson 2", duration: "10 min", type: "Video", isCompleted: false),
         Lesson(number: 3, title: "Lesson 3", duration: "10 min", type: "Reading", isCompleted: false),
         Lesson(number: 0, title: "Quiz 1", duration: "10 min", type: "14 Questions", isCompleted: false),
         Lesson(number: 4, title: "Lesson 4", duration: "10 min", type: "Video", isCompleted: false),
@@ -27,7 +20,7 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
     ]
     
     var tableView = UITableView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -66,7 +59,7 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return 80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

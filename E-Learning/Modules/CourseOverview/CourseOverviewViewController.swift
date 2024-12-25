@@ -1,22 +1,15 @@
 //
-//  CourseViewController.swift
+//  CourseOverviewViewController.swift
 //  E-Learning
 //
-//  Created by aya on 04/12/2024.
+//  Created by aya on 25/12/2024.
 //
 
 import UIKit
-import AVFoundation
 
-protocol sendData {
-    func sendData(_ data: Any)
-}
-
-class CourseViewController: UIViewController {
+class CourseOverviewViewController: UIViewController {
     
-    var player: AVPlayer?
-    var playerLayer: AVPlayerLayer?
-    var videoContainerView: UIView!
+    var imageCourseOverview: UIImageView!
     var stackView: UIStackView!
     var selectedButton: UIButton?
     var scrollView: UIScrollView!
@@ -31,45 +24,11 @@ class CourseViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backButton
         setupUI()
         setupConstraints()
-        setupVideoPlayer()
         loadSubView(1)
     }
     
     @objc func cancelTapped() {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    private func setupVideoPlayer() {
-        
-        guard let url = URL(string: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4") else {
-            print("Invalid video URL")
-            return
-        }
-        
-        player = AVPlayer(url: url)
-        
-        playerLayer = AVPlayerLayer(player: player)
-        print("Video URL: \(url)")
-        playerLayer?.frame = videoContainerView.bounds
-        playerLayer?.videoGravity = .resizeAspectFill
-        videoContainerView.layer.addSublayer(playerLayer!)
-        player?.play()
-        print("Started playing video")
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTapOnVideo))
-        videoContainerView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    @objc func handleTapOnVideo() {
-        if player?.rate == 0 {
-            // If the video is paused, start playing it
-            player?.play()
-            print("Video resumed playing")
-        } else {
-            // If the video is playing, pause it
-            player?.pause()
-            print("Video paused")
-        }
     }
     
     private func setupUI() {
@@ -84,10 +43,12 @@ class CourseViewController: UIViewController {
         contentView.backgroundColor = .clear
         scrollView.addSubview(contentView)
         
-        videoContainerView = UIView()
-        videoContainerView.backgroundColor = .clear
-        videoContainerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(videoContainerView)
+        imageCourseOverview = UIImageView()
+        imageCourseOverview.backgroundColor = .clear
+        imageCourseOverview.image = UIImage(named: "imageCourseOverview")
+        imageCourseOverview.contentMode = .scaleToFill
+        imageCourseOverview.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageCourseOverview)
         
         stackView = UIStackView()
         stackView.axis = .horizontal
@@ -152,34 +113,6 @@ class CourseViewController: UIViewController {
         ])
         stackView.addArrangedSubview(containerView2)
         
-        let containerView3 = UIView()
-        let button3 = UIButton(type: .custom)
-        button3.setTitle("Interactions", for: .normal)
-        button3.setTitleColor(UIColor.gray, for: .normal)
-        button3.setTitleColor(UIColor(named: "myCustom"), for: .selected)
-        button3.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
-        button3.translatesAutoresizingMaskIntoConstraints = false
-        button3.tag = 3
-        button3.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        containerView3.addSubview(button3)
-        
-        let underline3 = UIView()
-        underline3.backgroundColor = UIColor.gray
-        underline3.translatesAutoresizingMaskIntoConstraints = false
-        containerView3.addSubview(underline3)
-        
-        NSLayoutConstraint.activate([
-            button3.centerXAnchor.constraint(equalTo: containerView3.centerXAnchor),
-            button3.centerYAnchor.constraint(equalTo: containerView3.centerYAnchor),
-            
-            underline3.topAnchor.constraint(equalTo: button3.bottomAnchor, constant: 10),
-            underline3.leadingAnchor.constraint(equalTo: containerView3.leadingAnchor),
-            underline3.trailingAnchor.constraint(equalTo: containerView3.trailingAnchor),
-            underline3.heightAnchor.constraint(equalToConstant: 4),
-            underline3.bottomAnchor.constraint(equalTo: containerView3.bottomAnchor)
-        ])
-        stackView.addArrangedSubview(containerView3)
-        
         if let firstButton = containerView1.subviews.first(where: { $0 is UIButton }) as? UIButton {
             buttonTapped(firstButton)
         }
@@ -210,20 +143,28 @@ class CourseViewController: UIViewController {
         loadSubView(sender.tag)
     }
     
+    
     private func loadSubView(_ tag: Int) {
         self.removeAllSubView(mainContainerView: contentView)
         switch tag {
         case 1:
-            self.moveToSubView(mainContainerView: contentView, identifier: "CourseInfoViewController", storyboardName: "Main", CourseInfoViewController.self, data: "section1 send!")
-        case 2:
-            self.moveToSubView(mainContainerView: contentView, identifier: "CourseContentViewController", storyboardName: "Main", CourseContentViewController.self)
-        case 3:
-            self.moveToSubView(mainContainerView: contentView, identifier: "CourseInteractionsViewController", storyboardName: "Main", CourseInteractionsViewController.self)
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "courseInfoOverviewViewController",
+                nibName: "courseInfoOverviewViewController",
+                courseInfoOverviewViewController.self,
+                data: "section1 send!"
+            )
             
-            // Emit test data from Section2ViewController after it's added to the parent
-            if let childVC = children.first(where: { $0 is CourseInteractionsViewController }) as? CourseInteractionsViewController {
-                childVC.delegate = self
-            }
+            
+        case 2:
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "courseContentOverviewViewController",
+                nibName: "courseContentOverviewViewController",
+                courseContentOverviewViewController.self
+            )
+            
         default:
             print("No View found!")
         }
@@ -233,15 +174,15 @@ class CourseViewController: UIViewController {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            videoContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            videoContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            videoContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            videoContainerView.heightAnchor.constraint(equalToConstant: 250)
+            imageCourseOverview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            imageCourseOverview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageCourseOverview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageCourseOverview.heightAnchor.constraint(equalToConstant: 250)
         ])
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: videoContainerView.bottomAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackView.topAnchor.constraint(equalTo: imageCourseOverview.bottomAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stackView.heightAnchor.constraint(equalToConstant: 50)
         ])
@@ -259,16 +200,5 @@ class CourseViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
         ])
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        playerLayer?.frame = videoContainerView.bounds
-    }
-}
-
-extension CourseViewController: callDataBack {
-    func sendDataBack(_ data: Any) {
-        print(data as? String ?? "")
     }
 }

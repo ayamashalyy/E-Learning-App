@@ -61,27 +61,26 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: collectionView.bounds.width, height: 90)
+            return CGSize(width: collectionView.frame.width, height: 90)
         case 1:
-            return CGSize(width: collectionView.bounds.width , height: 210)
+            return CGSize(width: collectionView.frame.width , height: 210)
         case 2 , 4 , 6 , 8 , 10:
-            return CGSize(width: collectionView.bounds.width - 20, height: 40)
+            return CGSize(width: collectionView.frame.width - 20, height: 40)
         case 3:
-            return CGSize(width: collectionView.bounds.width , height: 60)
+            return CGSize(width: collectionView.frame.width , height: 60)
         case 5:
-            return CGSize(width: collectionView.bounds.width , height: 200)
+            return CGSize(width: collectionView.frame.width , height: 200)
         case 7:
-            return CGSize(width: collectionView.bounds.width , height: 200)
+            return CGSize(width: collectionView.frame.width , height: 200)
         case 9:
-            return CGSize(width: collectionView.bounds.width , height: 220)
+            return CGSize(width: collectionView.frame.width , height: 220)
         case 11:
-            return CGSize(width: collectionView.bounds.width , height: 200)
-            
-            
+            return CGSize(width: collectionView.frame.width , height: 200)
         default:
             return .zero
         }
     }
+    
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
@@ -174,6 +173,10 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             print("Selected Course: \(selectedCourse)")
         case 4:
             print("Selected Section Header Cell at section 4, item \(indexPath.item)")
+            let nextViewController = CourseOverviewViewController(nibName: "CourseOverviewViewController", bundle: nil)
+            let navigationController = UINavigationController(rootViewController: nextViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
         case 5 :
             print("Selected Section Header Cell at section 5")
         case 6:
@@ -197,13 +200,13 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     func didSelectCourse(_ course: String) {
-           print("تم اختيار الدورة: \(course)")
-           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-           if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
-               //nextViewController.courseTitle = course
-               let navigationController = UINavigationController(rootViewController: nextViewController)
-               navigationController.modalPresentationStyle = .fullScreen
-               present(navigationController, animated: true, completion: nil)
-           }
-       }
+        print("تم اختيار الدورة: \(course)")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
+            //nextViewController.courseTitle = course
+            let navigationController = UINavigationController(rootViewController: nextViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+        }
+    }
 }

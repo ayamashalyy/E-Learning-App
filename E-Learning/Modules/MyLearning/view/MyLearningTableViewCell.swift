@@ -88,17 +88,32 @@ class MyLearningTableViewCell: UITableViewCell {
             myLearningImage2.heightAnchor.constraint(equalToConstant: 40).isActive = true
             myLearningProgress.setProgress(0.5, animated: true)
             myLearningProgressLabel.text = "50%"
-            myLearningBtn.setTitle("   Continue!", for: .normal)
+            myLearningBtn.setTitle("Continue!", for: .normal)
         } else if isInAssigned {
             myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
             myLearningImage2.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            myLearningBtn.setTitle("   Start now!", for: .normal)
+            myLearningBtn.setTitle("Start now!", for: .normal)
         } else if isInCompleted {
             myLearningImage2.widthAnchor.constraint(equalToConstant: 80).isActive = true
             myLearningImage2.heightAnchor.constraint(equalToConstant: 70).isActive = true
             myLearningProgress.setProgress(1.0, animated: true)
             myLearningProgressLabel.text = "100%"
-            myLearningBtn.setTitle("   Share Certification", for: .normal)
+            myLearningBtn.setTitle("Share Certification", for: .normal)
+            let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
+            let smallerImage = UIImage(named: "uil_share", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
+            let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
+            myLearningBtn.setImage(tintedArrowImage, for: .normal)
+            myLearningBtn.semanticContentAttribute = .forceRightToLeft
+            let spacing: CGFloat = 10
+            myLearningBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
+            myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
+            myLearningBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+            myLearningBtn.layoutIfNeeded()
+
+            print("Button frame: \(myLearningBtn.frame)")
+            print("Title Insets: \(myLearningBtn.titleEdgeInsets)")
+            print("Image Insets: \(myLearningBtn.imageEdgeInsets)")
+
         }
         
         self.layoutIfNeeded()

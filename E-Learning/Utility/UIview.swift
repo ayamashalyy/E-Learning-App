@@ -17,32 +17,41 @@ extension UIViewController {
     func moveToSubView<T: UIViewController>(
         mainContainerView: UIView,
         identifier: String,
-        storyboardName: String,
+        storyboardName: String? = nil,
+        nibName: String? = nil,
         _ viewControllerType: T.Type,
         data: Any? = nil
     ) {
-        let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: identifier) as? T else { return }
+        var controller: T?
         
-        // Pass data if the child view controller conforms to sendData
-        if let dataViewController = controller as? sendData {
-            guard let data = data else { return }
-            dataViewController.sendData(data)
+        if let storyboardName = storyboardName {
+            // Load from storyboard
+            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+            controller = storyboard.instantiateViewController(withIdentifier: identifier) as? T
+        } else if let nibName = nibName {
+            // Load from Nib file
+            controller = T(nibName: nibName, bundle: nil)
         }
         
+        guard let viewController = controller else { return }
         
-        controller.view.translatesAutoresizingMaskIntoConstraints = false
-        mainContainerView.addSubview(controller.view)
-        self.addChild(controller)
+        // Pass data if the child view controller conforms to callDataBack
+        if let dataViewController = viewController as? callDataBack, let data = data {
+            dataViewController.sendDataBack(data)
+        }
+        
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        mainContainerView.addSubview(viewController.view)
+        self.addChild(viewController)
         
         NSLayoutConstraint.activate([
-            controller.view.topAnchor.constraint(equalTo: mainContainerView.topAnchor),
-            controller.view.bottomAnchor.constraint(equalTo: mainContainerView.bottomAnchor),
-            controller.view.leadingAnchor.constraint(equalTo: mainContainerView.leadingAnchor),
-            controller.view.trailingAnchor.constraint(equalTo: mainContainerView.trailingAnchor)
+            viewController.view.topAnchor.constraint(equalTo: mainContainerView.topAnchor),
+            viewController.view.bottomAnchor.constraint(equalTo: mainContainerView.bottomAnchor),
+            viewController.view.leadingAnchor.constraint(equalTo: mainContainerView.leadingAnchor),
+            viewController.view.trailingAnchor.constraint(equalTo: mainContainerView.trailingAnchor)
         ])
         
-        controller.didMove(toParent: self)
+        viewController.didMove(toParent: self)
     }
     
     func removeAllSubView(mainContainerView: UIView) {
@@ -50,5 +59,4 @@ extension UIViewController {
             subView.removeFromSuperview()
         }
     }
-    
 }

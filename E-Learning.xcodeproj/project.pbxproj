@@ -78,6 +78,12 @@
 		03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03BCA3902D08C0C80025B833 /* MatchingCell.xib */; };
 		03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */; };
 		03E1F0E42CFE5C22005646D7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1F0E32CFE5C21005646D7 /* Constants.swift */; };
+		03F37E7F2D1C4DC200F50C52 /* CourseOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E7D2D1C4DC200F50C52 /* CourseOverviewViewController.swift */; };
+		03F37E802D1C4DC200F50C52 /* CourseOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E7E2D1C4DC200F50C52 /* CourseOverviewViewController.xib */; };
+		03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */; };
+		03F37E842D1C52B300F50C52 /* courseInfoOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E822D1C52B300F50C52 /* courseInfoOverviewViewController.xib */; };
+		03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */; };
+		03F37E882D1C530A00F50C52 /* courseContentOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 		F3E13565B343003F348549F4 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */; };
@@ -157,6 +163,12 @@
 		03BCA3902D08C0C80025B833 /* MatchingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchingCell.xib; sourceTree = "<group>"; };
 		03D97D462CF510DB0089C026 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		03E1F0E32CFE5C21005646D7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		03F37E7D2D1C4DC200F50C52 /* CourseOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseOverviewViewController.swift; sourceTree = "<group>"; };
+		03F37E7E2D1C4DC200F50C52 /* CourseOverviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseOverviewViewController.xib; sourceTree = "<group>"; };
+		03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseInfoOverviewViewController.swift; sourceTree = "<group>"; };
+		03F37E822D1C52B300F50C52 /* courseInfoOverviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = courseInfoOverviewViewController.xib; sourceTree = "<group>"; };
+		03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseContentOverviewViewController.swift; sourceTree = "<group>"; };
+		03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = courseContentOverviewViewController.xib; sourceTree = "<group>"; };
 		7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
@@ -461,6 +473,7 @@
 		03B43C1A2CF0C5210018A306 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				03F37E7C2D1C4D4D00F50C52 /* CourseOverview */,
 				03678AFA2D0E3BAC00371403 /* QuestionDetails */,
 				037F20F32CF3A0FA00691EF0 /* Auth */,
 				0341D1DE2D0093330008136C /* CourseContent */,
@@ -505,6 +518,19 @@
 				03678B012D0E3EE200371403 /* QuestionModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		03F37E7C2D1C4D4D00F50C52 /* CourseOverview */ = {
+			isa = PBXGroup;
+			children = (
+				03F37E7D2D1C4DC200F50C52 /* CourseOverviewViewController.swift */,
+				03F37E7E2D1C4DC200F50C52 /* CourseOverviewViewController.xib */,
+				03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */,
+				03F37E822D1C52B300F50C52 /* courseInfoOverviewViewController.xib */,
+				03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */,
+				03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */,
+			);
+			path = CourseOverview;
 			sourceTree = "<group>";
 		};
 		31E775D98D1E899D09C6734B /* Pods */ = {
@@ -594,12 +620,15 @@
 				0328C10F2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.xib in Resources */,
 				03678B062D0E41C000371403 /* QuestionVC.xib in Resources */,
 				036A8C862CF7923700F01CE5 /* FiltrationCollectionViewCell.xib in Resources */,
+				03F37E802D1C4DC200F50C52 /* CourseOverviewViewController.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */,
 				0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
 				032179852D10CCDC00557B77 /* Roboto-Bold.ttf in Resources */,
+				03F37E842D1C52B300F50C52 /* courseInfoOverviewViewController.xib in Resources */,
+				03F37E882D1C530A00F50C52 /* courseContentOverviewViewController.xib in Resources */,
 				032179872D10CCEF00557B77 /* Roboto-Regular.ttf in Resources */,
 				0321798B2D10D4E500557B77 /* Roboto-Medium.ttf in Resources */,
 				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
@@ -661,6 +690,7 @@
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */,
 				030519592D03544F003B991F /* CommentCell.swift in Sources */,
+				03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */,
 				037C5C362D01F96900905CE9 /* CourseContentTableViewCell.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,
 				038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */,
@@ -668,6 +698,7 @@
 				03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */,
 				03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */,
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
+				03F37E7F2D1C4DC200F50C52 /* CourseOverviewViewController.swift in Sources */,
 				03678B052D0E41C000371403 /* QuestionVC.swift in Sources */,
 				0328C10E2CEE1B7C00CC1DCF /* CoursesCollectionViewCell.swift in Sources */,
 				035250A22D07717C0027C270 /* MultipleChoiceCell.swift in Sources */,
@@ -700,6 +731,7 @@
 				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
 				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
+				03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */,
 				037F7DEB2D0B7165001A411A /* SuccessViewController.swift in Sources */,
 				0341D1E22D0093F30008136C /* CourseViewController.swift in Sources */,
 				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
