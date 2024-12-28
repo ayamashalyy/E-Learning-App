@@ -158,8 +158,9 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             noRecentSearchImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             noRecentSearchImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            noRecentSearchImageView.widthAnchor.constraint(equalToConstant: 200),
-            noRecentSearchImageView.heightAnchor.constraint(equalToConstant: 200)
+            noRecentSearchImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
+            noRecentSearchImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 200)
+            
         ])
         
         NSLayoutConstraint.activate([
@@ -173,7 +174,6 @@ class SearchViewController: UIViewController {
             searchTextField.centerXAnchor.constraint(equalTo: searchView.centerXAnchor),
             searchTextField.centerYAnchor.constraint(equalTo: searchView.centerYAnchor),
             searchTextField.leadingAnchor.constraint(equalTo: searchButton.leadingAnchor, constant: 40),
-            searchTextField.widthAnchor.constraint(equalToConstant: 200),
             searchTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
         
@@ -501,7 +501,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel?.textColor = UIColor(named: "myCustom")
             header.textLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
-            header.widthAnchor.constraint(equalToConstant: 40).isActive = true
         }
     }
     

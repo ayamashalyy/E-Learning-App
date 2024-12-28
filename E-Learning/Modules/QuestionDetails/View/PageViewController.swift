@@ -221,7 +221,7 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     func goToNextPage(animated: Bool = true) {
         guard let currentViewController = self.viewControllers?.first else { return }
         guard let nextViewController = dataSource?.pageViewController(self, viewControllerAfter: currentViewController) else { return }
-        let currentIndex = subVC.firstIndex(of: nextViewController as! QuestionVC) ?? 0
+        let _ = subVC.firstIndex(of: nextViewController as! QuestionVC) ?? 0
         setViewControllers([nextViewController], direction: .forward, animated: animated, completion: nil)
         updateButtonStates()
         
@@ -230,7 +230,7 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     private func goToPreviousPage(animated: Bool = true) {
         guard let currentViewController = self.viewControllers?.first else { return }
         guard let previousViewController = dataSource?.pageViewController(self, viewControllerBefore: currentViewController) else { return }
-        let currentIndex = subVC.firstIndex(of: previousViewController as! QuestionVC) ?? 0
+        let _ = subVC.firstIndex(of: previousViewController as! QuestionVC) ?? 0
         setViewControllers([previousViewController], direction: .reverse, animated: animated, completion: nil)
         updateButtonStates()
     }

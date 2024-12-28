@@ -76,12 +76,4 @@ extension CoursesSectionCell: UICollectionViewDataSource, UICollectionViewDelega
     
 }
 
-extension String {
-    func width(usingFont font: UIFont) -> CGFloat {
-        let attributes: [NSAttributedString.Key: Any] = [.font: font]
-        let size = self.size(withAttributes: attributes)
-        return size.width
-    }
-}
-
 

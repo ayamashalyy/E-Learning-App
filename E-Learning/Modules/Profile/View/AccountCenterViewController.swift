@@ -289,38 +289,35 @@ class AccountCenterViewController: UIViewController {
         guard let horizontalStack = sender.view as? UIStackView,
               let parentStack = horizontalStack.superview as? UIStackView else { return }
         
-        if let stack = parentStack as? UIStackView {
-            for view in stack.arrangedSubviews {
-                if let textField = view as? UITextField {
-                    textField.isHidden.toggle()
+        for view in parentStack.arrangedSubviews {
+            if let textField = view as? UITextField {
+                textField.isHidden.toggle()
+                
+                if textField.isHidden {
                     
-                    if textField.isHidden {
-                        
-                        stack.layer.borderWidth = 0.0
-                        stack.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
-                        stack.layer.cornerRadius = 8
-                        stack.layer.shadowColor = UIColor.lightGray.cgColor
-                        stack.layer.shadowOpacity = 0.0
-                        stack.layer.shadowOffset = CGSize(width: 0, height: 2)
-                        stack.layer.shadowRadius = 4
-                    } else {
-                        
-                        stack.layer.borderWidth = 1.0
-                        stack.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
-                        stack.layer.cornerRadius = 8
-                        stack.layer.shadowColor = UIColor.lightGray.cgColor
-                        stack.layer.shadowOpacity = 0.1
-                        stack.layer.shadowOffset = CGSize(width: 0, height: 2)
-                        stack.layer.shadowRadius = 4
-                    }
+                    parentStack.layer.borderWidth = 0.0
+                    parentStack.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
+                    parentStack.layer.cornerRadius = 8
+                    parentStack.layer.shadowColor = UIColor.lightGray.cgColor
+                    parentStack.layer.shadowOpacity = 0.0
+                    parentStack.layer.shadowOffset = CGSize(width: 0, height: 2)
+                    parentStack.layer.shadowRadius = 4
+                } else {
+                    
+                    parentStack.layer.borderWidth = 1.0
+                    parentStack.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
+                    parentStack.layer.cornerRadius = 8
+                    parentStack.layer.shadowColor = UIColor.lightGray.cgColor
+                    parentStack.layer.shadowOpacity = 0.1
+                    parentStack.layer.shadowOffset = CGSize(width: 0, height: 2)
+                    parentStack.layer.shadowRadius = 4
                 }
             }
-            
-            if stack == passwordStackView {
-                passwordCriteriaLabel.isHidden.toggle()
-                passwordRequirementsLabel.isHidden.toggle()
-            }
-            
+        }
+        
+        if parentStack == passwordStackView {
+            passwordCriteriaLabel.isHidden.toggle()
+            passwordRequirementsLabel.isHidden.toggle()
         }
     }
     

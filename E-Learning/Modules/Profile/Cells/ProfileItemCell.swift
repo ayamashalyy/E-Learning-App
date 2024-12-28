@@ -63,7 +63,7 @@ class ProfileItemCell: UITableViewCell {
             outerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
             outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
             iconImageView.leadingAnchor.constraint(equalTo: outerView.leadingAnchor, constant: 25),
             iconImageView.centerYAnchor.constraint(equalTo: outerView.centerYAnchor),

@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-
-
 class TotalResultsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var outerView: UIView!

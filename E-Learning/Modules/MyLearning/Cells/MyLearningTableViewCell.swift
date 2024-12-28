@@ -53,8 +53,6 @@ class MyLearningTableViewCell: UITableViewCell {
         myLearningBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 8)
         myLearningBtn.layer.borderWidth = 0
         myLearningBtn.layer.shadowOpacity = 0
-        print("Button frame: \(myLearningBtn.frame)")
-        print("Button backgroundColor: \(String(describing: myLearningBtn.backgroundColor))")
         
         
     }
@@ -85,17 +83,14 @@ class MyLearningTableViewCell: UITableViewCell {
         myLearningImage2.translatesAutoresizingMaskIntoConstraints = false
         if isInProgress {
             myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
-            myLearningImage2.heightAnchor.constraint(equalToConstant: 40).isActive = true
             myLearningProgress.setProgress(0.5, animated: true)
             myLearningProgressLabel.text = "50%"
             myLearningBtn.setTitle("Continue!", for: .normal)
         } else if isInAssigned {
             myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
-            myLearningImage2.heightAnchor.constraint(equalToConstant: 50).isActive = true
             myLearningBtn.setTitle("Start now!", for: .normal)
         } else if isInCompleted {
             myLearningImage2.widthAnchor.constraint(equalToConstant: 80).isActive = true
-            myLearningImage2.heightAnchor.constraint(equalToConstant: 70).isActive = true
             myLearningProgress.setProgress(1.0, animated: true)
             myLearningProgressLabel.text = "100%"
             myLearningBtn.setTitle("Share Certification", for: .normal)
@@ -109,11 +104,6 @@ class MyLearningTableViewCell: UITableViewCell {
             myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
             myLearningBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
             myLearningBtn.layoutIfNeeded()
-
-            print("Button frame: \(myLearningBtn.frame)")
-            print("Title Insets: \(myLearningBtn.titleEdgeInsets)")
-            print("Image Insets: \(myLearningBtn.imageEdgeInsets)")
-
         }
         
         self.layoutIfNeeded()
