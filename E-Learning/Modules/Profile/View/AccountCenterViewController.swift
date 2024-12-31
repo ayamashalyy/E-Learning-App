@@ -110,10 +110,11 @@ class AccountCenterViewController: UIViewController {
             textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
             textLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            mainStack.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             mainStack.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 30),
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            mainStack.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -20)
+
         ])
         
         NSLayoutConstraint.activate([
@@ -150,8 +151,8 @@ class AccountCenterViewController: UIViewController {
         
         let actionButton = UIButton(type: .system)
         actionButton.setImage(UIImage(named: "arrow_drop_down_24px"), for: .normal)
-        actionButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        actionButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        actionButton.widthAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
+        actionButton.heightAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
         
         horizontalStack.addArrangedSubview(iconImageView)
         horizontalStack.addArrangedSubview(titleLabel)
@@ -162,6 +163,7 @@ class AccountCenterViewController: UIViewController {
             horizontalStack.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 20),
             horizontalStack.topAnchor.constraint(equalTo: stack.topAnchor, constant: 20),
             horizontalStack.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 20),
+            horizontalStack.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 20)
         ])
         
         

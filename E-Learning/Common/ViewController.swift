@@ -33,10 +33,10 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
         navigationController.setNavigationBarHidden(false, animated: true)
         self.navigationController?.pushViewController(navigationController, animated: true)
         
-        homeVC.title = "Home"
-        mySearchVC.title = "Search"
-        myLearningVC.title = "My Learning"
-        profileVC.title = "Profile"
+        homeVC.title = "Home".localized
+        mySearchVC.title = "Search".localized
+        myLearningVC.title = "My Learning".localized
+        profileVC.title = "Profile".localized
         
         self.setViewControllers([homeVC, navigationController, myLearningVC, profileVC], animated: false)
         
@@ -61,5 +61,6 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             item.setTitleTextAttributes(attributes, for: .normal)
             item.setTitleTextAttributes(selectedAttributes, for: .selected)
         }
+        tabBarItem.imageInsets = .init(top: 10, left: 0, bottom: -10, right: 0)
     }
 }

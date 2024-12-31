@@ -29,7 +29,7 @@ class courseInfoOverviewViewController: UIViewController {
     private func setupUI() {
         
         introductionLabel.translatesAutoresizingMaskIntoConstraints = false
-        introductionLabel.text = "Introduction to Scrum Master"
+        introductionLabel.text = "Introduction to Scrum Master".localized
         introductionLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         view.addSubview(introductionLabel)
         

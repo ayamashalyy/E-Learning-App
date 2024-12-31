@@ -44,6 +44,7 @@ class ProfileItemCell: UITableViewCell {
         let underlineString = NSAttributedString(string: "English", attributes: underlineAttribute)
         englishButton.setAttributedTitle(underlineString, for: .normal)
         englishButton.isHidden = true
+        englishButton.addTarget(self, action: #selector(englishButtonTapped), for: .touchUpInside)
         
         contentView.addSubview(outerView)
         outerView.addSubview(itemLabel)
@@ -58,12 +59,28 @@ class ProfileItemCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func englishButtonTapped() {
+        print("English button tapped")
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+        if LocalizationManager.shared.getLanguage() == .Arabic {
+            LocalizationManager.shared.setLanguage(language: .English)
+        } else {
+            LocalizationManager.shared.setLanguage(language: .Arabic)
+        }
+    }
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             outerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
+            outerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             outerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             outerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            outerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
             
             iconImageView.leadingAnchor.constraint(equalTo: outerView.leadingAnchor, constant: 25),
             iconImageView.centerYAnchor.constraint(equalTo: outerView.centerYAnchor),

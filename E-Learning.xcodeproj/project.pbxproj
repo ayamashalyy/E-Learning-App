@@ -75,6 +75,8 @@
 		038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */; };
 		038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */; };
 		03AA80E62CF6631300141A0E /* TotalResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */; };
+		03AC50A32D24914400874296 /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AC50A22D24914400874296 /* LocalizationManager.swift */; };
+		03AC50A72D249B3D00874296 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03AC50A92D249B3D00874296 /* Localizable.strings */; };
 		03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BCA38F2D08C0C80025B833 /* MatchingCell.swift */; };
 		03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03BCA3902D08C0C80025B833 /* MatchingCell.xib */; };
 		03C6DD0C2D20BEDC00E2A5BB /* TotalResultsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C6DD0B2D20BEDC00E2A5BB /* TotalResultsTableViewCell.xib */; };
@@ -161,6 +163,9 @@
 		038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
 		03AA80E42CF6631300141A0E /* TotalResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalResultsTableViewCell.swift; sourceTree = "<group>"; };
+		03AC50A22D24914400874296 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		03AC50A82D249B3D00874296 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		03AC50AA2D249B8A00874296 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		03BCA38F2D08C0C80025B833 /* MatchingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingCell.swift; sourceTree = "<group>"; };
 		03BCA3902D08C0C80025B833 /* MatchingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchingCell.xib; sourceTree = "<group>"; };
 		03C6DD0B2D20BEDC00E2A5BB /* TotalResultsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalResultsTableViewCell.xib; sourceTree = "<group>"; };
@@ -557,6 +562,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		03AC50A42D249AA300874296 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				03AC50A22D24914400874296 /* LocalizationManager.swift */,
+				03AC50A92D249B3D00874296 /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		03B43C1A2CF0C5210018A306 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +590,7 @@
 		03B43C1B2CF0C63B0018A306 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				03AC50A42D249AA300874296 /* Localization */,
 				030C79402D20C20400FFD7DD /* Extensions */,
 				038230032CED36E500F96ACB /* Fonts */,
 				03E1F0E32CFE5C21005646D7 /* Constants.swift */,
@@ -677,6 +692,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 0377D45B2CEBBA0C006C60F6;
 			productRefGroup = 0377D4652CEBBA0E006C60F6 /* Products */;
@@ -703,6 +719,7 @@
 				03F37E802D1C4DC200F50C52 /* CourseOverviewViewController.xib in Resources */,
 				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				034FD1BC2D20A2AC00CDD3D7 /* CoursesCollectionViewCell.xib in Resources */,
+				03AC50A72D249B3D00874296 /* Localizable.strings in Resources */,
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				03C6DD0C2D20BEDC00E2A5BB /* TotalResultsTableViewCell.xib in Resources */,
 				03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */,
@@ -791,6 +808,7 @@
 				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
+				03AC50A32D24914400874296 /* LocalizationManager.swift in Sources */,
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
 				03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */,
 				035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */,
@@ -839,6 +857,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		03AC50A92D249B3D00874296 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03AC50A82D249B3D00874296 /* en */,
+				03AC50AA2D249B8A00874296 /* ar */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -846,6 +873,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -892,7 +920,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -906,6 +934,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -946,7 +975,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

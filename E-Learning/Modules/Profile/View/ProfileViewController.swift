@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func setupViews() {
         
         profileLabel = UILabel()
-        profileLabel.text = "Profile"
+        profileLabel.text = "Profile".localized
         profileLabel.textAlignment = .center
         profileLabel.font = UIFont(name: "Roboto-Bold", size: 20)
         profileLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -156,6 +156,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60 
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileItemCell", for: indexPath) as! ProfileItemCell

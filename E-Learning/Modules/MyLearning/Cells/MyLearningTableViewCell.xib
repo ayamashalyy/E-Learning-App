@@ -31,7 +31,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjh-oQ-cA9">
-                        <rect key="frame" x="16" y="16" width="359" height="171"/>
+                        <rect key="frame" x="16" y="16" width="397" height="195"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tMy-Ud-1R4" userLabel="Outer Stack View">
                                 <rect key="frame" x="16" y="0.0" width="327" height="155"/>
@@ -180,8 +180,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="tMy-Ud-1R4" firstAttribute="leading" secondItem="cjh-oQ-cA9" secondAttribute="leading" constant="16" id="XZI-zk-Dqp"/>
-                            <constraint firstAttribute="bottom" secondItem="tMy-Ud-1R4" secondAttribute="bottom" constant="16" id="YZ8-BF-PrH"/>
-                            <constraint firstAttribute="trailing" secondItem="tMy-Ud-1R4" secondAttribute="trailing" constant="16" id="h6r-4z-FqI"/>
                             <constraint firstItem="tMy-Ud-1R4" firstAttribute="top" secondItem="cjh-oQ-cA9" secondAttribute="top" id="tm9-c2-RJt"/>
                         </constraints>
                     </view>

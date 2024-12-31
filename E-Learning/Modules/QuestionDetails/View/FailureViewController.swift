@@ -106,7 +106,6 @@ class FailureViewController: UIViewController {
             tryAgainButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             tryAgainButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             tryAgainButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            tryAgainButton.widthAnchor.constraint(equalToConstant: 340),
             tryAgainButton.heightAnchor.constraint(equalToConstant: 50),
             
         ])

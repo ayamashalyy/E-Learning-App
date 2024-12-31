@@ -11,8 +11,14 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        LocalizationManager.shared.delegate = self
+        LocalizationManager.shared.setAppInnitLanguage()
+        
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [
             .font: UIFont(name: "Roboto-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18),
@@ -88,3 +94,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+
+extension AppDelegate: LocalizationDelegate {
+    func resetApp() {
+        guard let window = window else { return }
+        
+        let navigationController = UIViewController.wrapInNavigation(ViewController.self)
+        
+        window.rootViewController = navigationController
+        let options: UIView.AnimationOptions = .transitionCrossDissolve
+        let duration: TimeInterval = 0.3
+        UIView.transition(with: window, duration: duration, options: options, animations: nil, completion: nil)
+    }
+}
+
+
+extension UIViewController {
+    static func wrapInNavigation<T: UIViewController>(_ viewControllerType: T.Type, configure: ((T) -> Void)? = nil) -> UINavigationController {
+
+        let viewController = T()
+        configure?(viewController)
+        return UINavigationController(rootViewController: viewController)
+    }
+}
