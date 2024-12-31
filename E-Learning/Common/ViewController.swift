@@ -61,6 +61,5 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             item.setTitleTextAttributes(attributes, for: .normal)
             item.setTitleTextAttributes(selectedAttributes, for: .selected)
         }
-        tabBarItem.imageInsets = .init(top: 10, left: 0, bottom: -10, right: 0)
     }
 }
