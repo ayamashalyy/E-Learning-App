@@ -1,11 +1,35 @@
 /* 
-  Localizable.strings
-  E-Learning
+ Localizable.strings
+ E-Learning
+ 
+ Created by aya on 31/12/2024.
+ 
+ */
 
-  Created by aya on 31/12/2024.
-  
-*/
-
+"Welcome to Vinsys Academy" = "مرحبًا بكم في أكاديمية Vinsys";
+"Access a wide range of courses tailored to help you succeed in your personal and professional life." = "احصل على مجموعة واسعة من الدورات المصممة لمساعدتك على النجاح في حياتك الشخصية والمهنية.";
+"Register" = "تسجيل";
+"Enter Your Organization Name" = "أدخل اسم منظمتك";
+"Organization Name" = "اسم المنظمة";
+"Go To Your Organization" = "انتقل إلى منظمتك";
+"Vinsys Academy" = "Vinsys Academy";
+"Welcome back!" = "مرحبًا بعودتك!";
+"Email" = "البريد الإلكتروني";
+"Password" = "كلمة المرور";
+"Remember me" = "تذكرني";
+"Forget Password?" = "نسيت كلمة المرور؟";
+"Login" = "تسجيل الدخول";
+"Forget Password!" = "نسيت كلمة المرور!";
+"Please enter the email address associated with you account" = "يرجى إدخال عنوان البريد الإلكتروني المرتبط بحسابك";
+"Get verification code" = "احصل على رمز التحقق";
+"Reset Password" = "إعادة تعيين كلمة المرور";
+"Please enter the code we just sent to email" = "يرجى إدخال الرمز الذي أرسلناه للتو إلى بريدك الإلكتروني";
+"username@gmail.com" = "username@gmail.com";
+"Didn’t receive OTP?" = "لم تستلم رمز التحقق؟";
+"Resend code" = "إعادة إرسال الرمز";
+"Verify" = "تحقق";
+"Confirm new password" = "تأكيد كلمة المرور الجديدة";
+"Save" = "حفظ";
 "Profile" = "الملف الشخصي";
 "Introduction to Scrum Master" = "مقدمة عن Scrum Master";
 "Home" = "الرئيسية";
@@ -76,3 +100,26 @@
 "Apply " = "تقديم";
 "Course Info" = "معلومات الكورس";
 "Content" = "المحتوى";
+"Interactions" = "التفاعلات";
+"Share this course" = "شارك هذه الدورة";
+"Discussion Forum" = "منتدى النقاش";
+"Comments" = "التعليقات";
+"Add Comment" = "إضافة تعليق";
+"Enter your comment below:" = "أدخل تعليقك أدناه:";
+"Your comment here" = "تعليقك هنا";
+"Add" = "إضافة";
+"The text field is empty. Please enter a comment." = "حقل النص فارغ. يرجى إدخال تعليق.";
+"User %d" = "المستخدم %d";
+"dd/MM/yyyy" = "dd/MM/yyyy";
+"Lesson1 Quiz" = "اختبار الدرس الاول";
+"Previous" = "السابق";
+"Next" = "التالي";
+"Please select an answer before proceeding to the next question." = "يرجى اختيار إجابة قبل المتابعة إلى السؤال التالي.";
+"Alert" = "تنبيه";
+"Show Results" = "عرض النتائج";
+"Congratulation!" = "تهانينا!";
+"You have successfully passed the Quiz,\n\nclick Continue to complete your educational journey" = "لقد اجتزت الاختبار بنجاح،\n\nاضغط متابعة لإكمال رحلتك التعليمية";
+"Continue" = "متابعة";
+"You did not pass the quiz!" = "لم تجتز الاختبار!";
+"Please click \"Retry\" to take the quiz again \n\nand continue your educational journey." = "يرجى الضغط على \"إعادة المحاولة\" لإجراء الاختبار مرة أخرى \n\nومواصلة رحلتك التعليمية.";
+"Try Again" = "إعادة المحاولة";

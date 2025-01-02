@@ -25,8 +25,8 @@ class CourseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationItem.title = "Introduction to Scrum Master"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.navigationItem.title = "Introduction to Scrum Master".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.leftBarButtonItem = backButton
         setupUI()
@@ -98,7 +98,7 @@ class CourseViewController: UIViewController {
         
         let containerView1 = UIView()
         let button1 = UIButton(type: .custom)
-        button1.setTitle("Course Info", for: .normal)
+        button1.setTitle("Course Info".localized, for: .normal)
         button1.setTitleColor(UIColor.gray, for: .normal)
         button1.setTitleColor(UIColor(named: "myCustom"), for: .selected)
         button1.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
@@ -126,7 +126,7 @@ class CourseViewController: UIViewController {
         
         let containerView2 = UIView()
         let button2 = UIButton(type: .custom)
-        button2.setTitle("Content", for: .normal)
+        button2.setTitle("Content".localized, for: .normal)
         button2.setTitleColor(UIColor.gray, for: .normal)
         button2.setTitleColor(UIColor(named: "myCustom"), for: .selected)
         button2.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
@@ -154,7 +154,7 @@ class CourseViewController: UIViewController {
         
         let containerView3 = UIView()
         let button3 = UIButton(type: .custom)
-        button3.setTitle("Interactions", for: .normal)
+        button3.setTitle("Interactions".localized, for: .normal)
         button3.setTitleColor(UIColor.gray, for: .normal)
         button3.setTitleColor(UIColor(named: "myCustom"), for: .selected)
         button3.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)

@@ -64,7 +64,7 @@ class SuccessViewController: UIViewController {
         stackView.addArrangedSubview(scoreNum)
         
         congratulationLabel = UILabel()
-        congratulationLabel.text = "Congratulation!"
+        congratulationLabel.text = "Congratulation!".localized
         congratulationLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         congratulationLabel.textColor = .black
         congratulationLabel.textAlignment = .center
@@ -73,7 +73,7 @@ class SuccessViewController: UIViewController {
         stackView.addArrangedSubview(congratulationLabel)
         
         passedMassage = UILabel()
-        passedMassage.text = "You have successfully passed the Quiz,\n\nclick Continue to complete your educational journey"
+        passedMassage.text = "You have successfully passed the Quiz,\n\nclick Continue to complete your educational journey".localized
         passedMassage.font = UIFont(name: "Roboto-Regular", size: 12)
         passedMassage.textColor = UIColor(named: "onboradColor")
         passedMassage.textAlignment = .center
@@ -84,7 +84,7 @@ class SuccessViewController: UIViewController {
         stackView.addArrangedSubview(passedMassage)
         
         continueButton = UIButton(type: .system)
-        continueButton.setTitle("Continue", for: .normal)
+        continueButton.setTitle("Continue".localized, for: .normal)
         continueButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         continueButton.setTitleColor(UIColor.white, for: .normal)
         continueButton.backgroundColor = UIColor(named: "myCustom")

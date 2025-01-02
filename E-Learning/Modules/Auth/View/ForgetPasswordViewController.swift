@@ -35,7 +35,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         
         
         ForgetPasswordText = UILabel()
-        ForgetPasswordText.text = "Forget Password!"
+        ForgetPasswordText.text = "Forget Password!".localized
         ForgetPasswordText.font = UIFont(name: "Roboto-Bold", size: 24)
         ForgetPasswordText.textAlignment = .center
         ForgetPasswordText.textColor = UIColor(named: "myCustom")
@@ -43,7 +43,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         view.addSubview(ForgetPasswordText)
         
         descriptionForgetPasswordText = UITextView()
-        descriptionForgetPasswordText.text = "Please enter the email address associated with you account"
+        descriptionForgetPasswordText.text = "Please enter the email address associated with you account".localized
         descriptionForgetPasswordText.font = UIFont(name: "Roboto-Regular", size: 15)
         descriptionForgetPasswordText.textAlignment = .center
         descriptionForgetPasswordText.textColor = UIColor(named: "onboradColor")
@@ -60,7 +60,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         
         
         emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
-        emailController.placeholderText = "Email"
+        emailController.placeholderText = "Email".localized
         emailController.normalColor = .lightGray
         emailController.activeColor = .lightGray
         emailController.floatingPlaceholderActiveColor = .black
@@ -68,7 +68,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         emailController.borderRadius = 8
         
         getVerificationCodeButton = UIButton(type: .system)
-        getVerificationCodeButton.setTitle("Get verification code", for: .normal)
+        getVerificationCodeButton.setTitle("Get verification code".localized, for: .normal)
         getVerificationCodeButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         getVerificationCodeButton.setTitleColor(.white, for: .normal)
         getVerificationCodeButton.backgroundColor = UIColor(named: "myCustom") ?? .black

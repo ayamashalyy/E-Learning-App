@@ -43,8 +43,8 @@ class PageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.title = "Lesson1 Quiz"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.title = "Lesson1 Quiz".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
         self.navigationItem.leftBarButtonItem = backButton
         
@@ -76,13 +76,13 @@ class PageViewController: UIPageViewController {
         
         // Previous Button
         previousButton = UIButton(type: .system)
-        previousButton.setTitle("Previous", for: .normal)
+        previousButton.setTitle("Previous".localized, for: .normal)
         previousButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         previousButton.layer.borderWidth = 1.0
         previousButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
         previousButton.layer.cornerRadius = 24
         previousButton.translatesAutoresizingMaskIntoConstraints = false
-        previousButton.setImage(UIImage(named: "Icon 1"), for: .normal)
+        previousButton.setImage(UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         previousButton.imageView?.contentMode = .scaleAspectFit
         previousButton.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
         previousButton.semanticContentAttribute = .forceLeftToRight
@@ -91,12 +91,12 @@ class PageViewController: UIPageViewController {
         
         // Next Button
         nextButton = UIButton(type: .system)
-        nextButton.setTitle("Next", for: .normal)
+        nextButton.setTitle("Next".localized, for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
         nextButton.backgroundColor = UIColor(named: "myCustom")
         nextButton.layer.cornerRadius = 24
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.setImage(UIImage(named: "navigate_next 1"), for: .normal)
+        nextButton.setImage(UIImage(named: "navigate_next 1")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         nextButton.imageView?.contentMode = .scaleAspectFit
         nextButton.semanticContentAttribute = .forceRightToLeft
         nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
@@ -149,13 +149,13 @@ extension PageViewController {
         if isAnswerSelected {
             goToNextPage()
         } else {
-            showAlert(message: "Please select an answer before proceeding to the next question.")
+            showAlert(message: "Please select an answer before proceeding to the next question.".localized)
         }
     }
     
     private func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertController = UIAlertController(title: "Alert".localized, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -184,11 +184,11 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         titleLabel.text = dataSourace[currentIndex].title
         
         if currentIndex == subVC.count - 1 {
-            nextButton.setTitle("Show Results", for: .normal)
+            nextButton.setTitle("Show Results".localized, for: .normal)
             nextButton.removeTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
             nextButton.addTarget(self, action: #selector(showResults), for: .touchUpInside)
         } else {
-            nextButton.setTitle("Next", for: .normal)
+            nextButton.setTitle("Next".localized, for: .normal)
             nextButton.removeTarget(self, action: #selector(showResults), for: .touchUpInside)
             nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
         }
@@ -213,7 +213,7 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
                 present(failureViewController, animated: true, completion: nil)
             }
         } else {
-            showAlert(message: "Please select an answer before proceeding to the results.")
+            showAlert(message: "Please select an answer before proceeding to the results.".localized)
         }
     }
     

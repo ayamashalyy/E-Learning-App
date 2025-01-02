@@ -45,7 +45,7 @@ class CourseOverviewViewController: UIViewController {
         
         imageCourseOverview = UIImageView()
         imageCourseOverview.backgroundColor = .clear
-        imageCourseOverview.image = UIImage(named: "imageCourseOverview")?.imageFlippedForRightToLeftLayoutDirection()
+        imageCourseOverview.image = UIImage(named: "imageCourseOverview")
         imageCourseOverview.contentMode = .scaleToFill
         imageCourseOverview.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageCourseOverview)

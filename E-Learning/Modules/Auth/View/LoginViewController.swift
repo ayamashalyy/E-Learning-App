@@ -39,7 +39,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     func setupViews() {
         
         organizationNameText = UILabel()
-        organizationNameText.text = "Vinsys Academy"
+        organizationNameText.text = "Vinsys Academy".localized
         organizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
         organizationNameText.textColor = UIColor(named: "myCustom")
         organizationNameText.textAlignment = .center
@@ -48,7 +48,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         view.addSubview(organizationNameText)
         
         welcomeBackText = UILabel()
-        welcomeBackText.text = " Welcome back!"
+        welcomeBackText.text = "Welcome back!".localized
         welcomeBackText.font = UIFont(name: "Roboto-Medium", size: 16)
         welcomeBackText.textColor = UIColor(named: "second")
         welcomeBackText.textAlignment = .center
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         
         emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
-        emailController.placeholderText = "Email"
+        emailController.placeholderText = "Email".localized
         emailController.normalColor = .lightGray
         emailController.activeColor = .lightGray
         emailController.floatingPlaceholderActiveColor = .black
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         
         passwordController = MDCTextInputControllerOutlined(textInput: passwordTextField)
-        passwordController.placeholderText = "Password"
+        passwordController.placeholderText = "Password".localized
         passwordController.normalColor = .lightGray
         passwordController.activeColor = .lightGray
         passwordController.floatingPlaceholderActiveColor = .black
@@ -89,7 +89,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         
         eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(named: "view"), for: .normal)
+        eyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         passwordTextField.rightView = eyeButton
@@ -104,14 +104,14 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         view.addSubview(rememberMeCheckbox)
         
         rememberMeLabel = UILabel()
-        rememberMeLabel.text = "Remember me"
+        rememberMeLabel.text = "Remember me".localized
         rememberMeLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         rememberMeLabel.textColor = .darkGray
         rememberMeLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rememberMeLabel)
         
         forgetPasswordButton = UIButton(type: .system)
-        forgetPasswordButton.setTitle("Forget Password?", for: .normal)
+        forgetPasswordButton.setTitle("Forget Password?".localized, for: .normal)
         forgetPasswordButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         forgetPasswordButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 12)
         forgetPasswordButton.translatesAutoresizingMaskIntoConstraints = false
@@ -120,7 +120,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         
         goToYourOrgaizationButton = UIButton(type: .system)
-        goToYourOrgaizationButton.setTitle("Login", for: .normal)
+        goToYourOrgaizationButton.setTitle("Login".localized, for: .normal)
         goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(UIColor.white, for: .normal)
         goToYourOrgaizationButton.backgroundColor = UIColor(named: "myCustom")
@@ -128,22 +128,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         goToYourOrgaizationButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(goToYourOrgaizationButton)
         goToYourOrgaizationButton.addTarget(self, action: #selector(goToYourOrgaizationButtonTapped), for: .touchUpInside)
-        
-        alreadyHaveAccountLabel = UILabel()
-        alreadyHaveAccountLabel.text = "Already have an account?"
-        alreadyHaveAccountLabel.font = UIFont(name: "Roboto-Medium", size: 12)
-        alreadyHaveAccountLabel.textColor = .gray
-        alreadyHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(alreadyHaveAccountLabel)
-        
-        loginButton = UIButton(type: .system)
-        loginButton.setTitle("Log in", for: .normal)
-        loginButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
-        loginButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 12)
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        view.addSubview(loginButton)
-        
         
     }
     
@@ -204,17 +188,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
             goToYourOrgaizationButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        NSLayoutConstraint.activate([
-            alreadyHaveAccountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            alreadyHaveAccountLabel.topAnchor.constraint(equalTo: goToYourOrgaizationButton.bottomAnchor, constant: 30)
-        ])
-        
-        NSLayoutConstraint.activate([
-            loginButton.leadingAnchor.constraint(equalTo: alreadyHaveAccountLabel.trailingAnchor, constant: 5),
-            loginButton.centerYAnchor.constraint(equalTo: alreadyHaveAccountLabel.centerYAnchor)
-        ])
-        
-        
     }
     
     @objc func goToYourOrgaizationButtonTapped() {
@@ -245,13 +218,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         let nextViewController = ForgetPasswordViewController()
         navigationController?.pushViewController(nextViewController, animated: true)
-    }
-    
-    @objc func loginButtonTapped() {
-        print("Log in button tapped")
-        //        let nextViewController = ViewController()
-        //        navigationController?.pushViewController(nextViewController, animated: true)
-        
     }
 }
 

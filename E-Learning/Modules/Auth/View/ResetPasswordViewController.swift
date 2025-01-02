@@ -22,8 +22,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        self.navigationItem.title = "Reset Password"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.navigationItem.title = "Reset Password".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.leftBarButtonItem = backButton
         
@@ -34,7 +34,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     func setupViews() {
         
         descriptionResetPasswordText = UITextView()
-        descriptionResetPasswordText.text = "Please enter the code we just sent to email"
+        descriptionResetPasswordText.text = "Please enter the code we just sent to email".localized
         descriptionResetPasswordText.font = UIFont(name: "Roboto-Regular", size: 14)
         descriptionResetPasswordText.textAlignment = .center
         descriptionResetPasswordText.textColor = UIColor(named: "onboradColor")
@@ -43,7 +43,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         descriptionResetPasswordText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionResetPasswordText)
         
-        emailLabel.text = "username@gmail.com"
+        emailLabel.text = "username@gmail.com".localized
         emailLabel.textAlignment = .center
         emailLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         emailLabel.textColor = UIColor(named: "onboradColor")
@@ -65,7 +65,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             otpFields.append(textField)
         }
         
-        checkReceiveOTPLabel.text = "Didn’t receive OTP?"
+        checkReceiveOTPLabel.text = "Didn’t receive OTP?".localized
         checkReceiveOTPLabel.textAlignment = .center
         checkReceiveOTPLabel.font = UIFont(name: "Roboto-Medium", size: 12)
         checkReceiveOTPLabel.textColor = UIColor(named: "onboradColor")
@@ -74,7 +74,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         
         let attributedString = NSAttributedString(
-            string: "Resend code",
+            string: "Resend code".localized,
             attributes: [
                 .foregroundColor: UIColor(named: "myCustom") ?? .blue,
                 .font: UIFont(name: "Roboto-Medium", size: 12) ?? .boldSystemFont(ofSize: 12),
@@ -90,7 +90,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         
         verifyButton = UIButton()
-        verifyButton.setTitle("Verify", for: .normal)
+        verifyButton.setTitle("Verify".localized, for: .normal)
         verifyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         verifyButton.setTitleColor(.white, for: .normal)
         verifyButton.backgroundColor = UIColor(named: "myCustom") ?? .black

@@ -19,7 +19,6 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         view.backgroundColor = .white
         setupHeaderView()
         setupTableView()
-        
     }
     
     private func setupHeaderView() {
@@ -34,13 +33,12 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        let shareImageView = UIImageView(image: UIImage(named: "share_icon"))
+        let shareImageView = UIImageView(image: UIImage(named: "share_icon")?.imageFlippedForRightToLeftLayoutDirection())
         shareImageView.contentMode = .scaleAspectFit
         shareImageView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         
         let shareButton = UIButton(type: .system)
-        shareButton.setTitle("Share this course", for: .normal)
+        shareButton.setTitle("Share this course".localized, for: .normal)
         shareButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
         shareButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         
@@ -49,13 +47,12 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         shareStackView.spacing = 8
         stackView.addArrangedSubview(shareStackView)
         
-        
-        let discussionImageView = UIImageView(image: UIImage(named: "forum_icon"))
+        let discussionImageView = UIImageView(image: UIImage(named: "forum_icon")?.imageFlippedForRightToLeftLayoutDirection())
         discussionImageView.contentMode = .scaleAspectFit
         discussionImageView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         
         let discussionButton = UIButton(type: .system)
-        discussionButton.setTitle("Discussion Forum", for: .normal)
+        discussionButton.setTitle("Discussion Forum".localized, for: .normal)
         discussionButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         discussionButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
         
@@ -63,7 +60,6 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         discussionStackView.axis = .horizontal
         discussionStackView.spacing = 8
         stackView.addArrangedSubview(discussionStackView)
-        
         
         headerView.addSubview(stackView)
         
@@ -81,33 +77,40 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         stackViewComments.translatesAutoresizingMaskIntoConstraints = false
         
         let commentsLabel = UILabel()
-        commentsLabel.text = "Comments"
+        commentsLabel.text = "Comments".localized
         commentsLabel.font = UIFont(name: "Roboto-Bold", size: 20)
         commentsLabel.translatesAutoresizingMaskIntoConstraints = false
         stackViewComments.addArrangedSubview(commentsLabel)
         
+        let pencilImageView = UIImageView(image: UIImage(named: "pencil_icon"))
+        pencilImageView.contentMode = .scaleAspectFit
+        pencilImageView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        let padding = UIView()
+        padding.translatesAutoresizingMaskIntoConstraints = false
+        padding.frame = CGRect(x: 0, y: 0, width: 8, height: 8)
+        
         let addCommentButton = UIButton(type: .system)
-        addCommentButton.setTitle(" Add Comment", for: .normal)
-        addCommentButton.setImage(UIImage(named: "pencil_icon"), for: .normal)
-        addCommentButton.tintColor = UIColor(named: "myCustom")
-        addCommentButton.backgroundColor = UIColor(named: "addCommet")
+        addCommentButton.setTitle("Add Comment".localized, for: .normal)
         addCommentButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         addCommentButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 12)
-        addCommentButton.layer.cornerRadius = 10
-        addCommentButton.layer.borderWidth = 1.0
-        addCommentButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
         addCommentButton.translatesAutoresizingMaskIntoConstraints = false
         addCommentButton.addTarget(self, action: #selector(addComment), for: .touchUpInside)
         
-        addCommentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
-        addCommentButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 0)
-        
-        stackViewComments.addArrangedSubview(addCommentButton)
+        let addCommentStackView = UIStackView(arrangedSubviews: [padding ,pencilImageView, addCommentButton])
+        addCommentStackView.axis = .horizontal
+        addCommentStackView.backgroundColor = UIColor(named: "addCommet")
+        addCommentStackView.layer.cornerRadius = 10
+        addCommentStackView.layer.borderWidth = 1.0
+        addCommentStackView.alignment = .center
+        addCommentStackView.layer.borderColor = UIColor(named: "myCustom")?.cgColor
+        addCommentStackView.spacing = 2
+        addCommentStackView.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        stackViewComments.addArrangedSubview(addCommentStackView)
         
         headerView.addSubview(stackViewComments)
         
         NSLayoutConstraint.activate([
-            
             stackViewComments.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 90),
             stackViewComments.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
             stackViewComments.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
@@ -115,8 +118,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
             commentsLabel.centerYAnchor.constraint(equalTo: stackViewComments.centerYAnchor),
             addCommentButton.centerYAnchor.constraint(equalTo: stackViewComments.centerYAnchor),
             addCommentButton.heightAnchor.constraint(equalToConstant: 40),
-            addCommentButton.widthAnchor.constraint(equalToConstant: 130)
-            
+            addCommentButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         
         view.addSubview(headerView)
@@ -141,32 +143,30 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
     
     @objc func addComment() {
         
-        let alert = UIAlertController(title: "Add Comment", message: "Enter your comment below:", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Comment".localized, message: "Enter your comment below:".localized, preferredStyle: .alert)
         alert.addTextField { textField in
-            textField.placeholder = "Your comment here"
+            textField.placeholder = "Your comment here".localized
         }
         
-        let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+        let addAction = UIAlertAction(title: "Add".localized, style: .default) { [weak self] _ in
             if let commentText = alert.textFields?.first?.text, !commentText.isEmpty {
                 let currentDate = Date()
                 self?.comments.append((text: commentText, date: currentDate))
                 self?.tableView.reloadData()
             } else {
                 
-                let errorAlert = UIAlertController(title: "Error", message: "The text field is empty. Please enter a comment.", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                let errorAlert = UIAlertController(title: "Error".localized, message: "The text field is empty. Please enter a comment.".localized, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "OK".localized, style: .default))
                 self?.present(errorAlert, animated: true, completion: nil)
             }
         }
         
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel)
         
         alert.addAction(addAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -180,15 +180,14 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         
         let comment = comments[indexPath.row]
         
-        cell.profileImageView.image = UIImage(named: "profile_placeholder")
+        cell.profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
         cell.nameLabel.text = "User \(indexPath.row + 1)"
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "dd/MM/yyyy".localized
         cell.dateLabel.text = dateFormatter.string(from: comment.date)
         cell.commentLabel.text = comment.text
         cell.selectionStyle = .none
         
         return cell
     }
-    
 }

@@ -30,14 +30,14 @@ class OnboardingViewController: UIViewController {
         view.addSubview(imageView)
         
         welcomeText = UILabel()
-        welcomeText.text = "Welcome to Vinsys Academy"
+        welcomeText.text = "Welcome to Vinsys Academy".localized
         welcomeText.font = UIFont(name: "Roboto-Medium", size: 20)
         welcomeText.textAlignment = .center
         welcomeText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(welcomeText)
         
         descriptionText = UITextView()
-        descriptionText.text = "Access a wide range of courses tailored to help you succeed in your personal and professional life."
+        descriptionText.text = "Access a wide range of courses tailored to help you succeed in your personal and professional life.".localized
         descriptionText.font = UIFont(name: "Roboto-Regular", size: 16)
         descriptionText.textAlignment = .center
         descriptionText.textColor = UIColor(named: "onboradColor")
@@ -47,7 +47,7 @@ class OnboardingViewController: UIViewController {
         view.addSubview(descriptionText)
         
         registerButton = UIButton(type: .system)
-        registerButton.setTitle("Register", for: .normal)
+        registerButton.setTitle("Register".localized, for: .normal)
         registerButton.titleLabel?.font =  UIFont(name: "Roboto-Bold", size: 16)
         registerButton.setTitleColor(UIColor.white, for: .normal)
         registerButton.backgroundColor = UIColor(named: "myCustom")

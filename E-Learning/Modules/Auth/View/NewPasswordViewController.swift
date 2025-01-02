@@ -28,8 +28,8 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         setupViews()
         setupConstraints()
         
-        self.navigationItem.title = "New password"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.navigationItem.title = "New password".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.leftBarButtonItem = backButton
         
@@ -46,7 +46,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         
         
         newPasswordController = MDCTextInputControllerOutlined(textInput: newPasswordTextField)
-        newPasswordController.placeholderText = "New password"
+        newPasswordController.placeholderText = "New password".localized
         newPasswordController.normalColor = .lightGray
         newPasswordController.activeColor = .lightGray
         newPasswordController.floatingPlaceholderActiveColor = .black
@@ -61,7 +61,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         
         
         confirmNewPasswordController = MDCTextInputControllerOutlined(textInput: confirmNewPasswordTextField)
-        confirmNewPasswordController.placeholderText = "Confirm new password"
+        confirmNewPasswordController.placeholderText = "Confirm new password".localized
         confirmNewPasswordController.normalColor = .lightGray
         confirmNewPasswordController.activeColor = .lightGray
         confirmNewPasswordController.floatingPlaceholderActiveColor = .black
@@ -69,14 +69,14 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         confirmNewPasswordController.borderRadius = 8
         
         eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(named: "view"), for: .normal)
+        eyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         newPasswordTextField.rightView = eyeButton
         newPasswordTextField.rightViewMode = .always
         
         confireEyeButton = UIButton(type: .custom)
-        confireEyeButton.setImage(UIImage(named: "view"), for: .normal)
+        confireEyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         confireEyeButton.translatesAutoresizingMaskIntoConstraints = false
         confireEyeButton.addTarget(self, action: #selector(toggleConfirePasswordVisibility), for: .touchUpInside)
         confirmNewPasswordTextField.rightView = confireEyeButton
@@ -84,7 +84,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         
         
         saveButton = UIButton(type: .system)
-        saveButton.setTitle("Save", for: .normal)
+        saveButton.setTitle("Save".localized, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.backgroundColor = UIColor(named: "myCustom")

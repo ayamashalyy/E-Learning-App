@@ -25,7 +25,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     func setupViews() {
         
         enterOrganizationNameText = UILabel()
-        enterOrganizationNameText.text = "Enter Your Organization Name"
+        enterOrganizationNameText.text = "Enter Your Organization Name".localized
         enterOrganizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
         enterOrganizationNameText.textColor = UIColor(named: "myCustom") ?? .black
         enterOrganizationNameText.textAlignment = .center
@@ -41,7 +41,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         
         
         organizationNameController = MDCTextInputControllerOutlined(textInput: organizationNameTextField)
-        organizationNameController.placeholderText = "Organization Name"
+        organizationNameController.placeholderText = "Organization Name".localized
         organizationNameController.normalColor = .lightGray
         organizationNameController.activeColor = .lightGray
         organizationNameController.floatingPlaceholderActiveColor = .black
@@ -50,7 +50,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         
         
         goToYourOrgaizationButton = UIButton(type: .system)
-        goToYourOrgaizationButton.setTitle("Go To Your Organization", for: .normal)
+        goToYourOrgaizationButton.setTitle("Go To Your Organization".localized, for: .normal)
         goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(.white, for: .normal)
         goToYourOrgaizationButton.backgroundColor = UIColor(named: "myCustom") ?? .black

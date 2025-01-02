@@ -63,7 +63,7 @@ class FailureViewController: UIViewController {
         stackView.addArrangedSubview(scoreNum)
         
         congratulationLabel = UILabel()
-        congratulationLabel.text = "You did not pass the quiz!"
+        congratulationLabel.text = "You did not pass the quiz!".localized
         congratulationLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         congratulationLabel.textColor = .black
         congratulationLabel.textAlignment = .center
@@ -72,7 +72,7 @@ class FailureViewController: UIViewController {
         stackView.addArrangedSubview(congratulationLabel)
         
         retryMassage = UILabel()
-        retryMassage.text = "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey."
+        retryMassage.text = "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey.".localized
         retryMassage.font = UIFont(name: "Roboto-Regular", size: 12)
         retryMassage.textColor = UIColor(named: "onboradColor")
         retryMassage.textAlignment = .center
@@ -83,7 +83,7 @@ class FailureViewController: UIViewController {
         stackView.addArrangedSubview(retryMassage)
         
         tryAgainButton = UIButton(type: .system)
-        tryAgainButton.setTitle("Try Again", for: .normal)
+        tryAgainButton.setTitle("Try Again".localized, for: .normal)
         tryAgainButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         tryAgainButton.setTitleColor(UIColor.white, for: .normal)
         tryAgainButton.backgroundColor = UIColor(named: "myCustom")

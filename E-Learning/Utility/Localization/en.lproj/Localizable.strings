@@ -1,11 +1,35 @@
 /* 
-  Localizable.strings
-  E-Learning
+ Localizable.strings
+ E-Learning
+ 
+ Created by aya on 31/12/2024.
+ 
+ */
 
-  Created by aya on 31/12/2024.
-  
-*/
-
+"Welcome to Vinsys Academy" = "Welcome to Vinsys Academy";
+"Access a wide range of courses tailored to help you succeed in your personal and professional life." = "Access a wide range of courses tailored to help you succeed in your personal and professional life.";
+"Register" = "Register";
+"Enter Your Organization Name" = "Enter Your Organization Name";
+"Organization Name" = "Organization Name";
+"Go To Your Organization" = "Go To Your Organization";
+"Vinsys Academy" = "Vinsys Academy";
+"Welcome back!" = "Welcome back!";
+"Email" = "Email";
+"Password" = "Password";
+"Remember me" = "Remember me";
+"Forget Password?" = "Forget Password?";
+"Login" = "Login";
+"Forget Password!" = "Forget Password!";
+"Please enter the email address associated with you account" = "Please enter the email address associated with your account";
+"Get verification code" = "Get verification code";
+"Reset Password" = "Reset Password";
+"Please enter the code we just sent to email" = "Please enter the code we just sent to your email";
+"username@gmail.com" = "username@gmail.com";
+"Didn’t receive OTP?" = "Didn’t receive OTP?";
+"Resend code" = "Resend code";
+"Verify" = "Verify";
+"Confirm new password" = "Confirm new password";
+"Save" = "Save";
 "Profile"="Profile";
 "Introduction to Scrum Master"= "Introduction to Scrum Master";
 "Home"="Home";
@@ -76,3 +100,27 @@
 "Apply " = "Apply ";
 "Course Info" = "Course Info";
 "Content" = "Content";
+"Interactions" = "Interactions";
+"Share this course" = "Share this course";
+"Discussion Forum" = "Discussion Forum";
+"Comments" = "Comments";
+"Add Comment" = "Add Comment";
+"Enter your comment below:" = "Enter your comment below:";
+"Your comment here" = "Your comment here";
+"Add" = "Add";
+"Cancel" = "Cancel";
+"The text field is empty. Please enter a comment." = "The text field is empty. Please enter a comment.";
+"User %d" = "User %d";
+"dd/MM/yyyy" = "dd/MM/yyyy";
+"Lesson1 Quiz" = "Lesson1 Quiz";
+"Previous" = "Previous";
+"Next" = "Next";
+"Please select an answer before proceeding to the next question." = "Please select an answer before proceeding to the next question.";
+"Alert" = "Alert";
+"Show Results" = "Show Results"; 
+"Congratulation!" = "Congratulation!";
+"You have successfully passed the Quiz,\n\nclick Continue to complete your educational journey" = "You have successfully passed the Quiz,\n\nclick Continue to complete your educational journey";
+"Continue" = "Continue";
+"You did not pass the quiz!" = "You did not pass the quiz!";
+"Please click \"Retry\" to take the quiz again \n\nand continue your educational journey." = "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey.";
+"Try Again" = "Try Again";

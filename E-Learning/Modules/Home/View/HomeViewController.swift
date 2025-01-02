@@ -86,7 +86,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         switch indexPath.section {
         case 0:
             let headerCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HeaderCollectionViewCell
-            headerCell.configureCell(user: "Aya")
+            headerCell.configureCell(user: "Aya".localized)
             return headerCell
             
         case 1:

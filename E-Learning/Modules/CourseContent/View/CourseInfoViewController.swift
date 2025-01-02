@@ -43,14 +43,14 @@ class CourseInfoViewController: UIViewController, sendData {
     private func setupUI() {
         
         introductionLabel.translatesAutoresizingMaskIntoConstraints = false
-        introductionLabel.text = "Introduction to Scrum Master"
+        introductionLabel.text = "Introduction to Scrum Master".localized
         introductionLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         view.addSubview(introductionLabel)
         
         introductionDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         introductionDescriptionLabel.numberOfLines = 0
         introductionDescriptionLabel.textColor = UIColor(named: "onboradColor")
-        introductionDescriptionLabel.text = "This course is designed to help Scrum beginners learn the foundational knowledge to become proficient with Agile Scrum. Throughout the course, learners will explore Agile methodologies and benefits of building incrementally."
+        introductionDescriptionLabel.text = "This course is designed to help Scrum beginners learn the foundational knowledge to become proficient with Agile Scrum. Throughout the course, learners will explore Agile methodologies and benefits of building incrementally.".localized
         introductionDescriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         view.addSubview(introductionDescriptionLabel)
         
@@ -101,7 +101,7 @@ class CourseInfoViewController: UIViewController, sendData {
         let button1 = UIButton()
         button1.translatesAutoresizingMaskIntoConstraints = false
         let imageView1 = UIImageView()
-        imageView1.image = UIImage(named: "mingcute_time-line")
+        imageView1.image = UIImage(named: "mingcute_time-line")?.imageFlippedForRightToLeftLayoutDirection()
         imageView1.contentMode = .scaleAspectFit
         imageView1.translatesAutoresizingMaskIntoConstraints = false
         let label1 = UILabel()
@@ -145,11 +145,11 @@ class CourseInfoViewController: UIViewController, sendData {
         let button2 = UIButton()
         button2.translatesAutoresizingMaskIntoConstraints = false
         let imageView2 = UIImageView()
-        imageView2.image = UIImage(named: "Vector 1")
+        imageView2.image = UIImage(named: "Vector 1")?.imageFlippedForRightToLeftLayoutDirection()
         imageView2.contentMode = .scaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         let labelView2 = UILabel()
-        labelView2.text = "Quizzes"
+        labelView2.text = "Quizzes".localized
         labelView2.textColor = UIColor(named: "myCustom")
         labelView2.font = UIFont(name: "Roboto-Regular", size: 14)
         labelView2.translatesAutoresizingMaskIntoConstraints = false
@@ -177,11 +177,11 @@ class CourseInfoViewController: UIViewController, sendData {
         let button3 = UIButton()
         button3.translatesAutoresizingMaskIntoConstraints = false
         let imageView3 = UIImageView()
-        imageView3.image = UIImage(named: "Group")
+        imageView3.image = UIImage(named: "Group")?.imageFlippedForRightToLeftLayoutDirection()
         imageView3.contentMode = .scaleAspectFit
         imageView3.translatesAutoresizingMaskIntoConstraints = false
         let labelView3 = UILabel()
-        labelView3.text = "  Certificate of completion"
+        labelView3.text = "Certificate of completion".localized
         labelView3.numberOfLines = 0
         labelView3.textColor = UIColor(named: "myCustom")
         labelView3.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -218,7 +218,7 @@ class CourseInfoViewController: UIViewController, sendData {
         view.addSubview(instractorView)
         
         let profileImageView = UIImageView()
-        profileImageView.image = UIImage(named: "profile_placeholder")
+        profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.layer.cornerRadius = 30

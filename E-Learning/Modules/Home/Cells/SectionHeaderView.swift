@@ -17,6 +17,15 @@ class SectionHeaderView: UICollectionViewCell {
         return label
     }()
     
+    private let actionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .center
+        return stackView
+    }()
+    
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(UIColor(named:"myCustom2"), for: .normal)
@@ -24,17 +33,25 @@ class SectionHeaderView: UICollectionViewCell {
         return button
     }()
     
+    private let actionImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(titleLabel)
-        addSubview(actionButton)
+        addSubview(actionStackView)
+        actionStackView.addArrangedSubview(actionButton)
+        actionStackView.addArrangedSubview(actionImageView)
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            actionButton.centerYAnchor.constraint(equalTo: centerYAnchor)
+            actionStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            actionStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
         ])
     }
     
@@ -51,12 +68,11 @@ class SectionHeaderView: UICollectionViewCell {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
         let smallerImage = UIImage(named: "navigate_next", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
         let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
-        actionButton.setImage(tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        actionImageView.image = tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection()
         
         if let customColor = UIColor(named: "myCustom") {
             actionButton.tintColor = customColor
+            actionImageView.tintColor = customColor
         }
-        actionButton.semanticContentAttribute = .forceRightToLeft
-        actionButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
     }
 }
