@@ -19,7 +19,7 @@ private let reuseIdentifier4 = "CareerCell"
 
 class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate {
     
-    let sectionTitles = ["Courses Categories", "Featured Courses", "Most Popular", "Career Paths", "Latest Courses"]
+    let sectionTitles = ["Courses Categories".localized, "Featured Courses".localized, "Most Popular".localized, "Career Paths".localized, "Latest Courses".localized]
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
     private var useFirstImage: Bool = true
     
@@ -144,7 +144,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 10:
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderViewCell, for: indexPath) as! SectionHeaderView
             let coursesTitle = sectionTitles[4]
-            print("coursesTitle\(coursesTitle)" )
             coursesTitleCell.configure(title:coursesTitle )
             return coursesTitleCell
             

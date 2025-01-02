@@ -13,6 +13,9 @@ class ContinueCollectionViewCell: UICollectionViewCell {
     @IBAction func arrow(_ sender: UIButton) {
     }
     
+    @IBOutlet weak var arrow: UIButton!
+    
+    @IBOutlet weak var continueLabel: UILabel!
     @IBOutlet weak var courseImage: UIImageView!
     @IBOutlet weak var titleCourse: UILabel!
     @IBOutlet weak var constratorNameCourse: UILabel!
@@ -26,7 +29,9 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         outerView.layer.masksToBounds = true
         outerView.layer.borderColor = UIColor.gray.cgColor
         outerView.layer.borderWidth = 1.0
+        continueLabel.text = "Continue where you left off".localized
         
+        arrow.setImage(UIImage(named: "arrow")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         
         innerView.layer.cornerRadius = 6
         innerView.layer.masksToBounds = true

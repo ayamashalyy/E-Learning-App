@@ -54,7 +54,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRi-XD-Dk9">
+                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRi-XD-Dk9">
                                                 <rect key="frame" x="298" y="0.0" width="51" height="29.333333333333332"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="51" id="b5O-GI-wtT"/>
@@ -95,6 +95,8 @@
             </constraints>
             <size key="customSize" width="357" height="219"/>
             <connections>
+                <outlet property="HelloLabel" destination="JAk-YR-8UC" id="9w6-9x-qen"/>
+                <outlet property="decLabel" destination="U8w-de-Mhi" id="3A6-Ki-Ajb"/>
                 <outlet property="userLabel" destination="vx1-rk-teA" id="auT-ug-7iC"/>
             </connections>
             <point key="canvasLocation" x="197.70992366412213" y="-55.985915492957751"/>

@@ -13,13 +13,13 @@ struct ProfileItem {
 }
 
 var items: [ProfileItem] = [
-    ProfileItem(title: "Language", imageName: "language"),
-    ProfileItem(title: "Account Center", imageName: "mdi_account-cog-outline"),
-    ProfileItem(title: "My Certifications", imageName: "carbon_certificate"),
-    ProfileItem(title: "About VINSYS", imageName: "mdi_about-circle-outline"),
-    ProfileItem(title: "Terms and Conditions", imageName: "f7_book"),
-    ProfileItem(title: "Privacy & Policy", imageName: "iconoir_privacy-policy"),
-    ProfileItem(title: "Log out", imageName: "tabler_logout"),
+    ProfileItem(title: "Language".localized, imageName: "language"),
+    ProfileItem(title: "Account Center".localized, imageName: "mdi_account-cog-outline"),
+    ProfileItem(title: "My Certifications".localized, imageName: "carbon_certificate"),
+    ProfileItem(title: "About VINSYS".localized, imageName: "mdi_about-circle-outline"),
+    ProfileItem(title: "Terms and Conditions".localized, imageName: "f7_book"),
+    ProfileItem(title: "Privacy & Policy".localized, imageName: "iconoir_privacy-policy"),
+    ProfileItem(title: "Log out".localized, imageName: "tabler_logout"),
 ]
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -59,12 +59,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImageView.addGestureRecognizer(tapGesture)
         
         nameLabel = UILabel()
-        nameLabel.text = "Moaz Mohamed"
+        nameLabel.text = "Moaz Mohamed".localized
         nameLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         emailLabel = UILabel()
-        emailLabel.text = "mohamedmoaz176@gmail.com"
+        emailLabel.text = "mohamedmoaz176@gmail.com".localized
         emailLabel.font = UIFont(name: "Roboto-Medium", size: 14)
         emailLabel.textColor = .gray
         emailLabel.translatesAutoresizingMaskIntoConstraints = false

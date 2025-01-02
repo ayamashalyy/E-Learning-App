@@ -105,6 +105,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="myLearningLabel" destination="Jfz-pL-ozf" id="ian-1L-xpL"/>
                         <outlet property="mySegmentedControl" destination="ACi-48-zjy" id="2d4-pa-3XI"/>
                         <outlet property="tabelView" destination="MMs-h6-TGN" id="gyc-Zl-AZh"/>
                     </connections>

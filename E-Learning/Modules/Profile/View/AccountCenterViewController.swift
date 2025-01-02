@@ -21,8 +21,8 @@ class AccountCenterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationItem.title = "Account Center"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.navigationItem.title = "Account Center".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.leftBarButtonItem = backButton
         setupScrollView()
@@ -65,23 +65,16 @@ class AccountCenterViewController: UIViewController {
     
     
     func setupUI() {
-        passwordCriteriaLabel.text = "Your password must meet the following criteria:"
+        passwordCriteriaLabel.text = "Your password must meet the following criteria:".localized
         passwordCriteriaLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         passwordCriteriaLabel.textColor = .black
-        passwordCriteriaLabel.textAlignment = .left
         passwordCriteriaLabel.isHidden = true
         passwordCriteriaLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(passwordCriteriaLabel)
         
-        passwordRequirementsLabel.text = "At least one uppercase letter (A-Z)\n" +
-        "At least one number (0-9)\n" +
-        "At least one special character (#, @, $, etc.)\n" +
-        "Minimum length of 8 characters\n" +
-        "Please update your password to meet these requirements."
-        
+        passwordRequirementsLabel.text = "passwordRequirements".localized
         passwordRequirementsLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         passwordRequirementsLabel.textColor = UIColor(named: "onboradColor")
-        passwordRequirementsLabel.textAlignment = .left
         passwordRequirementsLabel.isHidden = true
         passwordRequirementsLabel.numberOfLines = 0
         passwordRequirementsLabel.lineBreakMode = .byWordWrapping
@@ -89,7 +82,7 @@ class AccountCenterViewController: UIViewController {
         contentView.addSubview(passwordRequirementsLabel)
         
         textLabel = UILabel()
-        textLabel.text = "Make changes to your personal information"
+        textLabel.text = "Make changes to your personal information".localized
         textLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         textLabel.textAlignment = .center
         textLabel.textColor = UIColor(named: "onboradColor")
@@ -114,7 +107,7 @@ class AccountCenterViewController: UIViewController {
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             mainStack.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -20)
-
+            
         ])
         
         NSLayoutConstraint.activate([
@@ -145,12 +138,12 @@ class AccountCenterViewController: UIViewController {
         iconImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         let titleLabel = UILabel()
-        titleLabel.text = title
+        titleLabel.text = title.localized
         titleLabel.font = UIFont(name: "Roboto-Regular", size: 16)
         titleLabel.textColor = .black
         
         let actionButton = UIButton(type: .system)
-        actionButton.setImage(UIImage(named: "arrow_drop_down_24px"), for: .normal)
+        actionButton.setImage(UIImage(named: "arrow_drop_down_24px")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         actionButton.widthAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
         actionButton.heightAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
         
@@ -172,12 +165,11 @@ class AccountCenterViewController: UIViewController {
             nameTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             nameTextField.textColor = UIColor(named: "textfield")
             nameTextField.isHidden = true
-            nameTextField.placeholder = "Moaz Mohamed"
+            nameTextField.placeholder = "Moaz Mohamed".localized
             nameTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewName = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             nameTextField.leftView = paddingViewName
             nameTextField.leftViewMode = .always
-            nameTextField.textAlignment = .left
             nameTextField.translatesAutoresizingMaskIntoConstraints = false
             
             stack.addArrangedSubview(nameTextField)
@@ -195,12 +187,11 @@ class AccountCenterViewController: UIViewController {
             emailTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             emailTextField.textColor = UIColor(named: "textfield")
             emailTextField.isHidden = true
-            emailTextField.placeholder = "Username@gmail.com"
+            emailTextField.placeholder = "Username@gmail.com".localized
             emailTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewEmail = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             emailTextField.leftView = paddingViewEmail
             emailTextField.leftViewMode = .always
-            emailTextField.textAlignment = .left
             emailTextField.translatesAutoresizingMaskIntoConstraints = false
             
             stack.addArrangedSubview(emailTextField)
@@ -219,7 +210,7 @@ class AccountCenterViewController: UIViewController {
             currentPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             currentPasswordTextField.textColor = UIColor(named: "textfield")
             currentPasswordTextField.isHidden = true
-            currentPasswordTextField.placeholder = "Current password"
+            currentPasswordTextField.placeholder = "Current password".localized
             currentPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewCurrentPasswordTextField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             currentPasswordTextField.leftView = paddingViewCurrentPasswordTextField
@@ -227,7 +218,7 @@ class AccountCenterViewController: UIViewController {
             currentPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
             
             let eyeButton1 = UIButton(type: .system)
-            eyeButton1.setImage(UIImage(named: "view"), for: .normal)
+            eyeButton1.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton1.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             
             eyeButton1.tag = 1
@@ -242,7 +233,7 @@ class AccountCenterViewController: UIViewController {
             newPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             newPasswordTextField.textColor = UIColor(named: "textfield")
             newPasswordTextField.isHidden = true
-            newPasswordTextField.placeholder = "New password"
+            newPasswordTextField.placeholder = "New password".localized
             newPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             newPasswordTextField.leftView = paddingView
@@ -251,7 +242,7 @@ class AccountCenterViewController: UIViewController {
             
             
             let eyeButton2 = UIButton(type: .system)
-            eyeButton2.setImage(UIImage(named: "view"), for: .normal)
+            eyeButton2.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton2.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             eyeButton2.tag = 2
             newPasswordTextField.rightViewMode = .always
@@ -325,7 +316,7 @@ class AccountCenterViewController: UIViewController {
     
     func setupButtons() {
         let cancelButton = UIButton(type: .system)
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle("Cancel".localized, for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         cancelButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         cancelButton.backgroundColor = .clear
@@ -337,7 +328,7 @@ class AccountCenterViewController: UIViewController {
         cancelButton.addTarget(self, action: #selector(cancelChanges), for: .touchUpInside)
         
         let saveButton = UIButton(type: .system)
-        saveButton.setTitle("Save Changes", for: .normal)
+        saveButton.setTitle("Save Changes".localized, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = UIColor(named: "myCustom")
@@ -381,9 +372,9 @@ class AccountCenterViewController: UIViewController {
         textField.isSecureTextEntry.toggle()
         
         if textField.isSecureTextEntry {
-            sender.setImage(UIImage(named: "hide"), for: .normal)
+            sender.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         } else {
-            sender.setImage(UIImage(named: "view"), for: .normal)
+            sender.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         }
     }
     

@@ -18,8 +18,8 @@ class CourseOverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationItem.title = "Introduction to Scrum Master"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.navigationItem.title = "Introduction to Scrum Master".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
         self.navigationItem.leftBarButtonItem = backButton
         setupUI()
@@ -45,7 +45,7 @@ class CourseOverviewViewController: UIViewController {
         
         imageCourseOverview = UIImageView()
         imageCourseOverview.backgroundColor = .clear
-        imageCourseOverview.image = UIImage(named: "imageCourseOverview")
+        imageCourseOverview.image = UIImage(named: "imageCourseOverview")?.imageFlippedForRightToLeftLayoutDirection()
         imageCourseOverview.contentMode = .scaleToFill
         imageCourseOverview.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageCourseOverview)
@@ -59,7 +59,7 @@ class CourseOverviewViewController: UIViewController {
         
         let containerView1 = UIView()
         let button1 = UIButton(type: .custom)
-        button1.setTitle("Course Info", for: .normal)
+        button1.setTitle("Course Info".localized, for: .normal)
         button1.setTitleColor(UIColor.gray, for: .normal)
         button1.setTitleColor(UIColor(named: "myCustom"), for: .selected)
         button1.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
@@ -87,7 +87,7 @@ class CourseOverviewViewController: UIViewController {
         
         let containerView2 = UIView()
         let button2 = UIButton(type: .custom)
-        button2.setTitle("Content", for: .normal)
+        button2.setTitle("Content".localized, for: .normal)
         button2.setTitleColor(UIColor.gray, for: .normal)
         button2.setTitleColor(UIColor(named: "myCustom"), for: .selected)
         button2.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)

@@ -45,13 +45,13 @@ class SectionHeaderView: UICollectionViewCell {
     func configure(title: String) {
         titleLabel.text = title
         titleLabel.font = UIFont(name: "Roboto-Medium", size: 18)
-        actionButton.setTitle("See all ", for: .normal)
+        actionButton.setTitle("See all".localized, for: .normal)
         actionButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
         let smallerImage = UIImage(named: "navigate_next", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
         let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
-        actionButton.setImage(tintedArrowImage, for: .normal)
+        actionButton.setImage(tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         
         if let customColor = UIColor(named: "myCustom") {
             actionButton.tintColor = customColor

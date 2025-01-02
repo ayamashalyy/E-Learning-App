@@ -48,7 +48,6 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUW-By-Bra">
                                                 <rect key="frame" x="311" y="0.0" width="26" height="40"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="arrow"/>
                                                 <connections>
                                                     <action selector="arrow:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Vqq-5X-Oex"/>
                                                 </connections>
@@ -61,7 +60,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zB-Gl-Jjx">
                                         <rect key="frame" x="0.0" y="48" width="337" height="120"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2" translatesAutoresizingMaskIntoConstraints="NO" id="LX9-mF-PYx">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2" translatesAutoresizingMaskIntoConstraints="NO" id="LX9-mF-PYx">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="3iZ-Y1-465"/>
@@ -198,7 +197,9 @@
             </constraints>
             <size key="customSize" width="385" height="247"/>
             <connections>
+                <outlet property="arrow" destination="WUW-By-Bra" id="8p0-e1-7wn"/>
                 <outlet property="constratorNameCourse" destination="SZn-hd-7su" id="fMf-Cn-eyh"/>
+                <outlet property="continueLabel" destination="MvS-qS-XOV" id="3Xy-V3-NEx"/>
                 <outlet property="courseImage" destination="LX9-mF-PYx" id="UOR-Gm-Iek"/>
                 <outlet property="courseProgress" destination="9Ah-zC-hBm" id="sUj-je-LQu"/>
                 <outlet property="courseProgressRaico" destination="X4r-b9-4zC" id="kXQ-5b-LsY"/>
@@ -211,7 +212,6 @@
     </objects>
     <resources>
         <image name="Rectangle 2" width="128" height="99"/>
-        <image name="arrow" width="24" height="24"/>
         <namedColor name="myCustom">
             <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

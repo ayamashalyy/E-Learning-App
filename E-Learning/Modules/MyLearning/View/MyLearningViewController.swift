@@ -10,6 +10,8 @@ import UIKit
 class MyLearningViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     
+    @IBOutlet weak var myLearningLabel: UILabel!
+    
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var tabelView: UITableView!
@@ -17,7 +19,7 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        myLearningLabel.text = "My Learning".localized
         setupTableView()
         setupSegmentedControl()
         
@@ -32,6 +34,10 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
     private func setupSegmentedControl() {
         
         guard let segmentedControl = mySegmentedControl else { return }
+        
+        segmentedControl.setTitle(NSLocalizedString("In Progress", comment: ""), forSegmentAt: 0)
+        segmentedControl.setTitle(NSLocalizedString("Assigned", comment: ""), forSegmentAt: 1)
+        segmentedControl.setTitle(NSLocalizedString("Completed", comment: ""), forSegmentAt: 2)
         
         segmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         

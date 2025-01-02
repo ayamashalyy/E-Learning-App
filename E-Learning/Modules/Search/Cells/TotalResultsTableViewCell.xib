@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -27,7 +28,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FnB-JF-LWy">
-                        <rect key="frame" x="8" y="8" width="400" height="141"/>
+                        <rect key="frame" x="14" y="8" width="388" height="141"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgT-Nc-awQ">
                                 <rect key="frame" x="8" y="15" width="90" height="75"/>
@@ -66,10 +67,10 @@
                                     <constraint firstAttribute="height" constant="30" id="sOX-dz-cmx"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google UX Design" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qs-bN-Xu6">
-                                <rect key="frame" x="108" y="53" width="150" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google UX Design" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qs-bN-Xu6">
+                                <rect key="frame" x="108" y="53" width="250" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="K7W-nV-n8t"/>
+                                    <constraint firstAttribute="width" constant="250" id="K7W-nV-n8t"/>
                                     <constraint firstAttribute="height" constant="16" id="k1Z-4f-0be"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
@@ -103,8 +104,8 @@
                 <constraints>
                     <constraint firstItem="FnB-JF-LWy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="7W6-eX-HRB"/>
                     <constraint firstAttribute="bottom" secondItem="FnB-JF-LWy" secondAttribute="bottom" constant="8" id="dw6-8u-Ykn"/>
-                    <constraint firstAttribute="trailing" secondItem="FnB-JF-LWy" secondAttribute="trailing" constant="8" id="hin-Ji-GKq"/>
-                    <constraint firstItem="FnB-JF-LWy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oWn-31-ntc"/>
+                    <constraint firstAttribute="trailing" secondItem="FnB-JF-LWy" secondAttribute="trailing" constant="14" id="hin-Ji-GKq"/>
+                    <constraint firstItem="FnB-JF-LWy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="oWn-31-ntc"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

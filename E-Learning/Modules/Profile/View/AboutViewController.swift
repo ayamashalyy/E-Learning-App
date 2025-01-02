@@ -17,8 +17,8 @@ class AboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.title = "About VINSYS"
-        let backButtonImage = UIImage(named: "Icon 1")
+        self.title = "About VINSYS".localized
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
         self.navigationItem.leftBarButtonItem = backButton
         setupUI()
@@ -43,7 +43,7 @@ class AboutViewController: UIViewController {
         introLabel = UILabel()
         introLabel.text = """
             Welcome to Vinsys Inc.'s Privacy Policy. This Policy explains how we collect and use your data and how you can control your information. Looking for a quick summary on our privacy practices? Check out this page or this video. And if you’re looking for specific product privacy information, for example, how we process your Chats and Snaps, take a look at our Privacy by Product page. In addition to these documents, we also show in-app notices that provide you more information about our products and services.
-            """
+            """.localized
         introLabel.font = UIFont(name: "Roboto-Regular", size: 18)
         introLabel.textColor = UIColor(named: "policy2")
         introLabel.numberOfLines = 0
@@ -53,7 +53,7 @@ class AboutViewController: UIViewController {
         transparencyLabel = UILabel()
         transparencyLabel.text = """
            Transparency is one of our core values at Vinsys. We believe there shouldn’t be any surprises about the data we collect and how we use it — that’s why we’re upfront with how we process it. For example, we process your information to provide you a more personalized experience, including to show you content and information that is most relevant to your experience, as well as more relevant advertisements. Understanding your interests and preferences help us provide a better product experience.
-           """
+           """.localized
         transparencyLabel.font = UIFont(name: "Roboto-Regular", size: 18)
         transparencyLabel.textColor = UIColor(named: "policy2")
         transparencyLabel.numberOfLines = 0

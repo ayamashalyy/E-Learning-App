@@ -31,17 +31,17 @@ class ProfileItemCell: UITableViewCell {
         
         arrowButton = UIButton(type: .custom)
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
-        arrowButton.setImage(UIImage(named: "navigate_next"), for: .normal)
+        arrowButton.setImage(UIImage(named: "navigate_next")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         arrowButton.isHidden = false
         
         englishButton = UIButton(type: .custom)
         englishButton.translatesAutoresizingMaskIntoConstraints = false
-        englishButton.setTitle("English", for: .normal)
+        englishButton.setTitle("English".localized, for: .normal)
         englishButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16)
         englishButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
         englishButton.contentHorizontalAlignment = .left
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
-        let underlineString = NSAttributedString(string: "English", attributes: underlineAttribute)
+        let underlineString = NSAttributedString(string: "English".localized, attributes: underlineAttribute)
         englishButton.setAttributedTitle(underlineString, for: .normal)
         englishButton.isHidden = true
         englishButton.addTarget(self, action: #selector(englishButtonTapped), for: .touchUpInside)
@@ -106,7 +106,7 @@ class ProfileItemCell: UITableViewCell {
         iconImageView.image = UIImage(named: item.imageName)
         
         if isLanguage {
-            itemLabel.text = "Language"
+            itemLabel.text = "Language".localized
             englishButton.isHidden = false
             arrowButton.isHidden = true
         } else {

@@ -22,8 +22,8 @@ class SearchViewController: UIViewController {
     }
     
     let sections: [Section] = [
-        Section(title: "Category", items: ["Data Science", "Design", "Business", "Language Learning"]),
-        Section(title: "Level", items: ["Beginner", "Intermediate", "Advanced"]),
+        Section(title: "Category".localized, items: ["Data Science".localized, "Design".localized, "Business".localized, "Language Learning".localized]),
+        Section(title: "Level".localized, items: ["Beginner".localized, "Intermediate".localized, "Advanced".localized]),
     ]
     
     var currentState: SearchState = .recentSearches
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationItem.title = "Search"
+        self.navigationItem.title = "Search".localized
         configureNavigationBar()
         loadRecentSearches()
         setupViews()
@@ -89,7 +89,7 @@ class SearchViewController: UIViewController {
             filterContainerView.isHidden = true
             tableView.isHidden = false
             searchView.isHidden = false
-            self.title = "Search"
+            self.title = "Search".localized
             self.navigationItem.leftBarButtonItem = nil
             tableView.reloadData()
             
@@ -113,7 +113,7 @@ class SearchViewController: UIViewController {
         view.addSubview(searchView)
         
         searchTextField = UITextField()
-        searchTextField.placeholder = "Search"
+        searchTextField.placeholder = "Search".localized
         searchTextField.backgroundColor = UIColor(named: "myLearning")
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.delegate = self
@@ -128,7 +128,7 @@ class SearchViewController: UIViewController {
         cancelButton = UIButton(type: .system)
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.setImage(UIImage(named: "multiply"), for: .normal)
+        cancelButton.setImage(UIImage(named: "multiply")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         cancelButton.imageView?.contentMode = .scaleAspectFit
         searchView.addSubview(cancelButton)
         
@@ -235,7 +235,7 @@ class SearchViewController: UIViewController {
         ])
         
         applyButton = UIButton(type: .system)
-        applyButton.setTitle("Apply", for: .normal)
+        applyButton.setTitle("Apply".localized, for: .normal)
         applyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 15)
         applyButton.setTitleColor(UIColor.white, for: .normal)
         applyButton.backgroundColor = UIColor(named: "myCustom")
@@ -248,7 +248,7 @@ class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             applyButton.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16),
             applyButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16),
-            applyButton.bottomAnchor.constraint(equalTo: filterContainerView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            applyButton.bottomAnchor.constraint(equalTo: filterContainerView.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             applyButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
@@ -257,8 +257,8 @@ class SearchViewController: UIViewController {
     @objc func searchButtonTapped() {
         guard let text = searchTextField.text, !text.isEmpty else {
             
-            let alert = UIAlertController(title: "Error", message: "Please enter a search term.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let alert = UIAlertController(title: "Error", message: "Please enter a search term.".localized, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
@@ -339,7 +339,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.totalResultSearchCategory.text = "Design"
             cell.totalResultSearchNameCourse.text = "Google UX Design"
             cell.totalResultSearchConstractorName.text = "Jacob Jones"
-            cell.totalResultSearchImage.image = UIImage(named: "myLearning")
+            cell.totalResultSearchImage.image = UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection()
             cell.selectionStyle = .none
             return cell
         } else if currentState == .totalResultsAfterFilter {
@@ -350,7 +350,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             cell.totalResultSearchCategory.text = "Design"
             cell.totalResultSearchNameCourse.text = "Google UX Design"
             cell.totalResultSearchConstractorName.text = "Jacob Jones"
-            cell.totalResultSearchImage.image = UIImage(named: "myLearning")
+            cell.totalResultSearchImage.image = UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection()
             cell.selectionStyle = .none
             return cell
             
@@ -369,15 +369,14 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         headerView.backgroundColor = .white
         
         let titleLabel = UILabel()
-        titleLabel.textAlignment = .left
         titleLabel.font = UIFont(name: "Roboto-Bold", size: 16)
         
         
         if currentState == .recentSearches {
-            titleLabel.text = "Recent Searches"
+            titleLabel.text = "Recent Searches".localized
             titleLabel.textColor = UIColor(named: "myCustom")
         } else if currentState == .totalResultsBeforeFilter {
-            titleLabel.text = "\(20) Total Results"
+            titleLabel.text = "\(20) \(NSLocalizedString("Total Results", comment: ""))"
         }
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -385,7 +384,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         if currentState == .totalResultsBeforeFilter {
             let filterButton = UIButton(type: .system)
-            filterButton.setImage(UIImage(named: "ion_filter"), for: .normal)
+            filterButton.setImage(UIImage(named: "ion_filter")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
             filterButton.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(filterButton)
@@ -399,25 +398,25 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             ])
         } else if currentState == .totalResultsAfterFilter {
             let resultsCountLabel = UILabel()
-            resultsCountLabel.text = "10"
+            resultsCountLabel.text = "10".localized
             resultsCountLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(resultsCountLabel)
             
             let resultsTextLabel = UILabel()
-            resultsTextLabel.text = "Total Results"
+            resultsTextLabel.text = "Total Results".localized
             resultsTextLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             resultsTextLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(resultsTextLabel)
             
             let filtersLabel = UILabel()
-            filtersLabel.text = "(\(selectedFiltersCount ?? 0) filters)"
+            filtersLabel.text = "(\(selectedFiltersCount ?? 0) \(NSLocalizedString("Filters", comment: "")))"
             filtersLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             filtersLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(filtersLabel)
             
             let filterButton = UIButton(type: .system)
-            filterButton.setImage(UIImage(named: "icon_filter-remove"), for: .normal)
+            filterButton.setImage(UIImage(named: "icon_filter-remove")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
             filterButton.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(filterButton)
@@ -454,9 +453,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         noRecentSearchImageView.isHidden = true
         filterContainerView.isHidden = false
         
-        self.title = "Filtration"
+        self.title = "Filtration".localized
         if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
-            tabBarItem.title = "Search"
+            tabBarItem.title = "Search".localized
         }
         
         let attributes: [NSAttributedString.Key: Any] = [
@@ -466,7 +465,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         
-        let backButtonImage = UIImage(named: "Icon 1")
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(applyButtonTapped))
         self.navigationItem.leftBarButtonItem = backButton
         
@@ -481,9 +480,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         searchView.isHidden = false
         tableView.reloadData()
         
-        self.title = "Search"
+        self.title = "Search".localized
         if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
-            tabBarItem.title = "Search"
+            tabBarItem.title = "Search".localized
         }
         
         let attributes: [NSAttributedString.Key: Any] = [
