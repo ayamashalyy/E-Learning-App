@@ -123,3 +123,6 @@
 "You did not pass the quiz!" = "لم تجتز الاختبار!";
 "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey." = "يرجى الضغط على \"إعادة المحاولة\" لإجراء الاختبار مرة أخرى \n\nومواصلة رحلتك التعليمية.";
 "Try Again" = "إعادة المحاولة";
+"Learners" = "المتعلمون";
+"request_count" = "%d طلب";
+"assign_course" = "تعيين الدورة";

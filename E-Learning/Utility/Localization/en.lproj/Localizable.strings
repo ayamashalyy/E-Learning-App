@@ -124,3 +124,6 @@
 "You did not pass the quiz!" = "You did not pass the quiz!";
 "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey." = "Please click \"Retry\" to take the quiz again \n\nand continue your educational journey.";
 "Try Again" = "Try Again";
+"Learners" = "Learners";
+"request_count" = "%d Request";
+"assign_course" = "Assign Course";

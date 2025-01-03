@@ -191,8 +191,14 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     @objc func goToYourOrgaizationButtonTapped() {
-        let nextViewController = ViewController()
-        navigationController?.pushViewController(nextViewController, animated: true)
+//        let nextViewController = ViewController()
+//        navigationController?.pushViewController(nextViewController, animated: true)
+        
+        let nextViewController = CourseManagerViewController()
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen 
+        present(navigationController, animated: true, completion: nil)
+
     }
     
     @objc func togglePasswordVisibility() {
