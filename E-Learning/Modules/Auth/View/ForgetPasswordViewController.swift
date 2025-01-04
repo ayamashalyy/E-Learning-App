@@ -22,7 +22,13 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func cancelTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setupViews() {

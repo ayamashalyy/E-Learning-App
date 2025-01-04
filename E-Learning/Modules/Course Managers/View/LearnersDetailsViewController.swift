@@ -13,12 +13,22 @@ class LearnersDetailsViewController: UIViewController {
     @IBOutlet weak var learnerImage: UIImageView!
     @IBOutlet weak var learnerName: UILabel!
     @IBAction func assignCourse(_ sender: UIButton) {
+        
+        let nextViewController = AssignCourseViewController()
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     @IBOutlet weak var assignCourse: UIButton!
     
     @IBOutlet weak var request: UIButton!
     @IBAction func request(_ sender: UIButton) {
+        
+        let nextViewController = NumberRequestViewController()
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     var requestCount: Int = 2
     

@@ -39,6 +39,11 @@ class LocalizationManager: NSObject {
         return nil
     }
     
+    func fetchAppLanguage() -> String {
+        let preferredLanguage = Locale.preferredLanguages.first ?? "en"
+        return preferredLanguage
+    }
+    
     // check if the language is available
     private func isLanguageAvailable(_ code: String) -> Language? {
         var finalCode = ""
@@ -51,7 +56,7 @@ class LocalizationManager: NSObject {
     }
     
     // check the language direction
-    private func getLanguageDirection() -> LanguageDirection {
+     func getLanguageDirection() -> LanguageDirection {
         if let lang = getLanguage() {
             switch lang {
             case .English:

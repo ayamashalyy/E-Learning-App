@@ -223,7 +223,9 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         print("Forget Password? tapped")
         
         let nextViewController = ForgetPasswordViewController()
-        navigationController?.pushViewController(nextViewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }
 

@@ -127,3 +127,5 @@
 "Learners" = "Learners";
 "request_count" = "%d Request";
 "assign_course" = "Assign Course";
+"Approve" = "Approve";
+"Reject" = "Reject";

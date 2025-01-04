@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         LocalizationManager.shared.delegate = self
         LocalizationManager.shared.setAppInnitLanguage()
         
@@ -27,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appearance.backgroundColor = .white
         appearance.shadowColor = .clear
+        
+        UICollectionView.appearance().semanticContentAttribute = LocalizationManager.shared.getLanguage() == .Arabic ? .forceRightToLeft : .forceLeftToRight
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
