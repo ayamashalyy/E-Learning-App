@@ -17,7 +17,7 @@ class LearnersCell: UITableViewCell {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var detailsButton: UIButton!
     @IBOutlet weak var progressLabel: UILabel!
-    
+    @IBOutlet weak var backButton: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         outerView.layer.cornerRadius = 10
@@ -28,7 +28,10 @@ class LearnersCell: UITableViewCell {
         outerView.layer.shadowRadius = 6
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.borderWidth = 0.5
-        
+        detailsButton.setTitle("Details".localized, for: .normal)
+        detailsButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 12)
+        detailsButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        backButton.image = UIImage(named: "navigate_next")?.imageFlippedForRightToLeftLayoutDirection()
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView

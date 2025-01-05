@@ -88,6 +88,8 @@ class OnboardingViewController: UIViewController {
     
     @objc func registerButtonTapped() {
         let nextViewController = SelectOrganizationViewController()
-        navigationController?.pushViewController(nextViewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }

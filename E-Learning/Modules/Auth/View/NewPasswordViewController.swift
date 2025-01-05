@@ -124,6 +124,10 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     
     @objc func saveButtonTapped() {
         print("Save")
+        let nextViewController = ViewController()
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     

@@ -5,7 +5,7 @@
  Created by aya on 31/12/2024.
  
  */
-
+"Details"="التفاصيل";
 "Welcome to Vinsys Academy" = "مرحبًا بكم في أكاديمية Vinsys";
 "Access a wide range of courses tailored to help you succeed in your personal and professional life." = "احصل على مجموعة واسعة من الدورات المصممة لمساعدتك على النجاح في حياتك الشخصية والمهنية.";
 "Register" = "تسجيل";
@@ -125,6 +125,6 @@
 "Try Again" = "إعادة المحاولة";
 "Learners" = "المتعلمون";
 "request_count" = "%d طلب";
-"assign_course" = "تعيين الدورة";
+"Assign Course" = "تعيين الدورة";
 "Approve" = "موافقة";
 "Reject" = "رفض";

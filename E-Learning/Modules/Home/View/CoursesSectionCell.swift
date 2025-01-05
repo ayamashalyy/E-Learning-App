@@ -12,7 +12,7 @@ class CoursesSectionCell: UICollectionViewCell {
     private var courses =  ["Data Science", "Design","Bussince", "Law"]
     
     private let innerCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = RTLCollectionFlow()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 350, height: 30)
         layout.minimumInteritemSpacing = 0

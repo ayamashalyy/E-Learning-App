@@ -18,7 +18,7 @@ class FeaturedCoursesCollectionView: UICollectionViewCell {
     weak var delegate: FeaturedCoursesCollectionViewDelegate?
     
     private lazy var innerFeaturedCoursesCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = RTLCollectionFlow()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 160, height: 190)
         layout.minimumLineSpacing = 0

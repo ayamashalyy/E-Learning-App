@@ -96,7 +96,7 @@ class PageViewController: UIPageViewController {
         nextButton.backgroundColor = UIColor(named: "myCustom")
         nextButton.layer.cornerRadius = 24
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.setImage(UIImage(named: "navigate_next 1")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        nextButton.setImage(UIImage(named: "navigate_next 1"), for: .normal)
         nextButton.imageView?.contentMode = .scaleAspectFit
         nextButton.semanticContentAttribute = .forceRightToLeft
         nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)

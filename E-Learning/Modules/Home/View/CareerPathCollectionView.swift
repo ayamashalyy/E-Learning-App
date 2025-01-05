@@ -12,7 +12,7 @@ class CareerPathCollectionView: UICollectionViewCell {
     private var courses: [String] = []
     
     private let innerCareerPathCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = RTLCollectionFlow()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 260, height: 210)
         layout.minimumLineSpacing = 0

@@ -52,20 +52,12 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEj-Ou-HrE">
                                                 <rect key="frame" x="285" y="0.0" width="90" height="16"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJp-aU-Wcx">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJp-aU-Wcx">
                                                         <rect key="frame" x="0.0" y="0.0" width="66" height="16"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
                                                         <color key="tintColor" name="myCustom"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain">
-                                                            <attributedString key="attributedTitle">
-                                                                <fragment content="Details">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.054753170066694758" green="0.085211315222561479" blue="0.46599486379912403" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                        <font key="NSFont" size="12" name="Arial-BoldMT"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
-                                                        </buttonConfiguration>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Details"/>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigate_next" translatesAutoresizingMaskIntoConstraints="NO" id="szV-DA-rBB">
                                                         <rect key="frame" x="66" y="0.0" width="24" height="16"/>
@@ -141,6 +133,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="backButton" destination="szV-DA-rBB" id="Wr2-sf-1ch"/>
                 <outlet property="coursesLabel" destination="XBJ-Uy-Wfp" id="O9Z-YI-YmE"/>
                 <outlet property="detailsButton" destination="HJp-aU-Wcx" id="Aa5-qL-fCA"/>
                 <outlet property="nameLabel" destination="wh3-Kn-rFH" id="KT7-yF-CpO"/>

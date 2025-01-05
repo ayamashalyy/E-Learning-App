@@ -12,7 +12,7 @@ private let reuseIdentifier = "HeaderCustomCell"
 class SecondHomeCollectionViewController: UICollectionViewController {
     
     init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        super.init(collectionViewLayout: RTLCollectionFlow())
     }
     
     required init?(coder: NSCoder) {

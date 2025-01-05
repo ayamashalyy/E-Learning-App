@@ -98,10 +98,16 @@ class MyLearningTableViewCell: UITableViewCell {
             let smallerImage = UIImage(named: "uil_share", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
             let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
             myLearningBtn.setImage(tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
-            myLearningBtn.semanticContentAttribute = .forceRightToLeft
-            let spacing: CGFloat = 10
-            myLearningBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
-            myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
+            
+            if UIView.userInterfaceLayoutDirection(for: myLearningBtn.semanticContentAttribute) == .rightToLeft {
+                myLearningBtn.semanticContentAttribute = .forceLeftToRight
+                myLearningBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+                myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+            } else {
+                myLearningBtn.semanticContentAttribute = .forceRightToLeft
+                myLearningBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+                myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+            }
             myLearningBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
             myLearningBtn.layoutIfNeeded()
         }

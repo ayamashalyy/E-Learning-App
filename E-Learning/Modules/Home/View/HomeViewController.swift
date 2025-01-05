@@ -25,7 +25,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     
     
     init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+        super.init(collectionViewLayout: RTLCollectionFlow())
     }
     
     required init?(coder: NSCoder) {

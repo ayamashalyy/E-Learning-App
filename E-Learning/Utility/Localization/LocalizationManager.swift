@@ -131,3 +131,9 @@ extension String {
         return LocalizationManager.shared.localizedString(for: self, value: "")
     }
 }
+
+class RTLCollectionFlow: UICollectionViewFlowLayout {
+      override var flipsHorizontallyInOppositeLayoutDirection: Bool {
+          return LocalizationManager.shared.getLanguageDirection() == .rightToLeft
+      }
+  }

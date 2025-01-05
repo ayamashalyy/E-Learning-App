@@ -86,6 +86,8 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     
     @objc func goToYourOrgaizationButtonTapped() {
         let nextViewController = LoginViewController()
-        navigationController?.pushViewController(nextViewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }

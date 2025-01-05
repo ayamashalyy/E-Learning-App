@@ -209,7 +209,7 @@ class SearchViewController: UIViewController {
     
     func setupFilterView() {
         
-        let layout = UICollectionViewFlowLayout()
+        let layout = RTLCollectionFlow()
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false

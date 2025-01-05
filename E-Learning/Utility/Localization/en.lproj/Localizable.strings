@@ -6,6 +6,7 @@
  
  */
 
+"Details"="Details";
 "Welcome to Vinsys Academy" = "Welcome to Vinsys Academy";
 "Access a wide range of courses tailored to help you succeed in your personal and professional life." = "Access a wide range of courses tailored to help you succeed in your personal and professional life.";
 "Register" = "Register";
@@ -126,6 +127,6 @@
 "Try Again" = "Try Again";
 "Learners" = "Learners";
 "request_count" = "%d Request";
-"assign_course" = "Assign Course";
+"Assign Course" = "Assign Course";
 "Approve" = "Approve";
 "Reject" = "Reject";
