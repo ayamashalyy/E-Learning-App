@@ -28,7 +28,7 @@ class OnboardingViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
-        
+        print("Hiiii")
         welcomeText = UILabel()
         welcomeText.text = "Welcome to Vinsys Academy".localized
         welcomeText.font = UIFont(name: "Roboto-Medium", size: 20)
