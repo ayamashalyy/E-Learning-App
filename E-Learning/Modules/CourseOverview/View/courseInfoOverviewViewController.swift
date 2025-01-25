@@ -131,7 +131,7 @@ class courseInfoOverviewViewController: UIViewController {
         let button2 = UIButton()
         button2.translatesAutoresizingMaskIntoConstraints = false
         let imageView2 = UIImageView()
-        imageView2.image = UIImage(named: "Vector 1")?.imageFlippedForRightToLeftLayoutDirection()
+        imageView2.image = UIImage(named: "note")?.imageFlippedForRightToLeftLayoutDirection()
         imageView2.contentMode = .scaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         let labelView2 = UILabel()
