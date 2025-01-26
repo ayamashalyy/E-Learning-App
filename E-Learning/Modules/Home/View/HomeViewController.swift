@@ -22,7 +22,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     let sectionTitles = ["Courses Categories".localized, "Featured Courses".localized, "Most Popular".localized, "Career Paths".localized, "Latest Courses".localized]
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
     private var useFirstImage: Bool = true
-    
+    var tenantViewModel = TenantViewModel.shared
     
     init() {
         super.init(collectionViewLayout: RTLCollectionFlow())

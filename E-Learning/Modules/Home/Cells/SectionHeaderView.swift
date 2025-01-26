@@ -10,6 +10,7 @@ import UIKit
 
 class SectionHeaderView: UICollectionViewCell {
     
+    var tenantViewModel = TenantViewModel.shared
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -26,9 +27,10 @@ class SectionHeaderView: UICollectionViewCell {
         return stackView
     }()
     
-    private let actionButton: UIButton = {
+    private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitleColor(UIColor(named:"myCustom2"), for: .normal)
+        let color = tenantViewModel.primaryColor
+        button.setTitleColor(color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -70,7 +72,7 @@ class SectionHeaderView: UICollectionViewCell {
         let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
         actionImageView.image = tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection()
         
-        if let customColor = UIColor(named: "myCustom") {
+        if let customColor = tenantViewModel.primaryColor {
             actionButton.tintColor = customColor
             actionImageView.tintColor = customColor
         }

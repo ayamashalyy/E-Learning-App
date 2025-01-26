@@ -16,6 +16,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     var checkReceiveOTPLabel = UILabel()
     var resendButton = UIButton()
     var verifyButton = UIButton()
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +25,14 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         setupViews()
         setupConstraints()
         self.navigationItem.title = "Reset Password".localized
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
-        self.navigationItem.leftBarButtonItem = backButton
         
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         
-        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
     }
     
     func setupViews() {
@@ -76,10 +80,10 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         let attributedString = NSAttributedString(
             string: "Resend code".localized,
             attributes: [
-                .foregroundColor: UIColor(named: "myCustom") ?? .blue,
+                .foregroundColor: tenantViewModel.primaryColor ?? .blue,
                 .font: UIFont(name: "Roboto-Medium", size: 12) ?? .boldSystemFont(ofSize: 12),
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .underlineColor:  UIColor(named: "myCustom") ?? .blue
+                .underlineColor:  tenantViewModel.primaryColor ?? .blue
             ]
         )
         resendButton.setAttributedTitle(attributedString, for: .normal)
@@ -93,7 +97,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         verifyButton.setTitle("Verify".localized, for: .normal)
         verifyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         verifyButton.setTitleColor(.white, for: .normal)
-        verifyButton.backgroundColor = UIColor(named: "myCustom") ?? .black
+        verifyButton.backgroundColor = tenantViewModel.primaryColor
         verifyButton.layer.cornerRadius = 25
         verifyButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(verifyButton)
@@ -163,9 +167,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     
     @objc func verifyButtonTapped() {
         
-        print("Hiiiiiiiiiiiiiiiiiiiiiiiiiiii")
         let nextViewController = NewPasswordViewController()
-        
         let navigationController = UINavigationController(rootViewController: nextViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
@@ -191,8 +193,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         if let index = otpFields.firstIndex(of: textField) {
             if !string.isEmpty {
                 
-                textField.textColor = UIColor(named: "second") ?? .blue
-                textField.layer.borderColor = (UIColor(named: "second") ?? .blue).cgColor
+                textField.textColor = tenantViewModel.secondaryColor
+                textField.layer.borderColor = (tenantViewModel.secondaryColor ?? .blue).cgColor
                 textField.layer.borderWidth = 1
                 if index < otpFields.count - 1 {
                     otpFields[index + 1].becomeFirstResponder()
@@ -201,7 +203,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
                 }
             } else {
                 
-                textField.textColor = UIColor(named: "second") ?? .black
+                textField.textColor = tenantViewModel.secondaryColor ?? .black
                 textField.layer.borderColor = UIColor.lightGray.cgColor
                 textField.layer.borderWidth = 0.4
                 

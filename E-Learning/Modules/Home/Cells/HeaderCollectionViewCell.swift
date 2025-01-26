@@ -13,12 +13,14 @@ class HeaderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var decLabel: UILabel!
     @IBOutlet weak var HelloLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
+    var tenantViewModel = TenantViewModel.shared
     
     @IBAction func btn_1(_ sender: UIButton) {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         HelloLabel.text = "Hello,".localized
+        HelloLabel.textColor = tenantViewModel.secondaryColor
         decLabel.text = "Start Your Learning Journey.".localized
     }
     

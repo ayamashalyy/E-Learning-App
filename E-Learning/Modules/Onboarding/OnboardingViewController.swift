@@ -13,6 +13,7 @@ class OnboardingViewController: UIViewController {
     var welcomeText: UILabel!
     var descriptionText: UITextView!
     var registerButton: UIButton!
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,6 @@ class OnboardingViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
-        print("Hiiii")
         welcomeText = UILabel()
         welcomeText.text = "Welcome to Vinsys Academy".localized
         welcomeText.font = UIFont(name: "Roboto-Medium", size: 20)
@@ -50,7 +50,7 @@ class OnboardingViewController: UIViewController {
         registerButton.setTitle("Register".localized, for: .normal)
         registerButton.titleLabel?.font =  UIFont(name: "Roboto-Bold", size: 16)
         registerButton.setTitleColor(UIColor.white, for: .normal)
-        registerButton.backgroundColor = UIColor(named: "myCustom")
+        registerButton.backgroundColor = tenantViewModel.primaryColor ?? .black
         registerButton.layer.cornerRadius = 25
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(registerButton)

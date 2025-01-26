@@ -14,6 +14,8 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     var organizationNameTextField: MDCTextField!
     var goToYourOrgaizationButton: UIButton!
     var organizationNameController: MDCTextInputControllerOutlined!
+    var tenantViewModel = TenantViewModel.shared
+    var logoViewController: LogoViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,6 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         enterOrganizationNameText = UILabel()
         enterOrganizationNameText.text = "Enter Your Organization Name".localized
         enterOrganizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
-        enterOrganizationNameText.textColor = UIColor(named: "myCustom") ?? .black
         enterOrganizationNameText.textAlignment = .center
         enterOrganizationNameText.numberOfLines = 0
         enterOrganizationNameText.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +54,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         goToYourOrgaizationButton.setTitle("Go To Your Organization".localized, for: .normal)
         goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(.white, for: .normal)
-        goToYourOrgaizationButton.backgroundColor = UIColor(named: "myCustom") ?? .black
+        goToYourOrgaizationButton.backgroundColor = tenantViewModel.primaryColor ?? .black
         goToYourOrgaizationButton.layer.cornerRadius = 25
         goToYourOrgaizationButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(goToYourOrgaizationButton)
@@ -85,9 +86,63 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func goToYourOrgaizationButtonTapped() {
-        let nextViewController = LoginViewController()
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        guard let organizationName = organizationNameTextField.text, !organizationName.isEmpty else {
+            let alert = UIAlertController(title: "Error", message: "Organization name is required", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        tenantViewModel.setOrganizationName(organizationName)
+        
+        tenantViewModel.onError = { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(alert, animated: true)
+            }
+        }
+        
+        tenantViewModel.fetchTenantData()
+        
+        tenantViewModel.onDataLoaded = { [weak self] tenant in
+            DispatchQueue.main.async{
+                if self?.tenantViewModel.validateOrganizationName(organizationName) == true {
+                    if let self = self {
+                        let logoViewController = LogoViewController()
+                        logoViewController.modalPresentationStyle = .fullScreen
+                        self.present(logoViewController, animated: true, completion: nil)
+                        
+                        self.tenantViewModel.onLogoLoaded = { data in
+                            DispatchQueue.main.async {
+                                if let data = data, let image = UIImage(data: data) {
+                                    if let logoImageView = logoViewController.logoImageView {
+                                        logoImageView.image = image
+                                    } else {
+                                        print("logoImageView is nil")
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            let nextViewController = LoginViewController()
+                            let navigationController = UINavigationController(rootViewController: nextViewController)
+                            navigationController.modalPresentationStyle = .fullScreen
+                            
+                            logoViewController.present(navigationController, animated: true) {
+                                self.logoViewController = nil
+                            }
+                        }
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Organization name does not match.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
+

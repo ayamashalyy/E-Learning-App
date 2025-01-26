@@ -14,6 +14,7 @@ class ProfileItemCell: UITableViewCell {
     var outerView: UIView!
     var arrowButton: UIButton!
     var englishButton: UIButton!
+    var tenantViewModel = TenantViewModel.shared
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,19 +27,21 @@ class ProfileItemCell: UITableViewCell {
         itemLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
         iconImageView = UIImageView()
+        iconImageView.tintColor = tenantViewModel.secondaryColor
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.contentMode = .scaleAspectFit
         
         arrowButton = UIButton(type: .custom)
         arrowButton.translatesAutoresizingMaskIntoConstraints = false
         arrowButton.setImage(UIImage(named: "navigate_next")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        arrowButton.tintColor = tenantViewModel.primaryColor
         arrowButton.isHidden = false
         
         englishButton = UIButton(type: .custom)
         englishButton.translatesAutoresizingMaskIntoConstraints = false
         englishButton.setTitle("English".localized, for: .normal)
         englishButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 16)
-        englishButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        englishButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         englishButton.contentHorizontalAlignment = .left
         let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let underlineString = NSAttributedString(string: "English".localized, attributes: underlineAttribute)

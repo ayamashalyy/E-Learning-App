@@ -19,7 +19,7 @@ class MyLearningTableViewCell: UITableViewCell {
     @IBOutlet weak var myLearningProgress: UIProgressView!
     @IBOutlet weak var myLearningImage2: UIImageView!
     @IBOutlet weak var checkImage: UIImageView!
-    
+    var tenantViewModel = TenantViewModel.shared
     
     
     override func awakeFromNib() {
@@ -30,6 +30,9 @@ class MyLearningTableViewCell: UITableViewCell {
         outerView.layer.masksToBounds = true
         myLearningImage2.layer.cornerRadius = 8
         myLearningImage2.layer.masksToBounds = true
+        
+        myLearningCategory.textColor = tenantViewModel.primaryColor
+        myLearningProgress.progressTintColor = tenantViewModel.secondaryColor
         
         innerView.layer.cornerRadius = 4
         innerView.layer.masksToBounds = true
@@ -47,7 +50,7 @@ class MyLearningTableViewCell: UITableViewCell {
         
         myLearningBtn.layer.cornerRadius = myLearningBtn.bounds.height / 2
         myLearningBtn.layer.masksToBounds = true
-        myLearningBtn.backgroundColor = UIColor(named: "myCustom")
+        myLearningBtn.backgroundColor = tenantViewModel.primaryColor
         myLearningBtn.layer.borderColor = nil
         myLearningBtn.tintColor = nil
         myLearningBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 8)

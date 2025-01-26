@@ -13,14 +13,20 @@ class AboutViewController: UIViewController {
     var stackView = UIStackView()
     var introLabel = UILabel()
     var transparencyLabel = UILabel()
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.title = "About VINSYS".localized
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
         setupUI()
         setupConstraints()
     }

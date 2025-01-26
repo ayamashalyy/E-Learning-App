@@ -10,6 +10,7 @@ import UIKit
 class CoursesSectionCell: UICollectionViewCell {
     static let identifier = "CoursesSectionCell"
     private var courses =  ["Data Science", "Design","Bussince", "Law"]
+    var tenantViewModel = TenantViewModel.shared
     
     private let innerCollectionView: UICollectionView = {
         let layout = RTLCollectionFlow()
@@ -57,9 +58,9 @@ extension CoursesSectionCell: UICollectionViewDataSource, UICollectionViewDelega
         let course = courses[indexPath.item]
         let color: UIColor
         if indexPath.item % 2 == 0 {
-            color = UIColor(named: "yellow2") ?? UIColor.yellow
+            color = tenantViewModel.secondaryColor ?? UIColor.yellow
         } else {
-            color = UIColor(named: "myCustom2") ?? UIColor.blue
+            color = tenantViewModel.primaryColor ?? UIColor.blue
         }
         
         cell.configure(with: course, color: color)

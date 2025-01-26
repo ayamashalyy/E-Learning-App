@@ -17,14 +17,20 @@ class AccountCenterViewController: UIViewController {
     var passwordCriteriaLabel = UILabel()
     var scrollView: UIScrollView!
     var contentView: UIView!
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationItem.title = "Account Center".localized
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
         setupScrollView()
         setupUI()
         setupButtons()
@@ -132,6 +138,7 @@ class AccountCenterViewController: UIViewController {
         horizontalStack.isUserInteractionEnabled = true
         
         let iconImageView = UIImageView(image: UIImage(named: icon))
+        iconImageView.tintColor = tenantViewModel.secondaryColor
         iconImageView.contentMode = .scaleAspectFit
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
@@ -144,6 +151,7 @@ class AccountCenterViewController: UIViewController {
         
         let actionButton = UIButton(type: .system)
         actionButton.setImage(UIImage(named: "arrow_drop_down_24px")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        actionButton.tintColor = tenantViewModel.primaryColor
         actionButton.widthAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
         actionButton.heightAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
         
@@ -218,6 +226,7 @@ class AccountCenterViewController: UIViewController {
             currentPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
             
             let eyeButton1 = UIButton(type: .system)
+            eyeButton1.tintColor = tenantViewModel.primaryColor
             eyeButton1.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton1.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             
@@ -242,6 +251,7 @@ class AccountCenterViewController: UIViewController {
             
             
             let eyeButton2 = UIButton(type: .system)
+            eyeButton2.tintColor = tenantViewModel.primaryColor
             eyeButton2.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton2.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             eyeButton2.tag = 2
@@ -318,20 +328,20 @@ class AccountCenterViewController: UIViewController {
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle("Cancel".localized, for: .normal)
         cancelButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        cancelButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        cancelButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         cancelButton.backgroundColor = .clear
         cancelButton.layer.cornerRadius = 8
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.layer.cornerRadius = 32
         cancelButton.layer.borderWidth = 1
-        cancelButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
+        cancelButton.layer.borderColor = tenantViewModel.primaryColor?.cgColor
         cancelButton.addTarget(self, action: #selector(cancelChanges), for: .touchUpInside)
         
         let saveButton = UIButton(type: .system)
         saveButton.setTitle("Save Changes".localized, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         saveButton.setTitleColor(.white, for: .normal)
-        saveButton.backgroundColor = UIColor(named: "myCustom")
+        saveButton.backgroundColor = tenantViewModel.primaryColor
         saveButton.layer.cornerRadius = 32
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.addTarget(self, action: #selector(saveChanges), for: .touchUpInside)

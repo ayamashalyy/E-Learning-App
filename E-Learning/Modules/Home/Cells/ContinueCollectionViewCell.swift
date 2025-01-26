@@ -9,6 +9,7 @@ import UIKit
 
 class ContinueCollectionViewCell: UICollectionViewCell {
     
+    var tenantViewModel = TenantViewModel.shared
     @IBOutlet weak var outerView: UIView!
     @IBAction func arrow(_ sender: UIButton) {
     }
@@ -29,10 +30,11 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         outerView.layer.masksToBounds = true
         outerView.layer.borderColor = UIColor.gray.cgColor
         outerView.layer.borderWidth = 1.0
+        outerView.backgroundColor = tenantViewModel.primaryColor
         continueLabel.text = "Continue where you left off".localized
         
         arrow.setImage(UIImage(named: "arrow")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
-        
+        courseProgress.progressTintColor = tenantViewModel.secondaryColor
         innerView.layer.cornerRadius = 6
         innerView.layer.masksToBounds = true
         innerView.layer.borderColor = UIColor.gray.cgColor

@@ -9,6 +9,7 @@ import UIKit
 
 class MyLearningViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
+    var tenantViewModel = TenantViewModel.shared
     
     @IBOutlet weak var myLearningLabel: UILabel!
     
@@ -44,8 +45,7 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
         
         segmentedControl.backgroundColor = UIColor.white
         segmentedControl.tintColor = UIColor.white
-        
-        
+        segmentedControl.selectedSegmentTintColor = tenantViewModel.primaryColor
         segmentedControl.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightGray], for: .normal)
         segmentedControl.setTitleTextAttributes([

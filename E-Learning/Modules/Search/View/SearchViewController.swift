@@ -42,6 +42,8 @@ class SearchViewController: UIViewController {
     var collectionView: UICollectionView!
     var applyButton: UIButton!
     var selectedFiltersCount: Int!
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -238,7 +240,7 @@ class SearchViewController: UIViewController {
         applyButton.setTitle("Apply".localized, for: .normal)
         applyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 15)
         applyButton.setTitleColor(UIColor.white, for: .normal)
-        applyButton.backgroundColor = UIColor(named: "myCustom")
+        applyButton.backgroundColor = tenantViewModel.primaryColor
         applyButton.layer.cornerRadius = 20
         applyButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(applyButton)
@@ -374,7 +376,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         if currentState == .recentSearches {
             titleLabel.text = "Recent Searches".localized
-            titleLabel.textColor = UIColor(named: "myCustom")
+            titleLabel.textColor = tenantViewModel.primaryColor
         } else if currentState == .totalResultsBeforeFilter {
             titleLabel.text = "\(20) \(NSLocalizedString("Total Results", comment: ""))"
         }
@@ -385,6 +387,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if currentState == .totalResultsBeforeFilter {
             let filterButton = UIButton(type: .system)
             filterButton.setImage(UIImage(named: "ion_filter")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+            filterButton.tintColor = tenantViewModel.primaryColor
             filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
             filterButton.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(filterButton)
@@ -417,6 +420,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             
             let filterButton = UIButton(type: .system)
             filterButton.setImage(UIImage(named: "icon_filter-remove")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+            filterButton.tintColor = tenantViewModel.primaryColor
             filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
             filterButton.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(filterButton)
@@ -465,9 +469,13 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(applyButtonTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(applyButtonTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
         
     }
     
@@ -498,7 +506,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = UIColor(named: "myCustom")
+            header.textLabel?.textColor = tenantViewModel.primaryColor
             header.textLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
         }
     }

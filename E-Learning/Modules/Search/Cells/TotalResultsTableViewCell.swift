@@ -16,6 +16,7 @@ class TotalResultsTableViewCell: UITableViewCell {
     @IBOutlet weak var totalResultSearchNameCourse: UILabel!
     @IBOutlet weak var totalResultSearchConstractorName: UILabel!
     @IBOutlet weak var totalResultSearchImage: UIImageView!
+    var tenantViewModel = TenantViewModel.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +26,7 @@ class TotalResultsTableViewCell: UITableViewCell {
         
         totalResultSearchImageView.layer.cornerRadius = 8
         totalResultSearchImageView.layer.masksToBounds = true
-        
+        totalResultSearchCategory.textColor = tenantViewModel.primaryColor
         
         outerView.layer.shadowColor = UIColor.gray.cgColor
         outerView.layer.shadowOpacity = 0.3

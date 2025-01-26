@@ -26,7 +26,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.FiltrationCategory.text = item
         if let selectedItems = selectedFilters[sections[indexPath.section].title], selectedItems.contains(item) {
             cell.FiltrationCategory.textColor = .white
-            cell.outerView.backgroundColor = UIColor(named: "myCustom")
+            cell.outerView.backgroundColor = tenantViewModel.primaryColor
         } else {
             cell.outerView.backgroundColor = UIColor(named: "myLearning")
             cell.FiltrationCategory.textColor = .black

@@ -16,15 +16,22 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
     var emailTextField: MDCTextField!
     var emailController: MDCTextInputControllerOutlined!
     var getVerificationCodeButton: UIButton!
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
     }
     
     @objc func cancelTapped() {
@@ -44,7 +51,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         ForgetPasswordText.text = "Forget Password!".localized
         ForgetPasswordText.font = UIFont(name: "Roboto-Bold", size: 24)
         ForgetPasswordText.textAlignment = .center
-        ForgetPasswordText.textColor = UIColor(named: "myCustom")
+        ForgetPasswordText.textColor = tenantViewModel.primaryColor
         ForgetPasswordText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(ForgetPasswordText)
         
@@ -77,7 +84,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         getVerificationCodeButton.setTitle("Get verification code".localized, for: .normal)
         getVerificationCodeButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         getVerificationCodeButton.setTitleColor(.white, for: .normal)
-        getVerificationCodeButton.backgroundColor = UIColor(named: "myCustom") ?? .black
+        getVerificationCodeButton.backgroundColor = tenantViewModel.primaryColor
         getVerificationCodeButton.layer.cornerRadius = 25
         getVerificationCodeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(getVerificationCodeButton)

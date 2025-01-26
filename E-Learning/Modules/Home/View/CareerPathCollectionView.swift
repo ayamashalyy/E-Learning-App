@@ -10,6 +10,7 @@ import UIKit
 class CareerPathCollectionView: UICollectionViewCell {
     static let identifier = "CareerPathsCell"
     private var courses: [String] = []
+    var tenantViewModel = TenantViewModel.shared
     
     private let innerCareerPathCollectionView: UICollectionView = {
         let layout = RTLCollectionFlow()
@@ -57,9 +58,9 @@ extension CareerPathCollectionView: UICollectionViewDataSource, UICollectionView
         cell.careerPathTitle.text = course
         let color: UIColor
         if indexPath.item % 2 == 0 {
-            color = UIColor(named: "myCustom") ?? UIColor.yellow
+            color = tenantViewModel.primaryColor ?? UIColor.yellow
         } else {
-            color = UIColor(named: "second") ?? UIColor.blue
+            color = tenantViewModel.secondaryColor ?? UIColor.blue
         }
         cell.configure(color: color)
         cell.selectedBackgroundView = .none

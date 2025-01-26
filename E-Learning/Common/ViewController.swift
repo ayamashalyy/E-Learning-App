@@ -9,13 +9,15 @@ import UIKit
 
 class ViewController: UITabBarController, UITabBarControllerDelegate {
     
+    var tenantViewModel = TenantViewModel.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
         
         self.tabBar.barTintColor = .white
         self.tabBar.backgroundColor = .white
-        self.tabBar.tintColor = UIColor(named: "myCustom")
+        self.tabBar.tintColor = tenantViewModel.primaryColor
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -55,7 +57,7 @@ class ViewController: UITabBarController, UITabBarControllerDelegate {
             
             let selectedAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont(name: "Roboto-Bold", size: 12) ?? .boldSystemFont(ofSize: 12),
-                .foregroundColor: UIColor(named: "myCustom") ?? .black
+                .foregroundColor: tenantViewModel.primaryColor ?? .black
             ]
             
             item.setTitleTextAttributes(attributes, for: .normal)

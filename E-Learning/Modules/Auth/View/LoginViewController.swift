@@ -26,13 +26,13 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     
     
     var isPasswordVisible = true
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        
     }
     
     
@@ -41,7 +41,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         organizationNameText = UILabel()
         organizationNameText.text = "Vinsys Academy".localized
         organizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
-        organizationNameText.textColor = UIColor(named: "myCustom")
+        organizationNameText.textColor = tenantViewModel.primaryColor
         organizationNameText.textAlignment = .center
         organizationNameText.numberOfLines = 0
         organizationNameText.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         welcomeBackText = UILabel()
         welcomeBackText.text = "Welcome back!".localized
         welcomeBackText.font = UIFont(name: "Roboto-Medium", size: 16)
-        welcomeBackText.textColor = UIColor(named: "second")
+        welcomeBackText.textColor = tenantViewModel.secondaryColor
         welcomeBackText.textAlignment = .center
         welcomeBackText.numberOfLines = 0
         welcomeBackText.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +91,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         eyeButton = UIButton(type: .custom)
         eyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
+        eyeButton.tintColor = tenantViewModel.primaryColor ?? .red
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         passwordTextField.rightView = eyeButton
         passwordTextField.rightViewMode = .always
@@ -98,7 +99,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         rememberMeCheckbox = UIButton(type: .custom)
         rememberMeCheckbox.setImage(UIImage(systemName: "square"), for: .normal)
         rememberMeCheckbox.setImage(UIImage(systemName: "checkmark.square"), for: .selected)
-        rememberMeCheckbox.tintColor = UIColor(named: "second")
+        rememberMeCheckbox.tintColor = tenantViewModel.secondaryColor
         rememberMeCheckbox.translatesAutoresizingMaskIntoConstraints = false
         rememberMeCheckbox.addTarget(self, action: #selector(toggleRememberMe), for: .touchUpInside)
         view.addSubview(rememberMeCheckbox)
@@ -112,7 +113,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         forgetPasswordButton = UIButton(type: .system)
         forgetPasswordButton.setTitle("Forget Password?".localized, for: .normal)
-        forgetPasswordButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        forgetPasswordButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         forgetPasswordButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 12)
         forgetPasswordButton.translatesAutoresizingMaskIntoConstraints = false
         forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordTapped), for: .touchUpInside)
@@ -123,7 +124,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         goToYourOrgaizationButton.setTitle("Login".localized, for: .normal)
         goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(UIColor.white, for: .normal)
-        goToYourOrgaizationButton.backgroundColor = UIColor(named: "myCustom")
+        goToYourOrgaizationButton.backgroundColor = tenantViewModel.primaryColor
         goToYourOrgaizationButton.layer.cornerRadius = 25
         goToYourOrgaizationButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(goToYourOrgaizationButton)
@@ -191,14 +192,14 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     @objc func goToYourOrgaizationButtonTapped() {
-//        let nextViewController = ViewController()
-//        navigationController?.pushViewController(nextViewController, animated: true)
+        //        let nextViewController = ViewController()
+        //        navigationController?.pushViewController(nextViewController, animated: true)
         
-        let nextViewController = CourseManagerViewController()
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen 
-        present(navigationController, animated: true, completion: nil)
-
+        let nextViewController = ViewController()
+//        let navigationController = UINavigationController(rootViewController: nextViewController)
+        nextViewController.modalPresentationStyle = .fullScreen
+        present(nextViewController, animated: true, completion: nil)
+        
     }
     
     @objc func togglePasswordVisibility() {
@@ -207,8 +208,10 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         passwordTextField.isSecureTextEntry = !isPasswordVisible
         print("Password visibility: \(isPasswordVisible)")
         let iconName = isPasswordVisible ? "view" : "hide"
-        let iconImage = UIImage(named: iconName)?.withTintColor(UIColor(named: "myCustom") ?? .red, renderingMode: .alwaysOriginal)
-        eyeButton.setImage(iconImage, for: .normal)
+        if let iconImage = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate) {
+            eyeButton.setImage(iconImage, for: .normal)
+            
+        }
     }
     
     
