@@ -23,6 +23,7 @@ class NumberRequestCell: UITableViewCell {
     @IBOutlet weak var approveBtn: UIButton!
     @IBOutlet weak var rejectBtn: UIButton!
     weak var delegate: NumberRequestCellDelegate?
+    var tenantViewModel = TenantViewModel.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +34,7 @@ class NumberRequestCell: UITableViewCell {
         
         innerView.layer.cornerRadius = 4
         innerView.layer.masksToBounds = true
-        
+        myLearningCategory.textColor = tenantViewModel.primaryColor
         outerView.layer.shadowColor = UIColor.gray.cgColor
         outerView.layer.shadowOpacity = 0.3
         outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
@@ -48,13 +49,13 @@ class NumberRequestCell: UITableViewCell {
         approveBtn.setTitle("Approve".localized, for: .normal)
         approveBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         approveBtn.setTitleColor(UIColor.white, for: .normal)
-        approveBtn.backgroundColor = UIColor(named: "myCustom")
+        approveBtn.backgroundColor = tenantViewModel.primaryColor
         approveBtn.layer.cornerRadius = 20
         
         rejectBtn.setTitle("Reject".localized, for: .normal)
         rejectBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         rejectBtn.setTitleColor(UIColor.white, for: .normal)
-        rejectBtn.backgroundColor = UIColor(named: "second")
+        rejectBtn.backgroundColor = tenantViewModel.secondaryColor
         rejectBtn.layer.cornerRadius = 20
     }
     

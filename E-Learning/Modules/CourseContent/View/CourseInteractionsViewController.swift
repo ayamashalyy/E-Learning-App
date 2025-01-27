@@ -13,6 +13,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
     var headerView = UIView()
     var comments: [(text: String, date: Date)] = []
     var tableView = UITableView()
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +35,14 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         let shareImageView = UIImageView(image: UIImage(named: "share_icon")?.imageFlippedForRightToLeftLayoutDirection())
+        shareImageView.tintColor = tenantViewModel.secondaryColor
         shareImageView.contentMode = .scaleAspectFit
         shareImageView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         
         let shareButton = UIButton(type: .system)
         shareButton.setTitle("Share this course".localized, for: .normal)
         shareButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
-        shareButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        shareButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         
         let shareStackView = UIStackView(arrangedSubviews: [shareImageView, shareButton])
         shareStackView.axis = .horizontal
@@ -48,12 +50,13 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         stackView.addArrangedSubview(shareStackView)
         
         let discussionImageView = UIImageView(image: UIImage(named: "forum_icon")?.imageFlippedForRightToLeftLayoutDirection())
+        discussionImageView.tintColor = tenantViewModel.secondaryColor
         discussionImageView.contentMode = .scaleAspectFit
         discussionImageView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         
         let discussionButton = UIButton(type: .system)
         discussionButton.setTitle("Discussion Forum".localized, for: .normal)
-        discussionButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        discussionButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         discussionButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
         
         let discussionStackView = UIStackView(arrangedSubviews: [discussionImageView, discussionButton])
@@ -83,6 +86,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         stackViewComments.addArrangedSubview(commentsLabel)
         
         let pencilImageView = UIImageView(image: UIImage(named: "pencil_icon"))
+        pencilImageView.tintColor = tenantViewModel.primaryColor
         pencilImageView.contentMode = .scaleAspectFit
         pencilImageView.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         
@@ -92,7 +96,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         
         let addCommentButton = UIButton(type: .system)
         addCommentButton.setTitle("Add Comment".localized, for: .normal)
-        addCommentButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        addCommentButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         addCommentButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 12)
         addCommentButton.translatesAutoresizingMaskIntoConstraints = false
         addCommentButton.addTarget(self, action: #selector(addComment), for: .touchUpInside)
@@ -103,7 +107,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         addCommentStackView.layer.cornerRadius = 10
         addCommentStackView.layer.borderWidth = 1.0
         addCommentStackView.alignment = .center
-        addCommentStackView.layer.borderColor = UIColor(named: "myCustom")?.cgColor
+        addCommentStackView.layer.borderColor = tenantViewModel.primaryColor?.cgColor
         addCommentStackView.spacing = 2
         addCommentStackView.widthAnchor.constraint(equalToConstant: 130).isActive = true
         stackViewComments.addArrangedSubview(addCommentStackView)

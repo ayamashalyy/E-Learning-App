@@ -14,14 +14,21 @@ class CourseOverviewViewController: UIViewController {
     var selectedButton: UIButton?
     var scrollView: UIScrollView!
     var contentView: UIView!
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationItem.title = "Introduction to Scrum Master".localized
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
         setupUI()
         setupConstraints()
         loadSubView(1)
@@ -61,7 +68,7 @@ class CourseOverviewViewController: UIViewController {
         let button1 = UIButton(type: .custom)
         button1.setTitle("Course Info".localized, for: .normal)
         button1.setTitleColor(UIColor.gray, for: .normal)
-        button1.setTitleColor(UIColor(named: "myCustom"), for: .selected)
+        button1.setTitleColor(tenantViewModel.primaryColor, for: .selected)
         button1.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
         button1.translatesAutoresizingMaskIntoConstraints = false
         button1.tag = 1
@@ -89,7 +96,7 @@ class CourseOverviewViewController: UIViewController {
         let button2 = UIButton(type: .custom)
         button2.setTitle("Content".localized, for: .normal)
         button2.setTitleColor(UIColor.gray, for: .normal)
-        button2.setTitleColor(UIColor(named: "myCustom"), for: .selected)
+        button2.setTitleColor(tenantViewModel.primaryColor, for: .selected)
         button2.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 18)
         button2.translatesAutoresizingMaskIntoConstraints = false
         button2.tag = 2
@@ -131,11 +138,11 @@ class CourseOverviewViewController: UIViewController {
         }
         
         sender.isSelected = true
-        sender.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        sender.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         
         if let containerView = sender.superview {
             if let underline = containerView.subviews.first(where: { $0 != sender }) {
-                underline.backgroundColor = UIColor(named: "myCustom")
+                underline.backgroundColor = tenantViewModel.primaryColor
             }
         }
         

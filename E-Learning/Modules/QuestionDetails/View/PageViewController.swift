@@ -29,7 +29,10 @@ class PageViewController: UIPageViewController {
     var previousButton: UIButton!
     var imageView = UIImageView()
     var titleLabel: UILabel!
-    private var score: Int = 80
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
+    
+    private var score: Int = 100
     
     init() {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -44,9 +47,13 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.title = "Lesson1 Quiz".localized
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
         
         var vcs = [QuestionVC]()
         
@@ -70,19 +77,20 @@ class PageViewController: UIPageViewController {
         
         titleLabel = UILabel()
         titleLabel.font = UIFont(name: "Roboto-Regular", size: 14)
-        titleLabel.textColor = UIColor(named: "second")
+        titleLabel.textColor = tenantViewModel.secondaryColor
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
         
         // Previous Button
         previousButton = UIButton(type: .system)
         previousButton.setTitle("Previous".localized, for: .normal)
-        previousButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        previousButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         previousButton.layer.borderWidth = 1.0
-        previousButton.layer.borderColor = UIColor(named: "myCustom")?.cgColor
+        previousButton.layer.borderColor = tenantViewModel.primaryColor?.cgColor
         previousButton.layer.cornerRadius = 24
         previousButton.translatesAutoresizingMaskIntoConstraints = false
         previousButton.setImage(UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        previousButton.tintColor = tenantViewModel.primaryColor
         previousButton.imageView?.contentMode = .scaleAspectFit
         previousButton.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
         previousButton.semanticContentAttribute = .forceLeftToRight
@@ -93,7 +101,7 @@ class PageViewController: UIPageViewController {
         nextButton = UIButton(type: .system)
         nextButton.setTitle("Next".localized, for: .normal)
         nextButton.setTitleColor(.white, for: .normal)
-        nextButton.backgroundColor = UIColor(named: "myCustom")
+        nextButton.backgroundColor = tenantViewModel.primaryColor
         nextButton.layer.cornerRadius = 24
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.setImage(UIImage(named: "navigate_next 1"), for: .normal)

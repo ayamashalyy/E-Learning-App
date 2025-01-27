@@ -9,6 +9,8 @@ import UIKit
 
 class SingleChoiceCell: UICollectionViewCell {
     
+    var tenantViewModel = TenantViewModel.shared
+    
     @IBOutlet weak var outerView: UIView!
     
     @IBOutlet weak var radioButton: UIImageView!
@@ -26,7 +28,8 @@ class SingleChoiceCell: UICollectionViewCell {
     func configure(optionText: String, isSelected: Bool) {
         optionLabel.text = optionText
         radioButton.image = UIImage(named: isSelected ? "radio_selected" : "radio_unselected")
-        outerView.layer.borderColor = isSelected ? UIColor(named: "myCustom")?.cgColor: UIColor.lightGray.cgColor
+        radioButton.tintColor = tenantViewModel.primaryColor
+        outerView.layer.borderColor = isSelected ? tenantViewModel.primaryColor?.cgColor: UIColor.lightGray.cgColor
         optionLabel.textColor = isSelected ? UIColor.black : UIColor(named: "policy")
     }
     

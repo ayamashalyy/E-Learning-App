@@ -8,6 +8,7 @@
 import UIKit
 
 class CommentCell: UITableViewCell {
+    var tenantViewModel = TenantViewModel.shared
     
     let containerView: UIView = {
         let view = UIView()
@@ -36,7 +37,6 @@ class CommentCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 25
         imageView.layer.borderWidth = 2
-        imageView.layer.borderColor = UIColor.orange.cgColor
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -75,6 +75,7 @@ class CommentCell: UITableViewCell {
         containerView.addSubview(nameLabel)
         containerView.addSubview(dateLabel)
         containerView.addSubview(commentLabel)
+        profileImageView.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         
         NSLayoutConstraint.activate([
             

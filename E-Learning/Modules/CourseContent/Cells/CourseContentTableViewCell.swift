@@ -17,6 +17,7 @@ class CourseContentTableViewCell: UITableViewCell {
     var outerView = UIView()
     var innerTypeLabel = UIView()
     var innerDurationLabel = UIView()
+    var tenantViewModel = TenantViewModel.shared
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -129,7 +130,7 @@ class CourseContentTableViewCell: UITableViewCell {
     
     func configure(with lesson: Lesson) {
         numberLabel.text = lesson.number == 0 ? "?" : String(format: "%02d", lesson.number)
-        numberLabel.backgroundColor = lesson.isCompleted ? UIColor(named: "myCustom") : .white
+        numberLabel.backgroundColor = lesson.isCompleted ? tenantViewModel.primaryColor : .white
         numberLabel.textColor = lesson.isCompleted ? .white : UIColor(named: "onboradColor")
         
         titleLabel.text = lesson.title

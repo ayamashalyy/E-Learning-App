@@ -12,16 +12,23 @@ class AssignCourseViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var learnerImage: UIImageView!
     @IBOutlet weak var learnerName: UILabel!
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
+        
         learnerImage.layer.cornerRadius = learnerImage.frame.height / 2
         learnerImage.layer.borderWidth = 0.8
-        learnerImage.layer.borderColor = UIColor(named: "second")?.cgColor
+        learnerImage.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         learnerImage.clipsToBounds = true
         tableView.delegate = self
         tableView.dataSource = self

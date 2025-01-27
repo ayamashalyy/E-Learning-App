@@ -18,6 +18,8 @@ class LearnersCell: UITableViewCell {
     @IBOutlet weak var detailsButton: UIButton!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var backButton: UIImageView!
+    var tenantViewModel = TenantViewModel.shared
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         outerView.layer.cornerRadius = 10
@@ -28,10 +30,12 @@ class LearnersCell: UITableViewCell {
         outerView.layer.shadowRadius = 6
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.borderWidth = 0.5
+        progressView.progressTintColor = tenantViewModel.secondaryColor
         detailsButton.setTitle("Details".localized, for: .normal)
         detailsButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 12)
-        detailsButton.setTitleColor(UIColor(named: "myCustom"), for: .normal)
+        detailsButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
         backButton.image = UIImage(named: "navigate_next")?.imageFlippedForRightToLeftLayoutDirection()
+        backButton.tintColor = tenantViewModel.primaryColor
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
@@ -48,14 +52,14 @@ class LearnersCell: UITableViewCell {
         profileImageView.image = learner.profileImage
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.layer.borderWidth = 0.8
-        profileImageView.layer.borderColor = UIColor(named: "second")?.cgColor
+        profileImageView.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         profileImageView.clipsToBounds = true
         nameLabel.text = learner.name
         let coursesText = "\(learner.coursesCompleted) "
         let completeText = "Course Complete"
         
         let attributedString = NSMutableAttributedString(string: coursesText, attributes: [
-            .foregroundColor: UIColor(named: "myCustom") ?? UIColor.black,
+            .foregroundColor: tenantViewModel.primaryColor ?? UIColor.black,
             .font: UIFont.boldSystemFont(ofSize: 14)
         ])
         

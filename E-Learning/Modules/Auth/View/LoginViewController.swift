@@ -192,13 +192,14 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     @objc func goToYourOrgaizationButtonTapped() {
-        //        let nextViewController = ViewController()
-        //        navigationController?.pushViewController(nextViewController, animated: true)
-        
         let nextViewController = ViewController()
-//        let navigationController = UINavigationController(rootViewController: nextViewController)
         nextViewController.modalPresentationStyle = .fullScreen
         present(nextViewController, animated: true, completion: nil)
+        
+//        let nextViewController = CourseManagerViewController()
+//        let navigationController = UINavigationController(rootViewController: nextViewController)
+//        navigationController.modalPresentationStyle = .fullScreen
+//        present(navigationController, animated: true, completion: nil)
         
     }
     

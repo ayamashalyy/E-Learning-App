@@ -16,6 +16,7 @@ class AssignCourseCell: UITableViewCell {
     @IBOutlet weak var innerView: UIView!
     @IBOutlet weak var myLearningImage2: UIImageView!
     @IBOutlet weak var myLearningBtn: UIButton!
+    var tenantViewModel = TenantViewModel.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +27,7 @@ class AssignCourseCell: UITableViewCell {
         
         innerView.layer.cornerRadius = 4
         innerView.layer.masksToBounds = true
-        
+        myLearningCategory.textColor = tenantViewModel.primaryColor
         outerView.layer.shadowColor = UIColor.gray.cgColor
         outerView.layer.shadowOpacity = 0.3
         outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
@@ -40,7 +41,7 @@ class AssignCourseCell: UITableViewCell {
         
         myLearningBtn.layer.cornerRadius = myLearningBtn.bounds.height / 2
         myLearningBtn.layer.masksToBounds = true
-        myLearningBtn.backgroundColor = UIColor(named: "myCustom")
+        myLearningBtn.backgroundColor = tenantViewModel.primaryColor
         myLearningBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 8)
         myLearningBtn.setTitleColor(UIColor.white, for: .normal)
         myLearningBtn.setTitle("Assign Course".localized, for: .normal)

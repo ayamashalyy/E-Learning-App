@@ -9,6 +9,8 @@ import UIKit
 
 class LearnersDetailsViewController: UIViewController {
     
+    var tenantViewModel = TenantViewModel.shared
+    var backButtonImage: UIImage!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var learnerImage: UIImageView!
     @IBOutlet weak var learnerName: UILabel!
@@ -35,12 +37,17 @@ class LearnersDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(cancelTapped))
-        self.navigationItem.leftBarButtonItem = backButton
+        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
+        
         learnerImage.layer.cornerRadius = learnerImage.frame.height / 2
         learnerImage.layer.borderWidth = 0.8
-        learnerImage.layer.borderColor = UIColor(named: "second")?.cgColor
+        learnerImage.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         learnerImage.clipsToBounds = true
         setupButtons()
         tableView.delegate = self
@@ -52,13 +59,13 @@ class LearnersDetailsViewController: UIViewController {
         assignCourse.setTitle("Assign Course".localized, for: .normal)
         assignCourse.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         assignCourse.setTitleColor(UIColor.white, for: .normal)
-        assignCourse.backgroundColor = UIColor(named: "myCustom")
+        assignCourse.backgroundColor = tenantViewModel.primaryColor
         assignCourse.layer.cornerRadius = 20
         
         request.setTitle(String(format: NSLocalizedString("request_count", comment: ""), requestCount), for: .normal)
         request.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         request.setTitleColor(UIColor.white, for: .normal)
-        request.backgroundColor = UIColor(named: "myCustom")
+        request.backgroundColor = tenantViewModel.primaryColor
         request.layer.cornerRadius = 20
         
     }

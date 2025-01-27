@@ -18,6 +18,7 @@ class courseInfoOverviewViewController: UIViewController {
     var instractorView = UIView()
     var sectionTitle: String?
     var applyButton: UIButton!
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,18 +89,19 @@ class courseInfoOverviewViewController: UIViewController {
         button1.translatesAutoresizingMaskIntoConstraints = false
         let imageView1 = UIImageView()
         imageView1.image = UIImage(named: "mingcute_time-line")?.imageFlippedForRightToLeftLayoutDirection()
+        imageView1.tintColor = tenantViewModel.secondaryColor
         imageView1.contentMode = .scaleAspectFit
         imageView1.translatesAutoresizingMaskIntoConstraints = false
         let label1 = UILabel()
         label1.text = "42 h   51 min"
         label1.numberOfLines = 0
-        label1.textColor = UIColor(named: "myCustom")
+        label1.textColor = tenantViewModel.primaryColor
         label1.font = UIFont(name: "Roboto-Regular", size: 14)
         label1.translatesAutoresizingMaskIntoConstraints = false
         let label2 = UILabel()
         label2.text = "23 Lessons"
         label2.numberOfLines = 0
-        label2.textColor = UIColor(named: "myCustom")
+        label2.textColor = tenantViewModel.primaryColor
         label2.font = UIFont(name: "Roboto-Regular", size: 14)
         label2.translatesAutoresizingMaskIntoConstraints = false
         button1.addSubview(imageView1)
@@ -132,11 +134,12 @@ class courseInfoOverviewViewController: UIViewController {
         button2.translatesAutoresizingMaskIntoConstraints = false
         let imageView2 = UIImageView()
         imageView2.image = UIImage(named: "note")?.imageFlippedForRightToLeftLayoutDirection()
+        imageView2.tintColor = tenantViewModel.secondaryColor
         imageView2.contentMode = .scaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
         let labelView2 = UILabel()
         labelView2.text = "Quizzes".localized
-        labelView2.textColor = UIColor(named: "myCustom")
+        labelView2.textColor = tenantViewModel.primaryColor
         labelView2.font = UIFont(name: "Roboto-Regular", size: 14)
         labelView2.translatesAutoresizingMaskIntoConstraints = false
         button2.addSubview(imageView2)
@@ -164,12 +167,13 @@ class courseInfoOverviewViewController: UIViewController {
         button3.translatesAutoresizingMaskIntoConstraints = false
         let imageView3 = UIImageView()
         imageView3.image = UIImage(named: "Group")?.imageFlippedForRightToLeftLayoutDirection()
+        imageView3.tintColor = tenantViewModel.secondaryColor
         imageView3.contentMode = .scaleAspectFit
         imageView3.translatesAutoresizingMaskIntoConstraints = false
         let labelView3 = UILabel()
         labelView3.text = "Certificate of completion".localized
         labelView3.numberOfLines = 0
-        labelView3.textColor = UIColor(named: "myCustom")
+        labelView3.textColor = tenantViewModel.primaryColor
         labelView3.font = UIFont(name: "Roboto-Regular", size: 14)
         labelView3.translatesAutoresizingMaskIntoConstraints = false
         button3.addSubview(imageView3)
@@ -197,7 +201,7 @@ class courseInfoOverviewViewController: UIViewController {
         applyButton.setTitle("Apply ".localized, for: .normal)
         applyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 15)
         applyButton.setTitleColor(UIColor.white, for: .normal)
-        applyButton.backgroundColor = UIColor(named: "myCustom")
+        applyButton.backgroundColor = tenantViewModel.primaryColor
         applyButton.layer.cornerRadius = 20
         applyButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(applyButton)
@@ -221,7 +225,7 @@ class courseInfoOverviewViewController: UIViewController {
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.layer.cornerRadius = 30
         profileImageView.layer.borderWidth = 2
-        profileImageView.layer.borderColor = UIColor.orange.cgColor
+        profileImageView.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         profileImageView.clipsToBounds = true
         instractorView.addSubview(profileImageView)
         

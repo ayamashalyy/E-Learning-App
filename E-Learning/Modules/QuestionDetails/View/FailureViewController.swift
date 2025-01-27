@@ -16,6 +16,7 @@ class FailureViewController: UIViewController {
     var congratulationLabel = UILabel()
     var retryMassage = UILabel()
     var tryAgainButton = UIButton()
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +87,7 @@ class FailureViewController: UIViewController {
         tryAgainButton.setTitle("Try Again".localized, for: .normal)
         tryAgainButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         tryAgainButton.setTitleColor(UIColor.white, for: .normal)
-        tryAgainButton.backgroundColor = UIColor(named: "myCustom")
+        tryAgainButton.backgroundColor = tenantViewModel.primaryColor
         tryAgainButton.layer.cornerRadius = 25
         tryAgainButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tryAgainButton)

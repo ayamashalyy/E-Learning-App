@@ -17,6 +17,7 @@ class DetailsDataOfLearnersCell: UITableViewCell {
     @IBOutlet weak var myLearningProgressLabel: UILabel!
     @IBOutlet weak var myLearningProgress: UIProgressView!
     @IBOutlet weak var myLearningImage2: UIImageView!
+    var tenantViewModel = TenantViewModel.shared
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,10 +25,10 @@ class DetailsDataOfLearnersCell: UITableViewCell {
         outerView.layer.masksToBounds = true
         myLearningImage2.layer.cornerRadius = 8
         myLearningImage2.layer.masksToBounds = true
-        
+        myLearningProgress.progressTintColor = tenantViewModel.secondaryColor
         innerView.layer.cornerRadius = 4
         innerView.layer.masksToBounds = true
-        
+        myLearningCategory.textColor = tenantViewModel.primaryColor
         outerView.layer.shadowColor = UIColor.gray.cgColor
         outerView.layer.shadowOpacity = 0.3
         outerView.layer.shadowOffset = CGSize(width: 0, height: 5)

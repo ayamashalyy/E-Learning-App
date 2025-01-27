@@ -9,10 +9,12 @@ import UIKit
 
 class MatchingCell: UICollectionViewCell {
     
+    var tenantViewModel = TenantViewModel.shared
+    
     @IBOutlet weak var outerView: UIView!
-        
+    
     @IBOutlet weak var optionLabel: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -20,10 +22,10 @@ class MatchingCell: UICollectionViewCell {
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.cornerRadius = 5
     }
-
+    
     func configure(optionText: String, isSelected: Bool) {
         optionLabel.text = optionText
-        outerView.layer.borderColor = isSelected ? UIColor(named: "myCustom")?.cgColor: UIColor.lightGray.cgColor
+        outerView.layer.borderColor = isSelected ? tenantViewModel.primaryColor?.cgColor: UIColor.lightGray.cgColor
         optionLabel.textColor = isSelected ? UIColor.black : UIColor(named: "policy")
     }
 }

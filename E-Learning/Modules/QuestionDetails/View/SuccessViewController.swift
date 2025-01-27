@@ -17,6 +17,7 @@ class SuccessViewController: UIViewController {
     var passedMassage = UILabel()
     var continueButton = UIButton()
     var reviewButton = UIButton()
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +88,7 @@ class SuccessViewController: UIViewController {
         continueButton.setTitle("Continue".localized, for: .normal)
         continueButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         continueButton.setTitleColor(UIColor.white, for: .normal)
-        continueButton.backgroundColor = UIColor(named: "myCustom")
+        continueButton.backgroundColor = tenantViewModel.primaryColor
         continueButton.layer.cornerRadius = 25
         continueButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(continueButton)
