@@ -7,5 +7,7 @@ target 'E-Learning' do
 
   # Pods for E-Learning
    pod 'MaterialComponents'
+   pod 'SDWebImage'
+
 
 end

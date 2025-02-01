@@ -64,6 +64,7 @@ extension CoursesSectionCell: UICollectionViewDataSource, UICollectionViewDelega
         }
         
         cell.configure(with: course, color: color)
+        cell.selectedBackgroundView = .none
         return cell
     }
     

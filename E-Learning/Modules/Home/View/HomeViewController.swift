@@ -17,7 +17,7 @@ private let reuseIdentifier3 = "FeaturedCell"
 private let reuseIdentifier4 = "CareerCell"
 
 
-class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate {
+class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate,CareerPathCollectionViewDelegate {
     
     let sectionTitles = ["Courses Categories".localized, "Featured Courses".localized, "Most Popular".localized, "Career Paths".localized, "Latest Courses".localized]
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
@@ -91,6 +91,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 1:
             let continueCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath) as! ContinueCollectionViewCell
+            continueCell.selectedBackgroundView = .none
             return continueCell
             
         case 2:
@@ -138,6 +139,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 9:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CareerPathCollectionView.identifier, for: indexPath) as! CareerPathCollectionView
             cell.configure(with: ["UX Design", "UX Design", "UX Design"])
+            cell.delegate = self
             return cell
             
             

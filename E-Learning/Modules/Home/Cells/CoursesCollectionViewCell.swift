@@ -18,8 +18,16 @@ class CoursesCollectionViewCell: UICollectionViewCell {
         
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
-        outerView.layer.borderColor = UIColor.gray.cgColor
-        outerView.layer.borderWidth = 1.0
+        outerView.layer.shadowColor = UIColor.gray.cgColor
+        outerView.layer.shadowOpacity = 0.3
+        outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        outerView.layer.shadowRadius = 6
+        outerView.layer.borderColor = UIColor.lightGray.cgColor
+        outerView.layer.borderWidth = 0.5
+        
+        let highlightView = UIView()
+        highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
+        self.selectedBackgroundView = highlightView
     }
     
     func configure(with text: String, color: UIColor) {

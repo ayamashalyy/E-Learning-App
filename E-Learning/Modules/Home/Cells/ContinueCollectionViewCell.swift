@@ -28,8 +28,13 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
-        outerView.layer.borderColor = UIColor.gray.cgColor
-        outerView.layer.borderWidth = 1.0
+        
+        outerView.layer.shadowColor = UIColor.gray.cgColor
+        outerView.layer.shadowOpacity = 0.3
+        outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        outerView.layer.shadowRadius = 6
+        outerView.layer.borderColor = UIColor.lightGray.cgColor
+        outerView.layer.borderWidth = 0.5
         outerView.backgroundColor = tenantViewModel.primaryColor
         continueLabel.text = "Continue where you left off".localized
         
@@ -37,8 +42,15 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         courseProgress.progressTintColor = tenantViewModel.secondaryColor
         innerView.layer.cornerRadius = 6
         innerView.layer.masksToBounds = true
-        innerView.layer.borderColor = UIColor.gray.cgColor
-        innerView.layer.borderWidth = 1.0
+        innerView.layer.shadowColor = UIColor.gray.cgColor
+        innerView.layer.shadowOpacity = 0.3
+        innerView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        innerView.layer.shadowRadius = 6
+        innerView.layer.borderColor = UIColor.lightGray.cgColor
+        innerView.layer.borderWidth = 0.5
         
+        let highlightView = UIView()
+        highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
+        self.selectedBackgroundView = highlightView
     }
 }

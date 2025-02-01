@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class TenantViewModel {
     
@@ -22,7 +23,9 @@ class TenantViewModel {
     var primaryColor: UIColor?
     var secondaryColor: UIColor?
     
-    private init() {}
+    private init() {
+        loadColorsFromUserDefaults()
+    }
     
     func fetchTenantData() {
         
@@ -42,6 +45,7 @@ class TenantViewModel {
                 self?.secondaryColor = UIColor(hex:response.tenant.secondaryColor)
                 self?.onDataLoaded?(response.tenant)
                 self?.loadLogoImage(from: response.tenant.siteLogo)
+                self?.saveColorsToUserDefaults()
             } else {
                 DispatchQueue.main.async {
                     self?.onError?("Tenant data not found or organization does not exist.")
@@ -63,7 +67,11 @@ class TenantViewModel {
             return
         }
         
-        URLSession.shared.dataTask(with: logoURL) { [weak self] data, response, error in
+        SDWebImageManager.shared.loadImage(
+            with: logoURL,
+            options: .highPriority,
+            progress: nil
+        ) { [weak self] image, data, error, cacheType, finished, url in
             if let error = error {
                 print("Failed to load logo image: \(error.localizedDescription)")
                 self?.onLogoLoaded?(nil)
@@ -79,7 +87,7 @@ class TenantViewModel {
             DispatchQueue.main.async {
                 self?.onLogoLoaded?(data)
             }
-        }.resume()
+        }
     }
     
     func validateOrganizationName(_ name: String) -> Bool {
@@ -103,5 +111,21 @@ class TenantViewModel {
     
     func getSecondaryColor() -> UIColor? {
         return secondaryColor
+    }
+    
+    func saveColorsToUserDefaults() {
+        let defaults = UserDefaults.standard
+        defaults.set(tenant?.primaryColor, forKey: "primaryColor")
+        defaults.set(tenant?.secondaryColor, forKey: "secondaryColor")
+    }
+    
+    private func loadColorsFromUserDefaults() {
+        let defaults = UserDefaults.standard
+        if let primaryColorHex = defaults.string(forKey: "primaryColor") {
+            primaryColor = UIColor(hex: primaryColorHex)
+        }
+        if let secondaryColorHex = defaults.string(forKey: "secondaryColor") {
+            secondaryColor = UIColor(hex: secondaryColorHex)
+        }
     }
 }

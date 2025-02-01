@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol CareerPathCollectionViewDelegate: AnyObject {
+    func didSelectCourse(_ course: String)
+}
+
 class CareerPathCollectionView: UICollectionViewCell {
     static let identifier = "CareerPathsCell"
     private var courses: [String] = []
     var tenantViewModel = TenantViewModel.shared
+    weak var delegate: CareerPathCollectionViewDelegate?
     
     private let innerCareerPathCollectionView: UICollectionView = {
         let layout = RTLCollectionFlow()
@@ -66,6 +71,11 @@ extension CareerPathCollectionView: UICollectionViewDataSource, UICollectionView
         cell.selectedBackgroundView = .none
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCourse = courses[indexPath.item]
+        delegate?.didSelectCourse(selectedCourse)
     }
 }
 
