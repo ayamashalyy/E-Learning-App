@@ -111,6 +111,8 @@
 		E88E5FF12D44FA04002A38C8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF02D44FA04002A38C8 /* APIService.swift */; };
 		E88E5FF32D44FF74002A38C8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF22D44FF74002A38C8 /* UIColor+Extensions.swift */; };
 		E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */; };
+		E8C6F2022D4E9EBE007D0923 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */; };
+		E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */; };
 		F3E13565B343003F348549F4 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */; };
 /* End PBXBuildFile section */
 
@@ -224,6 +226,8 @@
 		E88E5FF02D44FA04002A38C8 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E88E5FF22D44FF74002A38C8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoViewController.swift; sourceTree = "<group>"; };
+		E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		FF061A0A7105B2598020CB7E /* Pods-E-Learning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.debug.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -750,6 +754,8 @@
 		E84A96642D46385E00097572 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */,
+				E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -903,6 +909,7 @@
 				036A8C852CF7923700F01CE5 /* FiltrationCollectionViewCell.swift in Sources */,
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* ViewController.swift in Sources */,
+				E8C6F2022D4E9EBE007D0923 /* APIEndpoints.swift in Sources */,
 				038F1DC72D291F5500BD7058 /* AssignCourseViewController.swift in Sources */,
 				030519592D03544F003B991F /* CommentCell.swift in Sources */,
 				03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */,
@@ -956,6 +963,7 @@
 				0341D1EA2D00FBE90008136C /* UIview+Extensions.swift in Sources */,
 				03DDA9FB2D2883C5008115CA /* LearnersDetailsViewController.swift in Sources */,
 				0341D1E62D00D52E0008136C /* CourseContentViewController.swift in Sources */,
+				E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */,
 				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
 				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,

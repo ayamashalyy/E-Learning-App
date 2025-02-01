@@ -7,6 +7,7 @@
 
 import UIKit
 import MaterialComponents
+import SDWebImage
 
 class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     
@@ -113,15 +114,12 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
                         logoViewController.modalPresentationStyle = .fullScreen
                         self.present(logoViewController, animated: true, completion: nil)
                         
-                        self.tenantViewModel.onLogoLoaded = { data in
-                            DispatchQueue.main.async {
-                                if let data = data, let image = UIImage(data: data) {
-                                    if let logoImageView = logoViewController.logoImageView {
-                                        logoImageView.image = image
-                                    } else {
-                                        print("logoImageView is nil")
-                                    }
-                                    
+                        if let logoURL = URL(string: tenant.siteLogo) {
+                            logoViewController.logoImageView.sd_setImage(with: logoURL, placeholderImage: UIImage(named: "placeholder")) { image, error, cacheType, url in
+                                if let error = error {
+                                    print("Failed to load logo image: \(error.localizedDescription)")
+                                } else {
+                                    print("Logo image loaded successfully")
                                 }
                             }
                         }

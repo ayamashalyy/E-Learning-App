@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SDWebImage
 
 class TenantViewModel {
     
@@ -15,7 +14,6 @@ class TenantViewModel {
     
     private var tenant: Tenant?
     var onDataLoaded: ((Tenant) -> Void)?
-    var onLogoLoaded: ((Data?) -> Void)?
     var onError: ((String) -> Void)?
     private let apiService = APIService()
     private var storedOrganizationName: String?
@@ -34,7 +32,7 @@ class TenantViewModel {
             return
         }
         
-        let baseURL = "https://lms-test-api.netlify.app/api/domains/check/"
+        let baseURL = APIEndpoints.baseURL
         let url = "\(baseURL)\(organizationName)"
         print("Fetching tenant data from \(url)")
         apiService.fetchData(from: url) { [weak self] (response: TenantResponse?) in
@@ -44,7 +42,6 @@ class TenantViewModel {
                 self?.primaryColor = UIColor(hex: response.tenant.primaryColor)
                 self?.secondaryColor = UIColor(hex:response.tenant.secondaryColor)
                 self?.onDataLoaded?(response.tenant)
-                self?.loadLogoImage(from: response.tenant.siteLogo)
                 self?.saveColorsToUserDefaults()
             } else {
                 DispatchQueue.main.async {
@@ -59,37 +56,6 @@ class TenantViewModel {
         self.organizationName = name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
     }
     
-    
-    private func loadLogoImage(from urlString: String) {
-        guard let logoURL = URL(string: urlString) else {
-            print("Invalid logo URL")
-            self.onLogoLoaded?(nil)
-            return
-        }
-        
-        SDWebImageManager.shared.loadImage(
-            with: logoURL,
-            options: .highPriority,
-            progress: nil
-        ) { [weak self] image, data, error, cacheType, finished, url in
-            if let error = error {
-                print("Failed to load logo image: \(error.localizedDescription)")
-                self?.onLogoLoaded?(nil)
-                return
-            }
-            
-            guard let data = data else {
-                print("Invalid image data")
-                self?.onLogoLoaded?(nil)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self?.onLogoLoaded?(data)
-            }
-        }
-    }
-    
     func validateOrganizationName(_ name: String) -> Bool {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         
@@ -101,30 +67,18 @@ class TenantViewModel {
         return trimmedName == pathComponent
     }
     
-    func getTenant() -> Tenant? {
-        return tenant
-    }
-    
-    func getPrimaryColor() -> UIColor? {
-        return primaryColor
-    }
-    
-    func getSecondaryColor() -> UIColor? {
-        return secondaryColor
-    }
-    
     func saveColorsToUserDefaults() {
         let defaults = UserDefaults.standard
-        defaults.set(tenant?.primaryColor, forKey: "primaryColor")
-        defaults.set(tenant?.secondaryColor, forKey: "secondaryColor")
+        defaults.set(tenant?.primaryColor, forKey: UserDefaultsKeys.primaryColor)
+        defaults.set(tenant?.secondaryColor, forKey: UserDefaultsKeys.secondaryColor)
     }
     
     private func loadColorsFromUserDefaults() {
         let defaults = UserDefaults.standard
-        if let primaryColorHex = defaults.string(forKey: "primaryColor") {
+        if let primaryColorHex = defaults.string(forKey: UserDefaultsKeys.primaryColor) {
             primaryColor = UIColor(hex: primaryColorHex)
         }
-        if let secondaryColorHex = defaults.string(forKey: "secondaryColor") {
+        if let secondaryColorHex = defaults.string(forKey: UserDefaultsKeys.secondaryColor) {
             secondaryColor = UIColor(hex: secondaryColorHex)
         }
     }
