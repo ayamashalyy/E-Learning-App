@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.10.2)
   - MaterialComponents (112.1.0):
     - MaterialComponents/ActionSheet (= 112.1.0)
     - "MaterialComponents/ActionSheet+Theming (= 112.1.0)"
@@ -638,11 +639,13 @@ PODS:
   - SDWebImage/Core (5.20.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.0)
   - MaterialComponents
   - SDWebImage
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
@@ -651,6 +654,7 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   MaterialComponents: ba54523b921faa5c2adaaa692048c6b95a09263d
   MDFInternationalization: 010097556d6b09d2c4ea38e0820ea6d37be6a314
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
@@ -658,6 +662,6 @@ SPEC CHECKSUMS:
   MotionInterchange: ead0e3ae1f3a5fb539e289debbc7ae036160a10d
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
 
-PODFILE CHECKSUM: 7525a39d5bb422affcaab8aeefd16a6f19fa3949
+PODFILE CHECKSUM: dd889389c8918a918f7ccdef08517329ace7971a
 
 COCOAPODS: 1.16.2

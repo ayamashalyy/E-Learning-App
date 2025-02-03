@@ -10,10 +10,12 @@ import Foundation
 struct TenantResponse: Codable {
     let exists: Bool
     let tenant: Tenant
+    let url: String
     
     enum CodingKeys: String, CodingKey {
         case exists
         case tenant
+        case url
     }
 }
 

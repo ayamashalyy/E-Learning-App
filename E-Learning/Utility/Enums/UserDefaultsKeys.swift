@@ -10,4 +10,6 @@ import Foundation
 enum UserDefaultsKeys {
     static let primaryColor = "primaryColor"
     static let secondaryColor = "secondaryColor"
+    static let rememberEmail = "rememberedEmail"
+    static let rememberePassword = "rememberedPassword"
 }

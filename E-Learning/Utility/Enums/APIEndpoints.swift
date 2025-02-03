@@ -8,5 +8,5 @@
 import Foundation
 
 enum APIEndpoints {
-    static let baseURL = "https://lms-test-api.netlify.app/api/domains/check/"
+    static let baseURL = "https://vlms.link/api/domains/check/"
 }

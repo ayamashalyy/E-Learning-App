@@ -23,7 +23,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     var forgetPasswordButton: UIButton!
     var alreadyHaveAccountLabel: UILabel!
     var loginButton: UIButton!
-    
+    var loginViewModel = LoginViewModel()
     
     var isPasswordVisible = true
     var tenantViewModel = TenantViewModel.shared
@@ -33,13 +33,17 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        checkRememberedUser()
     }
     
     
     func setupViews() {
         
         organizationNameText = UILabel()
-        organizationNameText.text = "Vinsys Academy".localized
+        //organizationNameText.text = "Vinsys Academy".localized
+        organizationNameText.text = tenantViewModel.organizationName
         organizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
         organizationNameText.textColor = tenantViewModel.primaryColor
         organizationNameText.textAlignment = .center
@@ -191,16 +195,89 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == emailTextField {
+            emailController.setErrorText(nil, errorAccessibilityValue: nil)
+        } else if textField == passwordTextField {
+            passwordController.setErrorText(nil, errorAccessibilityValue: nil)
+        }
+    }
+    
     @objc func goToYourOrgaizationButtonTapped() {
+        
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            if emailTextField.text?.isEmpty == true && passwordTextField.text?.isEmpty == true {
+                showAlert(message: "Please enter your email address & password.")
+            } else if emailTextField.text?.isEmpty == true {
+                showAlert(message: "Please enter your email address.")
+            } else if passwordTextField.text?.isEmpty == true {
+                showAlert(message: "Please enter your password.")
+            }
+            return
+        }
+        
+        guard loginViewModel.isValidEmail(email) else {
+            emailController.setErrorText("Invalid email address.", errorAccessibilityValue: nil)
+            return
+        }
+        
+        guard loginViewModel.isValidPassword(password) else {
+            passwordController.setErrorText("Password must be at least 8 characters.", errorAccessibilityValue: nil)
+            return
+        }
+        
+        if rememberMeCheckbox.isSelected {
+            UserDefaults.standard.set(email, forKey: UserDefaultsKeys.rememberEmail)
+            UserDefaults.standard.set(password, forKey: UserDefaultsKeys.rememberePassword)
+        }else {
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberEmail)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberePassword)
+        }
+        
+        loginViewModel.email = email
+        loginViewModel.password = password
+        
+        loginViewModel.login { [weak self] response in
+            guard let self = self else { return }
+            if let token = response?.token {
+                print("Login successful, token: \(token)")
+                self.navigateToNextScreen()
+                
+            }else if let message = response?.message {
+                print("Login failed: \(message)")
+                self.showAlert(message: message)
+            }else {
+                print("Unexpected error")
+                self.showAlert(message: "An unexpected error occurred.")
+            }
+        }
+    }
+    
+    func checkRememberedUser() {
+        if let savedEmail = UserDefaults.standard.string(forKey: UserDefaultsKeys.rememberEmail),
+           let savedPassword = UserDefaults.standard.string(forKey: UserDefaultsKeys.rememberePassword) {
+            emailTextField.text = savedEmail
+            passwordTextField.text = savedPassword
+            rememberMeCheckbox.isSelected = true
+        }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func navigateToNextScreen() {
         let nextViewController = ViewController()
         nextViewController.modalPresentationStyle = .fullScreen
         present(nextViewController, animated: true, completion: nil)
         
-//        let nextViewController = CourseManagerViewController()
-//        let navigationController = UINavigationController(rootViewController: nextViewController)
-//        navigationController.modalPresentationStyle = .fullScreen
-//        present(navigationController, animated: true, completion: nil)
-        
+        //        let nextViewController = CourseManagerViewController()
+        //        let navigationController = UINavigationController(rootViewController: nextViewController)
+        //        navigationController.modalPresentationStyle = .fullScreen
+        //        present(navigationController, animated: true, completion: nil)
     }
     
     @objc func togglePasswordVisibility() {
@@ -214,9 +291,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
             
         }
     }
-    
-    
-    
     
     @objc func toggleRememberMe() {
         rememberMeCheckbox.isSelected.toggle()

@@ -104,6 +104,7 @@
 		03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */; };
 		03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */; };
 		03F37E882D1C530A00F50C52 /* courseContentOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */; };
+		53873B73CE464583ECE64220 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 		E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */; };
@@ -111,9 +112,10 @@
 		E88E5FF12D44FA04002A38C8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF02D44FA04002A38C8 /* APIService.swift */; };
 		E88E5FF32D44FF74002A38C8 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF22D44FF74002A38C8 /* UIColor+Extensions.swift */; };
 		E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */; };
+		E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EE92D4FF6C0005B0E3E /* User.swift */; };
+		E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */; };
 		E8C6F2022D4E9EBE007D0923 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */; };
 		E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */; };
-		F3E13565B343003F348549F4 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -217,18 +219,20 @@
 		03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseInfoOverviewViewController.swift; sourceTree = "<group>"; };
 		03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseContentOverviewViewController.swift; sourceTree = "<group>"; };
 		03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = courseContentOverviewViewController.xib; sourceTree = "<group>"; };
-		7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
+		152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.debug.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.debug.xcconfig"; sourceTree = "<group>"; };
+		4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
-		925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tenant.swift; sourceTree = "<group>"; };
 		E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenantViewModel.swift; sourceTree = "<group>"; };
 		E88E5FF02D44FA04002A38C8 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E88E5FF22D44FF74002A38C8 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoViewController.swift; sourceTree = "<group>"; };
+		E8B12EE92D4FF6C0005B0E3E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
-		FF061A0A7105B2598020CB7E /* Pods-E-Learning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.debug.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,13 +240,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3E13565B343003F348549F4 /* Pods_E_Learning.framework in Frameworks */,
+				53873B73CE464583ECE64220 /* Pods_E_Learning.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0052863BC07E25CAE18E1B0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		030C79402D20C20400FFD7DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,7 +432,7 @@
 				0377D4662CEBBA0E006C60F6 /* E-Learning */,
 				0377D4652CEBBA0E006C60F6 /* Products */,
 				31E775D98D1E899D09C6734B /* Pods */,
-				750C84505BF9AF119501984F /* Frameworks */,
+				0052863BC07E25CAE18E1B0A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -469,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */,
+				E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -674,6 +687,7 @@
 				036412992CFF6508008EE23F /* Course.swift */,
 				03678B012D0E3EE200371403 /* QuestionModel.swift */,
 				E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */,
+				E8B12EE92D4FF6C0005B0E3E /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -737,18 +751,10 @@
 		31E775D98D1E899D09C6734B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				FF061A0A7105B2598020CB7E /* Pods-E-Learning.debug.xcconfig */,
-				7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */,
+				152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */,
+				4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		750C84505BF9AF119501984F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				925371D106D9CCF6EB6AFAFC /* Pods_E_Learning.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E84A96642D46385E00097572 /* Enums */ = {
@@ -767,11 +773,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0377D47B2CEBBA3D006C60F6 /* Build configuration list for PBXNativeTarget "E-Learning" */;
 			buildPhases = (
-				662A13E53DADC16BE7AAFA73 /* [CP] Check Pods Manifest.lock */,
+				B6ECD4DA4E0B0AAEB0F003D7 /* [CP] Check Pods Manifest.lock */,
 				0377D4602CEBBA0E006C60F6 /* Sources */,
 				0377D4612CEBBA0E006C60F6 /* Frameworks */,
 				0377D4622CEBBA0E006C60F6 /* Resources */,
-				2FA08C099BC77633126E19D9 /* [CP] Embed Pods Frameworks */,
+				69F608667514FA294A5DC8F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -860,7 +866,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2FA08C099BC77633126E19D9 /* [CP] Embed Pods Frameworks */ = {
+		69F608667514FA294A5DC8F7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -877,7 +883,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-E-Learning/Pods-E-Learning-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		662A13E53DADC16BE7AAFA73 /* [CP] Check Pods Manifest.lock */ = {
+		B6ECD4DA4E0B0AAEB0F003D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -944,6 +950,7 @@
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */,
 				03678AFF2D0E3E2800371403 /* PageViewController.swift in Sources */,
+				E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */,
 				0341D1E82D00D5780008136C /* CourseInteractionsViewController.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
@@ -966,6 +973,7 @@
 				E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */,
 				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
 				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
+				E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
 				03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */,
 				037F7DEB2D0B7165001A411A /* SuccessViewController.swift in Sources */,
@@ -1123,7 +1131,7 @@
 		};
 		0377D47C2CEBBA3D006C60F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF061A0A7105B2598020CB7E /* Pods-E-Learning.debug.xcconfig */;
+			baseConfigurationReference = 152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1157,7 +1165,7 @@
 		};
 		0377D47D2CEBBA3D006C60F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7516977FC15380FBDC145689 /* Pods-E-Learning.release.xcconfig */;
+			baseConfigurationReference = 4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -17,8 +17,9 @@ class TenantViewModel {
     var onError: ((String) -> Void)?
     private let apiService = APIService()
     private var storedOrganizationName: String?
-    private var organizationName: String?
+    var organizationName: String?
     var primaryColor: UIColor?
+    var urlTenant: String?
     var secondaryColor: UIColor?
     
     private init() {
@@ -38,6 +39,7 @@ class TenantViewModel {
         apiService.fetchData(from: url) { [weak self] (response: TenantResponse?) in
             if let response = response, response.exists {
                 self?.tenant = response.tenant
+                self?.urlTenant = response.url
                 self?.storedOrganizationName = response.tenant.siteName
                 self?.primaryColor = UIColor(hex: response.tenant.primaryColor)
                 self?.secondaryColor = UIColor(hex:response.tenant.secondaryColor)
