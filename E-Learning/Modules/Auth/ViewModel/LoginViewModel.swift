@@ -39,18 +39,13 @@ class LoginViewModel {
         let url = "\(subDomain)/auth/login"
         print("Request URL: \(url)")
         
-        do {
-            let jsonData = try JSONEncoder().encode(loginRequest)
-            apiService.postData(to: url, data: jsonData) { (response: LoginResponse?) in
-                if let response = response {
-                    completion(response)
-                } else {
-                    print("Server response: \(String(data: jsonData, encoding: .utf8) ?? "")")
-                }
+        apiService.postData(to: url, data: loginRequest) { (response: LoginResponse?) in
+            if let response = response {
+                print("\(response)")
+                completion(response)
+            } else {
+                print("Login failed or invalid response")
             }
-        } catch {
-            print("Error encoding login request: \(error)")
-            completion(nil)
         }
     }
 }

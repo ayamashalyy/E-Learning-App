@@ -235,18 +235,27 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberePassword)
         }
         
+        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.successedLogin)
+        
         loginViewModel.email = email
         loginViewModel.password = password
         
         loginViewModel.login { [weak self] response in
             guard let self = self else { return }
             if let token = response?.token {
+                let alert = UIAlertController(title: "Success", message: "Login successful", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    self.navigateToNextScreen()
+                })
                 print("Login successful, token: \(token)")
-                self.navigateToNextScreen()
+                self.present(alert, animated: true, completion: nil)
+                
                 
             }else if let message = response?.message {
+                let alert = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 print("Login failed: \(message)")
-                self.showAlert(message: message)
+                self.present(alert, animated: true, completion: nil)
             }else {
                 print("Unexpected error")
                 self.showAlert(message: "An unexpected error occurred.")
