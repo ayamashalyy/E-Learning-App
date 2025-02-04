@@ -18,17 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         
         
-        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.successedLogin) {
-            let mainViewController = ViewController()
-            let navigationController = UINavigationController(rootViewController: mainViewController)
-            navigationController.setNavigationBarHidden(true, animated: false)
-            self.window?.rootViewController = navigationController
-        } else {
+//        if UserDefaults.standard.bool(forKey: UserDefaultsKeys.successedLogin) {
+//            let mainViewController = ViewController()
+//            let navigationController = UINavigationController(rootViewController: mainViewController)
+//            navigationController.setNavigationBarHidden(true, animated: false)
+//            self.window?.rootViewController = navigationController
+//        } else {
             let onboardingVC = OnboardingViewController()
             let navigationController = UINavigationController(rootViewController: onboardingVC)
             navigationController.setNavigationBarHidden(true, animated: false)
             self.window?.rootViewController = navigationController
-        }
+      //  }
         
         
         self.window?.makeKeyAndVisible()

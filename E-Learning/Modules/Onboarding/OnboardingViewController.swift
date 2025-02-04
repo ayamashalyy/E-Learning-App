@@ -20,7 +20,6 @@ class OnboardingViewController: UIViewController {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
     }
     
     func setupViews() {

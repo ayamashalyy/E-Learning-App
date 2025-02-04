@@ -21,13 +21,17 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     var backButtonImage: UIImage!
     var isPasswordVisible = true
     var isConfirePasswordVisible = true
+    var viewModel = ResetPasswordViewModel()
+    var email: String = ""
+    var otp: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        
+        newPasswordTextField.delegate = self
+        confirmNewPasswordTextField.delegate = self
         self.navigationItem.title = "New password".localized
         
         backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
@@ -128,9 +132,60 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func saveButtonTapped() {
-        print("Save")
+        guard let newPassword = newPasswordTextField.text, !newPassword.isEmpty,
+              let confirmPassword = confirmNewPasswordTextField.text, !confirmPassword.isEmpty else {
+            
+            if newPasswordTextField.text?.isEmpty ?? true {
+                newPasswordController.setErrorText("Please enter a new password.", errorAccessibilityValue: nil)
+            }
+            if confirmNewPasswordTextField.text?.isEmpty ?? true {
+                confirmNewPasswordController.setErrorText("Please confirm your new password.", errorAccessibilityValue: nil)
+            }
+            
+            return
+        }
+        
+        if newPassword.count < 8 {
+            newPasswordController.setErrorText("Password must be at least 8 characters.", errorAccessibilityValue: nil)
+            return
+        }
+        
+        if !viewModel.validatePasswords(password: newPassword, confirmPassword: confirmPassword) {
+            confirmNewPasswordController.setErrorText("Passwords do not match.", errorAccessibilityValue: nil)
+            return
+        }
+        
+        viewModel.resetPassword(email: email, otp: otp, password: newPassword, passwordConfirmation: confirmPassword) { [weak self] message in
+            guard let self = self else { return }
+            
+            if let message = message {
+                print(message)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                        self.navigationController?.popToRootViewController(animated: true)
+                    })
+                    self.present(alert, animated: true)
+                }
+            } else {
+                self.showAlert(title: "Error", message: "Failed to reset password. Please try again.")
+            }
+        }
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == newPasswordTextField {
+            newPasswordController.setErrorText(nil, errorAccessibilityValue: nil)
+        } else if textField == confirmNewPasswordTextField {
+            confirmNewPasswordController.setErrorText(nil, errorAccessibilityValue: nil)
+        }
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @objc func togglePasswordVisibility() {
         isPasswordVisible.toggle()

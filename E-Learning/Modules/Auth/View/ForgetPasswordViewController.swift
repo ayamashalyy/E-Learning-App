@@ -18,6 +18,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
     var getVerificationCodeButton: UIButton!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
+    var sendOTPViewModel = SendOTPViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,10 +133,30 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
     
     
     @objc func getVerificationCodeButtonTapped() {
-        let nextViewController = ResetPasswordViewController()
         
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        guard let email = emailTextField.text, !email.isEmpty else {
+            showAlert(message: "Please enter your email address.")
+            return
+        }
+        
+        sendOTPViewModel.sendOTP(to: email) { [weak self] success, message in
+            DispatchQueue.main.async {
+                if success {
+                    let nextViewController = ResetPasswordViewController()
+                    nextViewController.email = email
+                    let navigationController = UINavigationController(rootViewController: nextViewController)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true, completion: nil)
+                }else {
+                    self?.showAlert(message: message ?? "Failed to send OTP. Please try again.")
+                }
+            }
+        }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

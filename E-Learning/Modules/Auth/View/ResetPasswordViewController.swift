@@ -10,6 +10,7 @@ import UIKit
 
 class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     
+    var email: String?
     var descriptionResetPasswordText: UITextView!
     let emailLabel = UILabel()
     var otpFields: [UITextField] = []
@@ -18,6 +19,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     var verifyButton = UIButton()
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
+    var sendOTPViewModel = SendOTPViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         descriptionResetPasswordText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionResetPasswordText)
         
-        emailLabel.text = "username@gmail.com".localized
+        emailLabel.text = email ?? "Unknown email"
         emailLabel.textAlignment = .center
         emailLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         emailLabel.textColor = UIColor(named: "onboradColor")
@@ -166,11 +168,26 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func verifyButtonTapped() {
-        
-        let nextViewController = NewPasswordViewController()
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        let otp = otpFields.map { $0.text ?? "" }.joined()
+        let viewModel =  VerifyOTPViewModel(email: emailLabel.text ?? "", otp: otp)
+        viewModel.verifyOTP { errorMessage in
+            if let errorMessage = errorMessage {
+                self.showAlert(message: errorMessage)
+            }else {
+                let nextViewController = NewPasswordViewController()
+                nextViewController.email = self.emailLabel.text ?? ""
+                nextViewController.otp = otp
+                let navigationController = UINavigationController(rootViewController: nextViewController)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -180,7 +197,21 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func sendOTPAgainButtonTapped() {
-        print("OTP resent successfully!")
+        
+        otpFields.forEach { $0.text = "" }
+        otpFields.first?.becomeFirstResponder()
+        guard let email = email else {
+            showAlert(message: "Email is not available.")
+            return
+        }
+        sendOTPViewModel.sendOTP(to: email) { [weak self] success, message  in
+            if success {
+                print("OTP resent successfully!")
+                self?.showAlert(message: message ?? "OTP sent successfully.")
+            } else {
+                self?.showAlert(message: message ?? "Failed to resend OTP.")
+            }
+        }
     }
     
     
