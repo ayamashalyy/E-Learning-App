@@ -22,7 +22,13 @@ class SendOTPViewModel {
         
         let requestBody = ForgetPasswordRequest(email: email)
         
-        apiService.postData(to: url, data: requestBody) { (response: OTPResponse?) in
+        apiService.postData(to: url, data: requestBody) { (response: OTPResponse?, error) in
+            if let error = error {
+                print(" Error sending OTP: \(error.localizedDescription)")
+                completion(false, error.localizedDescription)
+                return
+            }
+            
             if let response = response {
                 completion(true, response.message)
                 print("OTP sent successfully \(response.message)")

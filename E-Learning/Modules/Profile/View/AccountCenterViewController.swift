@@ -19,6 +19,9 @@ class AccountCenterViewController: UIViewController {
     var contentView: UIView!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
+    let profileUpdateViewModel = ProfileUpdateViewModel()
+    var userSessionManager = UserSessionManager.shared
+    var resetPasswordViewModel = ResetPasswordViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +37,7 @@ class AccountCenterViewController: UIViewController {
         setupScrollView()
         setupUI()
         setupButtons()
-        
+        userSessionManager.loadUserCredentialsFromUserDefaults()
     }
     
     @objc func cancelTapped() {
@@ -227,6 +230,7 @@ class AccountCenterViewController: UIViewController {
             
             let eyeButton1 = UIButton(type: .system)
             eyeButton1.tintColor = tenantViewModel.primaryColor
+            eyeButton1.translatesAutoresizingMaskIntoConstraints = false
             eyeButton1.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton1.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             
@@ -369,7 +373,27 @@ class AccountCenterViewController: UIViewController {
     }
     
     @objc func saveChanges() {
-        print("Changes saved")
+        guard let token = userSessionManager.token else {
+            print("Token not found in UserDefaults")
+            return
+        }
+        guard let nameTextField = nameStackView.arrangedSubviews.compactMap({$0 as? UITextField }).first,
+              let emailTextField = emailStackView.arrangedSubviews.compactMap({ $0 as? UITextField }).first else {
+            print("Text fields not found")
+            return
+        }
+        
+        let name = nameTextField.text ?? ""
+        let email = emailTextField.text ?? ""
+        
+        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, token: token) { result in
+            switch result {
+            case .success:
+                print("Profile successfully updated.")
+            case .failure(let error):
+                print("Failed to update profile: \(error.localizedDescription)")
+            }
+        }
     }
     
     @objc func togglePasswordVisibility(_ sender: UIButton) {

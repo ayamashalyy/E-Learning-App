@@ -14,9 +14,9 @@ struct LoginRequest: Encodable {
 
 struct LoginResponse: Decodable {
     let token: String?
-    let message: String?
-    let user: User
-    let role: String
+    let message: String
+    let user: User?
+    let role: String?
 }
 
 struct User: Decodable {

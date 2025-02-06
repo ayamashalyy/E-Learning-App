@@ -229,43 +229,41 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         if rememberMeCheckbox.isSelected {
             UserDefaults.standard.set(email, forKey: UserDefaultsKeys.rememberEmail)
-            UserDefaults.standard.set(password, forKey: UserDefaultsKeys.rememberePassword)
+            UserDefaults.standard.set(password, forKey: UserDefaultsKeys.newPassword)
         }else {
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberEmail)
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberePassword)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.newPassword)
         }
-        
-        UserDefaults.standard.set(true, forKey: UserDefaultsKeys.successedLogin)
         
         loginViewModel.email = email
         loginViewModel.password = password
         
         loginViewModel.login { [weak self] response in
+            print("Response: \(String(describing: response))")
             guard let self = self else { return }
-            if let token = response?.token {
-                let alert = UIAlertController(title: "Success", message: "Login successful", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                    self.navigateToNextScreen()
-                })
-                print("Login successful, token: \(token)")
-                self.present(alert, animated: true, completion: nil)
-                
-                
-            }else if let message = response?.message {
-                let alert = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                print("Login failed: \(message)")
-                self.present(alert, animated: true, completion: nil)
-            }else {
-                print("Unexpected error")
-                self.showAlert(message: "An unexpected error occurred.")
+            DispatchQueue.main.async {
+                if let token = response?.token {
+                    UserDefaults.standard.set(token, forKey: UserDefaultsKeys.userToken)
+                    UserSessionManager.shared.token = token
+                    let alert = UIAlertController(title: "Success", message: response?.message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                        self.navigateToNextScreen()
+                    })
+                    print("Login successful, token: \(token)")
+                    self.present(alert, animated: true, completion: nil)
+                }else {
+                    self.showAlert(message: "Login failed: \(response?.message ?? "invalid response")")
+                }
             }
         }
     }
     
+    
     func checkRememberedUser() {
-        if let savedEmail = UserDefaults.standard.string(forKey: UserDefaultsKeys.rememberEmail),
-           let savedPassword = UserDefaults.standard.string(forKey: UserDefaultsKeys.rememberePassword) {
+        UserSessionManager.shared.loadUserCredentialsFromUserDefaults()
+        
+        if let savedEmail = UserSessionManager.shared.email,
+           let savedPassword = UserSessionManager.shared.newPassword {
             emailTextField.text = savedEmail
             passwordTextField.text = savedPassword
             rememberMeCheckbox.isSelected = true

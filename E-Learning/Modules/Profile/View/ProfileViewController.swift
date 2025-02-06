@@ -30,13 +30,29 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var nameLabel = UILabel()
     var emailLabel = UILabel()
     lazy var imagePickerController = UIImagePickerController()
+    let profileUpdateViewModel = ProfileUpdateViewModel()
+    var userSessionManager = UserSessionManager.shared
+    private let viewModel = ProfileViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        
+        userSessionManager.loadUserCredentialsFromUserDefaults()
+        if let token = userSessionManager.token {
+            viewModel.fetchProfile(token: token)
+        }
+        viewModel.onProfileDataUpdated = { [weak self] in
+            self?.updateUI()
+        }
+    }
+    
+    func updateUI() {
+        if let profileData = viewModel.profileData {
+            nameLabel.text = profileData.user.name
+            emailLabel.text = profileData.user.email
+        }
     }
     
     
@@ -59,12 +75,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImageView.addGestureRecognizer(tapGesture)
         
         nameLabel = UILabel()
-        nameLabel.text = "Moaz Mohamed".localized
+        nameLabel.text = userSessionManager.name
         nameLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         emailLabel = UILabel()
-        emailLabel.text = "mohamedmoaz176@gmail.com".localized
+        emailLabel.text = userSessionManager.email
         emailLabel.font = UIFont(name: "Roboto-Medium", size: 14)
         emailLabel.textColor = .gray
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -100,6 +116,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             profileImageView.image = selectedImage
             profileImageView.layer.cornerRadius = 50
             profileImageView.clipsToBounds = true
+            
+            // Convert the image to data and send it to update the profile
+            if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
+                updateProfileWithImage(imageData)
+            }
         }
         dismiss(animated: true, completion: nil)
     }
@@ -107,6 +128,23 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
+    
+    func updateProfileWithImage(_ imageData: Data) {
+        guard let token = userSessionManager.token,
+              let name = nameLabel.text,
+              let email = emailLabel.text else { return }
+        
+        
+        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: imageData, token: token) { result in
+            switch result {
+            case .success():
+                print("Profile updated successfully.")
+            case .failure(let error):
+                print("Failed to update profile: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     
     func setupConstraints() {
         
@@ -157,9 +195,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60 
+        return 60
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileItemCell", for: indexPath) as! ProfileItemCell
@@ -179,64 +217,48 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configure(for: item, isLanguage: isLanguage)
-        let selectedBackgroundView = UIView()
-        selectedBackgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = selectedBackgroundView
+        
+        cell.arrowButtonAction = { [weak self] in
+            guard let self = self else { return }
+            
+            switch item.title {
+            case "Account Center".localized:
+                let nextViewController = AccountCenterViewController()
+                let navigationController = UINavigationController(rootViewController: nextViewController)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
+                
+            case "About VINSYS".localized:
+                let nextController = AboutViewController()
+                let navigationController = UINavigationController(rootViewController: nextController)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
+                
+            case "Terms and Conditions".localized:
+                let nextController = TermsAndConditionsViewController()
+                let navigationController = UINavigationController(rootViewController: nextController)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
+                
+            case "Privacy & Policy".localized:
+                let nextController = PrivacyAndPolicyViewController()
+                let navigationController = UINavigationController(rootViewController: nextController)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
+                
+                //                case "Log out".localized:
+                
+                
+            default:
+                break
+            }
+            
+        }
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.section {
-        case 0:
-            if indexPath.row == 0 {
-                print("section 1 item 1")
-                
-            } else if indexPath.row == 1 {
-                
-                let nextViewController = AccountCenterViewController()
-                let navigationController = UINavigationController(rootViewController: nextViewController)
-                navigationController.modalPresentationStyle = .fullScreen
-                present(navigationController, animated: true, completion: nil)
-                
-            } else {
-                print("section 1 item 3")
-            }
-        case 1:
-            if indexPath.row == 0 {
-                
-                let nextController = AboutViewController()
-                let navigationController = UINavigationController(rootViewController: nextController)
-                navigationController.modalPresentationStyle = .fullScreen
-                present(navigationController, animated: true, completion: nil)
-                
-            } else if indexPath.row == 1 {
-                
-                let nextController = TermsAndConditionsViewController()
-                let navigationController = UINavigationController(rootViewController: nextController)
-                navigationController.modalPresentationStyle = .fullScreen
-                present(navigationController, animated: true, completion: nil)
-                
-            } else {
-                
-                let nextController = PrivacyAndPolicyViewController()
-                let navigationController = UINavigationController(rootViewController: nextController)
-                navigationController.modalPresentationStyle = .fullScreen
-                present(navigationController, animated: true, completion: nil)
-            }
-        case 2:
-            
-            if indexPath.row == 0 {
-                print("section 3 item 1")
-            }
-        default:
-            break
-            
-        }
     }
 }
 

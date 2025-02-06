@@ -11,9 +11,17 @@ import Alamofire
 class APIService {
     
     
-    func fetchData<T: Decodable>(from url: String, completion: @escaping (T?) -> Void) {
+    func fetchData<T: Decodable>(from url: String, token: String? = nil, completion: @escaping (T?) -> Void) {
         
-        AF.request(url).responseDecodable(of: T.self) {  response in
+        var headers: HTTPHeaders = [
+            "Accept": "application/json"
+        ]
+        
+        if let token = token {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
+        AF.request(url, headers: headers).responseDecodable(of: T.self) {  response in
             switch response.result {
             case .success(let decodedData):
                 DispatchQueue.main.async {
@@ -28,12 +36,16 @@ class APIService {
         }
     }
     
-    func postData<T: Decodable, U: Encodable>(to url: String, data: U, completion: @escaping (T?) -> Void) {
+    func postData<T: Decodable, U: Encodable>(to url: String, data: U, token: String? = nil, completion: @escaping (T?,Error?) -> Void) {
         
-        let headers: HTTPHeaders = [
+        var headers: HTTPHeaders = [
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         ]
+        
+        if let token = token {
+            headers["Authorization"] = "Bearer \(token)"
+        }
         
         AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: headers)
             .validate()
@@ -41,14 +53,51 @@ class APIService {
                 switch response.result {
                 case .success(let decodedData):
                     DispatchQueue.main.async {
-                        completion(decodedData)
+                        completion(decodedData, nil)
                     }
                 case .failure(let error):
                     print("Error posting data: \(error)")
                     DispatchQueue.main.async {
-                        completion(nil)
+                        completion(nil, error)
                     }
                 }
             }
+    }
+    
+    func postUpdateProfileData<T: Decodable, U: Encodable>(to url: String, data: U, token: String? = nil, completion: @escaping (T?) -> Void) {
+        
+        var headers: HTTPHeaders = [
+            "Accept": "application/json",
+        ]
+        
+        if let token = token {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            if let profileData = data as? ProfileUpdateRequest {
+                // Append name and email fields
+                multipartFormData.append(Data(profileData.name.utf8), withName: "name")
+                multipartFormData.append(Data(profileData.email.utf8), withName: "email")
+                // Append the avatar file if available
+                if let avatarData = profileData.avatar {
+                    multipartFormData.append(avatarData, withName: "avatar", fileName: "avatar.jpeg", mimeType: "image/jpeg")
+                }
+            }
+        }, to: url, method: .post, headers: headers)
+        .validate()
+        .responseDecodable(of: T.self) { response in
+            switch response.result {
+            case .success(let decodedData):
+                DispatchQueue.main.async {
+                    completion(decodedData)
+                }
+            case .failure(let error):
+                print("Error posting data: \(error)")
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
     }
 }

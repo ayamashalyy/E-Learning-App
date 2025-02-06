@@ -155,6 +155,9 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        UserDefaults.standard.set(email, forKey: UserDefaultsKeys.rememberEmail)
+        UserDefaults.standard.set(newPassword, forKey: UserDefaultsKeys.newPassword)
+        
         viewModel.resetPassword(email: email, otp: otp, password: newPassword, passwordConfirmation: confirmPassword) { [weak self] message in
             guard let self = self else { return }
             
@@ -163,7 +166,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                        self.navigationController?.popToRootViewController(animated: true)
+                        self.navigateToNextScreen()
                     })
                     self.present(alert, animated: true)
                 }
@@ -171,6 +174,12 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
                 self.showAlert(title: "Error", message: "Failed to reset password. Please try again.")
             }
         }
+    }
+    
+    private func navigateToNextScreen() {
+        let nextViewController = LoginViewController()
+        nextViewController.modalPresentationStyle = .fullScreen
+        present(nextViewController, animated: true, completion: nil)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

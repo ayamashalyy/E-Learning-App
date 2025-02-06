@@ -27,7 +27,13 @@ class  VerifyOTPViewModel {
         print("Request URL: \(url)")
         let otpRequest = OTPRequest(email: self.email, otp: self.otp)
         
-        apiService.postData(to: url, data: otpRequest) { (response: OTPResponse?) in
+        apiService.postData(to: url, data: otpRequest) { (response: OTPResponse?, error) in
+            if let error = error {
+                print(" Error verifying OTP: \(error.localizedDescription)")
+                completion("An error occurred: \(error.localizedDescription)")
+                return
+            }
+            
             if let response = response {
                 if response.message == "Invalid OTP" {
                     completion("Invalid OTP. Please try again.")

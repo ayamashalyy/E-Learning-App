@@ -11,6 +11,8 @@ enum UserDefaultsKeys {
     static let primaryColor = "primaryColor"
     static let secondaryColor = "secondaryColor"
     static let rememberEmail = "rememberedEmail"
-    static let rememberePassword = "rememberedPassword"
-    static let successedLogin = "isLoggedIn"
+    static let newPassword = "newPassword"
+    static let confirmPassword = "confirmPassword"
+    static let userToken = "userToken"
+    static let userName = "userName"
 }

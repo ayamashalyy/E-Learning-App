@@ -15,6 +15,7 @@ class ProfileItemCell: UITableViewCell {
     var arrowButton: UIButton!
     var englishButton: UIButton!
     var tenantViewModel = TenantViewModel.shared
+    var arrowButtonAction: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +37,7 @@ class ProfileItemCell: UITableViewCell {
         arrowButton.setImage(UIImage(named: "navigate_next")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         arrowButton.tintColor = tenantViewModel.primaryColor
         arrowButton.isHidden = false
+        arrowButton.addTarget(self, action: #selector(arrowButtonTapped), for: .touchUpInside)
         
         englishButton = UIButton(type: .custom)
         englishButton.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +64,10 @@ class ProfileItemCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func arrowButtonTapped() {
+            arrowButtonAction?()
+        }
+        
     @objc func englishButtonTapped() {
         print("English button tapped")
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {

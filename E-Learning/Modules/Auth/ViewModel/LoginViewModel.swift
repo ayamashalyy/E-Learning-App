@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class LoginViewModel {
     var email: String = ""
@@ -24,7 +25,6 @@ class LoginViewModel {
     }
     
     func login(completion: @escaping (LoginResponse?) -> Void) {
-        
         guard isValidEmail(email), isValidPassword(password) else {
             print("Invalid email format or password must be at least 8 characters long")
             completion(nil)
@@ -39,12 +39,40 @@ class LoginViewModel {
         let url = "\(subDomain)/auth/login"
         print("Request URL: \(url)")
         
-        apiService.postData(to: url, data: loginRequest) { (response: LoginResponse?) in
+        apiService.postData(to: url, data: loginRequest) { (response: LoginResponse?, error) in
+            if let error = error {
+                if let afError = error as? AFError {
+                    switch afError {
+                    case .responseValidationFailed(let reason):
+                        if case .unacceptableStatusCode(let code) = reason, code == 401 {
+                            print("Login failed: Invalid credentials")
+                            completion(LoginResponse(token: nil, message: "Invalid credentials", user: nil, role: nil))
+                            
+                            return
+                        }
+                    default:
+                        break
+                    }
+                }
+                print("Network error: \(error.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
             if let response = response {
-                print("\(response)")
-                completion(response)
+                if let token = response.token {
+                    print("Received response: \(response)")
+                    UserSessionManager.shared.token = token
+                    UserSessionManager.shared.email = response.user?.email
+                    UserSessionManager.shared.name = response.user?.name
+                    completion(response)
+                } else {
+                    print("Login failed: \(response.message)")
+                    completion(nil)
+                }
             } else {
-                print("Login failed or invalid response")
+                print("Login failed: Invalid response from server")
+                completion(nil)
             }
         }
     }

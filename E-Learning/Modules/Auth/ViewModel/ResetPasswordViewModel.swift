@@ -21,8 +21,16 @@ class ResetPasswordViewModel {
         let request = ResetPasswordRequest(email: email, otp: otp, password: password, passwordConfirmation: passwordConfirmation)
         print("\(request)")
         
-        apiService.postData(to: url, data: request) { (response: ResetPasswordResponse?) in
+        apiService.postData(to: url, data: request) { (response: ResetPasswordResponse?, error) in
+            if let error = error {
+                print(" Error: \(error.localizedDescription)")
+                completion("An error occurred. Please try again.")
+                return
+            }
+            
             if let response = response {
+                UserSessionManager.shared.newPassword = password
+                UserSessionManager.shared.confirmPassword = passwordConfirmation
                 completion(response.message)
                 print("response\(response)")
                 print("response\(response.message)")

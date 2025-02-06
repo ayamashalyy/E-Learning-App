@@ -23,6 +23,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
     private var useFirstImage: Bool = true
     var tenantViewModel = TenantViewModel.shared
+    var userSessionManager = UserSessionManager.shared
     
     init() {
         super.init(collectionViewLayout: RTLCollectionFlow())
@@ -46,8 +47,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         collectionView.register(FeaturedCoursesCollectionView.self, forCellWithReuseIdentifier: FeaturedCoursesCollectionView.identifier)
         collectionView.register(SectionHeaderView.self, forCellWithReuseIdentifier: SectionHeaderViewCell)
         collectionView.register(CareerPathCollectionView.self, forCellWithReuseIdentifier: CareerPathCollectionView.identifier)
-        
-        
+        userSessionManager.loadUserCredentialsFromUserDefaults()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -86,7 +86,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         switch indexPath.section {
         case 0:
             let headerCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HeaderCollectionViewCell
-            headerCell.configureCell(user: "Aya".localized)
+            headerCell.configureCell(user: userSessionManager.name ?? "Aya")
             return headerCell
             
         case 1:
