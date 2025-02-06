@@ -19,11 +19,16 @@ class TenantViewModel {
     private var storedOrganizationName: String?
     var organizationName: String?
     var primaryColor: UIColor?
-    var urlTenant: String?
     var secondaryColor: UIColor?
+    var urlTenant: String? {
+        didSet {
+            saveUrlTenantToUserDefaults()
+        }
+    }
     
     private init() {
         loadColorsFromUserDefaults()
+        loadUrlTenantFromUserDefaults()
     }
     
     func fetchTenantData() {
@@ -82,6 +87,18 @@ class TenantViewModel {
         }
         if let secondaryColorHex = defaults.string(forKey: UserDefaultsKeys.secondaryColor) {
             secondaryColor = UIColor(hex: secondaryColorHex)
+        }
+    }
+    
+    private func saveUrlTenantToUserDefaults() {
+        if let urlTenant = self.urlTenant {
+            UserDefaults.standard.set(urlTenant, forKey: UserDefaultsKeys.urlTenant)
+        }
+    }
+    
+    private func loadUrlTenantFromUserDefaults() {
+        if let savedUrlTenant = UserDefaults.standard.string(forKey: UserDefaultsKeys.urlTenant) {
+            self.urlTenant = savedUrlTenant
         }
     }
 }

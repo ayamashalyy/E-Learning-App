@@ -252,7 +252,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     print("Login successful, token: \(token)")
                     self.present(alert, animated: true, completion: nil)
                 }else {
-                    self.showAlert(message: "Login failed: \(response?.message ?? "invalid response")")
+                    self.showAlert(message: "Login failed: \(response?.message ?? "")")
                 }
             }
         }

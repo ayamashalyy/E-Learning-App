@@ -32,6 +32,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     lazy var imagePickerController = UIImagePickerController()
     let profileUpdateViewModel = ProfileUpdateViewModel()
     var userSessionManager = UserSessionManager.shared
+    var tenantViewModel = TenantViewModel.shared
     private let viewModel = ProfileViewModel()
     
     override func viewDidLoad() {
@@ -41,17 +42,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         setupConstraints()
         userSessionManager.loadUserCredentialsFromUserDefaults()
         if let token = userSessionManager.token {
-            viewModel.fetchProfile(token: token)
-        }
-        viewModel.onProfileDataUpdated = { [weak self] in
-            self?.updateUI()
-        }
-    }
-    
-    func updateUI() {
-        if let profileData = viewModel.profileData {
-            nameLabel.text = profileData.user.name
-            emailLabel.text = profileData.user.email
+            viewModel.fetchProfile(token: token) { [weak self] result in
+                switch result {
+                case .success(let profileResponse):
+                    DispatchQueue.main.async {
+                        self?.nameLabel.text = profileResponse.user.name
+                        self?.emailLabel.text = profileResponse.user.email
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print("Error fetching profile: \(error.localizedDescription)")
+                    }
+                }
+            }
         }
     }
     
