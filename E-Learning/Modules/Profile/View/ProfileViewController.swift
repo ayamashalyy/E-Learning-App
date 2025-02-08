@@ -58,6 +58,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userSessionManager.loadUserCredentialsFromUserDefaults()
+        nameLabel.text = userSessionManager.name
+        emailLabel.text = userSessionManager.email
+    }
     
     func setupViews() {
         
@@ -78,12 +84,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImageView.addGestureRecognizer(tapGesture)
         
         nameLabel = UILabel()
-        nameLabel.text = userSessionManager.name
         nameLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         emailLabel = UILabel()
-        emailLabel.text = userSessionManager.email
         emailLabel.font = UIFont(name: "Roboto-Medium", size: 14)
         emailLabel.textColor = .gray
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -121,8 +125,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             profileImageView.clipsToBounds = true
             
             // Convert the image to data and send it to update the profile
-            if let imageData = selectedImage.jpegData(compressionQuality: 0.8) {
+            if let imageData = selectedImage.jpegData(compressionQuality: 0.5) {
                 updateProfileWithImage(imageData)
+            }
+            else {
+                print("No image selected or image is not of expected type.")
             }
         }
         dismiss(animated: true, completion: nil)
@@ -135,18 +142,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func updateProfileWithImage(_ imageData: Data) {
         guard let token = userSessionManager.token,
               let name = nameLabel.text,
-              let email = emailLabel.text else { return }
+              let email = emailLabel.text, !name.isEmpty, !email.isEmpty else {
+            print("Missing required data: Name or email is empty.")
+            return
+        }
         
-        
+        print("name: \(name), email: \(email), token: \(token)")
         profileUpdateViewModel.updateProfile(name: name, email: email, avatar: imageData, token: token) { result in
             switch result {
-            case .success():
-                print("Profile updated successfully.")
+            case .success(let data):
+                if let data = data, let responseString = String(data: data, encoding: .utf8) {
+                    print("Profile updated successfully with response: \(responseString)")
+                } else {
+                    print("Profile updated successfully, but no response data.")
+                }
             case .failure(let error):
                 print("Failed to update profile: \(error.localizedDescription)")
             }
         }
     }
+    
     
     
     func setupConstraints() {

@@ -6,28 +6,64 @@
 //
 
 import Foundation
+import Alamofire
 
 
 class ProfileUpdateViewModel {
     
     private let apiService = APIService()
     
-    func updateProfile(name: String, email: String, avatar: Data?, token: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func updateProfile(name: String, email: String, avatar: Data?, token: String, completion: @escaping (Result<Data?, AFError>) -> Void) {
+        
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
         print("subDomain: \(subDomain)")
         
         let url = "\(subDomain)/profile"
         print("Request URL: \(url)")
         
-        let profileUpdateRequest = ProfileUpdateRequest(name: name, email: email, avatar: avatar)
+        let parameters: [String: String] = [
+            "name": name,
+            "email": email
+        ]
         
-        apiService.postUpdateProfileData(to: url, data: profileUpdateRequest, token: token) { (response: ProfileUpdateResponse?) in
-            if let response = response {
-                let updatedUser = response.user
-                print("Profile Updated: \(updatedUser.name), \(updatedUser.email)")
-                completion(.success(()))
+        let boundary = UUID().uuidString
+        var headers: HTTPHeaders = [
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data; boundary=\(boundary)",
+        ]
+        
+        headers["Authorization"] = "Bearer \(token)"
+        
+        print("Headers: \(headers)")
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            // Append the file with the key "Avatar"
+            if let avatar = avatar {
+                print("Avatar data size: \(avatar.count) bytes")
+                multipartFormData.append(avatar, withName: "avatar", fileName: "avatar.jpg", mimeType: "image/jpeg")
             } else {
-                completion(.failure(NSError(domain: "ProfileUpdateError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error: Failed to update profile."])))
+                print("No avatar data found")
+            }
+            
+            // Append text parameters
+            for (key, value) in parameters {
+                if let data = value.data(using: .utf8) {
+                    multipartFormData.append(data, withName: key)
+                }
+            }
+        }, to: url, method: .post, headers: headers)
+        .validate()
+        .response { response in
+            switch response.result {
+            case .success(let data):
+                print("Profile updated successfully: \(String(describing: data))")
+                completion(.success(data))
+            case .failure(let error):
+                print("Failed to update profile: \(error.localizedDescription)")
+                if let data = response.data, let errorMessage = String(data: data, encoding: .utf8) {
+                    print("Server Response: \(errorMessage)")
+                    completion(.failure(error))
+                }
             }
         }
     }

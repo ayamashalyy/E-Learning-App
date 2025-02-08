@@ -388,8 +388,17 @@ class AccountCenterViewController: UIViewController {
         
         profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, token: token) { result in
             switch result {
-            case .success:
-                print("Profile successfully updated.")
+            case .success(let data):
+                if let data = data, let responseString = String(data: data, encoding: .utf8) {
+                    print("Profile updated successfully with response: \(responseString)")
+                    DispatchQueue.main.async {
+                        self.userSessionManager.name = name
+                        self.userSessionManager.email = email
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                } else {
+                    print("Profile updated successfully, but no response data.")
+                }
             case .failure(let error):
                 print("Failed to update profile: \(error.localizedDescription)")
             }

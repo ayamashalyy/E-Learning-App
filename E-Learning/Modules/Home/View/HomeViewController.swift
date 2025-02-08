@@ -81,6 +81,14 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
     
+    func didUpdateProfile(name: String, email: String) {
+        userSessionManager.name = name
+        collectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {

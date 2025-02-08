@@ -52,7 +52,7 @@ class UserSessionManager {
     }
     
     
-    private func saveUserCredentialsToUserDefaults() {
+    func saveUserCredentialsToUserDefaults() {
         let defaults = UserDefaults.standard
         
         if let token = token {
