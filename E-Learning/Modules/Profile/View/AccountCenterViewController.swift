@@ -176,7 +176,7 @@ class AccountCenterViewController: UIViewController {
             nameTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             nameTextField.textColor = UIColor(named: "textfield")
             nameTextField.isHidden = true
-            nameTextField.placeholder = "Moaz Mohamed".localized
+            nameTextField.placeholder = userSessionManager.name
             nameTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewName = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             nameTextField.leftView = paddingViewName
@@ -198,7 +198,7 @@ class AccountCenterViewController: UIViewController {
             emailTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             emailTextField.textColor = UIColor(named: "textfield")
             emailTextField.isHidden = true
-            emailTextField.placeholder = "Username@gmail.com".localized
+            emailTextField.placeholder = userSessionManager.email
             emailTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewEmail = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             emailTextField.leftView = paddingViewEmail
@@ -383,8 +383,15 @@ class AccountCenterViewController: UIViewController {
             return
         }
         
-        let name = nameTextField.text ?? ""
-        let email = emailTextField.text ?? ""
+        
+        let name = nameTextField.text?.isEmpty == false ? nameTextField.text! : userSessionManager.name ?? ""
+        let email = emailTextField.text?.isEmpty == false ? emailTextField.text! : userSessionManager.email ?? ""
+        
+        if !profileUpdateViewModel.isValidEmail(email) {
+            print(" البريد الإلكتروني غير صالح")
+            showAlert(title: "Invalid Email", message: "Please enter a valid email address.")
+            return
+        }
         
         profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, token: token) { result in
             switch result {
@@ -421,4 +428,9 @@ class AccountCenterViewController: UIViewController {
         }
     }
     
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
 }
