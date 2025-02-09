@@ -11,7 +11,7 @@ import Alamofire
 
 class ProfileUpdateViewModel {
     
-    func updateProfile(name: String, email: String, avatar: Data?, token: String, completion: @escaping (Result<Data?, AFError>) -> Void) {
+    func updateProfile(name: String, email: String, avatar: Data?, password: String? = nil, password_confirmation: String? = nil, token: String, completion: @escaping (Result<Data?, AFError>) -> Void) {
         
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
         print("subDomain: \(subDomain)")
@@ -21,7 +21,9 @@ class ProfileUpdateViewModel {
         
         let parameters: [String: String] = [
             "name": name,
-            "email": email
+            "email": email,
+            "password": password ?? "",
+            "password_confirmation": password_confirmation ?? ""
         ]
         
         let boundary = UUID().uuidString
@@ -70,5 +72,9 @@ class ProfileUpdateViewModel {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)
+    }
+    
+    func isValidPassword(_ password: String) -> Bool {
+        return password.count >= 8
     }
 }

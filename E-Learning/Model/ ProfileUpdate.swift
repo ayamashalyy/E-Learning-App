@@ -22,5 +22,7 @@ struct ProfileUpdateRequest: Encodable {
     let name: String
     let email: String
     let avatar: Data?
+    let password: String
+    let password_confirmation: String
 }
 

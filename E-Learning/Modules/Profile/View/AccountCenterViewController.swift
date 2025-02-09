@@ -132,13 +132,17 @@ class AccountCenterViewController: UIViewController {
     func configureStack(stack: UIStackView, title: String, icon: String) {
         stack.axis = .vertical
         stack.spacing = 20
+        stack.alignment = .fill
         stack.backgroundColor = UIColor.white
         stack.isLayoutMarginsRelativeArrangement = true
+        stack.layoutMargins = UIEdgeInsets(top: 30, left: 20, bottom: 0, right: 0)
         
         let horizontalStack = UIStackView()
         horizontalStack.axis = .horizontal
         horizontalStack.spacing = 10
         horizontalStack.isUserInteractionEnabled = true
+        horizontalStack.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        
         
         let iconImageView = UIImageView(image: UIImage(named: icon))
         iconImageView.tintColor = tenantViewModel.secondaryColor
@@ -163,13 +167,6 @@ class AccountCenterViewController: UIViewController {
         horizontalStack.addArrangedSubview(actionButton)
         stack.addArrangedSubview(horizontalStack)
         
-        NSLayoutConstraint.activate([
-            horizontalStack.leadingAnchor.constraint(equalTo: stack.leadingAnchor, constant: 20),
-            horizontalStack.topAnchor.constraint(equalTo: stack.topAnchor, constant: 20),
-            horizontalStack.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: 20),
-            horizontalStack.trailingAnchor.constraint(equalTo: stack.trailingAnchor, constant: 20)
-        ])
-        
         
         if title == "Name" {
             let nameTextField = UITextField()
@@ -188,7 +185,7 @@ class AccountCenterViewController: UIViewController {
             NSLayoutConstraint.activate([
                 nameTextField.heightAnchor.constraint(equalToConstant: 50),
                 nameTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                nameTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
+                nameTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor),
                 
             ])
         }
@@ -210,7 +207,7 @@ class AccountCenterViewController: UIViewController {
             NSLayoutConstraint.activate([
                 emailTextField.heightAnchor.constraint(equalToConstant: 50),
                 emailTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                emailTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20)
+                emailTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor)
             ])
         }
         
@@ -221,7 +218,7 @@ class AccountCenterViewController: UIViewController {
             currentPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             currentPasswordTextField.textColor = UIColor(named: "textfield")
             currentPasswordTextField.isHidden = true
-            currentPasswordTextField.placeholder = "Current password".localized
+            currentPasswordTextField.placeholder = userSessionManager.newPassword
             currentPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewCurrentPasswordTextField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             currentPasswordTextField.leftView = paddingViewCurrentPasswordTextField
@@ -246,7 +243,7 @@ class AccountCenterViewController: UIViewController {
             newPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             newPasswordTextField.textColor = UIColor(named: "textfield")
             newPasswordTextField.isHidden = true
-            newPasswordTextField.placeholder = "New password".localized
+            newPasswordTextField.placeholder = userSessionManager.confirmPassword
             newPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             newPasswordTextField.leftView = paddingView
@@ -269,7 +266,7 @@ class AccountCenterViewController: UIViewController {
                 
                 currentPasswordTextField.heightAnchor.constraint(equalToConstant: 50),
                 currentPasswordTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                currentPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
+                currentPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor),
                 
                 eyeButton1.trailingAnchor.constraint(equalTo: currentPasswordTextField.trailingAnchor, constant: -10),
                 eyeButton1.widthAnchor.constraint(equalToConstant: 90),
@@ -279,7 +276,7 @@ class AccountCenterViewController: UIViewController {
                 newPasswordTextField.heightAnchor.constraint(equalToConstant: 50),
                 newPasswordTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
                 
-                newPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor, constant: 20),
+                newPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor),
                 eyeButton2.widthAnchor.constraint(equalToConstant: 90),
                 eyeButton2.heightAnchor.constraint(equalToConstant: 90)
                 
@@ -352,6 +349,8 @@ class AccountCenterViewController: UIViewController {
         
         let buttonStack = UIStackView(arrangedSubviews: [cancelButton, saveButton])
         buttonStack.axis = .horizontal
+        buttonStack.distribution = .fillProportionally
+        
         buttonStack.spacing = 10
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(buttonStack)
@@ -360,10 +359,8 @@ class AccountCenterViewController: UIViewController {
             buttonStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             buttonStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             buttonStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            cancelButton.heightAnchor.constraint(equalToConstant: 65),
-            cancelButton.widthAnchor.constraint(equalToConstant: 95),
+            cancelButton.heightAnchor.constraint(equalTo: saveButton.heightAnchor),
             saveButton.heightAnchor.constraint(equalToConstant: 60),
-            saveButton.widthAnchor.constraint(equalToConstant: 230)
         ])
     }
     
@@ -378,7 +375,10 @@ class AccountCenterViewController: UIViewController {
             return
         }
         guard let nameTextField = nameStackView.arrangedSubviews.compactMap({$0 as? UITextField }).first,
-              let emailTextField = emailStackView.arrangedSubviews.compactMap({ $0 as? UITextField }).first else {
+              let emailTextField = emailStackView.arrangedSubviews.compactMap({ $0 as? UITextField }).first,
+              let currentPasswordTextField = passwordStackView.arrangedSubviews.compactMap ({ $0 as? UITextField }).first,
+              let confirmationPasswordTextField = passwordStackView.arrangedSubviews.compactMap ({ $0 as? UITextField }).last
+        else {
             print("Text fields not found")
             return
         }
@@ -386,14 +386,25 @@ class AccountCenterViewController: UIViewController {
         
         let name = nameTextField.text?.isEmpty == false ? nameTextField.text! : userSessionManager.name ?? ""
         let email = emailTextField.text?.isEmpty == false ? emailTextField.text! : userSessionManager.email ?? ""
+        let currentPassword = currentPasswordTextField.text?.isEmpty == false ? currentPasswordTextField.text! : userSessionManager.newPassword ?? ""
+        let confirmationPassword = confirmationPasswordTextField.text?.isEmpty == false ? confirmationPasswordTextField.text! : userSessionManager.confirmPassword ?? ""
         
         if !profileUpdateViewModel.isValidEmail(email) {
-            print(" البريد الإلكتروني غير صالح")
             showAlert(title: "Invalid Email", message: "Please enter a valid email address.")
             return
         }
         
-        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, token: token) { result in
+        if !profileUpdateViewModel.isValidPassword(currentPassword) {
+            showAlert(title: "Invalid Password", message: "The password field must be at least 8 characters.")
+            return
+        }
+        
+        if currentPassword != confirmationPassword {
+            showAlert(title: "Password Mismatch", message: "The password field confirmation does not match.")
+            return
+        }
+        
+        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, password: currentPassword, password_confirmation: confirmationPassword, token: token) { result in
             switch result {
             case .success(let data):
                 if let data = data, let responseString = String(data: data, encoding: .utf8) {
@@ -401,6 +412,8 @@ class AccountCenterViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.userSessionManager.name = name
                         self.userSessionManager.email = email
+                        self.userSessionManager.newPassword = currentPassword
+                        self.userSessionManager.confirmPassword = confirmationPassword
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {
