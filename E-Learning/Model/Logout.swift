@@ -7,20 +7,8 @@
 
 import Foundation
 
-struct LogoutRequest: Encodable {
-    let email: String
-    let otp: String
-    let password: String
-    let password_confirmation: String
+struct LogoutResponse: Decodable {
+    let message: String
 }
 
-struct LogoutResponse: Decodable {
-    struct User: Decodable {
-        let id: Int
-        let name: String
-        let email: String
-        let avatar: String?
-    }
-    
-    let user: User
-}
+struct EmptyRequest: Encodable {}

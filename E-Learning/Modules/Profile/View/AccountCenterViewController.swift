@@ -414,6 +414,7 @@ class AccountCenterViewController: UIViewController {
                         self.userSessionManager.email = email
                         self.userSessionManager.newPassword = currentPassword
                         self.userSessionManager.confirmPassword = confirmationPassword
+                        self.userSessionManager.saveUserCredentialsToUserDefaults()
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {

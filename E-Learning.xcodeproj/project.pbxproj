@@ -121,6 +121,7 @@
 		E8B29E412D51252E0083C471 /*  VerifyOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */; };
 		E8B375C62D5174ED00FC383B /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C52D5174ED00FC383B /* ResetPassword.swift */; };
 		E8B375C82D51758200FC383B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */; };
+		E8BB32882D61EE08006CBB2A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BB32872D61EE08006CBB2A /* KeychainManager.swift */; };
 		E8C644BC2D536DC500EDA483 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */; };
 		E8C644BE2D5387F300EDA483 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BD2D5387F300EDA483 /* Profile.swift */; };
 		E8C644C02D53883500EDA483 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BF2D53883500EDA483 /* ProfileViewModel.swift */; };
@@ -250,6 +251,7 @@
 		E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " VerifyOTPViewModel.swift"; sourceTree = "<group>"; };
 		E8B375C52D5174ED00FC383B /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		E8BB32872D61EE08006CBB2A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
 		E8C644BD2D5387F300EDA483 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E8C644BF2D53883500EDA483 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 			children = (
 				E88E5FF02D44FA04002A38C8 /* APIService.swift */,
 				E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */,
+				E8BB32872D61EE08006CBB2A /* KeychainManager.swift */,
 			);
 			path = "Network service";
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
 				03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */,
 				035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */,
+				E8BB32882D61EE08006CBB2A /* KeychainManager.swift in Sources */,
 				03DDA9F42D285E28008115CA /* UITableView+Extensions.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */,

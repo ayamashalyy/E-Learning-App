@@ -1,0 +1,60 @@
+//
+//  KeychainManager.swift
+//  E-Learning
+//
+//  Created by Aya Mashaly on 16/02/2025.
+//
+
+import Foundation
+import Security
+
+class KeychainManager {
+    
+    static let shared = KeychainManager()
+    
+    static func savePasswordToKeychain(password: String, key: String) {
+        // service, account, class, data, password
+        let data = Data(password.utf8)
+        
+        let deleteQuery = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key
+        ] as CFDictionary
+        
+        SecItemDelete(deleteQuery)
+        
+        let addQuery = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key,
+            kSecValueData: data
+        ] as CFDictionary
+        
+        let status = SecItemAdd(addQuery, nil)
+        if status == errSecSuccess {
+            print("successfully Saved")
+        } else {
+            print("Failed to save data: \(status)")
+        }
+    }
+    
+    static func getPasswordFromKeychain(key: String) -> String?{
+        // service, account, class, return_data, matchLimit
+        
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key,
+            kSecReturnData: true,                 // return data saved
+            kSecMatchLimit: kSecMatchLimitOne     //one element return
+        ] as CFDictionary
+        
+        var data: AnyObject?
+        let status = SecItemCopyMatching(query, &data)
+        
+        if status == errSecSuccess, let retrievedData = data as? Data {
+            return String(data: retrievedData, encoding: .utf8)
+        } else {
+            print("فشل في استرجاع كلمة المرور")
+            return nil
+        }
+    }
+}

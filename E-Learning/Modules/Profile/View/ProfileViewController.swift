@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var userSessionManager = UserSessionManager.shared
     var tenantViewModel = TenantViewModel.shared
     private let viewModel = ProfileViewModel()
+    let logoutViewModel = LogoutViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,14 +142,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func updateProfileWithImage(_ imageData: Data) {
         guard let token = userSessionManager.token,
+              let password = userSessionManager.newPassword,
+              let password_confirmation = userSessionManager.confirmPassword,
               let name = nameLabel.text,
               let email = emailLabel.text, !name.isEmpty, !email.isEmpty else {
             print("Missing required data: Name or email is empty.")
             return
         }
         
-        print("name: \(name), email: \(email), token: \(token)")
-        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: imageData, token: token) { result in
+        print("name: \(name), email: \(email), token: \(token), password: \(password), password_confirmation: \(password_confirmation) ")
+        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: imageData, password: password, password_confirmation: password_confirmation, token: token) { result in
             switch result {
             case .success(let data):
                 if let data = data, let responseString = String(data: data, encoding: .utf8) {
@@ -264,9 +267,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 navigationController.modalPresentationStyle = .fullScreen
                 self.present(navigationController, animated: true, completion: nil)
                 
-                //                case "Log out".localized:
-                
-                
+            case "Log out".localized:
+                logoutUser()
             default:
                 break
             }
@@ -278,6 +280,29 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
+    
+    func logoutUser() {
+        guard let token = userSessionManager.token else { return }
+        
+        logoutViewModel.postLogout(token: token) { [weak self] result in
+            switch result {
+            case .success(let message):
+                print(message)
+                self?.navigateToLoginScreen()
+                
+            case .failure(let error):
+                print("Logout failed: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func navigateToLoginScreen() {
+        let loginViewController = LoginViewController()
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
+    
 }
 
 

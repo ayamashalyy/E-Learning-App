@@ -7,25 +7,32 @@
 
 import Foundation
 
+enum LogoutError: Error {
+    case unknownError(String)
+}
+
 class LogoutViewModel {
     private let apiService = APIService()
     
-    func postLogout(email: String, otp: String, password: String, passwordConfirmation: String, token: String, completion: @escaping (LogoutResponse?) -> Void) {
+    func postLogout(token: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
         print("subDomain: \(subDomain)")
         
         let url = "\(subDomain)/auth/logout"
         print("Request URL: \(url)")
-        let requestData = LogoutRequest(email: email, otp: otp, password: password, password_confirmation: passwordConfirmation)
         
-        apiService.postData(to: url, data: requestData, token: token) { (response: LogoutResponse?, error) in
+        apiService.postData(to: url, data: EmptyRequest(), token: token) { (response: LogoutResponse?, error) in
             if let error = error {
                 print("Logout error: \(error.localizedDescription)")
-                completion(nil)
+                completion(.failure(error))
                 return
             }
-            completion(response)
+            if let response = response {
+                completion(.success(response.message))
+            } else {
+                completion(.failure(LogoutError.unknownError("Unknown logout error")))
+            }
         }
     }
 }

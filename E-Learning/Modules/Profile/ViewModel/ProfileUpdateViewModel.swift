@@ -11,19 +11,17 @@ import Alamofire
 
 class ProfileUpdateViewModel {
     
-    func updateProfile(name: String, email: String, avatar: Data?, password: String? = nil, password_confirmation: String? = nil, token: String, completion: @escaping (Result<Data?, AFError>) -> Void) {
+    func updateProfile(name: String, email: String, avatar: Data?, password: String, password_confirmation: String, token: String, completion: @escaping (Result<Data?, AFError>) -> Void) {
         
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
-        print("subDomain: \(subDomain)")
         
         let url = "\(subDomain)/profile"
-        print("Request URL: \(url)")
         
         let parameters: [String: String] = [
             "name": name,
             "email": email,
-            "password": password ?? "",
-            "password_confirmation": password_confirmation ?? ""
+            "password": password,
+            "password_confirmation": password_confirmation
         ]
         
         let boundary = UUID().uuidString
@@ -34,12 +32,9 @@ class ProfileUpdateViewModel {
         
         headers["Authorization"] = "Bearer \(token)"
         
-        print("Headers: \(headers)")
-        
         AF.upload(multipartFormData: { multipartFormData in
             // Append the file with the key "Avatar"
             if let avatar = avatar {
-                print("Avatar data size: \(avatar.count) bytes")
                 multipartFormData.append(avatar, withName: "avatar", fileName: "avatar.jpg", mimeType: "image/jpeg")
             } else {
                 print("No avatar data found")
@@ -51,6 +46,16 @@ class ProfileUpdateViewModel {
                     multipartFormData.append(data, withName: key)
                 }
             }
+            
+            
+            print("Request Headers: \(headers)")
+            print("Request Body contains: \(parameters)")
+            if let avatar = avatar {
+                print("Request Body contains an image of size: \(avatar.count) bytes")
+            } else {
+                print("No avatar data included")
+            }
+            
         }, to: url, method: .post, headers: headers)
         .validate()
         .response { response in

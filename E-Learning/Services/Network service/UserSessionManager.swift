@@ -65,10 +65,11 @@ class UserSessionManager {
             defaults.set(email, forKey: UserDefaultsKeys.rememberEmail)
         }
         if let newPassword = newPassword {
+            KeychainManager.savePasswordToKeychain(password: newPassword, key: UserDefaultsKeys.newPassword)
             defaults.set(newPassword, forKey: UserDefaultsKeys.newPassword)
         }
         if let confirmPassword = confirmPassword {
-            defaults.set(confirmPassword, forKey: UserDefaultsKeys.confirmPassword)
+            KeychainManager.savePasswordToKeychain(password: confirmPassword, key: UserDefaultsKeys.confirmPassword)
         }
     }
     
@@ -84,10 +85,10 @@ class UserSessionManager {
         if let email = defaults.string(forKey: UserDefaultsKeys.rememberEmail) {
             self.email = email
         }
-        if let newPassword = defaults.string(forKey: UserDefaultsKeys.newPassword) {
+        if let newPassword = KeychainManager.getPasswordFromKeychain(key: UserDefaultsKeys.newPassword) {
             self.newPassword = newPassword
         }
-        if let confirmPassword = defaults.string(forKey: UserDefaultsKeys.confirmPassword) {
+        if let confirmPassword = KeychainManager.getPasswordFromKeychain(key: UserDefaultsKeys.confirmPassword) {
             self.confirmPassword = confirmPassword
         }
     }

@@ -18,11 +18,12 @@ struct Profile: Decodable {
     let avatar: Data?
 }
 
+// ِEncodable convert object for json
 struct ProfileUpdateRequest: Encodable {
-    let name: String
-    let email: String
+    let name: String?
+    let email: String?
     let avatar: Data?
-    let password: String
-    let password_confirmation: String
+    let password: String?
+    let password_confirmation: String?
 }
 
