@@ -270,6 +270,19 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         }
     }
     
+    
+    //    func checkRememberedUser() {
+    //        if let savedEmail = UserDefaults.standard.string(forKey: UserDefaultsKeys.rememberEmail),
+    //           let savedPassword = UserDefaults.standard.string(forKey: UserDefaultsKeys.newPassword),
+    //           rememberMeCheckbox.isSelected {
+    //            emailTextField.text = savedEmail
+    //            passwordTextField.text = savedPassword
+    //        } else {
+    //            emailTextField.text = ""
+    //            passwordTextField.text = ""
+    //        }
+    //    }
+    
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

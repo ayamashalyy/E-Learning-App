@@ -288,6 +288,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch result {
             case .success(let message):
                 print(message)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.primaryColor)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.secondaryColor)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userName)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberEmail)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.urlTenant)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.selectedTenant)
                 self?.navigateToLoginScreen()
                 
             case .failure(let error):
@@ -297,8 +304,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func navigateToLoginScreen() {
-        let loginViewController = LoginViewController()
-        let navigationController = UINavigationController(rootViewController: loginViewController)
+        let selectOrganizationViewController = SelectOrganizationViewController()
+        let navigationController = UINavigationController(rootViewController: selectOrganizationViewController)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
     }

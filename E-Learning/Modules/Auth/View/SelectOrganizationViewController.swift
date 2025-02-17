@@ -55,7 +55,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         goToYourOrgaizationButton.setTitle("Go To Your Organization".localized, for: .normal)
         goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         goToYourOrgaizationButton.setTitleColor(.white, for: .normal)
-        goToYourOrgaizationButton.backgroundColor = tenantViewModel.primaryColor ?? .black
+        goToYourOrgaizationButton.backgroundColor = .black
         goToYourOrgaizationButton.layer.cornerRadius = 25
         goToYourOrgaizationButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(goToYourOrgaizationButton)
@@ -95,6 +95,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         }
         
         tenantViewModel.setOrganizationName(organizationName)
+        UserDefaults.standard.set(organizationName, forKey: UserDefaultsKeys.selectedTenant)
         
         tenantViewModel.onError = { [weak self] errorMessage in
             DispatchQueue.main.async {

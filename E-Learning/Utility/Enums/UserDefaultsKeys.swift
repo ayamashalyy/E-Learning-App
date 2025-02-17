@@ -16,4 +16,5 @@ enum UserDefaultsKeys {
     static let userToken = "userToken"
     static let userName = "userName"
     static let urlTenant = "urlTenant"
+    static let selectedTenant = "selectedTenant"
 }

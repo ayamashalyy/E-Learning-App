@@ -295,9 +295,6 @@
 		03121D562D20A0180062DB89 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */,
-				0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */,
-				0377D4732CEBBA3D006C60F6 /* Assets.xcassets */,
 				0377D46B2CEBBA0E006C60F6 /* ViewController.swift */,
 			);
 			path = Common;
@@ -473,25 +470,26 @@
 		0377D4662CEBBA0E006C60F6 /* E-Learning */ = {
 			isa = PBXGroup;
 			children = (
+				E8B115802D638D9D005C62CF /* Core Data */,
+				E8B1157F2D638D00005C62CF /* Configuration */,
+				E8B1157E2D638C4E005C62CF /* Resources */,
+				E8B1157D2D638C31005C62CF /* Core */,
 				03121D562D20A0180062DB89 /* Common */,
 				03B43C1E2CF0C7000018A306 /* Model */,
 				03B43C1C2CF0C6960018A306 /* Services */,
 				03B43C1B2CF0C63B0018A306 /* Utility */,
 				03B43C1A2CF0C5210018A306 /* Modules */,
-				0377D47E2CEBC1F5006C60F6 /* Views */,
-				0377D4702CEBBA0F006C60F6 /* E_Learning.xcdatamodeld */,
-				0377D4782CEBBA3D006C60F6 /* Info.plist */,
+				0377D47E2CEBC1F5006C60F6 /* Storyboards */,
 			);
 			path = "E-Learning";
 			sourceTree = "<group>";
 		};
-		0377D47E2CEBC1F5006C60F6 /* Views */ = {
+		0377D47E2CEBC1F5006C60F6 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				03822FE22CECC27A00F96ACB /* Main.storyboard */,
-				0377D4752CEBBA3D006C60F6 /* LaunchScreen.storyboard */,
 			);
-			path = Views;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		037F20F32CF3A0FA00691EF0 /* Auth */ = {
@@ -803,6 +801,40 @@
 				E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		E8B1157D2D638C31005C62CF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0377D4672CEBBA0E006C60F6 /* AppDelegate.swift */,
+				0377D4692CEBBA0E006C60F6 /* SceneDelegate.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		E8B1157E2D638C4E005C62CF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0377D4732CEBBA3D006C60F6 /* Assets.xcassets */,
+				0377D4752CEBBA3D006C60F6 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E8B1157F2D638D00005C62CF /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				0377D4782CEBBA3D006C60F6 /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		E8B115802D638D9D005C62CF /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				0377D4702CEBBA0F006C60F6 /* E_Learning.xcdatamodeld */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1190,7 +1222,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "E-Learning/Info.plist";
+				INFOPLIST_FILE = "E-Learning/Configuration/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take a profile picture.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to change your profile picture.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1224,7 +1256,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "E-Learning/Info.plist";
+				INFOPLIST_FILE = "E-Learning/Configuration/Info.plist";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take a profile picture.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to change your profile picture.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

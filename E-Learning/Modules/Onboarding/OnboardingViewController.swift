@@ -13,7 +13,6 @@ class OnboardingViewController: UIViewController {
     var welcomeText: UILabel!
     var descriptionText: UITextView!
     var registerButton: UIButton!
-    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +48,7 @@ class OnboardingViewController: UIViewController {
         registerButton.setTitle("Register".localized, for: .normal)
         registerButton.titleLabel?.font =  UIFont(name: "Roboto-Bold", size: 16)
         registerButton.setTitleColor(UIColor.white, for: .normal)
-        registerButton.backgroundColor = tenantViewModel.primaryColor ?? .black
+        registerButton.backgroundColor = .black
         registerButton.layer.cornerRadius = 25
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(registerButton)

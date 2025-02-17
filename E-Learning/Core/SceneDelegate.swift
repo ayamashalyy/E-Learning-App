@@ -17,11 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
+        let selectedTenant = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedTenant)
         
         if let token = UserDefaults.standard.string(forKey: UserDefaultsKeys.userToken), !token.isEmpty {
             
             let mainViewController = ViewController()
             let navigationController = UINavigationController(rootViewController: mainViewController)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            self.window?.rootViewController = navigationController
+        } else if let tenant = selectedTenant, !tenant.isEmpty {
+            let loginVC = LoginViewController()
+            let navigationController = UINavigationController(rootViewController: loginVC)
             navigationController.setNavigationBarHidden(true, animated: false)
             self.window?.rootViewController = navigationController
         } else {
