@@ -12,6 +12,7 @@ class ProfileViewModel {
     var tenantViewModel = TenantViewModel.shared
     var name: String?
     var email: String?
+    var avatar: String?
     
     func fetchProfile(token: String, completion: @escaping (Result<ProfileResponse, Error>) -> Void) {
         
@@ -24,13 +25,14 @@ class ProfileViewModel {
         let url = "\(subDomain)/profile"
         print("Request URL GetProfile: \(url)")
         
-        apiService.fetchData(from: url, token: token) { [weak self] (response: ProfileResponse?) in
+        apiService.fetchData(from: url, token: token) { [weak self] (response: ProfileResponse?, Error) in
             guard let self = self else { return }
             
             if let response = response {
                 print("Response\(response)")
                 self.name = response.user.name
                 self.email = response.user.email
+                self.avatar = response.user.avatar
                 
             } else {
                 print("Failed to fetch profile data")

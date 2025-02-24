@@ -24,6 +24,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     var alreadyHaveAccountLabel: UILabel!
     var loginButton: UIButton!
     var loginViewModel = LoginViewModel()
+    private let refreshTokenViewModel = RefreshTokenViewModel()
     
     var isPasswordVisible = true
     var tenantViewModel = TenantViewModel.shared
@@ -290,7 +291,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     private func navigateToNextScreen() {
-        let nextViewController = ViewController()
+        let nextViewController = TabBarViewController()
         nextViewController.modalPresentationStyle = .fullScreen
         present(nextViewController, animated: true, completion: nil)
         

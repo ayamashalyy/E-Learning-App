@@ -46,7 +46,7 @@ class LoginViewModel {
                     case .responseValidationFailed(let reason):
                         if case .unacceptableStatusCode(let code) = reason, code == 401 {
                             print("Login failed: Invalid credentials")
-                            completion(LoginResponse(token: nil, message: "Invalid credentials", user: nil, role: nil))
+                            completion(LoginResponse(token: nil, refreshToken: nil, message: "Invalid credentials", user: nil, role: nil))
                             
                             return
                         }
@@ -60,9 +60,11 @@ class LoginViewModel {
             }
             
             if let response = response {
-                if let token = response.token {
+                if let token = response.token, let refreshToken = response.refreshToken  {
                     print("Received response: \(response)")
                     UserSessionManager.shared.token = token
+                    UserSessionManager.shared.refreshToken = refreshToken
+                    UserSessionManager.shared.saveUserCredentialsToUserDefaults()
                     UserSessionManager.shared.email = response.user?.email
                     UserSessionManager.shared.name = response.user?.name
                     completion(response)

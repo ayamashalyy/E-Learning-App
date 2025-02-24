@@ -10,8 +10,7 @@ import Alamofire
 
 class APIService {
     
-    
-    func fetchData<T: Decodable>(from url: String, token: String? = nil, completion: @escaping (T?) -> Void) {
+    func fetchData<T: Decodable>(from url: String, token: String? = nil, completion: @escaping (T?,Error?) -> Void) {
         
         var headers: HTTPHeaders = [
             "Accept": "application/json"
@@ -21,20 +20,24 @@ class APIService {
             headers["Authorization"] = "Bearer \(token)"
         }
         
-        AF.request(url, headers: headers).responseDecodable(of: T.self) {  response in
-            switch response.result {
-            case .success(let decodedData):
-                DispatchQueue.main.async {
-                    completion(decodedData)
-                }
-            case .failure(let error):
-                print("Error fetching data: \(error)")
-                DispatchQueue.main.async {
-                    completion(nil)
+        AF.request(url, headers: headers)
+            .validate()
+            .responseDecodable(of: T.self) {  response in
+                switch response.result {
+                case .success(let decodedData):
+                    DispatchQueue.main.async {
+                        completion(decodedData, nil)
+                    }
+                case .failure(let error):
+                    
+                    print("Error fetching data: \(error)")
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
                 }
             }
-        }
     }
+    
     
     func postData<T: Decodable, U: Encodable>(to url: String, data: U, token: String? = nil, completion: @escaping (T?,Error?) -> Void) {
         
@@ -60,6 +63,7 @@ class APIService {
                     DispatchQueue.main.async {
                         completion(nil, error)
                     }
+                    
                 }
             }
     }

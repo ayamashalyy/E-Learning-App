@@ -100,7 +100,7 @@ extension AppDelegate: LocalizationDelegate {
     func resetApp() {
         guard let window = window else { return }
         
-        let navigationController = UIViewController.wrapInNavigation(ViewController.self)
+        let navigationController = UIViewController.wrapInNavigation(TabBarViewController.self)
         
         window.rootViewController = navigationController
         let options: UIView.AnimationOptions = .transitionCrossDissolve

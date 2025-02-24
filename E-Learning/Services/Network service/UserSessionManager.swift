@@ -27,6 +27,12 @@ class UserSessionManager {
         }
     }
     
+    var refreshToken: String? {
+        didSet {
+            saveUserCredentialsToUserDefaults()
+        }
+    }
+    
     var name: String? {
         didSet {
             saveUserCredentialsToUserDefaults()
@@ -51,6 +57,12 @@ class UserSessionManager {
         }
     }
     
+    var avatar: String? {
+        didSet {
+            saveUserCredentialsToUserDefaults()
+        }
+    }
+    
     
     func saveUserCredentialsToUserDefaults() {
         let defaults = UserDefaults.standard
@@ -58,11 +70,19 @@ class UserSessionManager {
         if let token = token {
             defaults.set(token, forKey: UserDefaultsKeys.userToken)
         }
+        
+        if let refreshToken = refreshToken {
+            defaults.set(refreshToken, forKey: UserDefaultsKeys.refreshToken)
+        }
+        
         if let name = name {
             defaults.set(name, forKey: UserDefaultsKeys.userName)
         }
         if let email = email {
             defaults.set(email, forKey: UserDefaultsKeys.rememberEmail)
+        }
+        if let avatar = avatar {
+            defaults.set(avatar, forKey: UserDefaultsKeys.userAvatar)
         }
         if let newPassword = newPassword {
             KeychainManager.savePasswordToKeychain(password: newPassword, key: UserDefaultsKeys.newPassword)
@@ -79,11 +99,17 @@ class UserSessionManager {
         if let token = defaults.string(forKey: UserDefaultsKeys.userToken) {
             self.token = token
         }
+        if let refreshToken = defaults.string(forKey: UserDefaultsKeys.refreshToken) {
+            self.refreshToken = refreshToken
+        }
         if let name = defaults.string(forKey: UserDefaultsKeys.userName) {
             self.name = name
         }
         if let email = defaults.string(forKey: UserDefaultsKeys.rememberEmail) {
             self.email = email
+        }
+        if let avatar = defaults.string(forKey: UserDefaultsKeys.userAvatar) {
+            self.avatar = avatar
         }
         if let newPassword = KeychainManager.getPasswordFromKeychain(key: UserDefaultsKeys.newPassword) {
             self.newPassword = newPassword

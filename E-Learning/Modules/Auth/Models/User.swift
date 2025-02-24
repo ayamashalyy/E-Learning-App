@@ -14,9 +14,18 @@ struct LoginRequest: Encodable {
 
 struct LoginResponse: Decodable {
     let token: String?
+    let refreshToken: String?
     let message: String
     let user: User?
     let role: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case token = "token"
+        case refreshToken = "refresh_token"
+        case message
+        case user
+        case role
+    }
 }
 
 struct User: Decodable {

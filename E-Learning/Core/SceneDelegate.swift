@@ -20,16 +20,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let selectedTenant = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedTenant)
         
         if let token = UserDefaults.standard.string(forKey: UserDefaultsKeys.userToken), !token.isEmpty {
+            let refreshTokenViewModel = RefreshTokenViewModel()
+            refreshTokenViewModel.refreshToken(refreshToken: UserDefaults.standard.string(forKey: UserDefaultsKeys.refreshToken)!) { result in
+                switch result {
+                case .success(let response):
+                    if let newToken = response.accessToken, let newRefreshToken = response.refreshToken {
+                        UserSessionManager.shared.token = newToken
+                        UserSessionManager.shared.refreshToken = newRefreshToken
+                        
+                        let mainViewController = TabBarViewController()
+                        let navigationController = UINavigationController(rootViewController: mainViewController)
+                        navigationController.setNavigationBarHidden(true, animated: false)
+                        self.window?.rootViewController = navigationController
+                    }
+                case .failure(let error):
+                    print(error)
+                    self.gotoLoginPage()
+                }
+            }
             
-            let mainViewController = ViewController()
-            let navigationController = UINavigationController(rootViewController: mainViewController)
-            navigationController.setNavigationBarHidden(true, animated: false)
-            self.window?.rootViewController = navigationController
         } else if let tenant = selectedTenant, !tenant.isEmpty {
-            let loginVC = LoginViewController()
-            let navigationController = UINavigationController(rootViewController: loginVC)
-            navigationController.setNavigationBarHidden(true, animated: false)
-            self.window?.rootViewController = navigationController
+            gotoLoginPage()
         } else {
             let onboardingVC = OnboardingViewController()
             let navigationController = UINavigationController(rootViewController: onboardingVC)
@@ -40,6 +51,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window?.makeKeyAndVisible()
         
+    }
+    func gotoLoginPage(){
+        let loginVC = LoginViewController()
+        let navigationController = UINavigationController(rootViewController: loginVC)
+        navigationController.setNavigationBarHidden(true, animated: false)
+        self.window?.rootViewController = navigationController
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

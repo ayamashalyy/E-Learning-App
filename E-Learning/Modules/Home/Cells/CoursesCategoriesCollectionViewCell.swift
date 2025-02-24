@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CoursesCollectionViewCell: UICollectionViewCell {
+class CoursesCategoriesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var outerView: UIView!
     @IBOutlet weak var courseImage: UIImageView!
@@ -19,11 +19,11 @@ class CoursesCollectionViewCell: UICollectionViewCell {
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
         outerView.layer.shadowColor = UIColor.gray.cgColor
-        outerView.layer.shadowOpacity = 0.3
-        outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        outerView.layer.shadowRadius = 6
+        outerView.layer.shadowOpacity = 0.1
+        outerView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        outerView.layer.shadowRadius = 3
         outerView.layer.borderColor = UIColor.lightGray.cgColor
-        outerView.layer.borderWidth = 0.5
+        outerView.layer.borderWidth = 0.3
         
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)

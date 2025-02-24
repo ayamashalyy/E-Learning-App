@@ -295,6 +295,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberEmail)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.urlTenant)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.selectedTenant)
+                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userAvatar)
                 self?.navigateToLoginScreen()
                 
             case .failure(let error):

@@ -17,4 +17,6 @@ enum UserDefaultsKeys {
     static let userName = "userName"
     static let urlTenant = "urlTenant"
     static let selectedTenant = "selectedTenant"
+    static let refreshToken = "refreshToken"
+    static let userAvatar = "userAvatar"
 }

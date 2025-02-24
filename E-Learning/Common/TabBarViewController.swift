@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UITabBarController, UITabBarControllerDelegate {
+class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     
     var tenantViewModel = TenantViewModel.shared
     

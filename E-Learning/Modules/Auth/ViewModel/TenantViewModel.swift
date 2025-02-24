@@ -41,7 +41,7 @@ class TenantViewModel {
         let baseURL = APIEndpoints.baseURL
         let url = "\(baseURL)\(organizationName)"
         print("Fetching tenant data from \(url)")
-        apiService.fetchData(from: url) { [weak self] (response: TenantResponse?) in
+        apiService.fetchData(from: url) { [weak self] (response: TenantResponse?, Error) in
             if let response = response, response.exists {
                 self?.tenant = response.tenant
                 self?.urlTenant = response.url

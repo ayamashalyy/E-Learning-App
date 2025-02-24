@@ -17,13 +17,17 @@ private let reuseIdentifier3 = "FeaturedCell"
 private let reuseIdentifier4 = "CareerCell"
 
 
-class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate,CareerPathCollectionViewDelegate {
+class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate,CareerPathCollectionViewDelegate, CoursesCategoriesSectionCellDelegate {
     
-    let sectionTitles = ["Courses Categories".localized, "Featured Courses".localized, "Most Popular".localized, "Career Paths".localized, "Latest Courses".localized]
+    // MARK: - Properties
+    
+    private let sectionTitles = ["Courses Categories".localized, "Featured Courses".localized, "Most Popular".localized, "Career Paths".localized, "Latest Courses".localized]
+    private var viewModel = CourseCategoriesViewModel()
+    private var tenantViewModel = TenantViewModel.shared
+    private var userSessionManager = UserSessionManager.shared
+    
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
-    private var useFirstImage: Bool = true
-    var tenantViewModel = TenantViewModel.shared
-    var userSessionManager = UserSessionManager.shared
+    // MARK: - Lifecycle
     
     init() {
         super.init(collectionViewLayout: RTLCollectionFlow())
@@ -36,49 +40,14 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        let nib = UINib(nibName: "HeaderCollectionViewCell", bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        let continueNib = UINib(nibName: "ContinueCollectionViewCell", bundle: nil)
-        collectionView.register(continueNib, forCellWithReuseIdentifier: reuseIdentifier1)
-        
-        collectionView.register(CoursesSectionCell.self, forCellWithReuseIdentifier: CoursesSectionCell.identifier)
-        collectionView.register(FeaturedCoursesCollectionView.self, forCellWithReuseIdentifier: FeaturedCoursesCollectionView.identifier)
-        collectionView.register(SectionHeaderView.self, forCellWithReuseIdentifier: SectionHeaderViewCell)
-        collectionView.register(CareerPathCollectionView.self, forCellWithReuseIdentifier: CareerPathCollectionView.identifier)
+        registerNibFiles()
+        getCoursesCategories()
         userSessionManager.loadUserCredentialsFromUserDefaults()
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 12
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0:
-            return CGSize(width: collectionView.frame.width, height: 90)
-        case 1:
-            return CGSize(width: collectionView.frame.width , height: 210)
-        case 2 , 4 , 6 , 8 , 10:
-            return CGSize(width: collectionView.frame.width - 20, height: 40)
-        case 3:
-            return CGSize(width: collectionView.frame.width , height: 60)
-        case 5:
-            return CGSize(width: collectionView.frame.width , height: 200)
-        case 7:
-            return CGSize(width: collectionView.frame.width , height: 200)
-        case 9:
-            return CGSize(width: collectionView.frame.width , height: 220)
-        case 11:
-            return CGSize(width: collectionView.frame.width , height: 200)
-        default:
-            return .zero
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
     }
     
     func didUpdateProfile(name: String, email: String) {
@@ -86,8 +55,41 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         collectionView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        collectionView.reloadData()
+    // MARK: - Data Fetching
+    
+    func getCoursesCategories() {
+        // Fetch data
+        viewModel.onDataFetched = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+        viewModel.fetchCourseCategories()
+    }
+    
+    // MARK: - Cell Registration
+    
+    func registerNibFiles() {
+        let nib = UINib(nibName: "HeaderCollectionViewCell", bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        let continueNib = UINib(nibName: "ContinueCollectionViewCell", bundle: nil)
+        collectionView.register(continueNib, forCellWithReuseIdentifier: reuseIdentifier1)
+        
+        collectionView.register(CoursesCategoriesSectionCell.self, forCellWithReuseIdentifier: CoursesCategoriesSectionCell.identifier)
+        collectionView.register(FeaturedCoursesCollectionView.self, forCellWithReuseIdentifier: FeaturedCoursesCollectionView.identifier)
+        collectionView.register(SectionHeaderView.self, forCellWithReuseIdentifier: SectionHeaderViewCell)
+        collectionView.register(CareerPathCollectionView.self, forCellWithReuseIdentifier: CareerPathCollectionView.identifier)
+    }
+    
+    // MARK: - UICollectionViewDataSource
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 12
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,8 +111,11 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return coursesTitleCell
             
         case 3:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CoursesSectionCell.identifier, for: indexPath) as! CoursesSectionCell
-            cell.configure(with: coursesTitles)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CoursesCategoriesSectionCell.identifier, for: indexPath) as! CoursesCategoriesSectionCell
+            let courseCategories = (0..<viewModel.numberOfCategories()).map { viewModel.cellViewModel(at: $0)
+            }
+            cell.configure(with: courseCategories)
+            cell.delegate = self
             return cell
             
         case 4:
@@ -168,6 +173,32 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
     
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.section {
+        case 0:
+            return CGSize(width: collectionView.frame.width, height: 90)
+        case 1:
+            return CGSize(width: collectionView.frame.width , height: 210)
+        case 2 , 4 , 6 , 8 , 10:
+            return CGSize(width: collectionView.frame.width - 20, height: 40)
+        case 3:
+            return CGSize(width: collectionView.frame.width , height: 60)
+        case 5:
+            return CGSize(width: collectionView.frame.width , height: 200)
+        case 7:
+            return CGSize(width: collectionView.frame.width , height: 200)
+        case 9:
+            return CGSize(width: collectionView.frame.width , height: 220)
+        case 11:
+            return CGSize(width: collectionView.frame.width , height: 200)
+        default:
+            return .zero
+        }
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -208,6 +239,8 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
     
+    // MARK: - Delegate Methods
+    
     func didSelectCourse(_ course: String) {
         print("تم اختيار الدورة: \(course)")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -217,5 +250,9 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true, completion: nil)
         }
+    }
+    
+    func didSelectCourseCategories(_ course: String) {
+        print("Selected Course: \(course)")
     }
 }

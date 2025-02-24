@@ -7,10 +7,15 @@
 
 import UIKit
 
-class CoursesSectionCell: UICollectionViewCell {
-    static let identifier = "CoursesSectionCell"
-    private var courses =  ["Data Science", "Design","Bussince", "Law"]
+protocol CoursesCategoriesSectionCellDelegate: AnyObject {
+    func didSelectCourseCategories(_ course: String)
+}
+
+class CoursesCategoriesSectionCell: UICollectionViewCell {
+    static let identifier = "CoursesCategoriesSectionCell"
+    private var coursesCategories: [CourseCategoryCellViewModel] = []
     var tenantViewModel = TenantViewModel.shared
+    weak var delegate: CoursesCategoriesSectionCellDelegate?
     
     private let innerCollectionView: UICollectionView = {
         let layout = RTLCollectionFlow()
@@ -28,7 +33,7 @@ class CoursesSectionCell: UICollectionViewCell {
         contentView.addSubview(innerCollectionView)
         innerCollectionView.dataSource = self
         innerCollectionView.delegate = self
-        let nib = UINib(nibName: "CoursesCollectionViewCell", bundle: nil)
+        let nib = UINib(nibName: "CoursesCategoriesCollectionViewCell", bundle: nil)
         innerCollectionView.register(nib, forCellWithReuseIdentifier: "CoursesCell")
     }
     
@@ -41,41 +46,38 @@ class CoursesSectionCell: UICollectionViewCell {
         innerCollectionView.frame = contentView.bounds
     }
     
-    func configure(with courses: [String]) {
-        self.courses = courses
+    func configure(with coursesCategories: [CourseCategoryCellViewModel]) {
+        self.coursesCategories = coursesCategories
         innerCollectionView.reloadData()
     }
 }
 
-extension CoursesSectionCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension CoursesCategoriesSectionCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return courses.count
+        return coursesCategories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCell", for: indexPath) as! CoursesCollectionViewCell
-        let course = courses[indexPath.item]
-        let color: UIColor
-        if indexPath.item % 2 == 0 {
-            color = tenantViewModel.secondaryColor ?? UIColor.yellow
-        } else {
-            color = tenantViewModel.primaryColor ?? UIColor.blue
-        }
-        
-        cell.configure(with: course, color: color)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCell", for: indexPath) as! CoursesCategoriesCollectionViewCell
+        let course = coursesCategories[indexPath.item]
+        cell.configure(with: course.name, color: course.color)
         cell.selectedBackgroundView = .none
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let text = courses[indexPath.item]
+        let text = coursesCategories[indexPath.item]
         let font = UIFont(name: "Roboto-Bold", size: 16) ?? .boldSystemFont(ofSize: 14)
-        let textWidth = text.width(usingFont: font)
+        let textWidth = text.name.width(usingFont: font)
         let padding: CGFloat = 50
         return CGSize(width: textWidth + padding, height: 60)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCourse = coursesCategories[indexPath.item]
+        delegate?.didSelectCourseCategories(selectedCourse.name)
+    }
 }
 
 

@@ -13,6 +13,7 @@ struct ProfileResponse: Decodable {
     struct User: Decodable {
         let name: String
         let email: String
+        let avatar: String?
     }
 }
 
