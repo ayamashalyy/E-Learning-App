@@ -31,7 +31,7 @@ class KeychainManager {
         
         let status = SecItemAdd(addQuery, nil)
         if status == errSecSuccess {
-           // print("successfully Saved")
+            // print("successfully Saved")
         } else {
             print("Failed to save data: \(status)")
         }
@@ -53,8 +53,23 @@ class KeychainManager {
         if status == errSecSuccess, let retrievedData = data as? Data {
             return String(data: retrievedData, encoding: .utf8)
         } else {
-            print("فشل في استرجاع كلمة المرور")
+            print("Failed to retrieve password")
             return nil
         }
     }
+    
+    static func deletePasswordFromKeychain(key: String) {
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrAccount: key
+        ] as CFDictionary
+        
+        let status = SecItemDelete(query)
+        if status == errSecSuccess {
+            print("Password deleted successfully")
+        } else {
+            print("Failed to delete password: \(status)")
+        }
+    }
+    
 }

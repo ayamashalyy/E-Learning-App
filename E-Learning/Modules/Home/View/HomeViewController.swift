@@ -42,7 +42,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         view.backgroundColor = .white
         registerNibFiles()
         getCoursesCategories()
-        userSessionManager.loadUserCredentialsFromUserDefaults()
     }
     
     override func viewWillAppear(_ animated: Bool) {

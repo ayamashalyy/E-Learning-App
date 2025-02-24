@@ -114,6 +114,7 @@
 		E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */; };
 		E8940F902D525CCE0008E3CA /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8940F8F2D525CCE0008E3CA /* Logout.swift */; };
 		E8940F922D525D420008E3CA /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8940F912D525D420008E3CA /* LogoutViewModel.swift */; };
+		E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */; };
 		E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EE92D4FF6C0005B0E3E /* User.swift */; };
 		E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */; };
 		E8B29E3D2D511AF80083C471 /* SendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E3C2D511AF80083C471 /* SendOTPViewModel.swift */; };
@@ -250,6 +251,7 @@
 		E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoViewController.swift; sourceTree = "<group>"; };
 		E8940F8F2D525CCE0008E3CA /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
 		E8940F912D525D420008E3CA /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsManager.swift; sourceTree = "<group>"; };
 		E8B12EE92D4FF6C0005B0E3E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8B29E3C2D511AF80083C471 /* SendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOTPViewModel.swift; sourceTree = "<group>"; };
@@ -704,6 +706,7 @@
 		03B43C1B2CF0C63B0018A306 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				E8B04FC62D6D0B6E00E84909 /* Local Storage */,
 				E84A96642D46385E00097572 /* Enums */,
 				03AC50A42D249AA300874296 /* Localization */,
 				030C79402D20C20400FFD7DD /* Extensions */,
@@ -725,8 +728,6 @@
 			isa = PBXGroup;
 			children = (
 				E88E5FF02D44FA04002A38C8 /* APIService.swift */,
-				E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */,
-				E8BB32872D61EE08006CBB2A /* KeychainManager.swift */,
 			);
 			path = "Network service";
 			sourceTree = "<group>";
@@ -809,9 +810,19 @@
 			isa = PBXGroup;
 			children = (
 				E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */,
-				E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		E8B04FC62D6D0B6E00E84909 /* Local Storage */ = {
+			isa = PBXGroup;
+			children = (
+				E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */,
+				E8BB32872D61EE08006CBB2A /* KeychainManager.swift */,
+				E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */,
+				E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */,
+			);
+			path = "Local Storage";
 			sourceTree = "<group>";
 		};
 		E8B1157D2D638C31005C62CF /* Core */ = {
@@ -1035,6 +1046,7 @@
 				037C5C362D01F96900905CE9 /* CourseContentTableViewCell.swift in Sources */,
 				038F1DCB2D2923E400BD7058 /* AssignCourseCell.swift in Sources */,
 				E8C73FD42D6CD40200A3CCFA /* LoadingViewController.swift in Sources */,
+				E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */,
 				E8B3449A2D691D7000F14EEE /* RefreshToken.swift in Sources */,
 				E8B29E3F2D511C370083C471 /* OTP.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,

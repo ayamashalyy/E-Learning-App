@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SDWebImage
 
 class LoginViewModel {
     var email: String = ""
@@ -64,9 +65,10 @@ class LoginViewModel {
                     print("Received response: \(response)")
                     UserSessionManager.shared.token = token
                     UserSessionManager.shared.refreshToken = refreshToken
-                    UserSessionManager.shared.saveUserCredentialsToUserDefaults()
                     UserSessionManager.shared.email = response.user?.email
                     UserSessionManager.shared.name = response.user?.name
+                    UserSessionManager.shared.avatar = response.user?.avatar
+                    
                     completion(response)
                 } else {
                     print("Login failed: \(response.message)")

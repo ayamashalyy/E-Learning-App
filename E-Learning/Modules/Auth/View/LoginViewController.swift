@@ -229,10 +229,10 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         }
         
         if rememberMeCheckbox.isSelected {
-            UserDefaults.standard.set(email, forKey: UserDefaultsKeys.rememberEmail)
+            UserDefaults.standard.set(email, forKey: UserDefaultsKeys.userEmail)
             UserDefaults.standard.set(password, forKey: UserDefaultsKeys.newPassword)
         }else {
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberEmail)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userEmail)
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.newPassword)
         }
         
@@ -260,29 +260,18 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     
+    
     func checkRememberedUser() {
-        UserSessionManager.shared.loadUserCredentialsFromUserDefaults()
-        
-        if let savedEmail = UserSessionManager.shared.email,
-           let savedPassword = UserSessionManager.shared.newPassword {
+        if let savedEmail = UserDefaults.standard.string(forKey: UserDefaultsKeys.userEmail),
+           let savedPassword = UserDefaults.standard.string(forKey: UserDefaultsKeys.newPassword),
+           rememberMeCheckbox.isSelected {
             emailTextField.text = savedEmail
             passwordTextField.text = savedPassword
-            rememberMeCheckbox.isSelected = true
+        } else {
+            emailTextField.text = ""
+            passwordTextField.text = ""
         }
     }
-    
-    
-    //    func checkRememberedUser() {
-    //        if let savedEmail = UserDefaults.standard.string(forKey: UserDefaultsKeys.rememberEmail),
-    //           let savedPassword = UserDefaults.standard.string(forKey: UserDefaultsKeys.newPassword),
-    //           rememberMeCheckbox.isSelected {
-    //            emailTextField.text = savedEmail
-    //            passwordTextField.text = savedPassword
-    //        } else {
-    //            emailTextField.text = ""
-    //            passwordTextField.text = ""
-    //        }
-    //    }
     
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)

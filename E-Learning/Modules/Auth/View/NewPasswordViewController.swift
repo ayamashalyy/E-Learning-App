@@ -155,7 +155,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        UserDefaults.standard.set(email, forKey: UserDefaultsKeys.rememberEmail)
+        UserDefaults.standard.set(email, forKey: UserDefaultsKeys.userEmail)
         UserDefaults.standard.set(newPassword, forKey: UserDefaultsKeys.newPassword)
         
         viewModel.resetPassword(email: email, otp: otp, password: newPassword, passwordConfirmation: confirmPassword) { [weak self] message in

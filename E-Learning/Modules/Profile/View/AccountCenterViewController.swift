@@ -37,7 +37,6 @@ class AccountCenterViewController: UIViewController {
         setupScrollView()
         setupUI()
         setupButtons()
-        userSessionManager.loadUserCredentialsFromUserDefaults()
     }
     
     @objc func cancelTapped() {
@@ -218,7 +217,7 @@ class AccountCenterViewController: UIViewController {
             currentPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             currentPasswordTextField.textColor = UIColor(named: "textfield")
             currentPasswordTextField.isHidden = true
-            currentPasswordTextField.placeholder = userSessionManager.newPassword
+            currentPasswordTextField.placeholder = UserCredentialsManager.shared.newPassword
             currentPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewCurrentPasswordTextField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             currentPasswordTextField.leftView = paddingViewCurrentPasswordTextField
@@ -243,7 +242,7 @@ class AccountCenterViewController: UIViewController {
             newPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             newPasswordTextField.textColor = UIColor(named: "textfield")
             newPasswordTextField.isHidden = true
-            newPasswordTextField.placeholder = userSessionManager.confirmPassword
+            newPasswordTextField.placeholder = UserCredentialsManager.shared.confirmPassword
             newPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             newPasswordTextField.leftView = paddingView
@@ -386,8 +385,8 @@ class AccountCenterViewController: UIViewController {
         
         let name = nameTextField.text?.isEmpty == false ? nameTextField.text! : userSessionManager.name ?? ""
         let email = emailTextField.text?.isEmpty == false ? emailTextField.text! : userSessionManager.email ?? ""
-        let currentPassword = currentPasswordTextField.text?.isEmpty == false ? currentPasswordTextField.text! : userSessionManager.newPassword ?? ""
-        let confirmationPassword = confirmationPasswordTextField.text?.isEmpty == false ? confirmationPasswordTextField.text! : userSessionManager.confirmPassword ?? ""
+        let currentPassword = currentPasswordTextField.text?.isEmpty == false ? currentPasswordTextField.text! : UserCredentialsManager.shared.newPassword ?? ""
+        let confirmationPassword = confirmationPasswordTextField.text?.isEmpty == false ? confirmationPasswordTextField.text! : UserCredentialsManager.shared.confirmPassword ?? ""
         
         if !profileUpdateViewModel.isValidEmail(email) {
             showAlert(title: "Invalid Email", message: "Please enter a valid email address.")
@@ -412,9 +411,8 @@ class AccountCenterViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.userSessionManager.name = name
                         self.userSessionManager.email = email
-                        self.userSessionManager.newPassword = currentPassword
-                        self.userSessionManager.confirmPassword = confirmationPassword
-                        self.userSessionManager.saveUserCredentialsToUserDefaults()
+                        UserCredentialsManager.shared.newPassword = currentPassword
+                        UserCredentialsManager.shared.confirmPassword = confirmationPassword
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {

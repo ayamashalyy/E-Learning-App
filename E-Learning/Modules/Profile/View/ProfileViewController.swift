@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        userSessionManager.loadUserCredentialsFromUserDefaults()
         if let token = userSessionManager.token {
             viewModel.fetchProfile(token: token) { [weak self] result in
                 switch result {
@@ -66,13 +65,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userSessionManager.loadUserCredentialsFromUserDefaults()
         nameLabel.text = userSessionManager.name
         emailLabel.text = userSessionManager.email
         
         // Load the profile image from UserDefaults
-        if let imageData = UserDefaults.standard.data(forKey: UserDefaultsKeys.userAvatar) {
-            print("imageData\(imageData)")
+        if let base64String = UserSessionManager.shared.avatar, let imageData = Data(base64Encoded: base64String) {
+            print("Loaded image data from UserDefaults")
             profileImageView.image = UIImage(data: imageData)
         } else {
             profileImageView.image = UIImage(named: "default_profile_image")
@@ -141,7 +139,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             // Convert the image to data and send it to update the profile
             if let imageData = selectedImage.jpegData(compressionQuality: 0.5) {
                 // Save the image data to UserDefaults
-                UserDefaults.standard.set(imageData, forKey: UserDefaultsKeys.userAvatar)
+                let base64String = imageData.base64EncodedString()
+                UserSessionManager.shared.avatar = base64String
                 updateProfileWithImage(imageData)
             }
             else {
@@ -169,8 +168,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func updateProfileWithImage(_ imageData: Data) {
         guard let token = userSessionManager.token,
-              let password = userSessionManager.newPassword,
-              let password_confirmation = userSessionManager.confirmPassword,
+              let password = UserCredentialsManager.shared.newPassword,
+              let password_confirmation = UserCredentialsManager.shared.confirmPassword,
               let name = nameLabel.text,
               let email = emailLabel.text, !name.isEmpty, !email.isEmpty else {
             print("Missing required data: Name or email is empty.")
@@ -315,14 +314,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             switch result {
             case .success(let message):
                 print(message)
-                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken)
+                UserSessionManager.shared.clearUserSession()
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.primaryColor)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.secondaryColor)
-                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userName)
-                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.rememberEmail)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.urlTenant)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.selectedTenant)
-                UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userAvatar)
                 self?.navigateToLoginScreen()
                 
             case .failure(let error):

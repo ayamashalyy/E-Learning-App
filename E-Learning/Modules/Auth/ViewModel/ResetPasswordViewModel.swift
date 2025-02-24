@@ -29,8 +29,8 @@ class ResetPasswordViewModel {
             }
             
             if let response = response {
-                UserSessionManager.shared.newPassword = password
-                UserSessionManager.shared.confirmPassword = passwordConfirmation
+                UserCredentialsManager.shared.newPassword = password
+                UserCredentialsManager.shared.confirmPassword = passwordConfirmation
                 completion(response.message)
                 print("response\(response)")
                 print("response\(response.message)")
