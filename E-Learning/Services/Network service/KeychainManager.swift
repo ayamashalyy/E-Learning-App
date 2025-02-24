@@ -31,7 +31,7 @@ class KeychainManager {
         
         let status = SecItemAdd(addQuery, nil)
         if status == errSecSuccess {
-            print("successfully Saved")
+           // print("successfully Saved")
         } else {
             print("Failed to save data: \(status)")
         }

@@ -15,7 +15,6 @@ class ProfileViewModel {
     var avatar: String?
     
     func fetchProfile(token: String, completion: @escaping (Result<ProfileResponse, Error>) -> Void) {
-        
         guard let subDomain = tenantViewModel.urlTenant, !subDomain.isEmpty else {
             print("Subdomain is missing or invalid: \(tenantViewModel.urlTenant ?? "No subdomain")")
             return
@@ -25,17 +24,18 @@ class ProfileViewModel {
         let url = "\(subDomain)/profile"
         print("Request URL GetProfile: \(url)")
         
-        apiService.fetchData(from: url, token: token) { [weak self] (response: ProfileResponse?, Error) in
+        apiService.fetchData(from: url, token: token) { [weak self] (response: ProfileResponse?, error: Error?) in
             guard let self = self else { return }
             
             if let response = response {
-                print("Response\(response)")
+                print("Response: \(response)")
                 self.name = response.user.name
                 self.email = response.user.email
                 self.avatar = response.user.avatar
                 
-            } else {
-                print("Failed to fetch profile data")
+                completion(.success(response))
+            } else if let error = error {
+                completion(.failure(error))
             }
         }
     }

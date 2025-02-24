@@ -49,6 +49,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     DispatchQueue.main.async {
                         self?.nameLabel.text = profileResponse.user.name
                         self?.emailLabel.text = profileResponse.user.email
+                        
+                        // Load the avatar image from the URL
+                        if let avatarURLString = profileResponse.user.avatar, let avatarURL = URL(string: avatarURLString) {
+                            self?.loadImage(from: avatarURL)
+                        }
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
@@ -64,6 +69,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         userSessionManager.loadUserCredentialsFromUserDefaults()
         nameLabel.text = userSessionManager.name
         emailLabel.text = userSessionManager.email
+        
+        // Load the profile image from UserDefaults
+        if let imageData = UserDefaults.standard.data(forKey: UserDefaultsKeys.userAvatar) {
+            print("imageData\(imageData)")
+            profileImageView.image = UIImage(data: imageData)
+        } else {
+            profileImageView.image = UIImage(named: "default_profile_image")
+        }
     }
     
     func setupViews() {
@@ -127,6 +140,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             
             // Convert the image to data and send it to update the profile
             if let imageData = selectedImage.jpegData(compressionQuality: 0.5) {
+                // Save the image data to UserDefaults
+                UserDefaults.standard.set(imageData, forKey: UserDefaultsKeys.userAvatar)
                 updateProfileWithImage(imageData)
             }
             else {
@@ -134,6 +149,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    func loadImage(from url: URL) {
+        profileImageView.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
+            guard let self = self else { return }
+            
+            if let image = image {
+                self.profileImageView.image = image
+            } else if let error = error {
+                print("Error loading image: \(error.localizedDescription)")
+            }
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
