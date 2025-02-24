@@ -134,6 +134,7 @@
 		E8C644C42D53A83400EDA483 /* ProfileUpdateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644C32D53A83400EDA483 /* ProfileUpdateViewModel.swift */; };
 		E8C6F2022D4E9EBE007D0923 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */; };
 		E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */; };
+		E8C73FD42D6CD40200A3CCFA /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C73FD32D6CD40200A3CCFA /* LoadingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,6 +270,7 @@
 		E8C644C32D53A83400EDA483 /* ProfileUpdateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateViewModel.swift; sourceTree = "<group>"; };
 		E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		E8C73FD32D6CD40200A3CCFA /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -826,6 +828,7 @@
 			children = (
 				0377D4732CEBBA3D006C60F6 /* Assets.xcassets */,
 				0377D4752CEBBA3D006C60F6 /* LaunchScreen.storyboard */,
+				E8C73FD32D6CD40200A3CCFA /* LoadingViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1031,6 +1034,7 @@
 				03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */,
 				037C5C362D01F96900905CE9 /* CourseContentTableViewCell.swift in Sources */,
 				038F1DCB2D2923E400BD7058 /* AssignCourseCell.swift in Sources */,
+				E8C73FD42D6CD40200A3CCFA /* LoadingViewController.swift in Sources */,
 				E8B3449A2D691D7000F14EEE /* RefreshToken.swift in Sources */,
 				E8B29E3F2D511C370083C471 /* OTP.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,

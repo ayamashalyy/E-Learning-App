@@ -17,6 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
+        let loadingVC = LoadingViewController()
+        self.window?.rootViewController = loadingVC
+        self.window?.makeKeyAndVisible()
+        
         let selectedTenant = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedTenant)
         
         if let token = UserDefaults.standard.string(forKey: UserDefaultsKeys.userToken), !token.isEmpty {
@@ -28,6 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         UserSessionManager.shared.token = newToken
                         UserSessionManager.shared.refreshToken = newRefreshToken
                         
+                        loadingVC.stopLoading()
                         let mainViewController = TabBarViewController()
                         let navigationController = UINavigationController(rootViewController: mainViewController)
                         navigationController.setNavigationBarHidden(true, animated: false)
@@ -35,23 +40,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     }
                 case .failure(let error):
                     print(error)
+                    loadingVC.stopLoading()
                     self.gotoLoginPage()
                 }
             }
             
         } else if let tenant = selectedTenant, !tenant.isEmpty {
+            loadingVC.stopLoading()
             gotoLoginPage()
         } else {
+            loadingVC.stopLoading()
             let onboardingVC = OnboardingViewController()
             let navigationController = UINavigationController(rootViewController: onboardingVC)
             navigationController.setNavigationBarHidden(true, animated: false)
             self.window?.rootViewController = navigationController
         }
-        
-        
-        self.window?.makeKeyAndVisible()
-        
     }
+    
     func gotoLoginPage(){
         let loginVC = LoginViewController()
         let navigationController = UINavigationController(rootViewController: loginVC)
