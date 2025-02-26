@@ -36,8 +36,8 @@ class SearchViewController: UIViewController {
     var searchLabel = UILabel()
     var noRecentSearchImageView: UIImageView!
     var filterContainerView: UIView!
-    var allResults: [Course] = []
-    var filteredResults: [Course] = []
+    var allResults: [CourseDamo] = []
+    var filteredResults: [CourseDamo] = []
     var selectedFilters: [String: [String]] = [:]
     var collectionView: UICollectionView!
     var applyButton: UIButton!

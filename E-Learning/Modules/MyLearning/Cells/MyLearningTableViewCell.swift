@@ -19,24 +19,20 @@ class MyLearningTableViewCell: UITableViewCell {
     @IBOutlet weak var myLearningProgress: UIProgressView!
     @IBOutlet weak var myLearningImage2: UIImageView!
     @IBOutlet weak var checkImage: UIImageView!
+    
     var tenantViewModel = TenantViewModel.shared
+    var state: LearningState = .inProgress
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        setupUI()
+    }
+    
+    private func setupUI() {
         
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
-        myLearningImage2.layer.cornerRadius = 8
-        myLearningImage2.layer.masksToBounds = true
-        
-        myLearningCategory.textColor = tenantViewModel.primaryColor
-        myLearningProgress.progressTintColor = tenantViewModel.secondaryColor
-        
-        innerView.layer.cornerRadius = 4
-        innerView.layer.masksToBounds = true
-        
         outerView.layer.shadowColor = UIColor.gray.cgColor
         outerView.layer.shadowOpacity = 0.3
         outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
@@ -44,20 +40,30 @@ class MyLearningTableViewCell: UITableViewCell {
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.borderWidth = 0.5
         
+        innerView.layer.cornerRadius = 4
+        innerView.layer.masksToBounds = true
+        
+        myLearningImage2.layer.cornerRadius = 8
+        myLearningImage2.layer.masksToBounds = true
+        myLearningImage2.translatesAutoresizingMaskIntoConstraints = false
+        
+        myLearningCategory.textColor = tenantViewModel.primaryColor
+        myLearningProgress.progressTintColor = tenantViewModel.secondaryColor
+        
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
         
+        configureButton()
+    }
+    
+    private func configureButton() {
         myLearningBtn.layer.cornerRadius = myLearningBtn.bounds.height / 2
         myLearningBtn.layer.masksToBounds = true
         myLearningBtn.backgroundColor = tenantViewModel.primaryColor
-        myLearningBtn.layer.borderColor = nil
-        myLearningBtn.tintColor = nil
         myLearningBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 8)
         myLearningBtn.layer.borderWidth = 0
         myLearningBtn.layer.shadowOpacity = 0
-        
-        
     }
     
     override func layoutSubviews() {
@@ -66,55 +72,66 @@ class MyLearningTableViewCell: UITableViewCell {
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func configure(with viewModel: MyLearningCellViewModel) {
+        self.state = viewModel.state
+        resetCell()
+        myLearningCategory.text = viewModel.courseTitleCategory
         
-    }
-    
-    
-    func configureCell(isInProgress: Bool = false, isInAssigned: Bool = false, isInCompleted: Bool = false) {
-        
-        myLearningImage2.removeConstraints(myLearningImage2.constraints)
-        
-        
-        checkImage.isHidden = isInProgress || isInAssigned
-        myLearningProgress.isHidden = isInAssigned
-        myLearningProgressLabel.isHidden = isInAssigned
-        myLearningBtn.imageView?.isHidden = isInProgress || isInAssigned
-        
-        
-        myLearningImage2.translatesAutoresizingMaskIntoConstraints = false
-        if isInProgress {
-            myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
-            myLearningProgress.setProgress(0.5, animated: true)
-            myLearningProgressLabel.text = "50%".localized
-            myLearningBtn.setTitle("Continue!".localized, for: .normal)
-        } else if isInAssigned {
-            myLearningImage2.widthAnchor.constraint(equalToConstant: 90).isActive = true
-            myLearningBtn.setTitle("Start now!".localized, for: .normal)
-        } else if isInCompleted {
-            myLearningImage2.widthAnchor.constraint(equalToConstant: 80).isActive = true
-            myLearningProgress.setProgress(1.0, animated: true)
-            myLearningProgressLabel.text = "100%".localized
-            myLearningBtn.setTitle("Share Certification".localized, for: .normal)
-            let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
-            let smallerImage = UIImage(named: "uil_share", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
-            let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
-            myLearningBtn.setImage(tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
-            
-            if UIView.userInterfaceLayoutDirection(for: myLearningBtn.semanticContentAttribute) == .rightToLeft {
-                myLearningBtn.semanticContentAttribute = .forceLeftToRight
-                myLearningBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-                myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-            } else {
-                myLearningBtn.semanticContentAttribute = .forceRightToLeft
-                myLearningBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-                myLearningBtn.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-            }
-            myLearningBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
-            myLearningBtn.layoutIfNeeded()
+        if let imageURL = URL(string: viewModel.courseImage) {
+            myLearningImage2.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "myLearning"))
+        } else {
+            myLearningImage2.image = UIImage(named: "myLearning")
         }
         
-        self.layoutIfNeeded()
+        myLearningNameCourse.text = viewModel.courseTitle
+        myLearningConstractorName.text = viewModel.instructorName
+        myLearningProgress.setProgress(viewModel.progress, animated: true)
+        myLearningProgressLabel.text = "\(Int(viewModel.progress * 100))%"
+        myLearningImage2.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        switch viewModel.state {
+        case .inProgress:
+            myLearningBtn.setTitle(NSLocalizedString("Continue!", comment: ""), for: .normal)
+        case .assigned:
+            myLearningBtn.setTitle(NSLocalizedString("Start now!", comment: ""), for: .normal)
+        case .completed:
+            myLearningBtn.setTitle(NSLocalizedString("Share Certification", comment: ""), for: .normal)
+            configureCompletedButton()
+        }
+    }
+    
+    private func resetCell() {
+        myLearningImage2.removeConstraints(myLearningImage2.constraints)
+        myLearningBtn.setImage(nil, for: .normal)
+        myLearningBtn.semanticContentAttribute = .unspecified
+        myLearningBtn.imageEdgeInsets = .zero
+        myLearningBtn.titleEdgeInsets = .zero
+        myLearningBtn.contentEdgeInsets = .zero
+        
+        checkImage.isHidden = state == .inProgress || state == .assigned
+        myLearningProgress.isHidden = state == .assigned
+        myLearningProgressLabel.isHidden = state == .assigned
+        myLearningBtn.imageView?.isHidden = state == .inProgress || state == .assigned
+    }
+    
+    private func configureCompletedButton() {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
+        let shareImage = UIImage(named: "uil_share")?
+            .withConfiguration(imageConfig)
+            .withRenderingMode(.alwaysTemplate)
+        
+        myLearningBtn.setImage(shareImage?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        
+        let isRTL = UIView.userInterfaceLayoutDirection(for: myLearningBtn.semanticContentAttribute) == .rightToLeft
+        myLearningBtn.semanticContentAttribute = isRTL ? .forceLeftToRight : .forceRightToLeft
+        myLearningBtn.imageEdgeInsets = isRTL ?
+        UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0) :
+        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        myLearningBtn.titleEdgeInsets = isRTL ?
+        UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10) :
+        UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        
+        myLearningBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+        myLearningBtn.layoutIfNeeded()
     }
 }

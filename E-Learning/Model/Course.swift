@@ -2,17 +2,23 @@
 //  Course.swift
 //  E-Learning
 //
-//  Created by aya on 03/12/2024.
+//  Created by Aya Mashaly on 26/02/2025.
 //
 
 import Foundation
 
-struct Course {
-    var name: String
-    var category: String
-    var level: String
-    var price: String
-    var language: String
-    var learningType: String
-    var instructor: String
+struct Course: Decodable {
+    let id: Int
+    let title: String
+    let image: String
+    let slug: String
+    let description: String
+    let category: CourseCategory
+    let instructor: Instructor
+    let createdAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id, title, image, slug, description, category, instructor
+        case createdAt = "created_at"
+    }
 }

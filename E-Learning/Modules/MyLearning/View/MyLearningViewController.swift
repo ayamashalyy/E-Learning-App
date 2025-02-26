@@ -7,15 +7,19 @@
 
 import UIKit
 
-class MyLearningViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class MyLearningViewController: UIViewController {
     
-    var tenantViewModel = TenantViewModel.shared
+    // MARK: - Properties
+    
+    lazy var tenantViewModel = TenantViewModel.shared
     
     @IBOutlet weak var myLearningLabel: UILabel!
-    
     @IBOutlet weak var mySegmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var tabelView: UITableView!
+    let viewModel = LearningViewModel()
+    
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +28,15 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
         setupTableView()
         setupSegmentedControl()
         
+        viewModel.onDataUpdated = { [weak self] in
+            self?.tabelView.reloadData()
+        }
+        
+        guard let token = UserSessionManager.shared.token else { return }
+        viewModel.fetchMyLearning(token: token)
     }
+    
+    // MARK: - Setup Methods
     
     private func setupTableView() {
         tabelView.delegate = self
@@ -44,67 +56,26 @@ class MyLearningViewController: UIViewController , UITableViewDelegate, UITableV
         
         
         segmentedControl.backgroundColor = UIColor.white
-        segmentedControl.tintColor = UIColor.white
         segmentedControl.selectedSegmentTintColor = tenantViewModel.primaryColor
+        
         segmentedControl.setDividerImage(UIImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.lightGray], for: .normal)
+        
+        segmentedControl.setTitleTextAttributes([
+            .font: UIFont.systemFont(ofSize: 15, weight: .bold)
+        ], for: .normal)
+        
         segmentedControl.setTitleTextAttributes([
             .foregroundColor: UIColor.white,
             .font: UIFont(name: "Roboto-Medium", size: 15) ?? .systemFont(ofSize: 15, weight: .medium)
         ], for: .selected)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)], for: .normal)
         
     }
+    
+    // MARK: - Actions
     
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         
         tabelView.reloadData()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch mySegmentedControl.selectedSegmentIndex {
-        case 0:
-            return 2
-        case 1:
-            return 3
-        case 2:
-            return 7
-        default:
-            return 0
-        }
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyLearningTableViewCell", for: indexPath) as? MyLearningTableViewCell else {
-            fatalError("Unable to dequeue MyLearningTableViewCell")
-        }
-        
-        switch mySegmentedControl.selectedSegmentIndex {
-        case 0:
-            print("0")
-            let isInProgress = true
-            cell.configureCell(isInProgress: isInProgress)
-            cell.selectionStyle = .none
-        case 1:
-            print("1")
-            let isInAssigned = true
-            cell.configureCell(isInAssigned: isInAssigned)
-            cell.selectionStyle = .none
-        case 2:
-            print("2")
-            let isInCompleted = true
-            cell.configureCell(isInCompleted: isInCompleted)
-            cell.selectionStyle = .none
-        default:
-            print("unknown")
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 190
-    }
 }

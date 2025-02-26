@@ -132,7 +132,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     
-    func courseValueForKey(_ key: String, _ course: Course) -> String? {
+    func courseValueForKey(_ key: String, _ course: CourseDamo) -> String? {
         switch key {
         case "Category":
             return course.category

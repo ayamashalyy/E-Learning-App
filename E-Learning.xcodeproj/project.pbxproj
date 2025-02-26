@@ -40,7 +40,7 @@
 		0359D08E2CF4CB17006B393C /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */; };
 		0359D0902CF4D5A6006B393C /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */; };
 		035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A5CEA2CF8DB0300929234 /* ProfileItemCell.swift */; };
-		0364129A2CFF6508008EE23F /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036412992CFF6508008EE23F /* Course.swift */; };
+		0364129A2CFF6508008EE23F /* CourseDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036412992CFF6508008EE23F /* CourseDemo.swift */; };
 		03678AFF2D0E3E2800371403 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03678AFD2D0E3E2700371403 /* PageViewController.swift */; };
 		03678B002D0E3E2800371403 /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03678AFE2D0E3E2700371403 /* PageViewController.xib */; };
 		03678B022D0E3EE200371403 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03678B012D0E3EE200371403 /* QuestionModel.swift */; };
@@ -114,6 +114,7 @@
 		E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */; };
 		E8940F902D525CCE0008E3CA /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8940F8F2D525CCE0008E3CA /* Logout.swift */; };
 		E8940F922D525D420008E3CA /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8940F912D525D420008E3CA /* LogoutViewModel.swift */; };
+		E8AA1D032D6EFC7400B15E9C /* MyLearningViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AA1D022D6EFC7400B15E9C /* MyLearningViewController+TableView.swift */; };
 		E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */; };
 		E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EE92D4FF6C0005B0E3E /* User.swift */; };
 		E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */; };
@@ -127,6 +128,12 @@
 		E8B3449C2D691DC000F14EEE /* RefreshTokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */; };
 		E8B375C62D5174ED00FC383B /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C52D5174ED00FC383B /* ResetPassword.swift */; };
 		E8B375C82D51758200FC383B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */; };
+		E8B668E92D6F077F00227314 /* LearningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668E82D6F077F00227314 /* LearningState.swift */; };
+		E8B668EC2D6F1BB800227314 /* MyLearningResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668EB2D6F1BB800227314 /* MyLearningResponse.swift */; };
+		E8B668EE2D6F1DA700227314 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668ED2D6F1DA700227314 /* Course.swift */; };
+		E8B668F02D6F1FAE00227314 /* CourseInstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668EF2D6F1FAE00227314 /* CourseInstructor.swift */; };
+		E8B668F22D6F200F00227314 /* CourseCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668F12D6F200F00227314 /* CourseCertificate.swift */; };
+		E8B668F42D6F219B00227314 /* LearningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668F32D6F219B00227314 /* LearningViewModel.swift */; };
 		E8BB32882D61EE08006CBB2A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BB32872D61EE08006CBB2A /* KeychainManager.swift */; };
 		E8C644BC2D536DC500EDA483 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */; };
 		E8C644BE2D5387F300EDA483 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BD2D5387F300EDA483 /* Profile.swift */; };
@@ -136,6 +143,7 @@
 		E8C6F2022D4E9EBE007D0923 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */; };
 		E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */; };
 		E8C73FD42D6CD40200A3CCFA /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C73FD32D6CD40200A3CCFA /* LoadingViewController.swift */; };
+		E8D4C9F02D6F85970043DBAA /* MyLearningCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D4C9EF2D6F85970043DBAA /* MyLearningCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -172,7 +180,7 @@
 		0359D08D2CF4CB16006B393C /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		0359D08F2CF4D5A6006B393C /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		035A5CEA2CF8DB0300929234 /* ProfileItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemCell.swift; sourceTree = "<group>"; };
-		036412992CFF6508008EE23F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		036412992CFF6508008EE23F /* CourseDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDemo.swift; sourceTree = "<group>"; };
 		03678AFD2D0E3E2700371403 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		03678AFE2D0E3E2700371403 /* PageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
 		03678B012D0E3EE200371403 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
@@ -251,6 +259,7 @@
 		E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoViewController.swift; sourceTree = "<group>"; };
 		E8940F8F2D525CCE0008E3CA /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
 		E8940F912D525D420008E3CA /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		E8AA1D022D6EFC7400B15E9C /* MyLearningViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyLearningViewController+TableView.swift"; sourceTree = "<group>"; };
 		E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsManager.swift; sourceTree = "<group>"; };
 		E8B12EE92D4FF6C0005B0E3E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -264,6 +273,12 @@
 		E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenViewModel.swift; sourceTree = "<group>"; };
 		E8B375C52D5174ED00FC383B /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		E8B668E82D6F077F00227314 /* LearningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningState.swift; sourceTree = "<group>"; };
+		E8B668EB2D6F1BB800227314 /* MyLearningResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningResponse.swift; sourceTree = "<group>"; };
+		E8B668ED2D6F1DA700227314 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		E8B668EF2D6F1FAE00227314 /* CourseInstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInstructor.swift; sourceTree = "<group>"; };
+		E8B668F12D6F200F00227314 /* CourseCertificate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCertificate.swift; sourceTree = "<group>"; };
+		E8B668F32D6F219B00227314 /* LearningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningViewModel.swift; sourceTree = "<group>"; };
 		E8BB32872D61EE08006CBB2A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
 		E8C644BD2D5387F300EDA483 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -273,6 +288,7 @@
 		E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 		E8C6F2032D4E9ED3007D0923 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		E8C73FD32D6CD40200A3CCFA /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		E8D4C9EF2D6F85970043DBAA /* MyLearningCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -545,7 +561,6 @@
 		03822FEC2CECE0A400F96ACB /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				E8B3448E2D68EC1600F14EEE /* Models */,
 				03822FEF2CECE0C900F96ACB /* ViewModel */,
 				03121D572D20A0B10062DB89 /* Cells */,
 				03822FEE2CECE0BA00F96ACB /* View */,
@@ -603,9 +618,10 @@
 		03822FF22CECE11B00F96ACB /* MyLearning */ = {
 			isa = PBXGroup;
 			children = (
-				0372CBA02D20BF7600A03242 /* Cells */,
-				03822FF42CECE13600F96ACB /* ViewModel */,
 				03822FF32CECE12A00F96ACB /* View */,
+				0372CBA02D20BF7600A03242 /* Cells */,
+				E8B668EA2D6F0CD400227314 /* Model */,
+				03822FF42CECE13600F96ACB /* ViewModel */,
 			);
 			path = MyLearning;
 			sourceTree = "<group>";
@@ -614,6 +630,7 @@
 			isa = PBXGroup;
 			children = (
 				03822FE62CECC90900F96ACB /* MyLearningViewController.swift */,
+				E8AA1D022D6EFC7400B15E9C /* MyLearningViewController+TableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -621,6 +638,8 @@
 		03822FF42CECE13600F96ACB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8B668F32D6F219B00227314 /* LearningViewModel.swift */,
+				E8D4C9EF2D6F85970043DBAA /* MyLearningCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -735,8 +754,12 @@
 		03B43C1E2CF0C7000018A306 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				036412992CFF6508008EE23F /* Course.swift */,
+				036412992CFF6508008EE23F /* CourseDemo.swift */,
 				03678B012D0E3EE200371403 /* QuestionModel.swift */,
+				E8B668ED2D6F1DA700227314 /* Course.swift */,
+				E8B3448F2D68EC3A00F14EEE /* CourseCategory.swift */,
+				E8B668EF2D6F1FAE00227314 /* CourseInstructor.swift */,
+				E8B668F12D6F200F00227314 /* CourseCertificate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -810,6 +833,7 @@
 			isa = PBXGroup;
 			children = (
 				E8C6F2012D4E9EBE007D0923 /* APIEndpoints.swift */,
+				E8B668E82D6F077F00227314 /* LearningState.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -860,14 +884,6 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		E8B3448E2D68EC1600F14EEE /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E8B3448F2D68EC3A00F14EEE /* CourseCategory.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		E8B344972D69096B00F14EEE /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +904,14 @@
 				E8940F8F2D525CCE0008E3CA /* Logout.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E8B668EA2D6F0CD400227314 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E8B668EB2D6F1BB800227314 /* MyLearningResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1040,6 +1064,7 @@
 				03822FE52CECC71500F96ACB /* SearchViewController.swift in Sources */,
 				0377D46C2CEBBA0E006C60F6 /* TabBarViewController.swift in Sources */,
 				E8C6F2022D4E9EBE007D0923 /* APIEndpoints.swift in Sources */,
+				E8B668F22D6F200F00227314 /* CourseCertificate.swift in Sources */,
 				038F1DC72D291F5500BD7058 /* AssignCourseViewController.swift in Sources */,
 				030519592D03544F003B991F /* CommentCell.swift in Sources */,
 				03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */,
@@ -1053,6 +1078,7 @@
 				038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */,
 				0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */,
 				E88E5FF32D44FF74002A38C8 /* UIColor+Extensions.swift in Sources */,
+				E8D4C9F02D6F85970043DBAA /* MyLearningCellViewModel.swift in Sources */,
 				03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */,
 				03D97D472CF510DB0089C026 /* NewPasswordViewController.swift in Sources */,
 				038F1DCF2D296C6D00BD7058 /* NumberRequestViewController.swift in Sources */,
@@ -1074,11 +1100,14 @@
 				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
 				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
+				E8AA1D032D6EFC7400B15E9C /* MyLearningViewController+TableView.swift in Sources */,
 				03AC50A32D24914400874296 /* LocalizationManager.swift in Sources */,
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
 				03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */,
+				E8B668EC2D6F1BB800227314 /* MyLearningResponse.swift in Sources */,
 				035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */,
 				E8BB32882D61EE08006CBB2A /* KeychainManager.swift in Sources */,
+				E8B668EE2D6F1DA700227314 /* Course.swift in Sources */,
 				E8B344942D68FCA900F14EEE /* CourseCategoryCellViewModel.swift in Sources */,
 				03DDA9F42D285E28008115CA /* UITableView+Extensions.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
@@ -1086,12 +1115,13 @@
 				03678AFF2D0E3E2800371403 /* PageViewController.swift in Sources */,
 				E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */,
 				0341D1E82D00D5780008136C /* CourseInteractionsViewController.swift in Sources */,
+				E8B668E92D6F077F00227314 /* LearningState.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
 				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
 				E8B344922D68EF0100F14EEE /* CourseCategoriesViewModel.swift in Sources */,
 				037F7DED2D0B7193001A411A /* FailureViewController.swift in Sources */,
-				0364129A2CFF6508008EE23F /* Course.swift in Sources */,
+				0364129A2CFF6508008EE23F /* CourseDemo.swift in Sources */,
 				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,
 				03DDA9FF2D289661008115CA /* DetailsDataOfLearnersCell.swift in Sources */,
 				E8B344902D68EC3A00F14EEE /* CourseCategory.swift in Sources */,
@@ -1103,6 +1133,7 @@
 				E8940F902D525CCE0008E3CA /* Logout.swift in Sources */,
 				0341D1E42D00D4D70008136C /* CourseInfoViewController.swift in Sources */,
 				0377D4722CEBBA0F006C60F6 /* E_Learning.xcdatamodeld in Sources */,
+				E8B668F42D6F219B00227314 /* LearningViewModel.swift in Sources */,
 				03DDA9F12D2859BA008115CA /* CourseManagerViewController.swift in Sources */,
 				0359D08E2CF4CB17006B393C /* ForgetPasswordViewController.swift in Sources */,
 				0341D1EA2D00FBE90008136C /* UIview+Extensions.swift in Sources */,
@@ -1111,6 +1142,7 @@
 				E8C644C02D53883500EDA483 /* ProfileViewModel.swift in Sources */,
 				E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */,
 				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
+				E8B668F02D6F1FAE00227314 /* CourseInstructor.swift in Sources */,
 				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
 				E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */,
 				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
