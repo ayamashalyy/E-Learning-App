@@ -11,6 +11,7 @@ import UIKit
 class SectionHeaderView: UICollectionViewCell {
     
     var tenantViewModel = TenantViewModel.shared
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -43,6 +44,7 @@ class SectionHeaderView: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         addSubview(titleLabel)
         addSubview(actionStackView)
         actionStackView.addArrangedSubview(actionButton)
@@ -61,20 +63,31 @@ class SectionHeaderView: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(title: String) {
+    func configure(title: String, showAction: Bool = true) {
+        
         titleLabel.text = title
         titleLabel.font = UIFont(name: "Roboto-Medium", size: 18)
-        actionButton.setTitle("See all".localized, for: .normal)
-        actionButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
         
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
-        let smallerImage = UIImage(named: "navigate_next", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
-        let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
-        actionImageView.image = tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection()
-        
-        if let customColor = tenantViewModel.primaryColor {
-            actionButton.tintColor = customColor
-            actionImageView.tintColor = customColor
+        if showAction {
+            actionButton.setTitle("See all".localized, for: .normal)
+            actionButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
+            
+            let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
+            let smallerImage = UIImage(named: "navigate_next", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
+            let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
+            actionImageView.image = tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection()
+            
+            if let customColor = tenantViewModel.primaryColor {
+                actionButton.tintColor = customColor
+                actionImageView.tintColor = customColor
+            }
+            
+            actionButton.isHidden = false
+            actionImageView.isHidden = false
+            
+        } else {
+            actionButton.isHidden = true
+            actionImageView.isHidden = true
         }
     }
 }

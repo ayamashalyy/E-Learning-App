@@ -19,8 +19,6 @@
 		0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1122CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift */; };
 		0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0328C1132CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib */; };
 		0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1162CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift */; };
-		0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */; };
-		0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */; };
 		03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */; };
 		03323E722CF14D36008AF673 /* MyLearningTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */; };
 		0341D1E22D0093F30008136C /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341D1E12D0093F20008136C /* CourseViewController.swift */; };
@@ -30,7 +28,6 @@
 		0341D1EA2D00FBE90008136C /* UIview+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0341D1E92D00FBE90008136C /* UIview+Extensions.swift */; };
 		0344D8A52CF9FD5A0065290E /* AccountCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0344D8A42CF9FD5A0065290E /* AccountCenterViewController.swift */; };
 		034FD1BC2D20A2AC00CDD3D7 /* CoursesCategoriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034FD1BB2D20A2AB00CDD3D7 /* CoursesCategoriesCollectionViewCell.xib */; };
-		034FD1BE2D20A32100CDD3D7 /* CareerPathsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034FD1BD2D20A31E00CDD3D7 /* CareerPathsCollectionViewCell.xib */; };
 		0352509E2D075F2B0027C270 /* SingleChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0352509C2D075F2B0027C270 /* SingleChoiceCell.swift */; };
 		0352509F2D075F2B0027C270 /* SingleChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0352509D2D075F2B0027C270 /* SingleChoiceCell.xib */; };
 		035250A22D07717C0027C270 /* MultipleChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035250A02D07717C0027C270 /* MultipleChoiceCell.swift */; };
@@ -67,10 +64,6 @@
 		03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FE82CECC93700F96ACB /* ProfileViewController.swift */; };
 		03822FEB2CECC97C00F96ACB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FEA2CECC97C00F96ACB /* HomeViewController.swift */; };
 		03822FFA2CECE8A000F96ACB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */; };
-		03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */; };
-		03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */; };
-		038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */; };
-		038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */; };
 		038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */; };
 		038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */; };
 		038CEB612CF2667D00889AA1 /* TermsAndConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */; };
@@ -106,7 +99,6 @@
 		03F37E882D1C530A00F50C52 /* courseContentOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */; };
 		53873B73CE464583ECE64220 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
-		7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */; };
 		E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */; };
 		E88E5FEF2D44F934002A38C8 /* TenantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */; };
 		E88E5FF12D44FA04002A38C8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF02D44FA04002A38C8 /* APIService.swift */; };
@@ -114,6 +106,10 @@
 		E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */; };
 		E8940F902D525CCE0008E3CA /* Logout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8940F8F2D525CCE0008E3CA /* Logout.swift */; };
 		E8940F922D525D420008E3CA /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8940F912D525D420008E3CA /* LogoutViewModel.swift */; };
+		E8A8E64C2D70727400321E3A /* WelcomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A8E64B2D70727400321E3A /* WelcomeCollectionViewCell.xib */; };
+		E8A8E64D2D70727400321E3A /* WelcomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A8E64A2D70727400321E3A /* WelcomeCollectionViewCell.swift */; };
+		E8A8E6502D7079D900321E3A /* ProgressContinueCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8A8E64F2D7079D900321E3A /* ProgressContinueCollectionViewCell.xib */; };
+		E8A8E6512D7079D900321E3A /* ProgressContinueCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A8E64E2D7079D900321E3A /* ProgressContinueCollectionViewCell.swift */; };
 		E8AA1D032D6EFC7400B15E9C /* MyLearningViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AA1D022D6EFC7400B15E9C /* MyLearningViewController+TableView.swift */; };
 		E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */; };
 		E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EE92D4FF6C0005B0E3E /* User.swift */; };
@@ -159,8 +155,6 @@
 		0328C1122CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCoursesCollectionViewCell.swift; sourceTree = "<group>"; };
 		0328C1132CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedCoursesCollectionViewCell.xib; sourceTree = "<group>"; };
 		0328C1162CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCoursesCollectionView.swift; sourceTree = "<group>"; };
-		0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathsCollectionViewCell.swift; sourceTree = "<group>"; };
-		0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerPathCollectionView.swift; sourceTree = "<group>"; };
 		03323E6F2CF14D36008AF673 /* MyLearningTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningTableViewCell.swift; sourceTree = "<group>"; };
 		03323E702CF14D36008AF673 /* MyLearningTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyLearningTableViewCell.xib; sourceTree = "<group>"; };
 		0341D1E12D0093F20008136C /* CourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +164,6 @@
 		0341D1E92D00FBE90008136C /* UIview+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIview+Extensions.swift"; sourceTree = "<group>"; };
 		0344D8A42CF9FD5A0065290E /* AccountCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCenterViewController.swift; sourceTree = "<group>"; };
 		034FD1BB2D20A2AB00CDD3D7 /* CoursesCategoriesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoursesCategoriesCollectionViewCell.xib; sourceTree = "<group>"; };
-		034FD1BD2D20A31E00CDD3D7 /* CareerPathsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CareerPathsCollectionViewCell.xib; sourceTree = "<group>"; };
 		0352509C2D075F2B0027C270 /* SingleChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleChoiceCell.swift; sourceTree = "<group>"; };
 		0352509D2D075F2B0027C270 /* SingleChoiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleChoiceCell.xib; sourceTree = "<group>"; };
 		035250A02D07717C0027C270 /* MultipleChoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceCell.swift; sourceTree = "<group>"; };
@@ -209,10 +202,6 @@
 		03822FE82CECC93700F96ACB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		03822FEA2CECC97C00F96ACB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		03822FF92CECE8A000F96ACB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
-		03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
-		03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueCollectionViewCell.swift; sourceTree = "<group>"; };
-		038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContinueCollectionViewCell.xib; sourceTree = "<group>"; };
 		038CEB5C2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyAndPolicyViewController.swift; sourceTree = "<group>"; };
 		038CEB5E2CF2662C00889AA1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		038CEB602CF2667D00889AA1 /* TermsAndConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewController.swift; sourceTree = "<group>"; };
@@ -250,7 +239,6 @@
 		152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.debug.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.debug.xcconfig"; sourceTree = "<group>"; };
 		4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
-		7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondHomeCollectionViewController.swift; sourceTree = "<group>"; };
 		CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tenant.swift; sourceTree = "<group>"; };
 		E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenantViewModel.swift; sourceTree = "<group>"; };
@@ -259,6 +247,10 @@
 		E88E5FF42D453A4F002A38C8 /* LogoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoViewController.swift; sourceTree = "<group>"; };
 		E8940F8F2D525CCE0008E3CA /* Logout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logout.swift; sourceTree = "<group>"; };
 		E8940F912D525D420008E3CA /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
+		E8A8E64A2D70727400321E3A /* WelcomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		E8A8E64B2D70727400321E3A /* WelcomeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeCollectionViewCell.xib; sourceTree = "<group>"; };
+		E8A8E64E2D7079D900321E3A /* ProgressContinueCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressContinueCollectionViewCell.swift; sourceTree = "<group>"; };
+		E8A8E64F2D7079D900321E3A /* ProgressContinueCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressContinueCollectionViewCell.xib; sourceTree = "<group>"; };
 		E8AA1D022D6EFC7400B15E9C /* MyLearningViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyLearningViewController+TableView.swift"; sourceTree = "<group>"; };
 		E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsManager.swift; sourceTree = "<group>"; };
 		E8B12EE92D4FF6C0005B0E3E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -333,17 +325,15 @@
 		03121D572D20A0B10062DB89 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				03822FFB2CED017D00F96ACB /* HeaderCollectionViewCell.swift */,
-				03822FFC2CED017D00F96ACB /* HeaderCollectionViewCell.xib */,
-				03822FFF2CED308C00F96ACB /* ContinueCollectionViewCell.swift */,
-				038230002CED308C00F96ACB /* ContinueCollectionViewCell.xib */,
+				E8A8E64A2D70727400321E3A /* WelcomeCollectionViewCell.swift */,
+				E8A8E64B2D70727400321E3A /* WelcomeCollectionViewCell.xib */,
+				E8A8E64E2D7079D900321E3A /* ProgressContinueCollectionViewCell.swift */,
+				E8A8E64F2D7079D900321E3A /* ProgressContinueCollectionViewCell.xib */,
 				0328C10C2CEE1B7C00CC1DCF /* CoursesCategoriesCollectionViewCell.swift */,
 				034FD1BB2D20A2AB00CDD3D7 /* CoursesCategoriesCollectionViewCell.xib */,
 				7D89CE922CED542800A5B64A /* SectionHeaderView.swift */,
 				0328C1122CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift */,
 				0328C1132CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib */,
-				0328C1182CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift */,
-				034FD1BD2D20A31E00CDD3D7 /* CareerPathsCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -582,10 +572,8 @@
 			isa = PBXGroup;
 			children = (
 				03822FEA2CECC97C00F96ACB /* HomeViewController.swift */,
-				7DA9C0E02CED29C00075C213 /* SecondHomeCollectionViewController.swift */,
 				0328C1102CEE325500CC1DCF /* CoursesCategoriesSectionCell.swift */,
 				0328C1162CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift */,
-				0328C11C2CEE77C200CC1DCF /* CareerPathCollectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -981,13 +969,14 @@
 				0328C1152CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.xib in Resources */,
 				032179892D10CCFB00557B77 /* Roboto-Light.ttf in Resources */,
 				03678B002D0E3E2800371403 /* PageViewController.xib in Resources */,
+				E8A8E6502D7079D900321E3A /* ProgressContinueCollectionViewCell.xib in Resources */,
 				0352509F2D075F2B0027C270 /* SingleChoiceCell.xib in Resources */,
 				03DDA9FC2D2883C5008115CA /* LearnersDetailsViewController.xib in Resources */,
 				03DDAA002D289661008115CA /* DetailsDataOfLearnersCell.xib in Resources */,
+				E8A8E64C2D70727400321E3A /* WelcomeCollectionViewCell.xib in Resources */,
 				035250A32D07717C0027C270 /* MultipleChoiceCell.xib in Resources */,
 				03678B062D0E41C000371403 /* QuestionVC.xib in Resources */,
 				03F37E802D1C4DC200F50C52 /* CourseOverviewViewController.xib in Resources */,
-				038230022CED308C00F96ACB /* ContinueCollectionViewCell.xib in Resources */,
 				034FD1BC2D20A2AC00CDD3D7 /* CoursesCategoriesCollectionViewCell.xib in Resources */,
 				03DDA9F82D285F5C008115CA /* LearnersCell.xib in Resources */,
 				03AC50A72D249B3D00874296 /* Localizable.strings in Resources */,
@@ -995,7 +984,6 @@
 				0377D4772CEBBA3D006C60F6 /* LaunchScreen.storyboard in Resources */,
 				03C6DD0C2D20BEDC00E2A5BB /* TotalResultsTableViewCell.xib in Resources */,
 				03BCA3922D08C0C80025B833 /* MatchingCell.xib in Resources */,
-				034FD1BE2D20A32100CDD3D7 /* CareerPathsCollectionViewCell.xib in Resources */,
 				0354098B2CF632A40030CA0B /* RecentSearchesTableViewCell.xib in Resources */,
 				0377D4742CEBBA3D006C60F6 /* Assets.xcassets in Resources */,
 				032179852D10CCDC00557B77 /* Roboto-Bold.ttf in Resources */,
@@ -1005,7 +993,6 @@
 				03DDA9F22D2859BA008115CA /* CourseManagerViewController.xib in Resources */,
 				0321798B2D10D4E500557B77 /* Roboto-Medium.ttf in Resources */,
 				038F1DCC2D2923E400BD7058 /* AssignCourseCell.xib in Resources */,
-				03822FFE2CED017D00F96ACB /* HeaderCollectionViewCell.xib in Resources */,
 				03822FE32CECC27B00F96ACB /* Main.storyboard in Resources */,
 				0372CB9F2D20BF2600A03242 /* FiltrationCollectionViewCell.xib in Resources */,
 			);
@@ -1099,7 +1086,6 @@
 				E8C644C22D53A6BD00EDA483 /*  ProfileUpdate.swift in Sources */,
 				0328C1142CEE4BB400CC1DCF /* FeaturedCoursesCollectionViewCell.swift in Sources */,
 				03822FE92CECC93700F96ACB /* ProfileViewController.swift in Sources */,
-				7DA9C0E12CED29C00075C213 /* SecondHomeCollectionViewController.swift in Sources */,
 				E8AA1D032D6EFC7400B15E9C /* MyLearningViewController+TableView.swift in Sources */,
 				03AC50A32D24914400874296 /* LocalizationManager.swift in Sources */,
 				0354098A2CF632A40030CA0B /* RecentSearchesTableViewCell.swift in Sources */,
@@ -1112,20 +1098,19 @@
 				03DDA9F42D285E28008115CA /* UITableView+Extensions.swift in Sources */,
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */,
+				E8A8E64D2D70727400321E3A /* WelcomeCollectionViewCell.swift in Sources */,
 				03678AFF2D0E3E2800371403 /* PageViewController.swift in Sources */,
 				E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */,
 				0341D1E82D00D5780008136C /* CourseInteractionsViewController.swift in Sources */,
 				E8B668E92D6F077F00227314 /* LearningState.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
-				03822FFD2CED017D00F96ACB /* HeaderCollectionViewCell.swift in Sources */,
 				E8B344922D68EF0100F14EEE /* CourseCategoriesViewModel.swift in Sources */,
 				037F7DED2D0B7193001A411A /* FailureViewController.swift in Sources */,
 				0364129A2CFF6508008EE23F /* CourseDemo.swift in Sources */,
 				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,
 				03DDA9FF2D289661008115CA /* DetailsDataOfLearnersCell.swift in Sources */,
 				E8B344902D68EC3A00F14EEE /* CourseCategory.swift in Sources */,
-				0328C11A2CEE71F500CC1DCF /* CareerPathsCollectionViewCell.swift in Sources */,
 				0328C1112CEE325500CC1DCF /* CoursesCategoriesSectionCell.swift in Sources */,
 				030C79432D20C2F200FFD7DD /* String+Extensions.swift in Sources */,
 				E8940F922D525D420008E3CA /* LogoutViewModel.swift in Sources */,
@@ -1145,7 +1130,6 @@
 				E8B668F02D6F1FAE00227314 /* CourseInstructor.swift in Sources */,
 				036A8C7E2CF7518100F01CE5 /* FilterViewController.swift in Sources */,
 				E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */,
-				038230012CED308C00F96ACB /* ContinueCollectionViewCell.swift in Sources */,
 				03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */,
 				037F7DEB2D0B7165001A411A /* SuccessViewController.swift in Sources */,
 				E8C644C42D53A83400EDA483 /* ProfileUpdateViewModel.swift in Sources */,
@@ -1154,7 +1138,6 @@
 				E8C644BE2D5387F300EDA483 /* Profile.swift in Sources */,
 				E8B3449C2D691DC000F14EEE /* RefreshTokenViewModel.swift in Sources */,
 				0341D1E22D0093F30008136C /* CourseViewController.swift in Sources */,
-				0328C11D2CEE77C200CC1DCF /* CareerPathCollectionView.swift in Sources */,
 				037F20F72CF3A17000691EF0 /* LoginViewController.swift in Sources */,
 				038CEB5F2CF2662C00889AA1 /* AboutViewController.swift in Sources */,
 				E88E5FF12D44FA04002A38C8 /* APIService.swift in Sources */,
@@ -1162,6 +1145,7 @@
 				03678B022D0E3EE200371403 /* QuestionModel.swift in Sources */,
 				E8C644BC2D536DC500EDA483 /* UserSessionManager.swift in Sources */,
 				03E1F0E42CFE5C22005646D7 /* Constants.swift in Sources */,
+				E8A8E6512D7079D900321E3A /* ProgressContinueCollectionViewCell.swift in Sources */,
 				0344D8A52CF9FD5A0065290E /* AccountCenterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

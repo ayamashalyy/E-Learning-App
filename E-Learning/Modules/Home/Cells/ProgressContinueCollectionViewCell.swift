@@ -1,21 +1,18 @@
 //
-//  ContinueCollectionViewCell.swift
+//  ProgressContinueCollectionViewCell.swift
 //  E-Learning
 //
-//  Created by aya on 19/11/2024.
+//  Created by Aya Mashaly on 27/02/2025.
 //
 
 import UIKit
 
-class ContinueCollectionViewCell: UICollectionViewCell {
-    
+class ProgressContinueCollectionViewCell: UICollectionViewCell {
+
     var tenantViewModel = TenantViewModel.shared
+    
     @IBOutlet weak var outerView: UIView!
-    @IBAction func arrow(_ sender: UIButton) {
-    }
-    
     @IBOutlet weak var arrow: UIButton!
-    
     @IBOutlet weak var continueLabel: UILabel!
     @IBOutlet weak var courseImage: UIImageView!
     @IBOutlet weak var titleCourse: UILabel!
@@ -28,7 +25,6 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
-        
         outerView.layer.shadowColor = UIColor.gray.cgColor
         outerView.layer.shadowOpacity = 0.3
         outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
@@ -37,7 +33,10 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         outerView.layer.borderWidth = 0.5
         outerView.backgroundColor = tenantViewModel.primaryColor
         continueLabel.text = "Continue where you left off".localized
-        
+        continueLabel.font = UIFont(name: "Roboto-Bold", size: 20)
+        titleCourse.font = UIFont(name: "Roboto-Bold", size: 16)
+        constratorNameCourse.font = UIFont(name: "Roboto-Regular", size: 12)
+        courseProgressRaico.font = UIFont(name: "Roboto-Bold", size: 12)
         arrow.setImage(UIImage(named: "arrow")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         courseProgress.progressTintColor = tenantViewModel.secondaryColor
         innerView.layer.cornerRadius = 6
@@ -52,5 +51,8 @@ class ContinueCollectionViewCell: UICollectionViewCell {
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
+    }
+    
+    @IBAction func arrow(_ sender: UIButton) {
     }
 }
