@@ -21,29 +21,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = loadingVC
         self.window?.makeKeyAndVisible()
         
+        let session = UserSessionManager.shared
+        
         let selectedTenant = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedTenant)
         
-        if let token = UserDefaults.standard.string(forKey: UserDefaultsKeys.userToken), !token.isEmpty {
+        if let token = session.token, !token.isEmpty {
+            print("#debug: - User Token: \(String(describing: session.token))")
+            
             let refreshTokenViewModel = RefreshTokenViewModel()
-            refreshTokenViewModel.refreshToken(refreshToken: UserDefaults.standard.string(forKey: UserDefaultsKeys.refreshToken)!) { result in
-                switch result {
-                case .success(let response):
-                    if let newToken = response.accessToken, let newRefreshToken = response.refreshToken {
-                        UserSessionManager.shared.token = newToken
-                        UserSessionManager.shared.refreshToken = newRefreshToken
-                        
-                        loadingVC.stopLoading()
-                        let mainViewController = TabBarViewController()
-                        let navigationController = UINavigationController(rootViewController: mainViewController)
-                        navigationController.setNavigationBarHidden(true, animated: false)
-                        self.window?.rootViewController = navigationController
-                    }
-                case .failure(let error):
-                    print(error)
-                    loadingVC.stopLoading()
-                    self.gotoLoginPage()
-                }
-            }
+            //            print("#debug: - User Token: \(String(describing: session.token))")
+            //            print("#debug: - Refresh Token: \(String(describing: session.refreshToken))")
+            //            print("""
+            //                  #debug: ===========================
+            //                  """)
+            //            refreshTokenViewModel.refreshToken(refreshToken: session.refreshToken!) { result in
+            //                switch result {
+            //                case .success(let response):
+            //                    if let newToken = response.accessToken, let newRefreshToken = response.refreshToken {
+            //                        session.token = newToken
+            //                        session.refreshToken = newRefreshToken
+            
+            loadingVC.stopLoading()
+            let mainViewController = TabBarViewController()
+            let navigationController = UINavigationController(rootViewController: mainViewController)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            self.window?.rootViewController = navigationController
+            //                    }
+            //                case .failure(let error):
+            //                    print("#debug: failure - User Token: \(String(describing: session.token))")
+            //                    print("#debug: failure - Refresh Token: \(String(describing: session.refreshToken))")
+            //                    print("#debug: failure - \(error)")
+            //                    loadingVC.stopLoading()
+            //                    self.gotoLoginPage()
+            //                }
+            //            }
             
         } else if let tenant = selectedTenant, !tenant.isEmpty {
             loadingVC.stopLoading()

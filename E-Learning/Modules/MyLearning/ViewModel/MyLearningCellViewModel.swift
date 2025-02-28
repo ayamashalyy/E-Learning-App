@@ -13,7 +13,7 @@ class MyLearningCellViewModel {
     let courseImage: String
     let courseTitleCategory: String
     let instructorName: String
-    let progress: Float
+    let courseProgress: Int
     let state: LearningState
     
     init(course: Course, state: LearningState) {
@@ -21,7 +21,7 @@ class MyLearningCellViewModel {
         self.courseImage = course.image
         self.instructorName = course.instructor.name
         self.courseTitleCategory = course.category.name
-        self.progress = 6.0
+        self.courseProgress = course.progress
         self.state = state
     }
     
@@ -30,7 +30,7 @@ class MyLearningCellViewModel {
         self.courseImage = completedCourse.image
         self.instructorName = completedCourse.instructor.name
         self.courseTitleCategory = completedCourse.category.name
-        self.progress = 1.0
+        self.courseProgress = completedCourse.progress
         self.state = .completed
     }
 }

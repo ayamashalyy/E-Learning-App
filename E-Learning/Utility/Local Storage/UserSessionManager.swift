@@ -20,6 +20,7 @@ class UserSessionManager {
         set {
             if newValue != token {
                 defaults.set(newValue, forKey: UserDefaultsKeys.userToken)
+                print("#debug: user-defaults - token: \(String(describing: newValue))")
             }
         }
     }
@@ -29,6 +30,8 @@ class UserSessionManager {
         set {
             if newValue != refreshToken {
                 defaults.set(newValue, forKey: UserDefaultsKeys.refreshToken)
+                print("#debug: user-defaults - refreshToken: \(String(describing: newValue))")
+                
             }
         }
     }

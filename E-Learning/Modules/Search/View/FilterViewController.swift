@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -72,36 +73,22 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let selectedItem = sections[indexPath.section].items[indexPath.row]
         let sectionTitle = sections[indexPath.section].title
         
-        if selectedFilters[sectionTitle] == nil {
-            selectedFilters[sectionTitle] = []
+        if let previousSelection = selectedFilters[sectionTitle]?.first {
+            if let previousIndex = sections[indexPath.section].items.firstIndex(of: previousSelection) {
+                selectedFilters[sectionTitle]?.removeAll()
+                let previousIndexPath = IndexPath(item: previousIndex, section: indexPath.section)
+                collectionView.reloadItems(at: [previousIndexPath])
+            }
         }
         
-        if selectedFilters[sectionTitle]?.contains(selectedItem) == true {
-            selectedFilters[sectionTitle]?.removeAll { $0 == selectedItem }
-        } else {
-            selectedFilters[sectionTitle]?.append(selectedItem)
-        }
-        
+        selectedFilters[sectionTitle] = [selectedItem]
         collectionView.reloadItems(at: [indexPath])
         
         applyFilters()
         collectionView.reloadData()
-        
-        /*
-         choose item only from section
-         if let previousSelection = selectedFilters[sectionTitle]?.first {
-         if let previousIndex = sections[indexPath.section].items.firstIndex(of: previousSelection) {
-         selectedFilters[sectionTitle]?.removeAll()
-         let previousIndexPath = IndexPath(item: previousIndex, section: indexPath.section)
-         collectionView.reloadItems(at: [previousIndexPath])
-         }
-         }
-         
-         selectedFilters[sectionTitle] = [selectedItem]
-         collectionView.reloadItems(at: [indexPath])
-         */
     }
     
+    // MARK: - Apply Filters
     func applyFilters() {
         filteredResults = allResults.filter { course in
             
@@ -119,6 +106,31 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
+    // MARK: - Apply Button Action
+    @objc func applyButtonTapped() {
+        applyFilters()
+        currentState = .totalResultsAfterFilter
+        tableView.isHidden = false
+        filterContainerView.isHidden = true
+        searchView.isHidden = false
+        tableView.reloadData()
+        
+        self.title = "Search".localized
+        if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
+            tabBarItem.title = "Search".localized
+        }
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
+            .foregroundColor: UIColor.black
+        ]
+        
+        self.navigationController?.navigationBar.titleTextAttributes = attributes
+        
+        self.navigationItem.leftBarButtonItem = nil
+    }
+    
+    // MARK: - Reset Filters
     func resetFilters() {
         // Clear all selected filters
         selectedFilters = [:]
@@ -131,7 +143,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         tableView.reloadData()
     }
     
-    
+    // MARK: - Course Value for Key
     func courseValueForKey(_ key: String, _ course: CourseDamo) -> String? {
         switch key {
         case "Category":

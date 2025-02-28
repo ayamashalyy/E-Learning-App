@@ -26,9 +26,9 @@ class RefreshTokenViewModel {
             }
             
             if let response = response {
-                completion(.success(response))
                 print("check_request - refresh_token_request_success: \(response)")
-
+                completion(.success(response))
+                
             } else {
                 print("check_request - refresh_token_request_success: refreshTokenError")
                 let error = NSError(domain: "RefreshTokenError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])

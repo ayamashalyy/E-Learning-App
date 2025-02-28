@@ -112,7 +112,7 @@ extension AppDelegate: LocalizationDelegate {
 
 extension UIViewController {
     static func wrapInNavigation<T: UIViewController>(_ viewControllerType: T.Type, configure: ((T) -> Void)? = nil) -> UINavigationController {
-
+        
         let viewController = T()
         configure?(viewController)
         return UINavigationController(rootViewController: viewController)

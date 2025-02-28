@@ -9,13 +9,6 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    enum SearchState {
-        case recentSearches
-        case totalResultsBeforeFilter
-        case totalResultsAfterFilter
-        case filterView
-    }
-    
     struct Section {
         let title: String
         let items: [String]
@@ -26,8 +19,17 @@ class SearchViewController: UIViewController {
         Section(title: "Level".localized, items: ["Beginner".localized, "Intermediate".localized, "Advanced".localized]),
     ]
     
+    // MARK: - Properties
     var currentState: SearchState = .recentSearches
     var recentSearches: [String] = []
+    var allResults: [CourseDamo] = []
+    var filteredResults: [CourseDamo] = []
+    var selectedFilters: [String: [String]] = [:]
+    var tenantViewModel = TenantViewModel.shared
+    var selectedFiltersCount: Int!
+    var viewModel = SearchViewModel()
+    
+    // MARK: - UI Components
     var searchView = UIView()
     var searchTextField = UITextField()
     var searchButton = UIButton()
@@ -36,15 +38,11 @@ class SearchViewController: UIViewController {
     var searchLabel = UILabel()
     var noRecentSearchImageView: UIImageView!
     var filterContainerView: UIView!
-    var allResults: [CourseDamo] = []
-    var filteredResults: [CourseDamo] = []
-    var selectedFilters: [String: [String]] = [:]
     var collectionView: UICollectionView!
     var applyButton: UIButton!
-    var selectedFiltersCount: Int!
-    var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -55,30 +53,6 @@ class SearchViewController: UIViewController {
         setupConstraints()
         collectionView.allowsMultipleSelection = true
         
-    }
-    
-    private func configureNavigationBar() {
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [
-            .font: UIFont(name: "Roboto-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        appearance.backgroundColor = .white
-        appearance.shadowColor = .clear
-        
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    private func saveRecentSearches() {
-        UserDefaults.standard.set(recentSearches, forKey: Constants.recentSearchesKey)
-    }
-    
-    private func loadRecentSearches() {
-        if let savedSearches = UserDefaults.standard.array(forKey: Constants.recentSearchesKey) as? [String] {
-            recentSearches = savedSearches
-        }
     }
     
     
@@ -103,8 +77,35 @@ class SearchViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation Bar Configuration
+    private func configureNavigationBar() {
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [
+            .font: UIFont(name: "Roboto-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
+            .foregroundColor: UIColor.black
+        ]
+        appearance.backgroundColor = .white
+        appearance.shadowColor = .clear
+        
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    // MARK: - Recent Searches Handling
+    func saveRecentSearches() {
+        UserDefaults.standard.set(recentSearches, forKey: Constants.recentSearchesKey)
+    }
+    
+    private func loadRecentSearches() {
+        if let savedSearches = UserDefaults.standard.array(forKey: Constants.recentSearchesKey) as? [String] {
+            recentSearches = savedSearches
+        }
+    }
     
     
+    
+    // MARK: - UI Setup
     func setupViews() {
         
         searchView = UIView()
@@ -208,7 +209,7 @@ class SearchViewController: UIViewController {
         ])
     }
     
-    
+    // MARK: - Filter View Setup
     func setupFilterView() {
         
         let layout = RTLCollectionFlow()
@@ -256,201 +257,9 @@ class SearchViewController: UIViewController {
         
     }
     
-    @objc func searchButtonTapped() {
-        guard let text = searchTextField.text, !text.isEmpty else {
-            
-            let alert = UIAlertController(title: "Error", message: "Please enter a search term.".localized, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        recentSearches.insert(text, at: 0)
-        saveRecentSearches()
-        currentState = .totalResultsBeforeFilter
-        tableView.reloadData()
-        updateNoRecentSearchImage()
-        resetFilters()
-    }
-    
-    @objc func cancelButtonTapped() {
-        searchTextField.text = ""
-        searchTextField.resignFirstResponder()
-        currentState = .recentSearches
-        tableView.isHidden = false
-        filterContainerView.isHidden = true
-        tableView.reloadData()
-        updateNoRecentSearchImage()
-        
-    }
-    
-}
-
-extension SearchViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == searchTextField {
-            searchButtonTapped()
-        }
-        return true
-    }
-}
-
-
-
-
-extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch currentState {
-        case .recentSearches:
-            return recentSearches.count
-        case .totalResultsBeforeFilter:
-            return 20
-        case .totalResultsAfterFilter:
-            return 10
-        case .filterView:
-            return 0
-        }
-        
-    }
-    
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if currentState == .recentSearches {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RecentSearchesTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.recentSearchLabel.text = recentSearches[indexPath.row]
-            cell.selectionStyle = .none
-            cell.onCancelTapped = { [weak self] in
-                self?.recentSearches.remove(at: indexPath.row)
-                self?.saveRecentSearches()
-                self?.updateNoRecentSearchImage()
-                tableView.reloadData()
-            }
-            return cell
-        }
-        else if currentState == .totalResultsBeforeFilter {
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TotalResultsTableViewCell", for: indexPath) as? TotalResultsTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.totalResultSearchCategory.text = "Design"
-            cell.totalResultSearchNameCourse.text = "Google UX Design"
-            cell.totalResultSearchConstractorName.text = "Jacob Jones"
-            cell.totalResultSearchImage.image = UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection()
-            cell.selectionStyle = .none
-            return cell
-        } else if currentState == .totalResultsAfterFilter {
-            
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TotalResultsTableViewCell", for: indexPath) as? TotalResultsTableViewCell else {
-                return UITableViewCell()
-            }
-            cell.totalResultSearchCategory.text = "Design"
-            cell.totalResultSearchNameCourse.text = "Google UX Design"
-            cell.totalResultSearchConstractorName.text = "Jacob Jones"
-            cell.totalResultSearchImage.image = UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection()
-            cell.selectionStyle = .none
-            return cell
-            
-        } else {
-        }
-        return UITableViewCell()
-    }
-    
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if recentSearches.isEmpty && currentState == .recentSearches {
-            return nil
-        }
-        
-        let headerView = UIView()
-        headerView.backgroundColor = .white
-        
-        let titleLabel = UILabel()
-        titleLabel.font = UIFont(name: "Roboto-Bold", size: 16)
-        
-        
-        if currentState == .recentSearches {
-            titleLabel.text = "Recent Searches".localized
-            titleLabel.textColor = tenantViewModel.primaryColor
-        } else if currentState == .totalResultsBeforeFilter {
-            titleLabel.text = "\(20) \(NSLocalizedString("Total Results", comment: ""))"
-        }
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(titleLabel)
-        
-        if currentState == .totalResultsBeforeFilter {
-            let filterButton = UIButton(type: .system)
-            filterButton.setImage(UIImage(named: "ion_filter")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
-            filterButton.tintColor = tenantViewModel.primaryColor
-            filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-            filterButton.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(filterButton)
-            
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-                titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                filterButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-                filterButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                filterButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 10)
-            ])
-        } else if currentState == .totalResultsAfterFilter {
-            let resultsCountLabel = UILabel()
-            resultsCountLabel.text = "10".localized
-            resultsCountLabel.font = UIFont(name: "Roboto-Medium", size: 16)
-            resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(resultsCountLabel)
-            
-            let resultsTextLabel = UILabel()
-            resultsTextLabel.text = "Total Results".localized
-            resultsTextLabel.font = UIFont(name: "Roboto-Medium", size: 16)
-            resultsTextLabel.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(resultsTextLabel)
-            
-            let filtersLabel = UILabel()
-            filtersLabel.text = "(\(selectedFiltersCount ?? 0) \(NSLocalizedString("Filters", comment: "")))"
-            filtersLabel.font = UIFont(name: "Roboto-Medium", size: 16)
-            filtersLabel.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(filtersLabel)
-            
-            let filterButton = UIButton(type: .system)
-            filterButton.setImage(UIImage(named: "icon_filter-remove")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
-            filterButton.tintColor = tenantViewModel.primaryColor
-            filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-            filterButton.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(filterButton)
-            
-            NSLayoutConstraint.activate([
-                resultsCountLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-                resultsCountLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                
-                resultsTextLabel.leadingAnchor.constraint(equalTo: resultsCountLabel.trailingAnchor, constant: 5),
-                resultsTextLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                
-                filtersLabel.leadingAnchor.constraint(equalTo: resultsTextLabel.trailingAnchor, constant: 5),
-                filtersLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-                
-                filterButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-                filterButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-            ])
-            
-        } else {
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-                titleLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-            ])
-        }
-        
-        return headerView
-    }
-    
-    
+    // MARK: - Filter Button Action
     @objc func filterButtonTapped() {
+        
         currentState = .filterView
         tableView.isHidden = true
         searchView.isHidden = true
@@ -479,54 +288,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    @objc func applyButtonTapped() {
-        
-        applyFilters()
-        currentState = .totalResultsAfterFilter
-        tableView.isHidden = false
-        filterContainerView.isHidden = true
-        searchView.isHidden = false
-        tableView.reloadData()
-        
-        self.title = "Search".localized
-        if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
-            tabBarItem.title = "Search".localized
-        }
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        
-        self.navigationController?.navigationBar.titleTextAttributes = attributes
-        
-        self.navigationItem.leftBarButtonItem = nil
-    }
-    
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if let header = view as? UITableViewHeaderFooterView {
-            header.textLabel?.textColor = tenantViewModel.primaryColor
-            header.textLabel?.font = UIFont(name: "Roboto-Bold", size: 14)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedSearch = recentSearches[indexPath.row]
-        searchTextField.text = selectedSearch
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if currentState == .totalResultsBeforeFilter {
-            return 120
-        } else if currentState == .recentSearches {
-            return 50
-        } else if currentState == .totalResultsAfterFilter {
-            return 120
-        }
-        return 0
-    }
-    
     
     func updateNoRecentSearchImage() {
         if recentSearches.isEmpty {
@@ -535,4 +296,5 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             noRecentSearchImageView.isHidden = true
         }
     }
+    
 }
