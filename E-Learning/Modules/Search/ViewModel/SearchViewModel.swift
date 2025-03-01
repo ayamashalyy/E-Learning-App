@@ -11,9 +11,11 @@ class SearchViewModel {
     
     // MARK: - Properties
     
-    var courses: [Course] = []
-    var searchResults: [Course] = []
-   // var filteredSearchCourses: [Course] = []
+    var courses: [Course] = [] // all courses
+    var searchResults: [Course] = [] // results after search
+    var filteredResults: [Course] = [] // results after filter
+    var categories: [String] = []
+    var levels: [String] = []
     var isLoading: Bool = false
     var errorMessage: String?
     private let apiService = APIService()
@@ -39,6 +41,7 @@ class SearchViewModel {
             if let courseResponse = courseResponse {
                 self?.courses = courseResponse.data
                 self?.searchResults = courseResponse.data
+                self?.filteredResults = courseResponse.data
                 completion(true)
             } else {
                 self?.errorMessage = "No data found"
@@ -71,13 +74,15 @@ class SearchViewModel {
     private func applySearch(query: String) {
         if query.isEmpty {
             searchResults = courses
+            filteredResults = courses
         } else {
-            searchResults = courses.filter { course in
+            let resultsToSearch = filteredResults.isEmpty ? courses : filteredResults
+            searchResults = resultsToSearch.filter { course in
                 return course.title.localizedCaseInsensitiveContains(query) ||
                 course.category.name.localizedCaseInsensitiveContains(query) ||
                 course.instructor.name.localizedCaseInsensitiveContains(query)
             }
-            
+            filteredResults = searchResults
         }
     }
     
@@ -85,7 +90,7 @@ class SearchViewModel {
     // MARK: - Filter Courses
     func filterCourses(by category: String?, instructor: String?) {
         
-        searchResults = courses.filter { course in
+        filteredResults = searchResults.filter { course in
             var matchesCategory = true
             var matchesInstructor = true
             
@@ -103,6 +108,31 @@ class SearchViewModel {
     
     // MARK: - Reset Filters
     func resetFilters() {
-        searchResults = courses
+        filteredResults = searchResults
+    }
+    
+    // MARK: - Apply Filters
+    func applyFilters(selectedFilters: [String: [String]]) {
+        filteredResults = searchResults.filter { course in
+            for (filterKey, selectedValues) in selectedFilters {
+                if let courseValue = courseValueForKey(filterKey, course),
+                   !selectedValues.contains(courseValue) {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+    
+    // MARK: - Course Value for Key
+    private func courseValueForKey(_ key: String, _ course: Course) -> String? {
+        switch key {
+        case "Category":
+            return course.category.name
+        case "Instructor":
+            return course.instructor.name
+        default:
+            return nil
+        }
     }
 }

@@ -24,6 +24,13 @@ extension SearchViewController: UITextFieldDelegate {
             return
         }
         
+        // Reset selected filters when starting a new search
+        selectedFilters.removeAll()
+        selectedFiltersCount = 0
+        
+        // Reload the collection view to reflect the reset filters
+        collectionView.reloadData()
+        
         // Add the new search query to the beginning of the recent searches list
         recentSearches.insert(query, at: 0)
         // Save the updated recent searches list (e.g., to UserDefaults or a database)
@@ -39,6 +46,15 @@ extension SearchViewController: UITextFieldDelegate {
         }
         updateNoRecentSearchImage()
         resetFilters()
+    }
+    
+    // MARK: - Reset Filters
+    func resetFilters() {
+        viewModel.resetFilters()
+        DispatchQueue.main.async {
+            self.currentState = .totalResultsBeforeFilter
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Cancel Button Action

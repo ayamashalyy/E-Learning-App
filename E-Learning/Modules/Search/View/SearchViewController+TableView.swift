@@ -19,7 +19,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         case .totalResultsBeforeFilter:
             return viewModel.searchResults.count
         case .totalResultsAfterFilter:
-            return 10
+            return viewModel.filteredResults.count
         case .filterView:
             return 0
         }
@@ -61,10 +61,14 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "TotalResultsTableViewCell", for: indexPath) as? TotalResultsTableViewCell else {
                 return UITableViewCell()
             }
-            cell.totalResultSearchCategory.text = "Design"
-            cell.totalResultSearchNameCourse.text = "Google UX Design"
-            cell.totalResultSearchConstractorName.text = "Jacob Jones"
-            cell.totalResultSearchImage.image = UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection()
+            let course = viewModel.filteredResults[indexPath.row]
+            
+            cell.totalResultSearchCategory.text = course.category.name
+            cell.totalResultSearchNameCourse.text = course.title
+            cell.totalResultSearchConstractorName.text = course.instructor.name
+            if let imageUrl = URL(string: course.image) {
+                cell.totalResultSearchImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection())
+            }
             cell.selectionStyle = .none
             return cell
             
@@ -114,7 +118,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             ])
         } else if currentState == .totalResultsAfterFilter {
             let resultsCountLabel = UILabel()
-            resultsCountLabel.text = "10".localized
+            resultsCountLabel.text = "\(viewModel.filteredResults.count)".localized
             resultsCountLabel.font = UIFont(name: "Roboto-Medium", size: 16)
             resultsCountLabel.translatesAutoresizingMaskIntoConstraints = false
             headerView.addSubview(resultsCountLabel)

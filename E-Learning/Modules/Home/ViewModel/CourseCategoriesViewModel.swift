@@ -10,7 +10,7 @@ import Foundation
 class CourseCategoriesViewModel {
     
     private var apiService = APIService()
-    private var courseCategories: [CourseCategory] = []
+    var courseCategories: [CourseCategory] = []
     var onDataFetched: (() -> Void)?
     
     func fetchCourseCategories() {

@@ -25,6 +25,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         let item = sections[indexPath.section].items[indexPath.row]
         cell.FiltrationCategory.text = item
+        
         if let selectedItems = selectedFilters[sections[indexPath.section].title], selectedItems.contains(item) {
             cell.FiltrationCategory.textColor = .white
             cell.outerView.backgroundColor = tenantViewModel.primaryColor
@@ -73,37 +74,37 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let selectedItem = sections[indexPath.section].items[indexPath.row]
         let sectionTitle = sections[indexPath.section].title
         
-        if let previousSelection = selectedFilters[sectionTitle]?.first {
-            if let previousIndex = sections[indexPath.section].items.firstIndex(of: previousSelection) {
-                selectedFilters[sectionTitle]?.removeAll()
-                let previousIndexPath = IndexPath(item: previousIndex, section: indexPath.section)
-                collectionView.reloadItems(at: [previousIndexPath])
-            }
+        // Check if the item is already selected
+        if let selectedItems = selectedFilters[sectionTitle], selectedItems.contains(selectedItem) {
+            // Item is already selected, so remove it (unselect)
+            selectedFilters[sectionTitle]?.removeAll { $0 == selectedItem }
+        } else {
+            // Item is not selected, so select it
+            // First, remove any previously selected item in the same section
+            selectedFilters[sectionTitle]?.removeAll()
+            // Then, add the new selected item
+            selectedFilters[sectionTitle] = [selectedItem]
         }
         
-        selectedFilters[sectionTitle] = [selectedItem]
-        collectionView.reloadItems(at: [indexPath])
+        // Update the selected filters count
+        selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }
         
+        // Reload the entire section to update the appearance of all items
+        collectionView.reloadSections(IndexSet(integer: indexPath.section))
+        
+        // Apply the filters
         applyFilters()
         collectionView.reloadData()
     }
     
     // MARK: - Apply Filters
     func applyFilters() {
-        filteredResults = allResults.filter { course in
-            
-            for (filterKey, selectedValues) in selectedFilters {
-                
-                if let courseValue = courseValueForKey(filterKey, course),
-                   !selectedValues.contains(courseValue) {
-                    return false
-                }
-            }
-            return true
-        }
-        
         selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }
-        
+        viewModel.applyFilters(selectedFilters: selectedFilters)
+        DispatchQueue.main.async {
+            self.currentState = .totalResultsAfterFilter
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Apply Button Action
@@ -128,30 +129,5 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         
         self.navigationItem.leftBarButtonItem = nil
-    }
-    
-    // MARK: - Reset Filters
-    func resetFilters() {
-        // Clear all selected filters
-        selectedFilters = [:]
-        
-        // Reset filtered results to show all results
-        filteredResults = allResults
-        
-        // Reload UI
-        collectionView.reloadData()
-        tableView.reloadData()
-    }
-    
-    // MARK: - Course Value for Key
-    func courseValueForKey(_ key: String, _ course: CourseDamo) -> String? {
-        switch key {
-        case "Category":
-            return course.category
-        case "Level":
-            return course.level
-        default:
-            return nil
-        }
     }
 }

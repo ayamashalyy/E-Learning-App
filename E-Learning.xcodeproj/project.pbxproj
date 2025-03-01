@@ -140,6 +140,8 @@
 		E8BC5E0A2D71FCA80032FF84 /* CourseCategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5E092D71FCA80032FF84 /* CourseCategoryResponse.swift */; };
 		E8BC5E0D2D71FD010032FF84 /* CourseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5E0C2D71FD010032FF84 /* CourseResponse.swift */; };
 		E8BC5E0F2D71FD730032FF84 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5E0E2D71FD730032FF84 /* SearchViewModel.swift */; };
+		E8BC5E112D725B5A0032FF84 /* InstructorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5E102D725B5A0032FF84 /* InstructorViewModel.swift */; };
+		E8BC5E132D725BF60032FF84 /* InstructorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC5E122D725BF60032FF84 /* InstructorResponse.swift */; };
 		E8C644BC2D536DC500EDA483 /* UserSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */; };
 		E8C644BE2D5387F300EDA483 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BD2D5387F300EDA483 /* Profile.swift */; };
 		E8C644C02D53883500EDA483 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C644BF2D53883500EDA483 /* ProfileViewModel.swift */; };
@@ -290,6 +292,8 @@
 		E8BC5E092D71FCA80032FF84 /* CourseCategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCategoryResponse.swift; sourceTree = "<group>"; };
 		E8BC5E0C2D71FD010032FF84 /* CourseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseResponse.swift; sourceTree = "<group>"; };
 		E8BC5E0E2D71FD730032FF84 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		E8BC5E102D725B5A0032FF84 /* InstructorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorViewModel.swift; sourceTree = "<group>"; };
+		E8BC5E122D725BF60032FF84 /* InstructorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorResponse.swift; sourceTree = "<group>"; };
 		E8C644BB2D536DC500EDA483 /* UserSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionManager.swift; sourceTree = "<group>"; };
 		E8C644BD2D5387F300EDA483 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E8C644BF2D53883500EDA483 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -483,6 +487,7 @@
 		0372CBA52D20C12F00A03242 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8BC5E102D725B5A0032FF84 /* InstructorViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -828,6 +833,7 @@
 		03F37E7C2D1C4D4D00F50C52 /* CourseOverview */ = {
 			isa = PBXGroup;
 			children = (
+				E8BC5E142D727A7F0032FF84 /* Model */,
 				0372CBA52D20C12F00A03242 /* ViewModel */,
 				0372CBA42D20C12300A03242 /* View */,
 			);
@@ -941,6 +947,14 @@
 			isa = PBXGroup;
 			children = (
 				E8BC5E0C2D71FD010032FF84 /* CourseResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E8BC5E142D727A7F0032FF84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E8BC5E122D725BF60032FF84 /* InstructorResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1105,6 +1119,7 @@
 				E8B3449A2D691D7000F14EEE /* RefreshToken.swift in Sources */,
 				E8B29E3F2D511C370083C471 /* OTP.swift in Sources */,
 				7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */,
+				E8BC5E112D725B5A0032FF84 /* InstructorViewModel.swift in Sources */,
 				038CEB5D2CF2660C00889AA1 /* PrivacyAndPolicyViewController.swift in Sources */,
 				0377D4682CEBBA0E006C60F6 /* AppDelegate.swift in Sources */,
 				E88E5FF32D44FF74002A38C8 /* UIColor+Extensions.swift in Sources */,
@@ -1158,6 +1173,7 @@
 				0364129A2CFF6508008EE23F /* CourseDemo.swift in Sources */,
 				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,
 				03DDA9FF2D289661008115CA /* DetailsDataOfLearnersCell.swift in Sources */,
+				E8BC5E132D725BF60032FF84 /* InstructorResponse.swift in Sources */,
 				E8B344902D68EC3A00F14EEE /* CourseCategory.swift in Sources */,
 				0328C1112CEE325500CC1DCF /* CoursesCategoriesSectionCell.swift in Sources */,
 				E8BC5E052D71FC280032FF84 /* Meta.swift in Sources */,

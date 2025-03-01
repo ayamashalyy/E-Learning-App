@@ -14,20 +14,16 @@ class SearchViewController: UIViewController {
         let items: [String]
     }
     
-    let sections: [Section] = [
-        Section(title: "Category".localized, items: ["Data Science".localized, "Design".localized, "Business".localized, "Language Learning".localized]),
-        Section(title: "Level".localized, items: ["Beginner".localized, "Intermediate".localized, "Advanced".localized]),
-    ]
-    
     // MARK: - Properties
     var currentState: SearchState = .recentSearches
+    var viewModel = SearchViewModel()
+    var courseCategoriesViewModel = CourseCategoriesViewModel()
+    var instructorViewModel = InstructorViewModel()
     var recentSearches: [String] = []
-    var allResults: [CourseDamo] = []
-    var filteredResults: [CourseDamo] = []
     var selectedFilters: [String: [String]] = [:]
+    var sections: [Section] = []
     var tenantViewModel = TenantViewModel.shared
     var selectedFiltersCount: Int!
-    var viewModel = SearchViewModel()
     
     // MARK: - UI Components
     var searchView = UIView()
@@ -52,7 +48,7 @@ class SearchViewController: UIViewController {
         setupViews()
         setupConstraints()
         collectionView.allowsMultipleSelection = true
-        
+        fetchCategoriesAndInstructors()
     }
     
     
@@ -102,8 +98,6 @@ class SearchViewController: UIViewController {
             recentSearches = savedSearches
         }
     }
-    
-    
     
     // MARK: - UI Setup
     func setupViews() {
@@ -297,4 +291,29 @@ class SearchViewController: UIViewController {
         }
     }
     
+    func fetchCategoriesAndInstructors() {
+        courseCategoriesViewModel.fetchCourseCategories()
+        instructorViewModel.fetchInstructors()
+        
+        courseCategoriesViewModel.onDataFetched = { [weak self] in
+            guard let self = self else { return }
+            self.updateSections()
+        }
+        
+        instructorViewModel.onDataFetched = { [weak self] in
+            guard let self = self else { return }
+            self.updateSections()
+        }
+    }
+    
+    private func updateSections() {
+        let categories = courseCategoriesViewModel.courseCategories.map { $0.name }
+        let instructors = instructorViewModel.instructors.map { $0.name }
+        
+        sections = [
+            Section(title: "Category".localized, items: categories),
+            Section(title: "Instructor".localized, items: instructors)
+        ]
+        collectionView.reloadData()
+    }
 }
