@@ -7,35 +7,25 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
-    
-    struct Section {
-        let title: String
-        let items: [String]
-    }
+class SearchViewController: UIViewController{
     
     // MARK: - Properties
-    var currentState: SearchState = .recentSearches
+    var recentSearchesViewController: RecentSearchesViewController!
+    var totalResultsBeforeFilterViewController: TotalResultsBeforeFilterViewController!
+    var totalResultsAfterFilterViewController: TotalResultsAfterFilterViewController!
+    var filterViewController: FilterItemsViewController!
     var viewModel = SearchViewModel()
     var courseCategoriesViewModel = CourseCategoriesViewModel()
     var instructorViewModel = InstructorViewModel()
-    var recentSearches: [String] = []
-    var selectedFilters: [String: [String]] = [:]
-    var sections: [Section] = []
     var tenantViewModel = TenantViewModel.shared
-    var selectedFiltersCount: Int!
     
     // MARK: - UI Components
     var searchView = UIView()
     var searchTextField = UITextField()
     var searchButton = UIButton()
     var cancelButton = UIButton()
-    var tableView = UITableView()
     var searchLabel = UILabel()
     var noRecentSearchImageView: UIImageView!
-    var filterContainerView: UIView!
-    var collectionView: UICollectionView!
-    var applyButton: UIButton!
     var backButtonImage: UIImage!
     
     // MARK: - Lifecycle Methods
@@ -44,38 +34,20 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationItem.title = "Search".localized
         configureNavigationBar()
-        loadRecentSearches()
+        viewModel.loadRecentSearches()
         setupViews()
         setupConstraints()
-        collectionView.allowsMultipleSelection = true
+        setupSubControllers()
+        updateUIForCurrentState()
         fetchCategoriesAndInstructors()
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if currentState == .filterView {
-            currentState = .totalResultsBeforeFilter
-            noRecentSearchImageView.isHidden = true
-            filterContainerView.isHidden = true
-            tableView.isHidden = false
-            searchView.isHidden = false
-            self.title = "Search".localized
-            self.navigationItem.leftBarButtonItem = nil
-            tableView.reloadData()
-            
-        } else {
-            currentState = .recentSearches
-            tableView.reloadData()
-            updateNoRecentSearchImage()
-            searchTextField.text = ""
+        recentSearchesViewController.tableView.reloadData()
+        viewModel.onComplete = {
+            self.updateUIForCurrentState()
         }
     }
     
     // MARK: - Navigation Bar Configuration
     private func configureNavigationBar() {
-        
         let appearance = UINavigationBarAppearance()
         appearance.titleTextAttributes = [
             .font: UIFont(name: "Roboto-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20),
@@ -86,17 +58,6 @@ class SearchViewController: UIViewController {
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    // MARK: - Recent Searches Handling
-    func saveRecentSearches() {
-        UserDefaults.standard.set(recentSearches, forKey: Constants.recentSearchesKey)
-    }
-    
-    private func loadRecentSearches() {
-        if let savedSearches = UserDefaults.standard.array(forKey: Constants.recentSearchesKey) as? [String] {
-            recentSearches = savedSearches
-        }
     }
     
     // MARK: - UI Setup
@@ -129,36 +90,14 @@ class SearchViewController: UIViewController {
         cancelButton.imageView?.contentMode = .scaleAspectFit
         searchView.addSubview(cancelButton)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UINib(nibName: "RecentSearchesTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
-        tableView.register(UINib(nibName: "TotalResultsTableViewCell", bundle: nil), forCellReuseIdentifier: "TotalResultsTableViewCell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
-        view.addSubview(tableView)
-        
         noRecentSearchImageView = UIImageView(image: UIImage(named: "search"))
         noRecentSearchImageView.contentMode = .scaleAspectFit
         noRecentSearchImageView.translatesAutoresizingMaskIntoConstraints = false
+        noRecentSearchImageView.isHidden = true
         view.addSubview(noRecentSearchImageView)
-        
-        filterContainerView = UIView()
-        filterContainerView.translatesAutoresizingMaskIntoConstraints = false
-        filterContainerView.isHidden = true
-        view.addSubview(filterContainerView)
-        
-        setupFilterView()
     }
     
     func setupConstraints() {
-        
-        NSLayoutConstraint.activate([
-            noRecentSearchImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            noRecentSearchImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            noRecentSearchImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
-            noRecentSearchImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 200)
-            
-        ])
         
         NSLayoutConstraint.activate([
             searchView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -189,108 +128,128 @@ class SearchViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 10),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            filterContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
-            filterContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            filterContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            filterContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            noRecentSearchImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noRecentSearchImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noRecentSearchImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
+            noRecentSearchImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 200)
         ])
     }
     
-    // MARK: - Filter View Setup
-    func setupFilterView() {
-        
-        let layout = RTLCollectionFlow()
-        layout.scrollDirection = .vertical
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(UINib(nibName: "FiltrationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FiltrationCollectionViewCell")
-        collectionView.register(
-            FilterSectionHeaderViewCollectionReusableView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: FilterSectionHeaderViewCollectionReusableView.identifier
-        )
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .white
-        
-        filterContainerView.addSubview(collectionView)
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: filterContainerView.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: filterContainerView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: filterContainerView.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: filterContainerView.bottomAnchor)
-        ])
-        
-        applyButton = UIButton(type: .system)
-        applyButton.setTitle("Apply".localized, for: .normal)
-        applyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 15)
-        applyButton.setTitleColor(UIColor.white, for: .normal)
-        applyButton.backgroundColor = tenantViewModel.primaryColor
-        applyButton.layer.cornerRadius = 20
-        applyButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(applyButton)
-        applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
-        filterContainerView.addSubview(applyButton)
-        
-        NSLayoutConstraint.activate([
-            applyButton.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor, constant: 16),
-            applyButton.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor, constant: -16),
-            applyButton.bottomAnchor.constraint(equalTo: filterContainerView.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            applyButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        
+    // MARK: - Setup RecentSearchesViewController
+    private func setupRecentSearchesViewController() {
+        recentSearchesViewController = RecentSearchesViewController()
+        recentSearchesViewController.viewModel = viewModel
+        recentSearchesViewController.delegate = self
+        recentSearchesViewController.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    // MARK: - Filter Button Action
-    @objc func filterButtonTapped() {
-        
-        currentState = .filterView
-        tableView.isHidden = true
-        searchView.isHidden = true
-        noRecentSearchImageView.isHidden = true
-        filterContainerView.isHidden = false
-        
-        self.title = "Filtration".localized
-        if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
-            tabBarItem.title = "Search".localized
-        }
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        
-        self.navigationController?.navigationBar.titleTextAttributes = attributes
-        
-        backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
-        
-        if let backButtonImage = backButtonImage {
-            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
-            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(applyButtonTapped))
-            self.navigationItem.leftBarButtonItem = backButton
-        }
-        
+    // MARK: - Setup TotalResultsBeforeFilterViewController
+    private func setupTotalResultsBeforeFilterViewController() {
+        totalResultsBeforeFilterViewController = TotalResultsBeforeFilterViewController()
+        totalResultsBeforeFilterViewController.viewModel = viewModel
+        totalResultsBeforeFilterViewController.delegate = self
+        totalResultsBeforeFilterViewController.view.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    // MARK: - Setup TotalResultsAfterFilterViewController
+    private func setupTotalResultsAfterFilterViewController() {
+        totalResultsAfterFilterViewController = TotalResultsAfterFilterViewController()
+        totalResultsAfterFilterViewController.viewModel = viewModel
+        totalResultsAfterFilterViewController.delegate = self
+        totalResultsAfterFilterViewController.view.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
-    func updateNoRecentSearchImage() {
-        if recentSearches.isEmpty {
+    // MARK: - Setup FilterViewController
+    private func setupFilterItemsViewController() {
+        filterViewController = FilterItemsViewController()
+        filterViewController.viewModel = viewModel
+        filterViewController.delegate = self
+        filterViewController.view.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    // MARK: - Setup Sub-Controllers
+    private func setupSubControllers() {
+        setupRecentSearchesViewController()
+        setupTotalResultsBeforeFilterViewController()
+        setupTotalResultsAfterFilterViewController()
+        setupFilterItemsViewController()
+    }
+    // MARK: - Update UI Based on Current State
+    func updateUIForCurrentState() {
+        
+        recentSearchesViewController.view.removeFromSuperview()
+        totalResultsBeforeFilterViewController.view.removeFromSuperview()
+        totalResultsAfterFilterViewController.view.removeFromSuperview()
+        filterViewController.view.removeFromSuperview()
+        
+        switch  viewModel.currentState {
+        case .recentSearches:
+            addChild(recentSearchesViewController)
+            view.addSubview(recentSearchesViewController.view)
+            recentSearchesViewController.didMove(toParent: self)
+            
+            NSLayoutConstraint.activate([
+                recentSearchesViewController.view.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 10),
+                recentSearchesViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                recentSearchesViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                recentSearchesViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+            
+            recentSearchesViewController.tableView.isHidden = false
+            recentSearchesViewController.tableView.reloadData()
+            
+        case .totalResultsBeforeFilter:
+            addChild(totalResultsBeforeFilterViewController)
+            view.addSubview(totalResultsBeforeFilterViewController.view)
+            totalResultsBeforeFilterViewController.didMove(toParent: self)
+            
+            NSLayoutConstraint.activate([
+                totalResultsBeforeFilterViewController.view.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 10),
+                totalResultsBeforeFilterViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                totalResultsBeforeFilterViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                totalResultsBeforeFilterViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+            
+            totalResultsBeforeFilterViewController.tableView.reloadData()
+            
+        case .totalResultsAfterFilter:
+            addChild(totalResultsAfterFilterViewController)
+            view.addSubview(totalResultsAfterFilterViewController.view)
+            totalResultsAfterFilterViewController.didMove(toParent: self)
+            
+            NSLayoutConstraint.activate([
+                totalResultsAfterFilterViewController.view.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 10),
+                totalResultsAfterFilterViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                totalResultsAfterFilterViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                totalResultsAfterFilterViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+            
+            searchView.isHidden = false
+            totalResultsAfterFilterViewController.tableView.reloadData()
+            
+        case .filterView:
+            addChild(filterViewController)
+            view.addSubview(filterViewController.view)
+            filterViewController.didMove(toParent: self)
+            
+            NSLayoutConstraint.activate([
+                filterViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                filterViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                filterViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                filterViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+            
+            searchView.isHidden = true
+            filterViewController.collectionView.reloadData()
+            
+        case .emptySearch:
             noRecentSearchImageView.isHidden = false
-        } else {
-            noRecentSearchImageView.isHidden = true
+            recentSearchesViewController.tableView.isHidden = true
         }
     }
     
+    // MARK: - fetchCategoriesAndInstructors
     func fetchCategoriesAndInstructors() {
         courseCategoriesViewModel.fetchCourseCategories()
         instructorViewModel.fetchInstructors()
@@ -310,10 +269,10 @@ class SearchViewController: UIViewController {
         let categories = courseCategoriesViewModel.courseCategories.map { $0.name }
         let instructors = instructorViewModel.instructors.map { $0.name }
         
-        sections = [
-            Section(title: "Category".localized, items: categories),
-            Section(title: "Instructor".localized, items: instructors)
+        viewModel.sections = [
+            SearchViewModel.Section(title: "Category".localized, items: categories),
+            SearchViewModel.Section(title: "Instructor".localized, items: instructors)
         ]
-        collectionView.reloadData()
+        filterViewController.collectionView.reloadData()
     }
 }

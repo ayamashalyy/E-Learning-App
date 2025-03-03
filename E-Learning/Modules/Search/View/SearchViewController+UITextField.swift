@@ -24,27 +24,25 @@ extension SearchViewController: UITextFieldDelegate {
             return
         }
         
-        // Reset selected filters when starting a new search
-        selectedFilters.removeAll()
-        selectedFiltersCount = 0
-        
-        // Reload the collection view to reflect the reset filters
-        collectionView.reloadData()
+        //        // Reset selected filters when starting a new search
+        viewModel.selectedFilters.removeAll()
+        viewModel.selectedFiltersCount = 0
         
         // Add the new search query to the beginning of the recent searches list
-        recentSearches.insert(query, at: 0)
-        // Save the updated recent searches list (e.g., to UserDefaults or a database)
-        saveRecentSearches()
+        viewModel.addRecentSearch(query)
+        recentSearchesViewController.tableView.reloadData()
         
         viewModel.searchCourses(with: query) { [weak self] success in
             if success {
-                DispatchQueue.main.async {
-                    self?.currentState = success ? .totalResultsBeforeFilter : .recentSearches
-                    self?.tableView.reloadData()
-                }
+                self?.viewModel.currentState = .totalResultsBeforeFilter
+                self?.updateUIForCurrentState()
+                self?.totalResultsBeforeFilterViewController.tableView.reloadData()
+            } else {
+                self?.viewModel.currentState = .recentSearches
+                self?.updateUIForCurrentState()
+                self?.recentSearchesViewController.tableView.reloadData()
             }
         }
-        updateNoRecentSearchImage()
         resetFilters()
     }
     
@@ -52,8 +50,8 @@ extension SearchViewController: UITextFieldDelegate {
     func resetFilters() {
         viewModel.resetFilters()
         DispatchQueue.main.async {
-            self.currentState = .totalResultsBeforeFilter
-            self.tableView.reloadData()
+            self.viewModel.currentState = .totalResultsBeforeFilter
+            self.updateUIForCurrentState()
         }
     }
     
@@ -61,11 +59,8 @@ extension SearchViewController: UITextFieldDelegate {
     @objc func cancelButtonTapped() {
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
-        currentState = .recentSearches
-        tableView.isHidden = false
-        filterContainerView.isHidden = true
-        tableView.reloadData()
-        updateNoRecentSearchImage()
+        viewModel.currentState = .recentSearches
+        updateUIForCurrentState()
     }
     
     // MARK: - Helper Function

@@ -12,4 +12,5 @@ enum SearchState {
     case totalResultsBeforeFilter
     case totalResultsAfterFilter
     case filterView
+    case emptySearch
 }

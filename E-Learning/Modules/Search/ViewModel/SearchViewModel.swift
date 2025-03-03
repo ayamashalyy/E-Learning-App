@@ -9,13 +9,37 @@ import Foundation
 
 class SearchViewModel {
     
-    // MARK: - Properties
+    struct Section {
+        let title: String
+        let items: [String]
+    }
     
+    // MARK: - Properties
+    var onComplete: (() -> Void)?
+    var currentState: SearchState = .recentSearches
     var courses: [Course] = [] // all courses
     var searchResults: [Course] = [] // results after search
     var filteredResults: [Course] = [] // results after filter
     var categories: [String] = []
     var levels: [String] = []
+    var recentSearches: [String] = [] {
+        didSet {
+            print("1: \(recentSearches.count)")
+            if recentSearches.isEmpty {
+                print("1")
+                currentState = .emptySearch
+            } else {
+                print("2")
+                currentState = .recentSearches
+            }
+            
+            (onComplete ?? {})()
+        }
+    } // Recent searches
+    
+    var sections: [Section] = []
+    var selectedFilters: [String: [String]] = [:]
+    var selectedFiltersCount: Int = 0
     var isLoading: Bool = false
     var errorMessage: String?
     private let apiService = APIService()
@@ -72,38 +96,22 @@ class SearchViewModel {
     
     // MARK: - Apply Search
     private func applySearch(query: String) {
+        
         if query.isEmpty {
             searchResults = courses
             filteredResults = courses
-        } else {
-            let resultsToSearch = filteredResults.isEmpty ? courses : filteredResults
-            searchResults = resultsToSearch.filter { course in
-                return course.title.localizedCaseInsensitiveContains(query) ||
-                course.category.name.localizedCaseInsensitiveContains(query) ||
-                course.instructor.name.localizedCaseInsensitiveContains(query)
-            }
-            filteredResults = searchResults
+            return
         }
-    }
-    
-    
-    // MARK: - Filter Courses
-    func filterCourses(by category: String?, instructor: String?) {
         
-        filteredResults = searchResults.filter { course in
-            var matchesCategory = true
-            var matchesInstructor = true
+        searchResults = courses.filter { course in
+            let isTitleMatch = course.title.localizedCaseInsensitiveContains(query)
+            let isCategoryMatch = course.category.name.localizedCaseInsensitiveContains(query)
+            let isInstructorMatch = course.instructor.name.localizedCaseInsensitiveContains(query)
             
-            if let category = category {
-                matchesCategory = course.category.name == category
-            }
-            
-            if let instructor = instructor {
-                matchesInstructor = course.instructor.name == instructor
-            }
-            
-            return matchesCategory && matchesInstructor
+            return isTitleMatch || isCategoryMatch || isInstructorMatch
         }
+        
+        filteredResults = searchResults
     }
     
     // MARK: - Reset Filters
@@ -113,8 +121,14 @@ class SearchViewModel {
     
     // MARK: - Apply Filters
     func applyFilters(selectedFilters: [String: [String]]) {
+        print("check filter - Selected Filters: \(selectedFilters)")
         filteredResults = searchResults.filter { course in
             for (filterKey, selectedValues) in selectedFilters {
+                
+                if selectedValues.isEmpty {
+                    continue
+                }
+                
                 if let courseValue = courseValueForKey(filterKey, course),
                    !selectedValues.contains(courseValue) {
                     return false
@@ -122,6 +136,7 @@ class SearchViewModel {
             }
             return true
         }
+        // print("check filter - Filtered Results: \(filteredResults)")
     }
     
     // MARK: - Course Value for Key
@@ -134,5 +149,29 @@ class SearchViewModel {
         default:
             return nil
         }
+    }
+    
+    // MARK: - Load Recent Searches
+    func loadRecentSearches() {
+        if let savedSearches = UserDefaults.standard.array(forKey: Constants.recentSearchesKey) as? [String] {
+            recentSearches = savedSearches
+        }
+    }
+    
+    // MARK: - Save Recent Searches
+    func saveRecentSearches() {
+        UserDefaults.standard.set(recentSearches, forKey: Constants.recentSearchesKey)
+    }
+    
+    // MARK: - Add Recent Search
+    func addRecentSearch(_ searchTerm: String) {
+        recentSearches.insert(searchTerm, at: 0)
+        saveRecentSearches()
+    }
+    
+    // MARK: - Delete Recent Search
+    func deleteRecentSearch(at index: Int) {
+        recentSearches.remove(at: index)
+        saveRecentSearches()
     }
 }

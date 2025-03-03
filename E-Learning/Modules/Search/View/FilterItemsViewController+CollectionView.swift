@@ -1,14 +1,14 @@
 //
-//  FilterViewController.swift
+//  FilterItemsViewController+CollectionView.swift
 //  E-Learning
 //
-//  Created by aya on 27/11/2024.
+//  Created by Aya Mashaly on 01/03/2025.
 //
 
+import Foundation
 import UIKit
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
@@ -73,10 +73,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedItem = sections[indexPath.section].items[indexPath.row]
         let sectionTitle = sections[indexPath.section].title
-        
+        print("check filter - \(selectedItem)")
+        print("check filter - \(sectionTitle)")
         // Check if the item is already selected
         if let selectedItems = selectedFilters[sectionTitle], selectedItems.contains(selectedItem) {
             // Item is already selected, so remove it (unselect)
+            print("check filter - \(selectedItems)")
             selectedFilters[sectionTitle]?.removeAll { $0 == selectedItem }
         } else {
             // Item is not selected, so select it
@@ -85,49 +87,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             // Then, add the new selected item
             selectedFilters[sectionTitle] = [selectedItem]
         }
-        
         // Update the selected filters count
         selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }
-        
+        print("check filter - \(selectedFiltersCount)")
         // Reload the entire section to update the appearance of all items
         collectionView.reloadSections(IndexSet(integer: indexPath.section))
-        
-        // Apply the filters
-        applyFilters()
-        collectionView.reloadData()
-    }
-    
-    // MARK: - Apply Filters
-    func applyFilters() {
-        selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }
-        viewModel.applyFilters(selectedFilters: selectedFilters)
-        DispatchQueue.main.async {
-            self.currentState = .totalResultsAfterFilter
-            self.tableView.reloadData()
-        }
-    }
-    
-    // MARK: - Apply Button Action
-    @objc func applyButtonTapped() {
-        applyFilters()
-        currentState = .totalResultsAfterFilter
-        tableView.isHidden = false
-        filterContainerView.isHidden = true
-        searchView.isHidden = false
-        tableView.reloadData()
-        
-        self.title = "Search".localized
-        if let tabBarItem = self.tabBarController?.tabBar.items?[self.tabBarController?.selectedIndex ?? 0] {
-            tabBarItem.title = "Search".localized
-        }
-        
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont(name: "Roboto-Bold", size: 20) ?? .boldSystemFont(ofSize: 20),
-            .foregroundColor: UIColor.black
-        ]
-        
-        self.navigationController?.navigationBar.titleTextAttributes = attributes
-        
-        self.navigationItem.leftBarButtonItem = nil
     }
 }
