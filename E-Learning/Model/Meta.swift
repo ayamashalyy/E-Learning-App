@@ -9,12 +9,12 @@ import Foundation
 
 struct Meta: Decodable {
     let currentPage: Int
-    let from: Int
+    let from: Int?
     let lastPage: Int
     let links: [Link]
     let path: String
     let perPage: Int
-    let to: Int
+    let to: Int?
     let total: Int
     
     enum CodingKeys: String, CodingKey {

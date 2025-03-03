@@ -24,9 +24,9 @@ extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewD
         }
         
         let item = sections[indexPath.section].items[indexPath.row]
-        cell.FiltrationCategory.text = item
+        cell.FiltrationCategory.text = item.name
         
-        if let selectedItems = selectedFilters[sections[indexPath.section].title], selectedItems.contains(item) {
+        if let selectedItems = selectedFilters[sections[indexPath.section].title], selectedItems.contains(item.name) {
             cell.FiltrationCategory.textColor = .white
             cell.outerView.backgroundColor = tenantViewModel.primaryColor
         } else {
@@ -38,7 +38,7 @@ extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let item = sections[indexPath.section].items[indexPath.row]
-        let labelWidth = item.width(usingFont: UIFont(name: "Roboto-Medium", size: 14) ?? .boldSystemFont(ofSize: 14))
+        let labelWidth = item.name.width(usingFont: UIFont(name: "Roboto-Medium", size: 14) ?? .boldSystemFont(ofSize: 14))
         let padding: CGFloat = 50
         return CGSize(width: labelWidth + padding, height: 55)
     }
@@ -75,17 +75,24 @@ extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewD
         let sectionTitle = sections[indexPath.section].title
         print("check filter - \(selectedItem)")
         print("check filter - \(sectionTitle)")
+        
+        if sectionTitle == "Category" {
+            viewModel.selectedCategoryId = selectedItem.id
+        } else if sectionTitle == "Instructor" {
+            viewModel.selectedInstructorId = selectedItem.id
+        }
+        
         // Check if the item is already selected
-        if let selectedItems = selectedFilters[sectionTitle], selectedItems.contains(selectedItem) {
+        if let selectedItems = selectedFilters[sectionTitle], selectedItems.contains(selectedItem.name) {
             // Item is already selected, so remove it (unselect)
             print("check filter - \(selectedItems)")
-            selectedFilters[sectionTitle]?.removeAll { $0 == selectedItem }
+            selectedFilters[sectionTitle]?.removeAll { $0 == selectedItem.name}
         } else {
             // Item is not selected, so select it
             // First, remove any previously selected item in the same section
             selectedFilters[sectionTitle]?.removeAll()
             // Then, add the new selected item
-            selectedFilters[sectionTitle] = [selectedItem]
+            selectedFilters[sectionTitle] = [selectedItem.name]
         }
         // Update the selected filters count
         selectedFiltersCount = selectedFilters.reduce(0) { $0 + $1.value.count }

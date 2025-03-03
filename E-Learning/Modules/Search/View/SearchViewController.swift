@@ -266,8 +266,8 @@ class SearchViewController: UIViewController{
     }
     
     private func updateSections() {
-        let categories = courseCategoriesViewModel.courseCategories.map { $0.name }
-        let instructors = instructorViewModel.instructors.map { $0.name }
+        let categories = courseCategoriesViewModel.courseCategories.map { ($0.id, $0.name) }
+        let instructors = instructorViewModel.instructors.map { ($0.id, $0.name) }
         
         viewModel.sections = [
             SearchViewModel.Section(title: "Category".localized, items: categories),

@@ -24,34 +24,18 @@ extension SearchViewController: UITextFieldDelegate {
             return
         }
         
-        //        // Reset selected filters when starting a new search
+     // Reset selected filters when starting a new search
         viewModel.selectedFilters.removeAll()
         viewModel.selectedFiltersCount = 0
-        
-        // Add the new search query to the beginning of the recent searches list
-        viewModel.addRecentSearch(query)
-        recentSearchesViewController.tableView.reloadData()
         
         viewModel.searchCourses(with: query) { [weak self] success in
             if success {
                 self?.viewModel.currentState = .totalResultsBeforeFilter
                 self?.updateUIForCurrentState()
-                self?.totalResultsBeforeFilterViewController.tableView.reloadData()
             } else {
                 self?.viewModel.currentState = .recentSearches
                 self?.updateUIForCurrentState()
-                self?.recentSearchesViewController.tableView.reloadData()
             }
-        }
-        resetFilters()
-    }
-    
-    // MARK: - Reset Filters
-    func resetFilters() {
-        viewModel.resetFilters()
-        DispatchQueue.main.async {
-            self.viewModel.currentState = .totalResultsBeforeFilter
-            self.updateUIForCurrentState()
         }
     }
     
@@ -59,8 +43,12 @@ extension SearchViewController: UITextFieldDelegate {
     @objc func cancelButtonTapped() {
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
-        viewModel.currentState = .recentSearches
-        updateUIForCurrentState()
+        viewModel.resetFilters { [weak self] success in
+              if success {
+                  self?.viewModel.currentState = .recentSearches
+                  self?.updateUIForCurrentState()
+              }
+          }
     }
     
     // MARK: - Helper Function

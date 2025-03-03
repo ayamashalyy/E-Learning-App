@@ -40,10 +40,14 @@ extension SearchViewController: TotalResultsBeforeFilterViewControllerDelegate, 
         // Handle the apply button tap action
         viewModel.selectedFilters = filterViewController.selectedFilters
         viewModel.selectedFiltersCount = filterViewController.selectedFiltersCount
-        viewModel.applyFilters(selectedFilters: viewModel.selectedFilters)
-        DispatchQueue.main.async {
-            self.viewModel.currentState = .totalResultsAfterFilter
-            self.updateUIForCurrentState()
+        // Apply filters and handle the result
+        viewModel.applyFilters(selectedFilters: viewModel.selectedFilters, term: searchTextField.text) { [weak self] success in
+            if success {
+                DispatchQueue.main.async {
+                    self?.viewModel.currentState = .totalResultsAfterFilter
+                    self?.updateUIForCurrentState()
+                }
+            }
         }
         
         self.title = "Search".localized

@@ -11,7 +11,7 @@ class SearchViewModel {
     
     struct Section {
         let title: String
-        let items: [String]
+        let items: [(id: Int, name: String)]
     }
     
     // MARK: - Properties
@@ -40,21 +40,43 @@ class SearchViewModel {
     var sections: [Section] = []
     var selectedFilters: [String: [String]] = [:]
     var selectedFiltersCount: Int = 0
-    var isLoading: Bool = false
+    var selectedCategoryId: Int?
+    var selectedInstructorId: Int?
     var errorMessage: String?
     private let apiService = APIService()
     
-    // MARK: - Fetch Courses
-    func fetchCourses(completion: @escaping (Bool) -> Void) {
-        isLoading = true
+    // MARK: - Fetch Courses with Filters
+    func fetchCourses(with term: String? = nil, categoryId: Int? = nil, instructorId: Int? = nil, isFeatured: Bool? = nil, completion: @escaping (Bool) -> Void) {
+        
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
-        print("subDomain: \(subDomain)")
-        
         let url = "\(subDomain)/courses"
-        print("Request URL: \(url)")
         
-        apiService.fetchData(from: url) { [weak self] ( courseResponse: CourseResponse?, error) in
-            self?.isLoading = false
+        // Add parameters to the URL
+        var parameters: [String: Any] = [:]
+        if let term = term {
+            parameters["term"] = term
+        }
+        if let categoryId = categoryId {
+            parameters["category_id"] = categoryId
+        }
+        if let instructorId = instructorId {
+            parameters["instructor_id"] = instructorId
+        }
+        if let isFeatured = isFeatured {
+            parameters["is_feather"] = isFeatured
+        }
+        
+        // Convert parameters to query items
+        var components = URLComponents(string: url)
+        components?.queryItems = parameters.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
+        
+        guard let finalURL = components?.url else {
+            completion(false)
+            return
+        }
+        
+        print("Final URL: \(finalURL.absoluteString)")
+        apiService.fetchData(from: finalURL.absoluteString) { [weak self] (courseResponse: CourseResponse?, error) in
             
             if let error = error {
                 self?.errorMessage = error.localizedDescription
@@ -63,6 +85,7 @@ class SearchViewModel {
             }
             
             if let courseResponse = courseResponse {
+                print("Courses: \(courseResponse.data)")
                 self?.courses = courseResponse.data
                 self?.searchResults = courseResponse.data
                 self?.filteredResults = courseResponse.data
@@ -76,78 +99,64 @@ class SearchViewModel {
     
     // MARK: - Search Courses
     func searchCourses(with query: String, completion: @escaping (Bool) -> Void) {
-        isLoading = true
         
-        // fetch total courses if not get before
-        if courses.isEmpty {
-            fetchCourses { [weak self] success in
+        // Add the new search query to the beginning of the recent searches list
+        addRecentSearch(query)
+        
+        // Fetch courses from the API with the search term
+        fetchCourses(with: query) { success in
+            if success {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    
+    // MARK: - Reset Filters
+    func resetFilters(completion: @escaping (Bool) -> Void) {
+        
+        // Reset selected filters
+        selectedCategoryId = nil
+        selectedInstructorId = nil
+        selectedFilters.removeAll()
+        selectedFiltersCount = 0
+        
+        // Fetch all courses without any filters
+        fetchCourses { [weak self] success in
+            if success {
+                self?.currentState = .totalResultsBeforeFilter
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    // MARK: - Apply Filters
+    func applyFilters(selectedFilters: [String: [String]],term: String?, completion: @escaping (Bool) -> Void) {
+        
+        let categoryId = selectedCategoryId
+        let instructorId = selectedInstructorId
+        
+        // Fetch courses with the selected filters
+        if let term {
+            fetchCourses(with: term, categoryId: categoryId, instructorId: instructorId) { success in
                 if success {
-                    self?.applySearch(query: query)
                     completion(true)
                 } else {
                     completion(false)
                 }
             }
         } else {
-            applySearch(query: query)
-            completion(true)
-        }
-    }
-    
-    // MARK: - Apply Search
-    private func applySearch(query: String) {
-        
-        if query.isEmpty {
-            searchResults = courses
-            filteredResults = courses
-            return
-        }
-        
-        searchResults = courses.filter { course in
-            let isTitleMatch = course.title.localizedCaseInsensitiveContains(query)
-            let isCategoryMatch = course.category.name.localizedCaseInsensitiveContains(query)
-            let isInstructorMatch = course.instructor.name.localizedCaseInsensitiveContains(query)
-            
-            return isTitleMatch || isCategoryMatch || isInstructorMatch
-        }
-        
-        filteredResults = searchResults
-    }
-    
-    // MARK: - Reset Filters
-    func resetFilters() {
-        filteredResults = searchResults
-    }
-    
-    // MARK: - Apply Filters
-    func applyFilters(selectedFilters: [String: [String]]) {
-        print("check filter - Selected Filters: \(selectedFilters)")
-        filteredResults = searchResults.filter { course in
-            for (filterKey, selectedValues) in selectedFilters {
-                
-                if selectedValues.isEmpty {
-                    continue
-                }
-                
-                if let courseValue = courseValueForKey(filterKey, course),
-                   !selectedValues.contains(courseValue) {
-                    return false
+            fetchCourses(categoryId: categoryId, instructorId: instructorId) { success in
+                if success {
+                    completion(true)
+                } else {
+                    completion(false)
                 }
             }
-            return true
-        }
-        // print("check filter - Filtered Results: \(filteredResults)")
-    }
-    
-    // MARK: - Course Value for Key
-    private func courseValueForKey(_ key: String, _ course: Course) -> String? {
-        switch key {
-        case "Category":
-            return course.category.name
-        case "Instructor":
-            return course.instructor.name
-        default:
-            return nil
         }
     }
     
