@@ -77,9 +77,21 @@ extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewD
         print("check filter - \(sectionTitle)")
         
         if sectionTitle == "Category" {
-            viewModel.selectedCategoryId = selectedItem.id
+            if viewModel.selectedCategoryId == selectedItem.id {
+                // إذا كان العنصر المحدد هو نفسه العنصر المحدد مسبقًا، قم بإلغاء تحديده
+                viewModel.selectedCategoryId = nil
+            } else {
+                // إذا كان العنصر المحدد مختلفًا، قم بتحديث القيمة
+                viewModel.selectedCategoryId = selectedItem.id
+            }
         } else if sectionTitle == "Instructor" {
-            viewModel.selectedInstructorId = selectedItem.id
+            if viewModel.selectedInstructorId == selectedItem.id {
+                // إذا كان العنصر المحدد هو نفسه العنصر المحدد مسبقًا، قم بإلغاء تحديده
+                viewModel.selectedInstructorId = nil
+            } else {
+                // إذا كان العنصر المحدد مختلفًا، قم بتحديث القيمة
+                viewModel.selectedInstructorId = selectedItem.id
+            }
         }
         
         // Check if the item is already selected

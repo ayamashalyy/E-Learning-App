@@ -16,23 +16,25 @@ class SearchViewModel {
     
     // MARK: - Properties
     var onComplete: (() -> Void)?
-    var currentState: SearchState = .recentSearches
+    var currentState: SearchState = .emptySearch
     var courses: [Course] = [] // all courses
     var searchResults: [Course] = [] // results after search
     var filteredResults: [Course] = [] // results after filter
     var categories: [String] = []
+    var isLoading = false
     var levels: [String] = []
     var recentSearches: [String] = [] {
         didSet {
-            print("1: \(recentSearches.count)")
+            saveRecentSearches()
+            print("recentSearches count : \(recentSearches.count)")
             if recentSearches.isEmpty {
                 print("1")
                 currentState = .emptySearch
+            } else if isLoading {
+                currentState = .loading
             } else {
-                print("2")
                 currentState = .recentSearches
             }
-            
             (onComplete ?? {})()
         }
     } // Recent searches
@@ -99,34 +101,14 @@ class SearchViewModel {
     
     // MARK: - Search Courses
     func searchCourses(with query: String, completion: @escaping (Bool) -> Void) {
-        
+        isLoading = true
         // Add the new search query to the beginning of the recent searches list
         addRecentSearch(query)
         
         // Fetch courses from the API with the search term
         fetchCourses(with: query) { success in
+            self.isLoading = false
             if success {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    
-    // MARK: - Reset Filters
-    func resetFilters(completion: @escaping (Bool) -> Void) {
-        
-        // Reset selected filters
-        selectedCategoryId = nil
-        selectedInstructorId = nil
-        selectedFilters.removeAll()
-        selectedFiltersCount = 0
-        
-        // Fetch all courses without any filters
-        fetchCourses { [weak self] success in
-            if success {
-                self?.currentState = .totalResultsBeforeFilter
                 completion(true)
             } else {
                 completion(false)
@@ -135,7 +117,7 @@ class SearchViewModel {
     }
     
     // MARK: - Apply Filters
-    func applyFilters(selectedFilters: [String: [String]],term: String?, completion: @escaping (Bool) -> Void) {
+    func applyFilters(selectedFilters: [String: [String]], term: String?, completion: @escaping (Bool) -> Void) {
         
         let categoryId = selectedCategoryId
         let instructorId = selectedInstructorId
@@ -164,12 +146,17 @@ class SearchViewModel {
     func loadRecentSearches() {
         if let savedSearches = UserDefaults.standard.array(forKey: Constants.recentSearchesKey) as? [String] {
             recentSearches = savedSearches
+            print("RecentSearches Count load - \(recentSearches.count) ")
         }
     }
     
     // MARK: - Save Recent Searches
     func saveRecentSearches() {
-        UserDefaults.standard.set(recentSearches, forKey: Constants.recentSearchesKey)
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(self.recentSearches, forKey: Constants.recentSearchesKey)
+            UserDefaults.standard.synchronize()
+            print("Recent Searches Saved: \(self.recentSearches)")
+        }
     }
     
     // MARK: - Add Recent Search
@@ -180,7 +167,8 @@ class SearchViewModel {
     
     // MARK: - Delete Recent Search
     func deleteRecentSearch(at index: Int) {
+        print("Before Deletion: \(recentSearches)")
         recentSearches.remove(at: index)
-        saveRecentSearches()
+        print("After Deletion: \(recentSearches)")
     }
 }

@@ -40,7 +40,6 @@ class SearchViewController: UIViewController{
         setupSubControllers()
         updateUIForCurrentState()
         fetchCategoriesAndInstructors()
-        recentSearchesViewController.tableView.reloadData()
         viewModel.onComplete = {
             self.updateUIForCurrentState()
         }
@@ -178,6 +177,7 @@ class SearchViewController: UIViewController{
     // MARK: - Update UI Based on Current State
     func updateUIForCurrentState() {
         
+        print("Updating UI for state: \(viewModel.currentState)")
         recentSearchesViewController.view.removeFromSuperview()
         totalResultsBeforeFilterViewController.view.removeFromSuperview()
         totalResultsAfterFilterViewController.view.removeFromSuperview()
@@ -185,6 +185,7 @@ class SearchViewController: UIViewController{
         
         switch  viewModel.currentState {
         case .recentSearches:
+            print("Adding recentSearchesViewController")
             addChild(recentSearchesViewController)
             view.addSubview(recentSearchesViewController.view)
             recentSearchesViewController.didMove(toParent: self)
@@ -198,8 +199,10 @@ class SearchViewController: UIViewController{
             
             recentSearchesViewController.tableView.isHidden = false
             recentSearchesViewController.tableView.reloadData()
+            print("Reloaded recentSearchesViewController tableView")
             
         case .totalResultsBeforeFilter:
+            print("Adding totalResultsBeforeFilterViewController")
             addChild(totalResultsBeforeFilterViewController)
             view.addSubview(totalResultsBeforeFilterViewController.view)
             totalResultsBeforeFilterViewController.didMove(toParent: self)
@@ -212,6 +215,7 @@ class SearchViewController: UIViewController{
             ])
             
             totalResultsBeforeFilterViewController.tableView.reloadData()
+            print("Reloaded totalResultsBeforeFilterViewController tableView")
             
         case .totalResultsAfterFilter:
             addChild(totalResultsAfterFilterViewController)
@@ -246,6 +250,30 @@ class SearchViewController: UIViewController{
         case .emptySearch:
             noRecentSearchImageView.isHidden = false
             recentSearchesViewController.tableView.isHidden = true
+            
+        case .loading:
+            noRecentSearchImageView.isHidden = true
+            showLoadingIndicator()
+            
+        }
+    }
+    
+    // MARK: - Loading Indicator
+    func showLoadingIndicator() {
+        print("Showing loading indicator")
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center
+        activityIndicator.startAnimating()
+        view.addSubview(activityIndicator)
+    }
+    
+    func hideLoadingIndicator() {
+        print("Hiding loading indicator")
+        view.subviews.forEach { subview in
+            if let activityIndicator = subview as? UIActivityIndicatorView {
+                activityIndicator.stopAnimating()
+                activityIndicator.removeFromSuperview()
+            }
         }
     }
     

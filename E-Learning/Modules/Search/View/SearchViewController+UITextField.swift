@@ -24,18 +24,20 @@ extension SearchViewController: UITextFieldDelegate {
             return
         }
         
-     // Reset selected filters when starting a new search
+        // Reset selected filters when starting a new search
+        viewModel.selectedCategoryId = nil
+        viewModel.selectedInstructorId = nil
         viewModel.selectedFilters.removeAll()
         viewModel.selectedFiltersCount = 0
         
         viewModel.searchCourses(with: query) { [weak self] success in
+            self?.hideLoadingIndicator()
             if success {
                 self?.viewModel.currentState = .totalResultsBeforeFilter
-                self?.updateUIForCurrentState()
             } else {
                 self?.viewModel.currentState = .recentSearches
-                self?.updateUIForCurrentState()
             }
+            self?.updateUIForCurrentState()
         }
     }
     
@@ -43,12 +45,8 @@ extension SearchViewController: UITextFieldDelegate {
     @objc func cancelButtonTapped() {
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
-        viewModel.resetFilters { [weak self] success in
-              if success {
-                  self?.viewModel.currentState = .recentSearches
-                  self?.updateUIForCurrentState()
-              }
-          }
+        viewModel.currentState = .recentSearches
+        updateUIForCurrentState()
     }
     
     // MARK: - Helper Function

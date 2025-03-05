@@ -8,7 +8,16 @@
 import Foundation
 import UIKit
 
-extension RecentSearchesViewController: UITableViewDataSource, UITableViewDelegate {
+protocol recentSearchDelegate: AnyObject {
+    func delete(index: Int)
+}
+
+extension RecentSearchesViewController: UITableViewDataSource, UITableViewDelegate, recentSearchDelegate {
+    func delete(index: Int) {
+        self.viewModel.deleteRecentSearch(at: index)
+        print("index: \(index)")
+    }
+    
     
     // MARK: - UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,9 +30,8 @@ extension RecentSearchesViewController: UITableViewDataSource, UITableViewDelega
         }
         cell.recentSearchLabel.text = viewModel.recentSearches[indexPath.row]
         cell.selectionStyle = .none
-        cell.onCancelTapped = { [weak self] in
-            self?.delegate?.didDeleteRecentSearch(at: indexPath.row)
-        }
+        cell.delegate = self
+        cell.cancelButton.tag = indexPath.row
         return cell
     }
     
