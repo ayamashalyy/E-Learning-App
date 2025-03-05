@@ -10,30 +10,12 @@ import Foundation
 struct LearningResponse: Decodable {
     let inProgress: [Course]
     let assigned: [Course]
-    let completed: [CompletedCourse]
+    let completed: [Course]
     
     enum CodingKeys: String, CodingKey {
         case inProgress = "in_progress"
         case assigned
         case completed
-    }
-}
-
-struct CompletedCourse: Decodable {
-    let id: Int
-    let title: String
-    let image: String
-    let slug: String
-    let description: String
-    let category: CourseCategory
-    let instructor: Instructor
-    let certificate: [Certificate]
-    let progress: Int
-    let createdAt: String
-    
-    enum CodingKeys: String, CodingKey {
-        case id, title, image, slug, description, category, instructor, certificate, progress
-        case createdAt = "created_at"
     }
 }
 

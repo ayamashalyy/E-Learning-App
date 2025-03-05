@@ -98,6 +98,8 @@
 		03F37E882D1C530A00F50C52 /* courseContentOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */; };
 		53873B73CE464583ECE64220 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
+		E80CC1C12D78F04900F7BA3A /* HomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */; };
+		E80CC1C32D78FDA800F7BA3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */; };
 		E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */; };
 		E88E5FEF2D44F934002A38C8 /* TenantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */; };
 		E88E5FF12D44FA04002A38C8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF02D44FA04002A38C8 /* APIService.swift */; };
@@ -258,6 +260,8 @@
 		4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponse.swift; sourceTree = "<group>"; };
+		E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tenant.swift; sourceTree = "<group>"; };
 		E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenantViewModel.swift; sourceTree = "<group>"; };
 		E88E5FF02D44FA04002A38C8 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 			children = (
 				E8B344912D68EF0100F14EEE /* CourseCategoriesViewModel.swift */,
 				E8B344932D68FCA900F14EEE /* CourseCategoryCellViewModel.swift */,
+				E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -963,6 +968,7 @@
 			isa = PBXGroup;
 			children = (
 				E8BC5E092D71FCA80032FF84 /* CourseCategoryResponse.swift */,
+				E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1140,6 +1146,7 @@
 				037C5C362D01F96900905CE9 /* CourseContentTableViewCell.swift in Sources */,
 				038F1DCB2D2923E400BD7058 /* AssignCourseCell.swift in Sources */,
 				E8C73FD42D6CD40200A3CCFA /* LoadingViewController.swift in Sources */,
+				E80CC1C32D78FDA800F7BA3A /* HomeViewModel.swift in Sources */,
 				E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */,
 				E8B3449A2D691D7000F14EEE /* RefreshToken.swift in Sources */,
 				E8B29E3F2D511C370083C471 /* OTP.swift in Sources */,
@@ -1189,6 +1196,7 @@
 				0328C1172CEE575B00CC1DCF /* FeaturedCoursesCollectionView.swift in Sources */,
 				E8BF8E642D730FAF0072E2B1 /* RecentSearchesViewController.swift in Sources */,
 				E8BF8E6C2D73228E0072E2B1 /* TotalResultsBeforeFilterViewController+TableView.swift in Sources */,
+				E80CC1C12D78F04900F7BA3A /* HomeResponse.swift in Sources */,
 				E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */,
 				E8A8E64D2D70727400321E3A /* WelcomeCollectionViewCell.swift in Sources */,
 				E8BC5E072D71FC6E0032FF84 /* Link.swift in Sources */,

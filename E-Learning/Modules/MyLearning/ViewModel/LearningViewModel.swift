@@ -11,7 +11,7 @@ class LearningViewModel {
     
     var inProgressCourses: [Course] = []
     var assignedCourses: [Course] = []
-    var completedCourses: [CompletedCourse] = []
+    var completedCourses: [Course] = []
     var errorMessage: String?
     private let apiService = APIService()
     var onDataUpdated: (() -> Void)?

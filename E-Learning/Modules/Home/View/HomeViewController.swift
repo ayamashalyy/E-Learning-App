@@ -24,6 +24,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     private var viewModel = CourseCategoriesViewModel()
     private var tenantViewModel = TenantViewModel.shared
     private var userSessionManager = UserSessionManager.shared
+    private var homeViewModel = HomeViewModel()
     
     let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
     // MARK: - Lifecycle
@@ -41,6 +42,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         view.backgroundColor = .white
         registerNibFiles()
         getCoursesCategories()
+        fetchHomeData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +53,18 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     func didUpdateProfile(name: String, email: String) {
         userSessionManager.name = name
         collectionView.reloadData()
+    }
+    
+    // MARK: - Data Fetching
+    func fetchHomeData() {
+        guard let token = userSessionManager.token else { return }
+        homeViewModel.onDataFetched = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        }
+        
+        homeViewModel.fetchHomeData(token: token)
     }
     
     // MARK: - Data Fetching

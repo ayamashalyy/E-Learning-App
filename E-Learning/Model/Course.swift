@@ -15,11 +15,12 @@ struct Course: Decodable {
     let description: String
     let category: CourseCategory
     let instructor: Instructor
+    let certificate: Certificate? 
     let progress: Int
     let createdAt: String
     
     enum CodingKeys: String, CodingKey {
-        case id, title, image, slug, description, category, instructor, progress
+        case id, title, image, slug, description, category, instructor, certificate, progress
         case createdAt = "created_at"
     }
 }

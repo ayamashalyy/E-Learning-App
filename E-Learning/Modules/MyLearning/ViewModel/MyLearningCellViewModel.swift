@@ -25,7 +25,7 @@ class MyLearningCellViewModel {
         self.state = state
     }
     
-    init(completedCourse: CompletedCourse) {
+    init(completedCourse: Course) {
         self.courseTitle = completedCourse.title
         self.courseImage = completedCourse.image
         self.instructorName = completedCourse.instructor.name
