@@ -34,14 +34,8 @@ class FeaturedCoursesCollectionViewCell: UICollectionViewCell {
         
     }
     
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
-    
-    func configureCourseTitle() {
-        courseTitle.text = "Google UX\nDesign"
-    }
-    
 }

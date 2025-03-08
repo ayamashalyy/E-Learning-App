@@ -16,17 +16,18 @@ private let reuseIdentifier2 = "CoursesCell"
 private let reuseIdentifier3 = "FeaturedCell"
 
 
-class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate, CoursesCategoriesSectionCellDelegate {
+class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout, FeaturedCoursesCollectionViewDelegate, CoursesCategoriesSectionCellDelegate, SectionHeaderViewDelegate {
     
     // MARK: - Properties
     
     private let sectionTitles = ["Courses Categories".localized, "Featured Courses".localized, "Most Popular".localized, "Latest Courses".localized]
-    private var viewModel = CourseCategoriesViewModel()
     private var tenantViewModel = TenantViewModel.shared
     private var userSessionManager = UserSessionManager.shared
-    private var homeViewModel = HomeViewModel()
+    private var homeViewModel = HomeViewModel.shared
+    let viewModel = SearchViewModel()
+    let resultFeaturedCourses = TotalResultsAfterFilterViewController()
+    let allCoursesCategories = AllCoursesCategoriesVC()
     
-    let coursesTitles = ["Data Science", "Design","Bussince", "Law"]
     // MARK: - Lifecycle
     
     init() {
@@ -41,7 +42,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         super.viewDidLoad()
         view.backgroundColor = .white
         registerNibFiles()
-        getCoursesCategories()
         fetchHomeData()
     }
     
@@ -67,17 +67,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         homeViewModel.fetchHomeData(token: token)
     }
     
-    // MARK: - Data Fetching
-    
-    func getCoursesCategories() {
-        // Fetch data
-        viewModel.onDataFetched = { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        }
-        viewModel.fetchCourseCategories()
-    }
     
     // MARK: - Cell Registration
     
@@ -117,27 +106,40 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 2:
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderViewCell, for: indexPath) as! SectionHeaderView
-            let coursesTitle = sectionTitles[0]
-            coursesTitleCell.configure(title:coursesTitle, showAction: true )
+            coursesTitleCell.delegate = self
+            coursesTitleCell.tag = indexPath.section
+            coursesTitleCell.configure(title: sectionTitles[0], showAction: true )
             return coursesTitleCell
             
         case 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CoursesCategoriesSectionCell.identifier, for: indexPath) as! CoursesCategoriesSectionCell
-            let courseCategories = (0..<viewModel.numberOfCategories()).map { viewModel.cellViewModel(at: $0)
+            if homeViewModel.isLoading {
+                cell.showLoadingIndicator()
+            } else {
+                cell.hideLoadingIndicator()
+                let courseCategories = homeViewModel.getCourseCategoriesViewModels()
+                cell.configure(with: courseCategories)
             }
-            cell.configure(with: courseCategories)
+            
             cell.delegate = self
             return cell
             
         case 4:
             let coursesTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: SectionHeaderViewCell, for: indexPath) as! SectionHeaderView
-            let coursesTitle = sectionTitles[1]
-            coursesTitleCell.configure(title:coursesTitle, showAction: true )
+            coursesTitleCell.delegate = self
+            coursesTitleCell.tag = indexPath.section
+            coursesTitleCell.configure(title: sectionTitles[1], showAction: true)
             return coursesTitleCell
             
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
-            cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            if homeViewModel.isLoading {
+                cell.showLoadingIndicator()
+            } else {
+                cell.hideLoadingIndicator()
+                let featuredCourses = homeViewModel.getFeaturedCourseViewModels()
+                cell.configure(with: featuredCourses)
+            }
             cell.delegate = self
             return cell
             
@@ -150,7 +152,13 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 7:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
-            cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            if homeViewModel.isLoading {
+                cell.showLoadingIndicator()
+            } else {
+                cell.hideLoadingIndicator()
+                let mostPopular = homeViewModel.getMostCourseViewModels()
+                cell.configure(with: mostPopular)
+            }
             cell.delegate = self
             return cell
             
@@ -163,7 +171,13 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 9:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
-            cell.configure(with: ["Google UX Design", "Google UX Design", "Google UX Design"])
+            if homeViewModel.isLoading {
+                cell.showLoadingIndicator()
+            } else {
+                cell.hideLoadingIndicator()
+                let latestCourses = homeViewModel.getLatestCourseViewModels()
+                cell.configure(with: latestCourses)
+            }
             cell.delegate = self
             return cell
             
@@ -206,8 +220,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             print("Selected Section Header Cell at section 2, item \(indexPath.item)")
         case 3:
             print("Selected Course Title at section 3, item \(indexPath.item)")
-            let selectedCourse = coursesTitles[indexPath.row]
-            print("Selected Course: \(selectedCourse)")
         case 4:
             print("Selected Section Header Cell at section 4, item \(indexPath.item)")
             let nextViewController = CourseOverviewViewController(nibName: "CourseOverviewViewController", bundle: nil)
@@ -242,7 +254,58 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
     
-    func didSelectCourseCategories(_ course: String) {
-        print("Selected Course: \(course)")
+    func didSelectCourseCategories(_ categoryId: Int) {
+        print("Selected Course: \(categoryId)")
+        resultFeaturedCourses.title = "Filtered Courses"
+        resultFeaturedCourses.setUpBackButton()
+        resultFeaturedCourses.filterButton.isHidden = true
+        resultFeaturedCourses.viewModel = self.viewModel
+        resultFeaturedCourses.viewModel.selectedFiltersCount = 1
+        
+        let navigationController = UINavigationController(rootViewController: resultFeaturedCourses)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+        
+        viewModel.fetchCourses(categoryId: categoryId) { success in
+            if success {
+                DispatchQueue.main.async {
+                    self.resultFeaturedCourses.tableView.reloadData()
+                }
+            } else {
+                print("Failed to fetch data")
+            }
+        }
+    }
+    
+    func didTapSeeAll(in section: Int) {
+        
+        if section == 2{
+            allCoursesCategories.title = "Categories Courses".localized
+            allCoursesCategories.setUpBackButton()
+            let navigationController = UINavigationController(rootViewController: allCoursesCategories)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+        }
+        
+        if section == 4 {
+            resultFeaturedCourses.title = "Featured Courses".localized
+            resultFeaturedCourses.setUpBackButton()
+            resultFeaturedCourses.filterButton.isHidden = true
+            resultFeaturedCourses.viewModel = self.viewModel
+            resultFeaturedCourses.viewModel.selectedFiltersCount = 1
+            let navigationController = UINavigationController(rootViewController: resultFeaturedCourses)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+            
+            viewModel.fetchCourses(isFeatured: true) { success in
+                if success {
+                    DispatchQueue.main.async {
+                        self.resultFeaturedCourses.tableView.reloadData()
+                    }
+                } else {
+                    print("Failed to fetch data")
+                }
+            }
+        }
     }
 }

@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
+protocol SectionHeaderViewDelegate: AnyObject {
+    func didTapSeeAll(in section: Int)
+}
+
 class SectionHeaderView: UICollectionViewCell {
     
     var tenantViewModel = TenantViewModel.shared
+    weak var delegate: SectionHeaderViewDelegate?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +54,7 @@ class SectionHeaderView: UICollectionViewCell {
         addSubview(actionStackView)
         actionStackView.addArrangedSubview(actionButton)
         actionStackView.addArrangedSubview(actionImageView)
+        actionButton.addTarget(self, action: #selector(handleSeeAllTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
@@ -61,6 +67,10 @@ class SectionHeaderView: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleSeeAllTap() {
+        delegate?.didTapSeeAll(in: self.tag)
     }
     
     func configure(title: String, showAction: Bool = true) {

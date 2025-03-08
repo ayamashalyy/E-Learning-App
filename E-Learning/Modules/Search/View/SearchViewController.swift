@@ -15,8 +15,7 @@ class SearchViewController: UIViewController{
     var totalResultsAfterFilterViewController: TotalResultsAfterFilterViewController!
     var filterViewController: FilterItemsViewController!
     var viewModel = SearchViewModel()
-    var courseCategoriesViewModel = CourseCategoriesViewModel()
-    var instructorViewModel = InstructorViewModel()
+    var homeViewModel = HomeViewModel.shared
     var tenantViewModel = TenantViewModel.shared
     
     // MARK: - UI Components
@@ -278,29 +277,12 @@ class SearchViewController: UIViewController{
     }
     
     // MARK: - fetchCategoriesAndInstructors
-    func fetchCategoriesAndInstructors() {
-        courseCategoriesViewModel.fetchCourseCategories()
-        instructorViewModel.fetchInstructors()
-        
-        courseCategoriesViewModel.onDataFetched = { [weak self] in
-            guard let self = self else { return }
-            self.updateSections()
-        }
-        
-        instructorViewModel.onDataFetched = { [weak self] in
-            guard let self = self else { return }
-            self.updateSections()
-        }
-    }
     
-    private func updateSections() {
-        let categories = courseCategoriesViewModel.courseCategories.map { ($0.id, $0.name) }
-        let instructors = instructorViewModel.instructors.map { ($0.id, $0.name) }
+    func fetchCategoriesAndInstructors() {
+        let categories = homeViewModel.courseCategories
+        let instructors = homeViewModel.courseInstructors
         
-        viewModel.sections = [
-            SearchViewModel.Section(title: "Category".localized, items: categories),
-            SearchViewModel.Section(title: "Instructor".localized, items: instructors)
-        ]
+        viewModel.updateSections(categories: categories, instructors: instructors)
         filterViewController.collectionView.reloadData()
     }
 }

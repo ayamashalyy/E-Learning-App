@@ -92,6 +92,8 @@ extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewD
                 // إذا كان العنصر المحدد مختلفًا، قم بتحديث القيمة
                 viewModel.selectedInstructorId = selectedItem.id
             }
+        } else if sectionTitle == "Is Featurer" {
+            viewModel.isFeatured = !viewModel.isFeatured
         }
         
         // Check if the item is already selected

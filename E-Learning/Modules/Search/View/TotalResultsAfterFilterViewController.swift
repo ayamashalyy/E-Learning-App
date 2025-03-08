@@ -10,18 +10,34 @@ import UIKit
 class TotalResultsAfterFilterViewController: UIViewController {
     
     // MARK: - Properties
-    var viewModel: SearchViewModel!
+    var viewModel = SearchViewModel()
     var selectedFiltersCount: Int {
         return viewModel.selectedFiltersCount
     }
     weak var delegate: TotalResultsBeforeFilterViewControllerDelegate?
     var tableView: UITableView!
     var tenantViewModel = TenantViewModel.shared
+    var filterButton = UIButton(type: .system)
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+    }
+    
+    // MARK: - setUpBackButton Methods
+    func setUpBackButton() {
+        let backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
+        
+        if let backButtonImage = backButtonImage {
+            let tintedImage = backButtonImage.withTintColor(tenantViewModel.primaryColor ?? .blue, renderingMode: .alwaysOriginal)
+            let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(backButtonTapped))
+            self.navigationItem.leftBarButtonItem = backButton
+        }
+    }
+    
+    @objc func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Setup Views

@@ -54,7 +54,6 @@ extension TotalResultsAfterFilterViewController: UITableViewDelegate, UITableVie
         filtersLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(filtersLabel)
         
-        let filterButton = UIButton(type: .system)
         filterButton.setImage(UIImage(named: "icon_filter-remove")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         filterButton.tintColor = TenantViewModel.shared.primaryColor
         filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)

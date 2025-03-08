@@ -8,12 +8,12 @@
 import UIKit
 
 protocol CoursesCategoriesSectionCellDelegate: AnyObject {
-    func didSelectCourseCategories(_ course: String)
+    func didSelectCourseCategories(_ categoryId: Int)
 }
 
 class CoursesCategoriesSectionCell: UICollectionViewCell {
     static let identifier = "CoursesCategoriesSectionCell"
-    private var coursesCategories: [CourseCategoryCellViewModel] = []
+    private var coursesCategories: [CourseCategoriesModel] = []
     var tenantViewModel = TenantViewModel.shared
     weak var delegate: CoursesCategoriesSectionCellDelegate?
     
@@ -28,13 +28,26 @@ class CoursesCategoriesSectionCell: UICollectionViewCell {
         return collectionView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(innerCollectionView)
+        contentView.addSubview(activityIndicator)
         innerCollectionView.dataSource = self
         innerCollectionView.delegate = self
         let nib = UINib(nibName: "CoursesCategoriesCollectionViewCell", bundle: nil)
         innerCollectionView.register(nib, forCellWithReuseIdentifier: "CoursesCell")
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
     }
     
     required init?(coder: NSCoder) {
@@ -46,7 +59,7 @@ class CoursesCategoriesSectionCell: UICollectionViewCell {
         innerCollectionView.frame = contentView.bounds
     }
     
-    func configure(with coursesCategories: [CourseCategoryCellViewModel]) {
+    func configure(with coursesCategories: [CourseCategoriesModel]) {
         self.coursesCategories = coursesCategories
         innerCollectionView.reloadData()
     }
@@ -61,7 +74,15 @@ extension CoursesCategoriesSectionCell: UICollectionViewDataSource, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCell", for: indexPath) as! CoursesCategoriesCollectionViewCell
         let course = coursesCategories[indexPath.item]
-        cell.configure(with: course.name, color: course.color)
+        cell.titleCourse.text = course.name
+        cell.innerView.layer.backgroundColor = course.color.cgColor
+        
+        if let imageURL = URL(string: course.image) {
+            cell.courseImage.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
+        } else {
+            cell.courseImage.image = UIImage(named: "placeholder")
+        }
+        
         cell.selectedBackgroundView = .none
         return cell
     }
@@ -76,7 +97,15 @@ extension CoursesCategoriesSectionCell: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCourse = coursesCategories[indexPath.item]
-        delegate?.didSelectCourseCategories(selectedCourse.name)
+        delegate?.didSelectCourseCategories(selectedCourse.id)
+    }
+    
+    func showLoadingIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoadingIndicator() {
+        activityIndicator.stopAnimating()
     }
 }
 

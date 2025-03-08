@@ -44,6 +44,7 @@ class SearchViewModel {
     var selectedFiltersCount: Int = 0
     var selectedCategoryId: Int?
     var selectedInstructorId: Int?
+    var isFeatured: Bool = false
     var errorMessage: String?
     private let apiService = APIService()
     
@@ -117,14 +118,14 @@ class SearchViewModel {
     }
     
     // MARK: - Apply Filters
-    func applyFilters(selectedFilters: [String: [String]], term: String?, completion: @escaping (Bool) -> Void) {
+    func applyFilters(selectedFilters: [String: [String]], term: String? = nil, completion: @escaping (Bool) -> Void) {
         
         let categoryId = selectedCategoryId
         let instructorId = selectedInstructorId
-        
+        let isFeatured = isFeatured
         // Fetch courses with the selected filters
         if let term {
-            fetchCourses(with: term, categoryId: categoryId, instructorId: instructorId) { success in
+            fetchCourses(with: term, categoryId: categoryId, instructorId: instructorId, isFeatured: isFeatured) { success in
                 if success {
                     completion(true)
                 } else {
@@ -132,7 +133,7 @@ class SearchViewModel {
                 }
             }
         } else {
-            fetchCourses(categoryId: categoryId, instructorId: instructorId) { success in
+            fetchCourses(categoryId: categoryId, instructorId: instructorId, isFeatured: isFeatured) { success in
                 if success {
                     completion(true)
                 } else {
@@ -170,5 +171,19 @@ class SearchViewModel {
         print("Before Deletion: \(recentSearches)")
         recentSearches.remove(at: index)
         print("After Deletion: \(recentSearches)")
+    }
+    
+    // MARK: - fill sections in filter Collection
+    func updateSections(categories: [CourseCategory], instructors: [Instructor]) {
+        let categoryItems = categories.map { ($0.id, $0.name) }
+        let instructorItems = instructors.map { ($0.id, $0.name) }
+        let featuredItems = [(id: 1, name: "Yes")]
+        
+        sections = [
+            SearchViewModel.Section(title: "Category".localized, items: categoryItems),
+            SearchViewModel.Section(title: "Instructor".localized, items: instructorItems),
+            SearchViewModel.Section(title: "Is Featurer".localized, items: featuredItems)
+        ]
+        
     }
 }

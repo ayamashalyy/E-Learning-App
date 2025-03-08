@@ -24,16 +24,9 @@ class CoursesCategoriesCollectionViewCell: UICollectionViewCell {
         outerView.layer.shadowRadius = 3
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.borderWidth = 0.3
-        
+        titleCourse.textAlignment = .center
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
-    }
-    
-    func configure(with text: String, color: UIColor) {
-        titleCourse.text = text
-        titleCourse.textAlignment = .center
-        innerView.layer.backgroundColor = color.cgColor
-        
     }
 }
