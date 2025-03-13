@@ -48,8 +48,13 @@ class SearchViewModel {
     var errorMessage: String?
     private let apiService = APIService()
     
+    // MARK: - Pagination Properties
+    var currentPage: Int = 1
+    var totalPages: Int = 1
+    var isFetchingMore: Bool = false
+    
     // MARK: - Fetch Courses with Filters
-    func fetchCourses(with term: String? = nil, categoryId: Int? = nil, instructorId: Int? = nil, isFeatured: Bool? = nil, completion: @escaping (Bool) -> Void) {
+    func fetchCourses(with term: String? = nil, categoryId: Int? = nil, instructorId: Int? = nil, isFeatured: Bool? = nil, page: Int = 1, completion: @escaping (Bool) -> Void) {
         
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
         let url = "\(subDomain)/courses"
@@ -68,6 +73,8 @@ class SearchViewModel {
         if let isFeatured = isFeatured {
             parameters["is_feather"] = isFeatured
         }
+        
+        parameters["page"] = page
         
         // Convert parameters to query items
         var components = URLComponents(string: url)
@@ -99,6 +106,22 @@ class SearchViewModel {
             }
         }
     }
+    
+    // MARK: - Load More Courses
+        func loadMoreCourses(completion: @escaping (Bool) -> Void) {
+            guard !isFetchingMore, currentPage < totalPages else {
+                completion(false)
+                return
+            }
+            
+            isFetchingMore = true
+            currentPage += 1
+            
+            fetchCourses(page: currentPage) { success in
+                self.isFetchingMore = false
+                completion(success)
+            }
+        }
     
     // MARK: - Search Courses
     func searchCourses(with query: String, completion: @escaping (Bool) -> Void) {

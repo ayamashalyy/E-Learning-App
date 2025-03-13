@@ -51,7 +51,7 @@ class LearningViewModel {
             return MyLearningCellViewModel(course: course, state: .assigned)
         case 2:
             let completedCourse = completedCourses[indexPath.row]
-            return MyLearningCellViewModel(completedCourse: completedCourse)
+            return MyLearningCellViewModel(course: completedCourse, state: .completed)
         default:
             fatalError("Invalid segment index")
         }

@@ -37,9 +37,9 @@ class HomeViewModel {
                 self.homeData = homeResponse
                 self.courseCategories = homeResponse.categories
                 self.courseInstructors = homeResponse.instructors
-                self.latestCourses = homeResponse.latestCourses
-                self.mostPopular = homeResponse.mostPopular
-                self.featuredCourses = homeResponse.featured
+                self.latestCourses = homeResponse.latestCourses ?? []
+                self.mostPopular = homeResponse.mostPopular ?? []
+                self.featuredCourses = homeResponse.featured ?? []
                 print("Course Categories count: \(self.courseCategories.count)")
                 print("Course Instructors count: \(self.courseInstructors.count)")
                 print("Latest courses count: \(self.latestCourses.count)")
@@ -56,28 +56,16 @@ class HomeViewModel {
         return homeData
     }
     
-    func getLatestCourseViewModels() -> [FeaturedCourseModel] {
-        return latestCourses.map { course in
-            FeaturedCourseModel(
-                slug: course.slug, title: course.title, instructorName: course.instructor.name, image: course.image
-            )
-        }
+    func getLatestCourseViewModels() -> [Course] {
+        return latestCourses
     }
-    
-    func getMostCourseViewModels() -> [FeaturedCourseModel] {
-        return mostPopular.map { course in
-            FeaturedCourseModel(
-                slug: course.slug, title: course.title, instructorName: course.instructor.name, image: course.image
-            )
-        }
+
+    func getMostCourseViewModels() -> [Course] {
+        return mostPopular
     }
-    
-    func getFeaturedCourseViewModels() -> [FeaturedCourseModel] {
-        return featuredCourses.map { course in
-            FeaturedCourseModel(
-                slug: course.slug, title: course.title, instructorName: course.instructor.name, image: course.image
-            )
-        }
+
+    func getFeaturedCourseViewModels() -> [Course] {
+        return featuredCourses
     }
     
     func getCourseCategoriesViewModels() -> [CourseCategoriesModel] {

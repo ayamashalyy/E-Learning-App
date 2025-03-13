@@ -44,7 +44,7 @@ class AllCoursesCategoriesVC: UIViewController, UICollectionViewDelegate, UIColl
         let category = coursesCategories[indexPath.row]
         
         let labelWidth = category.name.width(usingFont: UIFont(name: "Roboto-Medium", size: 14) ?? .boldSystemFont(ofSize: 14))
-        let padding: CGFloat = 60
+        let padding: CGFloat = 50
         return CGSize(width: labelWidth + padding, height: 55)
     }
     

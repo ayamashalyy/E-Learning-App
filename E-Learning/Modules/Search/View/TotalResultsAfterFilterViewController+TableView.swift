@@ -23,7 +23,7 @@ extension TotalResultsAfterFilterViewController: UITableViewDelegate, UITableVie
         
         cell.totalResultSearchCategory.text = course.category.name
         cell.totalResultSearchNameCourse.text = course.title
-        cell.totalResultSearchConstractorName.text = course.instructor.name
+        cell.totalResultSearchConstractorName.text = course.instructor?.name
         if let imageUrl = URL(string: course.image) {
             cell.totalResultSearchImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "myLearning")?.imageFlippedForRightToLeftLayoutDirection())
         }

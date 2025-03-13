@@ -18,7 +18,20 @@ class courseInfoOverviewViewController: UIViewController {
     var instractorView = UIView()
     var sectionTitle: String?
     var applyButton: UIButton!
+    var label1 = UILabel()
+    var label2 = UILabel()
+    var nameLabel = UILabel()
+    var titleLabel = UILabel()
+    var descriptionLabel = UILabel()
+    var profileImageView = UIImageView()
+    
     var tenantViewModel = TenantViewModel.shared
+    
+    var viewModel: CourseInfoViewModel? {
+        didSet {
+            updateUI()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +40,42 @@ class courseInfoOverviewViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateUI()
+    }
+    
+    private func updateUI() {
+        guard let viewModel = viewModel else {
+            print("ViewModel is nil in updateUI")
+            return
+        }
+        print("Updating UI with ViewModel: \(viewModel)")
+        introductionLabel.text = viewModel.getCourseTitle()
+        introductionDescriptionLabel.text = viewModel.getCourseDescription()
+        label1.text = viewModel.getFormattedDuration()
+        label2.text = viewModel.getLessonsCount()
+        nameLabel.text = viewModel.getInstructorName()
+        titleLabel.text = viewModel.getInstructorTitle()
+        descriptionLabel.text = viewModel.getInstructorBio()
+        
+        if let imageURL = viewModel.getInstructorImageURL() {
+            profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+        } else {
+            profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
+            
+        }
+    }
+    
     private func setupUI() {
         
         introductionLabel.translatesAutoresizingMaskIntoConstraints = false
-        introductionLabel.text = "Introduction to Scrum Master".localized
         introductionLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         view.addSubview(introductionLabel)
         
         introductionDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         introductionDescriptionLabel.numberOfLines = 0
         introductionDescriptionLabel.textColor = UIColor(named: "onboradColor")
-        introductionDescriptionLabel.text = "This course is designed to help Scrum beginners learn the foundational knowledge to become proficient with Agile Scrum. Throughout the course, learners will explore Agile methodologies and benefits of building incrementally.".localized
         introductionDescriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         view.addSubview(introductionDescriptionLabel)
         
@@ -56,9 +94,8 @@ class courseInfoOverviewViewController: UIViewController {
         containerView1.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
         containerView1.layer.cornerRadius = 8
         containerView1.layer.shadowColor = UIColor.black.cgColor
-        containerView1.layer.shadowOpacity = 0.1
-        containerView1.layer.shadowOffset = CGSize(width: 0, height: 2)
-        containerView1.layer.shadowRadius = 4
+        containerView1.layer.shadowOffset = CGSize(width: 0, height: 10)
+        containerView1.layer.shadowRadius = 8
         stackView.addArrangedSubview(containerView1)
         
         containerView2 = UIView()
@@ -68,9 +105,8 @@ class courseInfoOverviewViewController: UIViewController {
         containerView2.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
         containerView2.layer.cornerRadius = 8
         containerView2.layer.shadowColor = UIColor.black.cgColor
-        containerView2.layer.shadowOpacity = 0.1
-        containerView2.layer.shadowOffset = CGSize(width: 0, height: 2)
-        containerView2.layer.shadowRadius = 4
+        containerView2.layer.shadowOffset = CGSize(width: 0, height: 10)
+        containerView2.layer.shadowRadius = 8
         stackView.addArrangedSubview(containerView2)
         
         containerView3 = UIView()
@@ -80,9 +116,8 @@ class courseInfoOverviewViewController: UIViewController {
         containerView3.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
         containerView3.layer.cornerRadius = 8
         containerView3.layer.shadowColor = UIColor.black.cgColor
-        containerView3.layer.shadowOpacity = 0.1
-        containerView3.layer.shadowOffset = CGSize(width: 0, height: 2)
-        containerView3.layer.shadowRadius = 4
+        containerView3.layer.shadowOffset = CGSize(width: 0, height: 10)
+        containerView3.layer.shadowRadius = 8
         stackView.addArrangedSubview(containerView3)
         
         let button1 = UIButton()
@@ -92,14 +127,10 @@ class courseInfoOverviewViewController: UIViewController {
         imageView1.tintColor = tenantViewModel.secondaryColor
         imageView1.contentMode = .scaleAspectFit
         imageView1.translatesAutoresizingMaskIntoConstraints = false
-        let label1 = UILabel()
-        label1.text = "42 h   51 min"
         label1.numberOfLines = 0
         label1.textColor = tenantViewModel.primaryColor
         label1.font = UIFont(name: "Roboto-Regular", size: 14)
         label1.translatesAutoresizingMaskIntoConstraints = false
-        let label2 = UILabel()
-        label2.text = "23 Lessons"
         label2.numberOfLines = 0
         label2.textColor = tenantViewModel.primaryColor
         label2.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -214,13 +245,11 @@ class courseInfoOverviewViewController: UIViewController {
         instractorView.backgroundColor = UIColor(named: "myLearning")
         instractorView.layer.cornerRadius = 8
         instractorView.layer.shadowColor = UIColor.black.cgColor
-        instractorView.layer.shadowOpacity = 0.1
-        instractorView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        instractorView.layer.shadowRadius = 4
+        instractorView.layer.shadowOpacity = 0.3
+        instractorView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        instractorView.layer.shadowRadius = 8
         view.addSubview(instractorView)
         
-        let profileImageView = UIImageView()
-        profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.layer.cornerRadius = 30
@@ -231,13 +260,11 @@ class courseInfoOverviewViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             profileImageView.leadingAnchor.constraint(equalTo: instractorView.leadingAnchor, constant: 16),
-            profileImageView.centerYAnchor.constraint(equalTo: instractorView.centerYAnchor, constant: -30),
+            profileImageView.topAnchor.constraint(equalTo: instractorView.topAnchor, constant: 10),
             profileImageView.widthAnchor.constraint(equalToConstant: 60),
             profileImageView.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        let nameLabel = UILabel()
-        nameLabel.text = "Clifford Lampe"
         nameLabel.font = UIFont(name: "Roboto-Medium", size: 16)
         nameLabel.textColor = .black
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -248,8 +275,7 @@ class courseInfoOverviewViewController: UIViewController {
             nameLabel.topAnchor.constraint(equalTo: instractorView.topAnchor, constant: 15)
         ])
         
-        let titleLabel = UILabel()
-        titleLabel.text = "Title"
+        
         titleLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -260,8 +286,7 @@ class courseInfoOverviewViewController: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4)
         ])
         
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        
         descriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         descriptionLabel.textColor = UIColor(named: "onboradColor")
         descriptionLabel.numberOfLines = 0
@@ -271,7 +296,7 @@ class courseInfoOverviewViewController: UIViewController {
         NSLayoutConstraint.activate([
             descriptionLabel.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: instractorView.trailingAnchor, constant: -4),
-            descriptionLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8)
+            descriptionLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16)
         ])
         
     }
@@ -289,7 +314,7 @@ class courseInfoOverviewViewController: UIViewController {
             introductionDescriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             introductionDescriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             introductionDescriptionLabel.topAnchor.constraint(equalTo: introductionLabel.bottomAnchor, constant: 4),
-            introductionDescriptionLabel.heightAnchor.constraint(equalToConstant: 100)
+            introductionDescriptionLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
@@ -312,7 +337,7 @@ class courseInfoOverviewViewController: UIViewController {
             instractorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             instractorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             instractorView.topAnchor.constraint(equalTo: applyButton.bottomAnchor, constant: 20),
-            instractorView.heightAnchor.constraint(equalToConstant: 130),
+            instractorView.heightAnchor.constraint(equalToConstant: 200),
             instractorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ])
         
@@ -327,6 +352,19 @@ class courseInfoOverviewViewController: UIViewController {
             let navigationController = UINavigationController(rootViewController: nextViewController)
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+
+
+extension courseInfoOverviewViewController: callDataBack {
+    func sendDataBack(_ data: Any) {
+        if let viewModel = data as? CourseInfoViewModel {
+            print("Received viewModel in sendDataBack: \(viewModel)")
+            self.viewModel = viewModel
+        } else {
+            print("Failed to cast data to CourseInfoViewModel")
         }
     }
 }

@@ -11,9 +11,9 @@ struct HomeResponse: Decodable {
     let lastCourseWatched: String?
     let categories: [CourseCategory]
     let instructors: [Instructor]
-    let mostPopular: [Course]
-    let featured: [Course]
-    let latestCourses: [Course]
+    let mostPopular: [Course]?
+    let featured: [Course]?
+    let latestCourses: [Course]?
     
     enum CodingKeys: String, CodingKey {
         case lastCourseWatched = "last_course_watched"

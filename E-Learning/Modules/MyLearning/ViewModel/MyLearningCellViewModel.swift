@@ -19,18 +19,9 @@ class MyLearningCellViewModel {
     init(course: Course, state: LearningState) {
         self.courseTitle = course.title
         self.courseImage = course.image
-        self.instructorName = course.instructor.name
+        self.instructorName = course.instructor?.name ?? "Unknown Instructor"
         self.courseTitleCategory = course.category.name
-        self.courseProgress = course.progress
+        self.courseProgress = course.progress ?? 0
         self.state = state
-    }
-    
-    init(completedCourse: Course) {
-        self.courseTitle = completedCourse.title
-        self.courseImage = completedCourse.image
-        self.instructorName = completedCourse.instructor.name
-        self.courseTitleCategory = completedCourse.category.name
-        self.courseProgress = completedCourse.progress
-        self.state = .completed
     }
 }

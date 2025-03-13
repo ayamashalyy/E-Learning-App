@@ -9,22 +9,42 @@ import UIKit
 
 class courseContentOverviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    let lessons: [Lesson] = [
-        Lesson(number: 1, title: "Lesson 1", duration: "10 min", type: "Video", isCompleted: false),
-        Lesson(number: 2, title: "Lesson 2", duration: "10 min", type: "Video", isCompleted: false),
-        Lesson(number: 3, title: "Lesson 3", duration: "10 min", type: "Reading", isCompleted: false),
-        Lesson(number: 0, title: "Quiz 1", duration: "10 min", type: "14 Questions", isCompleted: false),
-        Lesson(number: 4, title: "Lesson 4", duration: "10 min", type: "Video", isCompleted: false),
-        Lesson(number: 5, title: "Introduction to Scrum Master", duration: "10 min", type: "Video", isCompleted: false)
-    ]
+    var viewModel: CourseContentViewModel? {
+        didSet {
+            updateUI()
+        }
+    }
     
     var tableView = UITableView()
-
+    private let noDataImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "No Search Result")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupTableView()
+        setupNoDataImageView()
+    }
+    
+    private func updateUI() {
+        guard let viewModel = viewModel else {
+            print("ViewModel is nil in updateUI")
+            tableView.isHidden = true
+            noDataImageView.isHidden = false
+            return
+        }
+        let sectionsCount = viewModel.getSectionsCount()
+        let hasLessons = sectionsCount > 0 && viewModel.getSections().contains { $0.lessons?.isEmpty == false }
+        
+        tableView.isHidden = !hasLessons
+        noDataImageView.isHidden = hasLessons
+        tableView.reloadData()
     }
     
     private func setupTableView() {
@@ -36,24 +56,47 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
+    private func setupNoDataImageView() {
+        view.addSubview(noDataImageView)
+        NSLayoutConstraint.activate([
+            noDataImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noDataImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            noDataImageView.widthAnchor.constraint(equalToConstant: 400),
+            noDataImageView.heightAnchor.constraint(equalToConstant: 400)
+        ])
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard let viewModel = viewModel else { return 0 }
+        let validSections = viewModel.getSections().filter { !($0.lessons?.isEmpty ?? true) }
+        return validSections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lessons.count
+        guard let viewModel = viewModel else { return 0 }
+        let validSections = viewModel.getSections().filter { !($0.lessons?.isEmpty ?? true) }
+        return validSections[section].lessons?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseContentTableViewCell", for: indexPath) as? CourseContentTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseContentTableViewCell", for: indexPath) as? CourseContentTableViewCell,
+              let viewModel = viewModel else {
             return UITableViewCell()
         }
+        let allSections = viewModel.getSections()
+        let validSections = allSections.filter { !($0.lessons?.isEmpty ?? true) }
         
-        let lesson = lessons[indexPath.row]
-        cell.configure(with: lesson)
+        let originalSectionIndex = allSections.firstIndex { $0.title == validSections[indexPath.section].title } ?? 0
+        
+        let lessonIndexPath = IndexPath(row: indexPath.row, section: originalSectionIndex)
+        cell.configure(with: viewModel, indexPath: lessonIndexPath)
         cell.selectionStyle = .none
         return cell
     }
@@ -62,10 +105,31 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
         return 80
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let viewModel = viewModel else { return nil }
+        let validSections = viewModel.getSections().filter { !($0.lessons?.isEmpty ?? true) }
+        return validSections[section].title
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextViewController = PageViewController()
         let navigationController = UINavigationController(rootViewController: nextViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
+    }
+}
+
+extension courseContentOverviewViewController: callDataBack {
+    func sendDataBack(_ data: Any) {
+        if let viewModel = data as? CourseContentViewModel {
+            print("Received viewModel in sendDataBack: \(viewModel)")
+            self.viewModel = viewModel
+        } else {
+            print("Failed to cast data to CourseContentViewModel")
+        }
     }
 }

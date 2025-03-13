@@ -48,6 +48,18 @@ class TotalResultsBeforeFilterViewController: UIViewController {
         ])
     }
     
+    // MARK: - Setup Indicator
+    func showLoadingIndicator() {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.startAnimating()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
+        tableView.tableFooterView = activityIndicator
+    }
+    
+    func hideLoadingIndicator() {
+        tableView.tableFooterView = nil
+    }
+    
     // MARK: - Filter Button Action
     @objc func filterButtonTapped() {
         delegate?.didTapFilterButton()

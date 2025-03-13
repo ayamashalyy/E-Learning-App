@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Lesson {
+struct LessonDemo {
     let number: Int
     let title: String
     let duration: String
@@ -17,13 +17,13 @@ struct Lesson {
 
 class CourseContentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
-    let lessons: [Lesson] = [
-        Lesson(number: 1, title: "Lesson 1", duration: "10 min", type: "Video", isCompleted: true),
-        Lesson(number: 2, title: "Lesson 2", duration: "10 min", type: "Video", isCompleted: true),
-        Lesson(number: 3, title: "Lesson 3", duration: "10 min", type: "Reading", isCompleted: false),
-        Lesson(number: 0, title: "Quiz 1", duration: "10 min", type: "14 Questions", isCompleted: false),
-        Lesson(number: 4, title: "Lesson 4", duration: "10 min", type: "Video", isCompleted: false),
-        Lesson(number: 5, title: "Introduction to Scrum Master", duration: "10 min", type: "Video", isCompleted: false)
+    let lessons: [LessonDemo] = [
+        LessonDemo(number: 1, title: "Lesson 1", duration: "10 min", type: "Video", isCompleted: true),
+        LessonDemo(number: 2, title: "Lesson 2", duration: "10 min", type: "Video", isCompleted: true),
+        LessonDemo(number: 3, title: "Lesson 3", duration: "10 min", type: "Reading", isCompleted: false),
+        LessonDemo(number: 0, title: "Quiz 1", duration: "10 min", type: "14 Questions", isCompleted: false),
+        LessonDemo(number: 4, title: "Lesson 4", duration: "10 min", type: "Video", isCompleted: false),
+        LessonDemo(number: 5, title: "Introduction to Scrum Master", duration: "10 min", type: "Video", isCompleted: false)
     ]
     
     var tableView = UITableView()
@@ -60,7 +60,7 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
         }
         
         let lesson = lessons[indexPath.row]
-        cell.configure(with: lesson)
+        //cell.configure(with: lesson)
         cell.selectionStyle = .none
         return cell
     }

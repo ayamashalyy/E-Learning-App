@@ -128,26 +128,29 @@ class CourseContentTableViewCell: UITableViewCell {
         
     }
     
-    func configure(with lesson: Lesson) {
-        numberLabel.text = lesson.number == 0 ? "?" : String(format: "%02d", lesson.number)
-        numberLabel.backgroundColor = lesson.isCompleted ? tenantViewModel.primaryColor : .white
-        numberLabel.textColor = lesson.isCompleted ? .white : UIColor(named: "onboradColor")
+    func configure(with viewModel: CourseContentViewModel, indexPath: IndexPath) {
+        guard let lesson = viewModel.getLesson(at: indexPath) else {
+            return
+        }
+        numberLabel.text = String(format: "%02d", indexPath.row + 1)
+        numberLabel.backgroundColor = lesson.isCompleted ?? false ? tenantViewModel.primaryColor : .white
+        numberLabel.textColor = lesson.isCompleted ?? false ? .white : UIColor(named: "onboradColor")
         
         titleLabel.text = lesson.title
-        titleLabel.textColor = lesson.isCompleted ? .black : UIColor(named: "policy2")
+        titleLabel.textColor = lesson.isCompleted ?? false ? .black : UIColor(named: "policy2")
         
-        durationLabel.text = lesson.duration
-        durationLabel.textColor = lesson.isCompleted ? .black : UIColor(named: "policy2")
+        durationLabel.text = viewModel.formatDuration(lesson.duration)
+        durationLabel.textColor = lesson.isCompleted ?? false ? .black : UIColor(named: "policy2")
+        
         typeLabel.text = lesson.type
-        typeLabel.textColor = lesson.isCompleted ? .black : UIColor(named: "policy2")
+        typeLabel.textColor = lesson.isCompleted ?? false ? .black : UIColor(named: "policy2")
         
-        completedIcon.image = lesson.isCompleted ? UIImage(named: "Vector (1)") : nil
+        completedIcon.image = lesson.isCompleted ?? false ? UIImage(named: "Vector (1)") : nil
         
-        innerDurationLabel.backgroundColor = lesson.isCompleted ? UIColor(named: "myLearning") : .white
+        innerDurationLabel.backgroundColor = lesson.isCompleted ?? false ? UIColor(named: "myLearning") : .white
+        innerTypeLabel.backgroundColor = lesson.isCompleted ?? false ? UIColor(named: "myLearning") : .white
+        outerView.backgroundColor = lesson.isCompleted ?? false ? .white : UIColor(named: "myLearning")
         
-        innerTypeLabel.backgroundColor = lesson.isCompleted ? UIColor(named: "myLearning") : .white
-        
-        outerView.backgroundColor = lesson.isCompleted ? .white : UIColor(named: "myLearning")
         outerView.layer.cornerRadius = 35
         outerView.layer.borderWidth = 1.0
         outerView.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor

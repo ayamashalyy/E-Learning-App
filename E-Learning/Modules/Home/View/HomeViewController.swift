@@ -138,7 +138,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             } else {
                 cell.hideLoadingIndicator()
                 let featuredCourses = homeViewModel.getFeaturedCourseViewModels()
-                cell.configure(with: featuredCourses)
+                cell.viewModel.updateCourses(featuredCourses)
             }
             cell.delegate = self
             return cell
@@ -157,7 +157,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             } else {
                 cell.hideLoadingIndicator()
                 let mostPopular = homeViewModel.getMostCourseViewModels()
-                cell.configure(with: mostPopular)
+                cell.viewModel.updateCourses(mostPopular)
             }
             cell.delegate = self
             return cell
@@ -176,7 +176,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             } else {
                 cell.hideLoadingIndicator()
                 let latestCourses = homeViewModel.getLatestCourseViewModels()
-                cell.configure(with: latestCourses)
+                cell.viewModel.updateCourses(latestCourses)
             }
             cell.delegate = self
             return cell
@@ -222,20 +222,12 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             print("Selected Course Title at section 3, item \(indexPath.item)")
         case 4:
             print("Selected Section Header Cell at section 4, item \(indexPath.item)")
-            let nextViewController = CourseOverviewViewController(nibName: "CourseOverviewViewController", bundle: nil)
-            let navigationController = UINavigationController(rootViewController: nextViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true, completion: nil)
-        case 5 :
-            print("Selected Section Header Cell at section 5")
         case 6:
             print("Selected Header Cell at section 6, item \(indexPath.item)")
-        case 7:
-            print("Selected Continue Cell at section 7, item \(indexPath.item)")
         case 8:
             print("Selected Section Header Cell at section 8, item \(indexPath.item)")
-        case 9 :
-            print("Selected Section Header Cell at section 9")
+        case 5, 7, 9:
+            print("")
         default:
             break
         }
@@ -243,15 +235,12 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     
     // MARK: - Delegate Methods
     
-    func didSelectCourse(_ course: String) {
-        print("تم اختيار الدورة: \(course)")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
-            //nextViewController.courseTitle = course
-            let navigationController = UINavigationController(rootViewController: nextViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true, completion: nil)
-        }
+    func didSelectCourse(courseSlug: String) {
+        let nextViewController = CourseOverviewViewController()
+        nextViewController.courseSlug = courseSlug
+        let navigationController = UINavigationController(rootViewController: nextViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     func didSelectCourseCategories(_ categoryId: Int) {
@@ -309,3 +298,15 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
 }
+
+
+/*
+ 
+ let storyboard = UIStoryboard(name: "Main", bundle: nil)
+ if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
+ //nextViewController.courseTitle = course
+ let navigationController = UINavigationController(rootViewController: nextViewController)
+ navigationController.modalPresentationStyle = .fullScreen
+ present(navigationController, animated: true, completion: nil)
+ 
+ */
