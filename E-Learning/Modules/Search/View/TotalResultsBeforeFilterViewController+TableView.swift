@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension TotalResultsBeforeFilterViewController: UITableViewDataSource, UITableViewDelegate {
+extension TotalResultsBeforeFilterViewController: UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.searchResults.count
@@ -68,6 +68,22 @@ extension TotalResultsBeforeFilterViewController: UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 100 && !viewModel.isFetchingMore {
+            showLoadingIndicator()
+            viewModel.loadMoreCourses { [weak self] success in
+                self?.hideLoadingIndicator()
+                if success {
+                    self?.tableView.reloadData()
+                }
+            }
+        }
     }
 }
 

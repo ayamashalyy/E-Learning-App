@@ -68,9 +68,7 @@ class HomeViewModel {
         return featuredCourses
     }
     
-    func getCourseCategoriesViewModels() -> [CourseCategoriesModel] {
-        return courseCategories.map { course in
-            CourseCategoriesModel(id: course.id, slug: course.slug , name: course.name, color: UIColor(hex: course.color), image: course.image)
-        }
+    func getCourseCategoriesViewModels() -> [CourseCategory] {
+        return courseCategories
     }
 }

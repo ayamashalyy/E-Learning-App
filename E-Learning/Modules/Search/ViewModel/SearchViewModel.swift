@@ -44,7 +44,7 @@ class SearchViewModel {
     var selectedFiltersCount: Int = 0
     var selectedCategoryId: Int?
     var selectedInstructorId: Int?
-    var isFeatured: Bool = false
+    var isFeatured: Bool?
     var errorMessage: String?
     private let apiService = APIService()
     
@@ -52,6 +52,7 @@ class SearchViewModel {
     var currentPage: Int = 1
     var totalPages: Int = 1
     var isFetchingMore: Bool = false
+    var currentSearchTerm: String?
     
     // MARK: - Fetch Courses with Filters
     func fetchCourses(with term: String? = nil, categoryId: Int? = nil, instructorId: Int? = nil, isFeatured: Bool? = nil, page: Int = 1, completion: @escaping (Bool) -> Void) {
@@ -84,8 +85,7 @@ class SearchViewModel {
             completion(false)
             return
         }
-        
-        print("Final URL: \(finalURL.absoluteString)")
+        print("Fetching courses with URL: \(finalURL.absoluteString)")
         apiService.fetchData(from: finalURL.absoluteString) { [weak self] (courseResponse: CourseResponse?, error) in
             
             if let error = error {
@@ -95,10 +95,18 @@ class SearchViewModel {
             }
             
             if let courseResponse = courseResponse {
-                print("Courses: \(courseResponse.data)")
-                self?.courses = courseResponse.data
-                self?.searchResults = courseResponse.data
-                self?.filteredResults = courseResponse.data
+                print("Courses fetched: \(courseResponse.data.count) items")
+                if page == 1 {
+                    self?.courses = courseResponse.data
+                    self?.searchResults = courseResponse.data
+                    self?.filteredResults = courseResponse.data
+                } else {
+                    self?.courses.append(contentsOf: courseResponse.data)
+                    self?.searchResults.append(contentsOf: courseResponse.data)
+                    self?.filteredResults.append(contentsOf: courseResponse.data)
+                }
+                self?.currentPage = page
+                self?.totalPages = courseResponse.meta.lastPage
                 completion(true)
             } else {
                 self?.errorMessage = "No data found"
@@ -108,29 +116,35 @@ class SearchViewModel {
     }
     
     // MARK: - Load More Courses
-        func loadMoreCourses(completion: @escaping (Bool) -> Void) {
-            guard !isFetchingMore, currentPage < totalPages else {
-                completion(false)
-                return
-            }
-            
-            isFetchingMore = true
-            currentPage += 1
-            
-            fetchCourses(page: currentPage) { success in
-                self.isFetchingMore = false
-                completion(success)
-            }
+    func loadMoreCourses(completion: @escaping (Bool) -> Void) {
+        guard !isFetchingMore, currentPage < totalPages else {
+            completion(false)
+            return
         }
+        
+        isFetchingMore = true
+        currentPage += 1
+        
+        fetchCourses(with: currentSearchTerm,
+                     categoryId: selectedCategoryId,
+                     instructorId: selectedInstructorId,
+                     isFeatured: isFeatured,
+                     page: currentPage) { success in
+            self.isFetchingMore = false
+            completion(success)
+        }
+    }
     
     // MARK: - Search Courses
     func searchCourses(with query: String, completion: @escaping (Bool) -> Void) {
         isLoading = true
+        currentPage = 1
+        currentSearchTerm = query
         // Add the new search query to the beginning of the recent searches list
         addRecentSearch(query)
         
         // Fetch courses from the API with the search term
-        fetchCourses(with: query) { success in
+        fetchCourses(with: query, page: currentPage) { success in
             self.isLoading = false
             if success {
                 completion(true)
@@ -143,12 +157,14 @@ class SearchViewModel {
     // MARK: - Apply Filters
     func applyFilters(selectedFilters: [String: [String]], term: String? = nil, completion: @escaping (Bool) -> Void) {
         
+        currentPage = 1
+        currentSearchTerm = term
         let categoryId = selectedCategoryId
         let instructorId = selectedInstructorId
         let isFeatured = isFeatured
         // Fetch courses with the selected filters
         if let term {
-            fetchCourses(with: term, categoryId: categoryId, instructorId: instructorId, isFeatured: isFeatured) { success in
+            fetchCourses(with: term, categoryId: categoryId, instructorId: instructorId, isFeatured: isFeatured, page: currentPage) { success in
                 if success {
                     completion(true)
                 } else {
@@ -156,7 +172,7 @@ class SearchViewModel {
                 }
             }
         } else {
-            fetchCourses(categoryId: categoryId, instructorId: instructorId, isFeatured: isFeatured) { success in
+            fetchCourses(categoryId: categoryId, instructorId: instructorId, isFeatured: isFeatured, page: currentPage) { success in
                 if success {
                     completion(true)
                 } else {

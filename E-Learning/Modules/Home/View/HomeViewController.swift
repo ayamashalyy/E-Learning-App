@@ -118,7 +118,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             } else {
                 cell.hideLoadingIndicator()
                 let courseCategories = homeViewModel.getCourseCategoriesViewModels()
-                cell.configure(with: courseCategories)
+                cell.viewModel.updateCategories(courseCategories)
             }
             
             cell.delegate = self
@@ -209,30 +209,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
     
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            print("Selected Header Cell at section 0, item \(indexPath.item)")
-        case 1:
-            print("Selected Continue Cell at section 1, item \(indexPath.item)")
-        case 2:
-            print("Selected Section Header Cell at section 2, item \(indexPath.item)")
-        case 3:
-            print("Selected Course Title at section 3, item \(indexPath.item)")
-        case 4:
-            print("Selected Section Header Cell at section 4, item \(indexPath.item)")
-        case 6:
-            print("Selected Header Cell at section 6, item \(indexPath.item)")
-        case 8:
-            print("Selected Section Header Cell at section 8, item \(indexPath.item)")
-        case 5, 7, 9:
-            print("")
-        default:
-            break
-        }
-    }
-    
     // MARK: - Delegate Methods
     
     func didSelectCourse(courseSlug: String) {
@@ -251,17 +227,23 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         resultFeaturedCourses.viewModel = self.viewModel
         resultFeaturedCourses.viewModel.selectedFiltersCount = 1
         
+        viewModel.selectedCategoryId = categoryId
+        viewModel.selectedInstructorId = nil
+        viewModel.selectedFilters.removeAll()
+        viewModel.isFeatured = nil
+        
         let navigationController = UINavigationController(rootViewController: resultFeaturedCourses)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
         
+        viewModel.currentPage = 1
         viewModel.fetchCourses(categoryId: categoryId) { success in
             if success {
                 DispatchQueue.main.async {
                     self.resultFeaturedCourses.tableView.reloadData()
                 }
             } else {
-                print("Failed to fetch data")
+                print("Failed to fetch data for category \(categoryId)")
             }
         }
     }
@@ -282,17 +264,24 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             resultFeaturedCourses.filterButton.isHidden = true
             resultFeaturedCourses.viewModel = self.viewModel
             resultFeaturedCourses.viewModel.selectedFiltersCount = 1
+            
+            viewModel.selectedCategoryId = nil
+            viewModel.selectedInstructorId = nil
+            viewModel.selectedFilters.removeAll()
+            viewModel.isFeatured = true
+            
             let navigationController = UINavigationController(rootViewController: resultFeaturedCourses)
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true, completion: nil)
             
+            viewModel.currentPage = 1
             viewModel.fetchCourses(isFeatured: true) { success in
                 if success {
                     DispatchQueue.main.async {
                         self.resultFeaturedCourses.tableView.reloadData()
                     }
                 } else {
-                    print("Failed to fetch data")
+                    print("Failed to fetch Featured Courses")
                 }
             }
         }

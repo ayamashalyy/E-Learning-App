@@ -71,17 +71,23 @@ class AllCoursesCategoriesVC: UIViewController, UICollectionViewDelegate, UIColl
         resultFeaturedCourses.viewModel = self.viewModel
         resultFeaturedCourses.viewModel.selectedFiltersCount = 1
         
+        viewModel.selectedCategoryId = categoryId
+        viewModel.selectedInstructorId = nil
+        viewModel.selectedFilters.removeAll()
+        viewModel.isFeatured = nil
+        
         let navigationController = UINavigationController(rootViewController: resultFeaturedCourses)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
         
+        viewModel.currentPage = 1
         viewModel.fetchCourses(categoryId: categoryId) { success in
             if success {
                 DispatchQueue.main.async {
                     self.resultFeaturedCourses.tableView.reloadData()
                 }
             } else {
-                print("Failed to fetch data")
+                print("Failed to fetch data for category \(categoryId)")
             }
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 class TotalResultsAfterFilterViewController: UIViewController {
     
     // MARK: - Properties
-    var viewModel = SearchViewModel()
+    var viewModel: SearchViewModel!
     var selectedFiltersCount: Int {
         return viewModel.selectedFiltersCount
     }

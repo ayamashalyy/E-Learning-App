@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension TotalResultsAfterFilterViewController: UITableViewDelegate, UITableViewDataSource {
+extension TotalResultsAfterFilterViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     // MARK: - UITableViewDataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,5 +91,33 @@ extension TotalResultsAfterFilterViewController: UITableViewDelegate, UITableVie
     // MARK: - Filter Button Action
     @objc func filterButtonTapped() {
         delegate?.didTapFilterButton()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - frameHeight - 100 && !viewModel.isFetchingMore {
+            showLoadingIndicator()
+            viewModel.loadMoreCourses { [weak self] success in
+                self?.hideLoadingIndicator()
+                if success {
+                    self?.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    // MARK: - Setup Indicator
+    func showLoadingIndicator() {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.startAnimating()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
+        tableView.tableFooterView = activityIndicator
+    }
+    
+    func hideLoadingIndicator() {
+        tableView.tableFooterView = nil
     }
 }

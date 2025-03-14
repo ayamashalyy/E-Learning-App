@@ -50,7 +50,7 @@ class TotalResultsBeforeFilterViewController: UIViewController {
     
     // MARK: - Setup Indicator
     func showLoadingIndicator() {
-        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.startAnimating()
         activityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44)
         tableView.tableFooterView = activityIndicator

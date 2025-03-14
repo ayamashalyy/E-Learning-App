@@ -13,7 +13,7 @@ protocol CoursesCategoriesSectionCellDelegate: AnyObject {
 
 class CoursesCategoriesSectionCell: UICollectionViewCell {
     static let identifier = "CoursesCategoriesSectionCell"
-    private var coursesCategories: [CourseCategoriesModel] = []
+    var viewModel = CourseCategoriesViewModel()
     var tenantViewModel = TenantViewModel.shared
     weak var delegate: CoursesCategoriesSectionCellDelegate?
     
@@ -48,6 +48,12 @@ class CoursesCategoriesSectionCell: UICollectionViewCell {
             activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
+        
+        viewModel.onCategoriesUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                self?.innerCollectionView.reloadData()
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -58,29 +64,27 @@ class CoursesCategoriesSectionCell: UICollectionViewCell {
         super.layoutSubviews()
         innerCollectionView.frame = contentView.bounds
     }
-    
-    func configure(with coursesCategories: [CourseCategoriesModel]) {
-        self.coursesCategories = coursesCategories
-        innerCollectionView.reloadData()
-    }
 }
 
 extension CoursesCategoriesSectionCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return coursesCategories.count
+        return viewModel.getCategoriesCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCell", for: indexPath) as! CoursesCategoriesCollectionViewCell
-        let course = coursesCategories[indexPath.item]
-        cell.titleCourse.text = course.name
-        cell.innerView.layer.backgroundColor = course.color.cgColor
-        
-        if let imageURL = URL(string: course.image) {
-            cell.courseImage.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
-        } else {
-            cell.courseImage.image = UIImage(named: "placeholder")
+        if let course = viewModel.getCategory(at: indexPath.item) {
+            
+            cell.titleCourse.text = course.name
+            let color = UIColor(hex: course.color)
+            cell.innerView.layer.backgroundColor = color.cgColor
+            
+            if let imageURL = URL(string: course.image) {
+                cell.courseImage.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
+            } else {
+                cell.courseImage.image = UIImage(named: "placeholder")
+            }
         }
         
         cell.selectedBackgroundView = .none
@@ -88,16 +92,13 @@ extension CoursesCategoriesSectionCell: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let text = coursesCategories[indexPath.item]
-        let font = UIFont(name: "Roboto-Bold", size: 16) ?? .boldSystemFont(ofSize: 14)
-        let textWidth = text.name.width(usingFont: font)
-        let padding: CGFloat = 50
-        return CGSize(width: textWidth + padding, height: 60)
+        return viewModel.sizeForCategory(at: indexPath.item)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCourse = coursesCategories[indexPath.item]
-        delegate?.didSelectCourseCategories(selectedCourse.id)
+        if let selectedCourse = viewModel.getCategory(at: indexPath.item) {
+            delegate?.didSelectCourseCategories(selectedCourse.id)
+        }
     }
     
     func showLoadingIndicator() {

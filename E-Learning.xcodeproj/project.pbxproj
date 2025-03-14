@@ -115,6 +115,7 @@
 		E8AA3C9C2D7CE00100A43D85 /* AllCoursesCategoriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8AA3C9B2D7CE00100A43D85 /* AllCoursesCategoriesVC.xib */; };
 		E8AA3C9D2D7CE00100A43D85 /* AllCoursesCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AA3C9A2D7CE00100A43D85 /* AllCoursesCategoriesVC.swift */; };
 		E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */; };
+		E8B0C2052D84663600F46F81 /* CourseCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B0C2042D84663600F46F81 /* CourseCategoriesViewModel.swift */; };
 		E8B0DDC92D82071000A5552D /* CourseInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B0DDC82D82071000A5552D /* CourseInfoViewModel.swift */; };
 		E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EE92D4FF6C0005B0E3E /* User.swift */; };
 		E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */; };
@@ -122,7 +123,6 @@
 		E8B29E3F2D511C370083C471 /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E3E2D511C370083C471 /* OTP.swift */; };
 		E8B29E412D51252E0083C471 /*  VerifyOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */; };
 		E8B344902D68EC3A00F14EEE /* CourseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B3448F2D68EC3A00F14EEE /* CourseCategory.swift */; };
-		E8B344922D68EF0100F14EEE /* CourseCategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B344912D68EF0100F14EEE /* CourseCategoriesModel.swift */; };
 		E8B3449A2D691D7000F14EEE /* RefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B344992D691D7000F14EEE /* RefreshToken.swift */; };
 		E8B3449C2D691DC000F14EEE /* RefreshTokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */; };
 		E8B375C62D5174ED00FC383B /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C52D5174ED00FC383B /* ResetPassword.swift */; };
@@ -283,6 +283,7 @@
 		E8AA3C9A2D7CE00100A43D85 /* AllCoursesCategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoursesCategoriesVC.swift; sourceTree = "<group>"; };
 		E8AA3C9B2D7CE00100A43D85 /* AllCoursesCategoriesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllCoursesCategoriesVC.xib; sourceTree = "<group>"; };
 		E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCredentialsManager.swift; sourceTree = "<group>"; };
+		E8B0C2042D84663600F46F81 /* CourseCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCategoriesViewModel.swift; sourceTree = "<group>"; };
 		E8B0DDC82D82071000A5552D /* CourseInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoViewModel.swift; sourceTree = "<group>"; };
 		E8B12EE92D4FF6C0005B0E3E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -290,7 +291,6 @@
 		E8B29E3E2D511C370083C471 /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
 		E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " VerifyOTPViewModel.swift"; sourceTree = "<group>"; };
 		E8B3448F2D68EC3A00F14EEE /* CourseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCategory.swift; sourceTree = "<group>"; };
-		E8B344912D68EF0100F14EEE /* CourseCategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCategoriesModel.swift; sourceTree = "<group>"; };
 		E8B344992D691D7000F14EEE /* RefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshToken.swift; sourceTree = "<group>"; };
 		E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenViewModel.swift; sourceTree = "<group>"; };
 		E8B375C52D5174ED00FC383B /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
@@ -644,6 +644,7 @@
 			children = (
 				E8B696462D7A2D4300ADABEC /* FeaturedCoursesViewModel.swift */,
 				E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */,
+				E8B0C2042D84663600F46F81 /* CourseCategoriesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -985,7 +986,6 @@
 			isa = PBXGroup;
 			children = (
 				E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */,
-				E8B344912D68EF0100F14EEE /* CourseCategoriesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1220,6 +1220,7 @@
 				E8BF8E642D730FAF0072E2B1 /* RecentSearchesViewController.swift in Sources */,
 				E8BF8E6C2D73228E0072E2B1 /* TotalResultsBeforeFilterViewController+TableView.swift in Sources */,
 				E80CC1C12D78F04900F7BA3A /* HomeResponse.swift in Sources */,
+				E8B0C2052D84663600F46F81 /* CourseCategoriesViewModel.swift in Sources */,
 				E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */,
 				E8A8E64D2D70727400321E3A /* WelcomeCollectionViewCell.swift in Sources */,
 				E8BC5E072D71FC6E0032FF84 /* Link.swift in Sources */,
@@ -1230,7 +1231,6 @@
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				E8BF8E742D73374A0072E2B1 /* FilterItemsViewController.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
-				E8B344922D68EF0100F14EEE /* CourseCategoriesModel.swift in Sources */,
 				037F7DED2D0B7193001A411A /* FailureViewController.swift in Sources */,
 				0364129A2CFF6508008EE23F /* CourseDemo.swift in Sources */,
 				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,

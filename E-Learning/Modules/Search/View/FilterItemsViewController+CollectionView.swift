@@ -93,7 +93,11 @@ extension FilterItemsViewController: UICollectionViewDelegate, UICollectionViewD
                 viewModel.selectedInstructorId = selectedItem.id
             }
         } else if sectionTitle == "Is Featurer" {
-            viewModel.isFeatured = !viewModel.isFeatured
+            if viewModel.isFeatured == true {
+                viewModel.isFeatured = nil
+            } else {
+                viewModel.isFeatured = true
+            }
         }
         
         // Check if the item is already selected
