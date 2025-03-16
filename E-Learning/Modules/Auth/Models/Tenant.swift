@@ -23,7 +23,7 @@ struct Tenant: Codable {
     let siteName: String
     let siteDescription: String
     let siteLogo: String
-    let siteEmail: String
+    let sitefavicon: String
     let primaryColor: String
     let secondaryColor: String
     
@@ -31,7 +31,7 @@ struct Tenant: Codable {
         case siteName = "site_name"
         case siteDescription = "site_description"
         case siteLogo = "site_logo"
-        case siteEmail = "site_email"
+        case sitefavicon = "site_favicon"
         case primaryColor = "primary_color"
         case secondaryColor = "secondary_color"
     }
