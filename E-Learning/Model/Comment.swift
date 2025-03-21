@@ -18,3 +18,7 @@ struct Comment: Decodable {
         case createdAt = "created_at"
     }
 }
+
+struct CommentResponse: Decodable {
+    let message: String
+}

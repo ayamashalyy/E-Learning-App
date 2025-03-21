@@ -9,6 +9,9 @@ import Foundation
 
 struct Course: Decodable {
     let id: Int
+    let isEnroll: Bool?
+    let isRequest: String?
+    let hasQuiz: Bool?
     let title: String
     let image: String
     let slug: String
@@ -24,5 +27,8 @@ struct Course: Decodable {
     enum CodingKeys: String, CodingKey {
         case id, title, image, slug, description, category, instructor, sections, comments, certificate, progress
         case createdAt = "created_at"
+        case isEnroll = "is_enroll"
+        case isRequest = "is_request"
+        case hasQuiz = "has_quiz"
     }
 }

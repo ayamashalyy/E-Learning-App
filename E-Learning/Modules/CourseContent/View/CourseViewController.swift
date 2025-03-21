@@ -8,10 +8,6 @@
 import UIKit
 import AVFoundation
 
-protocol sendData {
-    func sendData(_ data: Any)
-}
-
 class CourseViewController: UIViewController {
     
     var player: AVPlayer?
@@ -23,12 +19,18 @@ class CourseViewController: UIViewController {
     var contentView: UIView!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
+    var courseSlug: String?
+    var courseIsEnroll: Bool?
+    var viewModel: CourseOverviewViewModel?
+    private var userSessionManager = UserSessionManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationItem.title = "Introduction to Scrum Master".localized
-        
+        self.navigationItem.title = viewModel?.getCourse()?.title
+        if let courseSlug = courseSlug {
+            print("Course Slug in CourseViewController: \(courseSlug)")
+        }
         backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         
         if let backButtonImage = backButtonImage {
@@ -39,7 +41,6 @@ class CourseViewController: UIViewController {
         setupUI()
         setupConstraints()
         setupVideoPlayer()
-        loadSubView(1)
     }
     
     @objc func cancelTapped() {
@@ -221,16 +222,30 @@ class CourseViewController: UIViewController {
         self.removeAllSubView(mainContainerView: contentView)
         switch tag {
         case 1:
-            self.moveToSubView(mainContainerView: contentView, identifier: "CourseInfoViewController", storyboardName: "Main", CourseInfoViewController.self, data: "section1 send!")
-        case 2:
-            self.moveToSubView(mainContainerView: contentView, identifier: "CourseContentViewController", storyboardName: "Main", CourseContentViewController.self)
-        case 3:
-            self.moveToSubView(mainContainerView: contentView, identifier: "CourseInteractionsViewController", storyboardName: "Main", CourseInteractionsViewController.self)
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "CourseInfoViewController",
+                storyboardName: "Main",
+                CourseInfoViewController.self,
+                data: self.viewModel)
             
-            // Emit test data from Section2ViewController after it's added to the parent
-            if let childVC = children.first(where: { $0 is CourseInteractionsViewController }) as? CourseInteractionsViewController {
-                childVC.delegate = self
-            }
+        case 2:
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "CourseContentViewController",
+                storyboardName: "Main",
+                CourseContentViewController.self,
+                data: self.viewModel
+            )
+        case 3:
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "CourseInteractionsViewController",
+                storyboardName: "Main",
+                CourseInteractionsViewController.self,
+                data: self.viewModel
+            )
+            
         default:
             print("No View found!")
         }

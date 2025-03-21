@@ -59,11 +59,11 @@ class HomeViewModel {
     func getLatestCourseViewModels() -> [Course] {
         return latestCourses
     }
-
+    
     func getMostCourseViewModels() -> [Course] {
         return mostPopular
     }
-
+    
     func getFeaturedCourseViewModels() -> [Course] {
         return featuredCourses
     }

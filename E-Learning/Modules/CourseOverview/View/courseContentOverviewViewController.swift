@@ -7,13 +7,10 @@
 
 import UIKit
 
-class courseContentOverviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class courseContentOverviewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, sendData {
     
-    var viewModel: CourseContentViewModel? {
-        didSet {
-            updateUI()
-        }
-    }
+    private var viewModel: CourseOverviewViewModel?
+    
     
     var tableView = UITableView()
     private let noDataImageView: UIImageView = {
@@ -30,6 +27,7 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
         view.backgroundColor = .white
         setupTableView()
         setupNoDataImageView()
+        updateUI()
     }
     
     private func updateUI() {
@@ -42,9 +40,22 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
         let sectionsCount = viewModel.getSectionsCount()
         let hasLessons = sectionsCount > 0 && viewModel.getSections().contains { $0.lessons?.isEmpty == false }
         
+        print("updateUI: sectionsCount = \(sectionsCount), hasLessons = \(hasLessons)")
+        print("Sections: \(viewModel.getSections())")
+        
         tableView.isHidden = !hasLessons
         noDataImageView.isHidden = hasLessons
         tableView.reloadData()
+    }
+    
+    func sendData(_ data: Any) {
+        if let viewModel = data as? CourseOverviewViewModel {
+            print("Received viewModel in sendData: \(viewModel)")
+            self.viewModel = viewModel
+            updateUI()
+        } else {
+            print("Failed to cast data to CourseOverviewViewModel")
+        }
     }
     
     private func setupTableView() {
@@ -102,7 +113,7 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 85
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -120,16 +131,5 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
         let navigationController = UINavigationController(rootViewController: nextViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
-    }
-}
-
-extension courseContentOverviewViewController: callDataBack {
-    func sendDataBack(_ data: Any) {
-        if let viewModel = data as? CourseContentViewModel {
-            print("Received viewModel in sendDataBack: \(viewModel)")
-            self.viewModel = viewModel
-        } else {
-            print("Failed to cast data to CourseContentViewModel")
-        }
     }
 }

@@ -10,23 +10,29 @@ import Foundation
 class FeaturedCoursesViewModel {
     
     private(set) var courses: [Course] = [] {
-           didSet {
-               onCoursesUpdated?()
-           }
-       }
+        didSet {
+            onCoursesUpdated?()
+        }
+    }
     
     var onCoursesUpdated: (() -> Void)?
     
     func updateCourses(_ newCourses: [Course]) {
-           self.courses = newCourses
-       }
+        self.courses = newCourses
+        
+        for course in courses {
+            print("Updated Course: \(course.title), isEnroll: \(course.isEnroll ?? false)")
+        }
+    }
     
     func getCourse(at index: Int) -> Course? {
-           guard index >= 0, index < courses.count else { return nil }
-           return courses[index]
-       }
-       
-       func getCoursesCount() -> Int {
-           return courses.count
-       }
+        guard index >= 0, index < courses.count else { return nil }
+        let course = courses[index]
+        print("Course isEnroll value in getCourse: \(course.isEnroll ?? false)")
+        return course
+    }
+    
+    func getCoursesCount() -> Int {
+        return courses.count
+    }
 }

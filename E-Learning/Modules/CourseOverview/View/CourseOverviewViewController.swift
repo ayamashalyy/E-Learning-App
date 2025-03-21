@@ -17,13 +17,14 @@ class CourseOverviewViewController: UIViewController {
     var tenantViewModel = TenantViewModel.shared
     private var userSessionManager = UserSessionManager.shared
     var backButtonImage: UIImage!
-    var viewModel = CourseOverviewViewModel()
     var courseSlug: String!
+    var courseIsEnroll: Bool?
+    var viewModel: CourseOverviewViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        self.navigationItem.title = viewModel?.getCourse()?.title
         backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         
         if let backButtonImage = backButtonImage {
@@ -33,30 +34,7 @@ class CourseOverviewViewController: UIViewController {
         }
         setupUI()
         setupConstraints()
-        fetchCourseData()
-    }
-    
-    func fetchCourseData() {
-        guard let token = userSessionManager.token else { 
-            print("Token is nil, cannot fetch course data")
-            return
-        }
-        print("Using token: \(token)")
-        viewModel.onDataFetched = { [weak self] in
-            self?.updateUI()
-            self?.loadSubView(1)
-        }
-        viewModel.fetchCourseData(courseSlug: courseSlug, token: token)
-    }
-    
-    private func updateUI() {
-        guard let course = viewModel.getCourse() else { return }
-        self.navigationItem.title = course.title
-        if let imageURL = URL(string: course.image) {
-            imageCourseOverview.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
-        } else {
-            imageCourseOverview.image = UIImage(named: "placeholder")
-        }
+        loadSubView(1)
     }
     
     
@@ -78,6 +56,13 @@ class CourseOverviewViewController: UIViewController {
         
         imageCourseOverview = UIImageView()
         imageCourseOverview.backgroundColor = .clear
+        
+        if let imageURL = URL(string: viewModel?.getCourse()?.image ?? "") {
+            imageCourseOverview.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
+        } else {
+            imageCourseOverview.image = UIImage(named: "placeholder")
+        }
+        
         imageCourseOverview.contentMode = .scaleToFill
         imageCourseOverview.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageCourseOverview)
@@ -185,37 +170,23 @@ class CourseOverviewViewController: UIViewController {
         self.removeAllSubView(mainContainerView: contentView)
         switch tag {
         case 1:
-            if let course = viewModel.getCourse() {
-                print("Course Data: \(course)")
-                let courseInfoViewModel = CourseInfoViewModel(course: course)
-                print("Course Info ViewModel: \(courseInfoViewModel)")
-                self.moveToSubView(
-                    mainContainerView: contentView,
-                    identifier: "courseInfoOverviewViewController",
-                    nibName: "courseInfoOverviewViewController",
-                    courseInfoOverviewViewController.self,
-                    data: courseInfoViewModel
-                )
-            } else {
-                print("Course data is nil")
-            }
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "courseInfoOverviewViewController",
+                nibName: "courseInfoOverviewViewController",
+                courseInfoOverviewViewController.self,
+                data: self.viewModel
+            )
             
         case 2:
-            if let course = viewModel.getCourse() {
-                print("Course Data: \(course)")
-                let courseContentViewModel = CourseContentViewModel(course: course)
-                print("Course Info ViewModel: \(courseContentViewModel)")
-                
-                self.moveToSubView(
-                    mainContainerView: contentView,
-                    identifier: "courseContentOverviewViewController",
-                    nibName: "courseContentOverviewViewController",
-                    courseContentOverviewViewController.self,
-                    data: courseContentViewModel
-                )
-            } else {
-                print("Course data is nil")
-            }
+            
+            self.moveToSubView(
+                mainContainerView: contentView,
+                identifier: "courseContentOverviewViewController",
+                nibName: "courseContentOverviewViewController",
+                courseContentOverviewViewController.self,
+                data: self.viewModel
+            )
             
         default:
             print("No View found!")

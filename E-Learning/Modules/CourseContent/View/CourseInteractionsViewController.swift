@@ -7,19 +7,33 @@
 
 import UIKit
 
-class CourseInteractionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+class CourseInteractionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, sendData{
     
-    var delegate: callDataBack?
     var headerView = UIView()
-    var comments: [(text: String, date: Date)] = []
     var tableView = UITableView()
     var tenantViewModel = TenantViewModel.shared
+    private var viewModel: CourseOverviewViewModel?
+    private var commentViewModel = CommentViewModel()
+    private var courseSlug: String?
+    private var userSessionManager = UserSessionManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupHeaderView()
         setupTableView()
+        fetchCourseData()
+    }
+    
+    func sendData(_ data: Any) {
+        if let viewModel = data as? CourseOverviewViewModel {
+            print("Received viewModel in sendData: \(viewModel)")
+            self.viewModel = viewModel
+            self.courseSlug = viewModel.getCourse()?.slug
+            fetchCourseData()
+        } else {
+            print("Failed to cast data to CourseOverviewViewModel")
+        }
     }
     
     private func setupHeaderView() {
@@ -150,18 +164,36 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         let alert = UIAlertController(title: "Add Comment".localized, message: "Enter your comment below:".localized, preferredStyle: .alert)
         alert.addTextField { textField in
             textField.placeholder = "Your comment here".localized
+            textField.autocapitalizationType = .sentences
+            textField.returnKeyType = .done
+            textField.becomeFirstResponder()
         }
         
         let addAction = UIAlertAction(title: "Add".localized, style: .default) { [weak self] _ in
-            if let commentText = alert.textFields?.first?.text, !commentText.isEmpty {
-                let currentDate = Date()
-                self?.comments.append((text: commentText, date: currentDate))
-                self?.tableView.reloadData()
-            } else {
-                
-                let errorAlert = UIAlertController(title: "Error".localized, message: "The text field is empty. Please enter a comment.".localized, preferredStyle: .alert)
+            guard let self = self,
+                  let commentText = alert.textFields?.first?.text,
+                  !commentText.isEmpty,
+                  let courseSlug = viewModel?.getCourse()?.slug,
+                  let token = self.userSessionManager.token else {
+                let errorAlert = UIAlertController(title: "Error".localized, message: "Missing required data.".localized, preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "OK".localized, style: .default))
                 self?.present(errorAlert, animated: true, completion: nil)
+                return
+            }
+            
+            self.commentViewModel.addComment(courseSlug: courseSlug, commentText: commentText, token: token)
+            
+            self.commentViewModel.onCommentSuccess = { message in
+                print("Comment added successfully: \(message)")
+                // After successful POST, fetch updated course data
+                self.fetchCourseData()
+                
+            }
+            
+            self.commentViewModel.onCommentFailure = { errorMessage in
+                let errorAlert = UIAlertController(title: "Error".localized, message: errorMessage, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "OK".localized, style: .default))
+                self.present(errorAlert, animated: true, completion: nil)
             }
         }
         
@@ -170,26 +202,50 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         alert.addAction(addAction)
         alert.addAction(cancelAction)
         
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
+    private func fetchCourseData() {
+        guard let courseSlug = viewModel?.getCourse()?.slug ?? self.courseSlug,
+              let token = userSessionManager.token else {
+            print("Cannot fetch course data: missing courseSlug or token")
+            return
+        }
+        
+        viewModel?.fetchCourseData(courseSlug: courseSlug, token: token)
+        viewModel?.onDataFetched = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return comments.count
+        return viewModel?.getComments().count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as? CommentCell,
+              let comment = viewModel?.getComments()[indexPath.row] else {
             return UITableViewCell()
         }
         
-        let comment = comments[indexPath.row]
+        if let avatarURL = URL(string: comment.user.avatar ?? "") {
+            cell.profileImageView.sd_setImage(with: avatarURL, placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+        } else {
+            cell.profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
+        }
         
-        cell.profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
-        cell.nameLabel.text = "User \(indexPath.row + 1)"
+        cell.nameLabel.text = comment.user.name
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy".localized
-        cell.dateLabel.text = dateFormatter.string(from: comment.date)
-        cell.commentLabel.text = comment.text
+        let date = ISO8601DateFormatter().date(from: comment.createdAt) ?? Date()
+        cell.dateLabel.text = dateFormatter.string(from: date)
+        cell.commentLabel.text = comment.comment
         cell.selectionStyle = .none
         
         return cell

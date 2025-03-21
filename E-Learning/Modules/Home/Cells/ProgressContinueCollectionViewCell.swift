@@ -8,10 +8,11 @@
 import UIKit
 
 class ProgressContinueCollectionViewCell: UICollectionViewCell {
-
+    
     var tenantViewModel = TenantViewModel.shared
     
     @IBOutlet weak var outerView: UIView!
+    @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var arrow: UIButton!
     @IBOutlet weak var continueLabel: UILabel!
     @IBOutlet weak var courseImage: UIImageView!
@@ -26,9 +27,6 @@ class ProgressContinueCollectionViewCell: UICollectionViewCell {
         outerView.layer.cornerRadius = 10
         outerView.layer.masksToBounds = true
         outerView.layer.shadowColor = UIColor.gray.cgColor
-        outerView.layer.shadowOpacity = 0.3
-        outerView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        outerView.layer.shadowRadius = 6
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.borderWidth = 0.5
         outerView.backgroundColor = tenantViewModel.primaryColor
@@ -42,11 +40,11 @@ class ProgressContinueCollectionViewCell: UICollectionViewCell {
         innerView.layer.cornerRadius = 6
         innerView.layer.masksToBounds = true
         innerView.layer.shadowColor = UIColor.gray.cgColor
-        innerView.layer.shadowOpacity = 0.3
-        innerView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        innerView.layer.shadowRadius = 6
         innerView.layer.borderColor = UIColor.lightGray.cgColor
         innerView.layer.borderWidth = 0.5
+        
+        print("OuterView Frame after constraints: \(outerView.frame)")
+        print("InnerView Frame: \(innerView.frame)")
         
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)

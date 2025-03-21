@@ -7,63 +7,143 @@
 
 import UIKit
 
-class courseInfoOverviewViewController: UIViewController {
+class courseInfoOverviewViewController: UIViewController, sendData {
     
     var introductionLabel = UILabel()
     var introductionDescriptionLabel = UILabel()
     var stackView = UIStackView()
     var containerView1 = UIView()
+    var durationLabel = UILabel()
+    var lessonsCountLabel = UILabel()
     var containerView2 = UIView()
+    var quizzesLabel = UILabel()
     var containerView3 = UIView()
+    var certificateLabel = UILabel()
     var instractorView = UIView()
-    var sectionTitle: String?
+    var instructorNameLabel = UILabel()
+    var instructorTitleLabel = UILabel()
+    var instructorDescriptionLabel = UILabel()
+    var instructorProfileImageView = UIImageView()
     var applyButton: UIButton!
-    var label1 = UILabel()
-    var label2 = UILabel()
-    var nameLabel = UILabel()
-    var titleLabel = UILabel()
-    var descriptionLabel = UILabel()
-    var profileImageView = UIImageView()
-    
+    var enrollmentViewModel = CourseEnrollmentViewModel()
     var tenantViewModel = TenantViewModel.shared
-    
-    var viewModel: CourseInfoViewModel? {
-        didSet {
-            updateUI()
-        }
-    }
+    private var viewModel: CourseOverviewViewModel?
+    private var isEnrolled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupUI()
         setupConstraints()
+        courseEnrollment()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        updateUI()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if viewModel != nil {
+            print("viewWillAppear: viewModel exists, updating UI")
+            updateUIWithViewModel()
+            updateApplyButtonState()
+        } else {
+            print("viewWillAppear: viewModel is nil")
+        }
     }
     
-    private func updateUI() {
-        guard let viewModel = viewModel else {
-            print("ViewModel is nil in updateUI")
+    private func updateApplyButtonState() {
+        if let requestStatus = viewModel?.getCourseRequestStatus(), requestStatus == "PENDING" {
+            applyButton.setTitle("Cancel ".localized, for: .normal)
+            applyButton.backgroundColor = .red
+            isEnrolled = true
+        } else {
+            applyButton.setTitle("Enroll ".localized, for: .normal)
+            applyButton.backgroundColor = tenantViewModel.primaryColor
+            isEnrolled = false
+        }
+    }
+    
+    func sendData(_ data: Any) {
+        if let viewModel = data as? CourseOverviewViewModel {
+            self.viewModel = viewModel
+            print("ViewModel received in sendData: \(viewModel)")
+            print("Course from viewModel: \(String(describing: viewModel.getCourse()))")
+            updateUIWithViewModel()
+        } else {
+            print("No valid viewModel received in sendData")
+        }
+    }
+    
+    private func updateUIWithViewModel() {
+        
+        guard let course = viewModel?.getCourse() else {
+            print("No course data available in viewModel")
             return
         }
-        print("Updating UI with ViewModel: \(viewModel)")
-        introductionLabel.text = viewModel.getCourseTitle()
-        introductionDescriptionLabel.text = viewModel.getCourseDescription()
-        label1.text = viewModel.getFormattedDuration()
-        label2.text = viewModel.getLessonsCount()
-        nameLabel.text = viewModel.getInstructorName()
-        titleLabel.text = viewModel.getInstructorTitle()
-        descriptionLabel.text = viewModel.getInstructorBio()
         
-        if let imageURL = viewModel.getInstructorImageURL() {
-            profileImageView.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
-        } else {
-            profileImageView.image = UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection()
-            
+        print("Updating UI with course: \(course)")
+        print("Title: \(course.title)")
+        print("Description: \(course.description)")
+        print("Duration: \(viewModel?.getFormattedDuration() ?? "nil")")
+        print("Lessons: \(viewModel?.getLessonsCount() ?? "nil")")
+        print("Has Quiz: \(viewModel?.hasQuiz() ?? false)")
+        print("Certificate: \(String(describing: course.certificate))")
+        print("Instructor Name: \(viewModel?.getInstructorName() ?? "nil")")
+        print("Instructor Title: \(viewModel?.getInstructorTitle() ?? "nil")")
+        print("Instructor Bio: \(viewModel?.getInstructorBio() ?? "nil")")
+        print("Instructor Image URL: \(String(describing: viewModel?.getInstructorImageURL() ?? nil))")
+        
+        introductionLabel.text = course.title
+        introductionDescriptionLabel.text = course.description
+        durationLabel.text = viewModel?.getFormattedDuration()
+        lessonsCountLabel.text = viewModel?.getLessonsCount()
+        quizzesLabel.text = viewModel?.hasQuiz() ?? false ? "Quizzes Available".localized : "No Quizzes"
+        certificateLabel.text = (course.certificate != nil) ? "Certificate of completion".localized : "No certificate"
+        instructorNameLabel.text = viewModel?.getInstructorName()
+        instructorTitleLabel.text = viewModel?.getInstructorTitle()
+        instructorDescriptionLabel.text = viewModel?.getInstructorBio()
+        instructorProfileImageView.sd_setImage(
+            with: viewModel?.getInstructorImageURL(),
+            placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+    }
+    
+    
+    private func showPendingAlert() {
+        let alert = UIAlertController(title: "Pending".localized, message: "Your enrollment request is under review.".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func navigateToCourseViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
+            let navigationController = UINavigationController(rootViewController: nextViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true, completion: nil)
+        }
+    }
+    
+    private func courseEnrollment() {
+        enrollmentViewModel.onEnrollmentSuccess = { [weak self] message, isEnroll in
+            DispatchQueue.main.async {
+                self?.showSuccessAlert(message: message)
+                if isEnroll {
+                    self?.applyButton.setTitle("Cancel ".localized, for: .normal)
+                    self?.applyButton.backgroundColor = .red
+                    self?.isEnrolled = true
+                } else {
+                    self?.applyButton.setTitle("Enroll ".localized, for: .normal)
+                    self?.applyButton.backgroundColor = self?.tenantViewModel.primaryColor
+                    self?.isEnrolled = false
+                }
+                
+                
+            }
+        }
+        
+        enrollmentViewModel.onEnrollmentFailure = { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                self?.showErrorAlert(message: errorMessage)
+                self?.updateApplyButtonState()
+            }
         }
     }
     
@@ -127,17 +207,19 @@ class courseInfoOverviewViewController: UIViewController {
         imageView1.tintColor = tenantViewModel.secondaryColor
         imageView1.contentMode = .scaleAspectFit
         imageView1.translatesAutoresizingMaskIntoConstraints = false
-        label1.numberOfLines = 0
-        label1.textColor = tenantViewModel.primaryColor
-        label1.font = UIFont(name: "Roboto-Regular", size: 14)
-        label1.translatesAutoresizingMaskIntoConstraints = false
-        label2.numberOfLines = 0
-        label2.textColor = tenantViewModel.primaryColor
-        label2.font = UIFont(name: "Roboto-Regular", size: 14)
-        label2.translatesAutoresizingMaskIntoConstraints = false
+        
+        durationLabel.numberOfLines = 0
+        durationLabel.textColor = tenantViewModel.primaryColor
+        durationLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+        durationLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        lessonsCountLabel.numberOfLines = 0
+        lessonsCountLabel.textColor = tenantViewModel.primaryColor
+        lessonsCountLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+        lessonsCountLabel.translatesAutoresizingMaskIntoConstraints = false
         button1.addSubview(imageView1)
-        button1.addSubview(label1)
-        button1.addSubview(label2)
+        button1.addSubview(durationLabel)
+        button1.addSubview(lessonsCountLabel)
         containerView1.addSubview(button1)
         
         NSLayoutConstraint.activate([
@@ -152,13 +234,13 @@ class courseInfoOverviewViewController: UIViewController {
             imageView1.widthAnchor.constraint(equalToConstant: 30),
             imageView1.heightAnchor.constraint(equalToConstant: 30),
             
-            label1.topAnchor.constraint(equalTo: imageView1.bottomAnchor, constant: 2),
-            label1.leadingAnchor.constraint(equalTo: button1.leadingAnchor, constant: 25),
-            label1.trailingAnchor.constraint(equalTo: button1.trailingAnchor),
+            durationLabel.topAnchor.constraint(equalTo: imageView1.bottomAnchor, constant: 2),
+            durationLabel.leadingAnchor.constraint(equalTo: button1.leadingAnchor, constant: 25),
+            durationLabel.trailingAnchor.constraint(equalTo: button1.trailingAnchor),
             
-            label2.topAnchor.constraint(equalTo: label1.bottomAnchor, constant: 2),
-            label2.leadingAnchor.constraint(equalTo: label1.leadingAnchor),
-            label2.trailingAnchor.constraint(equalTo: label1.trailingAnchor),
+            lessonsCountLabel.topAnchor.constraint(equalTo: durationLabel.bottomAnchor, constant: 2),
+            lessonsCountLabel.leadingAnchor.constraint(equalTo: durationLabel.leadingAnchor),
+            lessonsCountLabel.trailingAnchor.constraint(equalTo: durationLabel.trailingAnchor),
         ])
         
         let button2 = UIButton()
@@ -168,13 +250,13 @@ class courseInfoOverviewViewController: UIViewController {
         imageView2.tintColor = tenantViewModel.secondaryColor
         imageView2.contentMode = .scaleAspectFit
         imageView2.translatesAutoresizingMaskIntoConstraints = false
-        let labelView2 = UILabel()
-        labelView2.text = "Quizzes".localized
-        labelView2.textColor = tenantViewModel.primaryColor
-        labelView2.font = UIFont(name: "Roboto-Regular", size: 14)
-        labelView2.translatesAutoresizingMaskIntoConstraints = false
+        
+        quizzesLabel.text = "Quizzes".localized
+        quizzesLabel.textColor = tenantViewModel.primaryColor
+        quizzesLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+        quizzesLabel.translatesAutoresizingMaskIntoConstraints = false
         button2.addSubview(imageView2)
-        button2.addSubview(labelView2)
+        button2.addSubview(quizzesLabel)
         containerView2.addSubview(button2)
         
         NSLayoutConstraint.activate([
@@ -189,9 +271,9 @@ class courseInfoOverviewViewController: UIViewController {
             imageView2.widthAnchor.constraint(equalToConstant: 20),
             imageView2.heightAnchor.constraint(equalToConstant: 20),
             
-            labelView2.topAnchor.constraint(equalTo: imageView2.bottomAnchor, constant: 8),
-            labelView2.leadingAnchor.constraint(equalTo: button2.leadingAnchor, constant: 40),
-            labelView2.trailingAnchor.constraint(equalTo: button2.trailingAnchor),
+            quizzesLabel.topAnchor.constraint(equalTo: imageView2.bottomAnchor, constant: 8),
+            quizzesLabel.leadingAnchor.constraint(equalTo: button2.leadingAnchor, constant: 40),
+            quizzesLabel.trailingAnchor.constraint(equalTo: button2.trailingAnchor),
         ])
         
         let button3 = UIButton()
@@ -201,14 +283,13 @@ class courseInfoOverviewViewController: UIViewController {
         imageView3.tintColor = tenantViewModel.secondaryColor
         imageView3.contentMode = .scaleAspectFit
         imageView3.translatesAutoresizingMaskIntoConstraints = false
-        let labelView3 = UILabel()
-        labelView3.text = "Certificate of completion".localized
-        labelView3.numberOfLines = 0
-        labelView3.textColor = tenantViewModel.primaryColor
-        labelView3.font = UIFont(name: "Roboto-Regular", size: 14)
-        labelView3.translatesAutoresizingMaskIntoConstraints = false
+        
+        certificateLabel.numberOfLines = 0
+        certificateLabel.textColor = tenantViewModel.primaryColor
+        certificateLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+        certificateLabel.translatesAutoresizingMaskIntoConstraints = false
         button3.addSubview(imageView3)
-        button3.addSubview(labelView3)
+        button3.addSubview(certificateLabel)
         containerView3.addSubview(button3)
         
         NSLayoutConstraint.activate([
@@ -223,13 +304,13 @@ class courseInfoOverviewViewController: UIViewController {
             imageView3.widthAnchor.constraint(equalToConstant: 20),
             imageView3.heightAnchor.constraint(equalToConstant: 20),
             
-            labelView3.topAnchor.constraint(equalTo: imageView3.bottomAnchor, constant: 5),
-            labelView3.leadingAnchor.constraint(equalTo: button3.leadingAnchor, constant: 20),
-            labelView3.trailingAnchor.constraint(equalTo: button3.trailingAnchor),
+            certificateLabel.topAnchor.constraint(equalTo: imageView3.bottomAnchor, constant: 5),
+            certificateLabel.leadingAnchor.constraint(equalTo: button3.leadingAnchor, constant: 20),
+            certificateLabel.trailingAnchor.constraint(equalTo: button3.trailingAnchor),
         ])
         
         applyButton = UIButton(type: .system)
-        applyButton.setTitle("Apply ".localized, for: .normal)
+        applyButton.setTitle("Enroll ".localized, for: .normal)
         applyButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 15)
         applyButton.setTitleColor(UIColor.white, for: .normal)
         applyButton.backgroundColor = tenantViewModel.primaryColor
@@ -250,53 +331,53 @@ class courseInfoOverviewViewController: UIViewController {
         instractorView.layer.shadowRadius = 8
         view.addSubview(instractorView)
         
-        profileImageView.contentMode = .scaleAspectFill
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.layer.cornerRadius = 30
-        profileImageView.layer.borderWidth = 2
-        profileImageView.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
-        profileImageView.clipsToBounds = true
-        instractorView.addSubview(profileImageView)
+        instructorProfileImageView.contentMode = .scaleAspectFill
+        instructorProfileImageView.translatesAutoresizingMaskIntoConstraints = false
+        instructorProfileImageView.layer.cornerRadius = 30
+        instructorProfileImageView.layer.borderWidth = 2
+        instructorProfileImageView.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
+        instructorProfileImageView.clipsToBounds = true
+        instractorView.addSubview(instructorProfileImageView)
         
         NSLayoutConstraint.activate([
-            profileImageView.leadingAnchor.constraint(equalTo: instractorView.leadingAnchor, constant: 16),
-            profileImageView.topAnchor.constraint(equalTo: instractorView.topAnchor, constant: 10),
-            profileImageView.widthAnchor.constraint(equalToConstant: 60),
-            profileImageView.heightAnchor.constraint(equalToConstant: 60)
+            instructorProfileImageView.leadingAnchor.constraint(equalTo: instractorView.leadingAnchor, constant: 16),
+            instructorProfileImageView.topAnchor.constraint(equalTo: instractorView.topAnchor, constant: 10),
+            instructorProfileImageView.widthAnchor.constraint(equalToConstant: 60),
+            instructorProfileImageView.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        nameLabel.font = UIFont(name: "Roboto-Medium", size: 16)
-        nameLabel.textColor = .black
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        instractorView.addSubview(nameLabel)
+        instructorNameLabel.font = UIFont(name: "Roboto-Medium", size: 16)
+        instructorNameLabel.textColor = .black
+        instructorNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        instractorView.addSubview(instructorNameLabel)
         
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            nameLabel.topAnchor.constraint(equalTo: instractorView.topAnchor, constant: 15)
-        ])
-        
-        
-        titleLabel.font = UIFont(name: "Roboto-Regular", size: 14)
-        titleLabel.textColor = .black
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        instractorView.addSubview(titleLabel)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4)
+            instructorNameLabel.leadingAnchor.constraint(equalTo: instructorProfileImageView.trailingAnchor, constant: 16),
+            instructorNameLabel.topAnchor.constraint(equalTo: instractorView.topAnchor, constant: 15)
         ])
         
         
-        descriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
-        descriptionLabel.textColor = UIColor(named: "onboradColor")
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        instractorView.addSubview(descriptionLabel)
+        instructorTitleLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+        instructorTitleLabel.textColor = .black
+        instructorTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        instractorView.addSubview(instructorTitleLabel)
         
         NSLayoutConstraint.activate([
-            descriptionLabel.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: instractorView.trailingAnchor, constant: -4),
-            descriptionLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16)
+            instructorTitleLabel.leadingAnchor.constraint(equalTo: instructorNameLabel.leadingAnchor),
+            instructorTitleLabel.topAnchor.constraint(equalTo: instructorNameLabel.bottomAnchor, constant: 4)
+        ])
+        
+        
+        instructorDescriptionLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+        instructorDescriptionLabel.textColor = UIColor(named: "onboradColor")
+        instructorDescriptionLabel.numberOfLines = 0
+        instructorDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        instractorView.addSubview(instructorDescriptionLabel)
+        
+        NSLayoutConstraint.activate([
+            instructorDescriptionLabel.leadingAnchor.constraint(equalTo: instructorProfileImageView.leadingAnchor),
+            instructorDescriptionLabel.trailingAnchor.constraint(equalTo: instractorView.trailingAnchor, constant: -4),
+            instructorDescriptionLabel.topAnchor.constraint(equalTo: instructorProfileImageView.bottomAnchor, constant: 16)
         ])
         
     }
@@ -346,25 +427,22 @@ class courseInfoOverviewViewController: UIViewController {
     
     @objc func applyButtonTapped() {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
-            //nextViewController.courseTitle = course
-            let navigationController = UINavigationController(rootViewController: nextViewController)
-            navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true, completion: nil)
+        guard let token = UserSessionManager.shared.token else {
+            print("Token is nil, cannot enroll in course")
+            return
         }
-    }
-}
-
-
-
-extension courseInfoOverviewViewController: callDataBack {
-    func sendDataBack(_ data: Any) {
-        if let viewModel = data as? CourseInfoViewModel {
-            print("Received viewModel in sendDataBack: \(viewModel)")
-            self.viewModel = viewModel
+        
+        guard let courseSlug = viewModel?.getCourse()?.slug else {
+            print("Course slug is nil")
+            return
+        }
+        
+        if isEnrolled {
+            print("Attempting to cancel enrollment for course: \(courseSlug)")
+            enrollmentViewModel.cancelEnrollInCourse(courseSlug: courseSlug, token: token)
         } else {
-            print("Failed to cast data to CourseInfoViewModel")
+            print("Attempting to enroll in course: \(courseSlug)")
+            enrollmentViewModel.enrollInCourse(courseSlug: courseSlug, token: token)
         }
     }
 }

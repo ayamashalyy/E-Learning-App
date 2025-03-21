@@ -85,7 +85,7 @@ class CommentCell: UITableViewCell {
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             
             profileImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 15),
-            profileImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 30),
+            profileImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 50),
             profileImageView.heightAnchor.constraint(equalToConstant: 50),
             
@@ -97,7 +97,7 @@ class CommentCell: UITableViewCell {
             dateLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
             commentLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 8),
-            commentLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            commentLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
             commentLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             
             containerView.bottomAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 16)

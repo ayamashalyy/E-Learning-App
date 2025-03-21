@@ -12,6 +12,10 @@ protocol callDataBack {
     func sendDataBack(_ data: Any)
 }
 
+protocol sendData {
+    func sendData(_ data: Any)
+}
+
 extension UIViewController {
     
     func moveToSubView<T: UIViewController>(
@@ -33,11 +37,19 @@ extension UIViewController {
             controller = T(nibName: nibName, bundle: nil)
         }
         
-        guard let viewController = controller else { return }
-        
+        guard let viewController = controller else {
+            print("Failed to instantiate view controller with identifier: \(identifier)")
+            return
+        }
         // Pass data if the child view controller conforms to callDataBack
-        if let dataViewController = viewController as? callDataBack, let data = data {
+        if let sendDataVC = viewController as? sendData, let data = data {
+            print("moveToSubView: Sending data to \(identifier): \(data)")
+            sendDataVC.sendData(data)
+        } else if let dataViewController = viewController as? callDataBack, let data = data {
+            print("moveToSubView: Sending data back to \(identifier): \(data)")
             dataViewController.sendDataBack(data)
+        } else {
+            print("moveToSubView: No data protocol conformed by \(identifier)")
         }
         
         viewController.view.translatesAutoresizingMaskIntoConstraints = false

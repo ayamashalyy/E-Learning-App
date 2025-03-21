@@ -41,39 +41,52 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProfileData()
+    }
+    
+    func fetchProfileData() {
         if let token = userSessionManager.token {
             viewModel.fetchProfile(token: token) { [weak self] result in
                 switch result {
                 case .success(let profileResponse):
                     DispatchQueue.main.async {
+                        
                         self?.nameLabel.text = profileResponse.user.name
                         self?.emailLabel.text = profileResponse.user.email
                         
-                        // Load the avatar image from the URL
                         if let avatarURLString = profileResponse.user.avatar, let avatarURL = URL(string: avatarURLString) {
                             self?.loadImage(from: avatarURL)
+                            print("Loaded avatar from API URL: \(avatarURLString)")
+                        } else if let base64String = UserSessionManager.shared.avatar, let imageData = Data(base64Encoded: base64String) {
+                            self?.profileImageView.image = UIImage(data: imageData)
+                            print("Loaded avatar from UserDefaults")
+                        } else {
+                            self?.profileImageView.image = UIImage(named: "default_profile_image")
+                            print("No avatar found, using default")
                         }
+                        
+                        print("Avatar URL from API: \(profileResponse.user.avatar ?? "nil")")
+                        print("Avatar from UserDefaults: \(UserSessionManager.shared.avatar?.prefix(50) ?? "nil")")
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         print("Error fetching profile: \(error.localizedDescription)")
+                        if let base64String = UserSessionManager.shared.avatar, let imageData = Data(base64Encoded: base64String) {
+                            self?.profileImageView.image = UIImage(data: imageData)
+                            print("Loaded avatar from UserDefaults after error")
+                        } else {
+                            self?.profileImageView.image = UIImage(named: "Default_image")
+                            print("No avatar found, using default after error")
+                        }
                     }
                 }
             }
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        nameLabel.text = userSessionManager.name
-        emailLabel.text = userSessionManager.email
-        
-        // Load the profile image from UserDefaults
-        if let base64String = UserSessionManager.shared.avatar, let imageData = Data(base64Encoded: base64String) {
-            print("Loaded image data from UserDefaults")
-            profileImageView.image = UIImage(data: imageData)
         } else {
-            profileImageView.image = UIImage(named: "default_profile_image")
+            print("No token available, cannot fetch profile")
         }
     }
     
@@ -87,7 +100,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         view.addSubview(profileLabel)
         
         profileImageView = UIImageView()
-        profileImageView.image = UIImage(named: "profile")
         profileImageView.layer.cornerRadius = 50
         profileImageView.clipsToBounds = true
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,9 +150,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             
             // Convert the image to data and send it to update the profile
             if let imageData = selectedImage.jpegData(compressionQuality: 0.5) {
-                // Save the image data to UserDefaults
-                let base64String = imageData.base64EncodedString()
-                UserSessionManager.shared.avatar = base64String
                 updateProfileWithImage(imageData)
             }
             else {
@@ -151,13 +160,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func loadImage(from url: URL) {
-        profileImageView.sd_setImage(with: url) { [weak self] (image, error, cacheType, url) in
+        profileImageView.sd_setImage(with: url, placeholderImage: self.profileImageView.image) { [weak self] (image, error, cacheType, url) in
             guard let self = self else { return }
-            
             if let image = image {
                 self.profileImageView.image = image
+                print("Image loaded successfully from URL")
             } else if let error = error {
-                print("Error loading image: \(error.localizedDescription)")
+                print("Error loading image from URL: \(error.localizedDescription)")
             }
         }
     }
@@ -180,6 +189,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileUpdateViewModel.updateProfile(name: name, email: email, avatar: imageData, password: password, password_confirmation: password_confirmation, token: token) { result in
             switch result {
             case .success(let data):
+                let base64String = imageData.base64EncodedString()
+                
+                self.userSessionManager.avatar = base64String
+                
+                DispatchQueue.main.async {
+                    self.profileImageView.image = UIImage(data: imageData)
+                    self.fetchProfileData()
+                }
+                
+                print("Profile updated successfully and avatar saved locally.")
+                
                 if let data = data, let responseString = String(data: data, encoding: .utf8) {
                     print("Profile updated successfully with response: \(responseString)")
                 } else {

@@ -128,7 +128,7 @@ class CourseContentTableViewCell: UITableViewCell {
         
     }
     
-    func configure(with viewModel: CourseContentViewModel, indexPath: IndexPath) {
+    func configure(with viewModel: CourseOverviewViewModel, indexPath: IndexPath) {
         guard let lesson = viewModel.getLesson(at: indexPath) else {
             return
         }

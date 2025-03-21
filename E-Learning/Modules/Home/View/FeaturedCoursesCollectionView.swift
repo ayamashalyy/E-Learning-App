@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FeaturedCoursesCollectionViewDelegate: AnyObject {
-    func didSelectCourse(courseSlug: String)
+    func didSelectCourse(courseSlug: String, isEnroll: Bool)
 }
 
 
@@ -96,8 +96,9 @@ extension FeaturedCoursesCollectionView: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let courseSlug = viewModel.getCourse(at: indexPath.item)?.slug {
-            delegate?.didSelectCourse(courseSlug: courseSlug)
+        if let course = viewModel.getCourse(at: indexPath.item) {
+            print("Course isEnroll value in didSelectItemAt: \(course.isEnroll ?? false)")
+            delegate?.didSelectCourse(courseSlug: course.slug, isEnroll: course.isEnroll ?? false)
         }
     }
 }

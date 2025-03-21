@@ -31,7 +31,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     // MARK: - Lifecycle
     
     init() {
-        super.init(collectionViewLayout: RTLCollectionFlow())
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +43,13 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         view.backgroundColor = .white
         registerNibFiles()
         fetchHomeData()
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset = UIEdgeInsets.zero
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
+            layout.estimatedItemSize = .zero
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +108,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 1:
             let continueCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath) as! ProgressContinueCollectionViewCell
+            print("Continue Cell Frame: \(continueCell.frame)")
             continueCell.selectedBackgroundView = .none
             return continueCell
             
@@ -133,6 +141,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
+            cell.delegate = self
             if homeViewModel.isLoading {
                 cell.showLoadingIndicator()
             } else {
@@ -140,7 +149,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
                 let featuredCourses = homeViewModel.getFeaturedCourseViewModels()
                 cell.viewModel.updateCourses(featuredCourses)
             }
-            cell.delegate = self
             return cell
             
             
@@ -152,6 +160,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 7:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
+            cell.delegate = self
             if homeViewModel.isLoading {
                 cell.showLoadingIndicator()
             } else {
@@ -159,7 +168,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
                 let mostPopular = homeViewModel.getMostCourseViewModels()
                 cell.viewModel.updateCourses(mostPopular)
             }
-            cell.delegate = self
             return cell
             
             
@@ -171,6 +179,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 9:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
+            cell.delegate = self
             if homeViewModel.isLoading {
                 cell.showLoadingIndicator()
             } else {
@@ -178,7 +187,6 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
                 let latestCourses = homeViewModel.getLatestCourseViewModels()
                 cell.viewModel.updateCourses(latestCourses)
             }
-            cell.delegate = self
             return cell
             
         default:
@@ -193,7 +201,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         case 0:
             return CGSize(width: collectionView.frame.width , height: 80)
         case 1:
-            return CGSize(width: collectionView.frame.width , height: 190)
+            return CGSize(width: collectionView.frame.width - 32, height: 176)
         case 2 , 4 , 6 , 8:
             return CGSize(width: collectionView.frame.width - 20, height: 40)
         case 3:
@@ -211,12 +219,54 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     
     // MARK: - Delegate Methods
     
-    func didSelectCourse(courseSlug: String) {
-        let nextViewController = CourseOverviewViewController()
-        nextViewController.courseSlug = courseSlug
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+    func didSelectCourse(courseSlug: String, isEnroll: Bool) {
+        
+        guard let token = userSessionManager.token else {
+            print("Token is nil")
+            return
+        }
+        let courseOverviewViewModel = CourseOverviewViewModel()
+        
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.center = view.center
+        loadingIndicator.startAnimating()
+        view.addSubview(loadingIndicator)
+        
+        courseOverviewViewModel.fetchCourseData(courseSlug: courseSlug, token: token)
+        courseOverviewViewModel.onDataFetched = { [weak self] in
+            DispatchQueue.main.async {
+                loadingIndicator.stopAnimating()
+                loadingIndicator.removeFromSuperview()
+                
+            }
+            
+            if let course = courseOverviewViewModel.getCourse() {
+                let isEnrolled = course.isEnroll ?? false
+                print("isEnroll value from CourseOverviewViewModel: \(isEnrolled)")
+                
+                if isEnrolled {
+                    print("User is enrolled, navigating to CourseViewController")
+                    let nextViewController = CourseViewController()
+                    nextViewController.courseSlug = courseSlug
+                    nextViewController.courseIsEnroll = isEnrolled
+                    nextViewController.viewModel = courseOverviewViewModel
+                    let navigationController = UINavigationController(rootViewController: nextViewController)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true, completion: nil)
+                } else {
+                    print("User is not enrolled, navigating to CourseOverviewViewController")
+                    let nextViewController = CourseOverviewViewController()
+                    nextViewController.courseSlug = courseSlug
+                    nextViewController.courseIsEnroll = isEnrolled
+                    nextViewController.viewModel = courseOverviewViewModel
+                    let navigationController = UINavigationController(rootViewController: nextViewController)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true, completion: nil)
+                }
+            } else {
+                print("Failed to fetch course data")
+            }
+        }
     }
     
     func didSelectCourseCategories(_ categoryId: Int) {
@@ -287,15 +337,3 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         }
     }
 }
-
-
-/*
- 
- let storyboard = UIStoryboard(name: "Main", bundle: nil)
- if let nextViewController = storyboard.instantiateViewController(withIdentifier: "CourseViewController") as? CourseViewController {
- //nextViewController.courseTitle = course
- let navigationController = UINavigationController(rootViewController: nextViewController)
- navigationController.modalPresentationStyle = .fullScreen
- present(navigationController, animated: true, completion: nil)
- 
- */
