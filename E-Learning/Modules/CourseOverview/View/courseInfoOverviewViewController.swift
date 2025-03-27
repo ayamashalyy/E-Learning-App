@@ -97,12 +97,19 @@ class courseInfoOverviewViewController: UIViewController, sendData {
         lessonsCountLabel.text = viewModel?.getLessonsCount()
         quizzesLabel.text = viewModel?.hasQuiz() ?? false ? "Quizzes Available".localized : "No Quizzes"
         certificateLabel.text = (course.certificate != nil) ? "Certificate of completion".localized : "No certificate"
-        instructorNameLabel.text = viewModel?.getInstructorName()
-        instructorTitleLabel.text = viewModel?.getInstructorTitle()
-        instructorDescriptionLabel.text = viewModel?.getInstructorBio()
-        instructorProfileImageView.sd_setImage(
-            with: viewModel?.getInstructorImageURL(),
-            placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+        
+        if let instructor = course.instructor, !instructor.name.isEmpty {
+            instractorView.isHidden = false
+            instructorNameLabel.text = viewModel?.getInstructorName()
+            instructorTitleLabel.text = viewModel?.getInstructorTitle()
+            instructorDescriptionLabel.text = viewModel?.getInstructorBio()
+            instructorProfileImageView.sd_setImage(
+                with: viewModel?.getInstructorImageURL(),
+                placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+        } else {
+            instractorView.isHidden = true
+            print("No instructor data available, hiding instructorView")
+        }
     }
     
     
@@ -124,7 +131,7 @@ class courseInfoOverviewViewController: UIViewController, sendData {
     private func courseEnrollment() {
         enrollmentViewModel.onEnrollmentSuccess = { [weak self] message, isEnroll in
             DispatchQueue.main.async {
-                self?.showSuccessAlert(message: message)
+                self?.showSuccessAlert(message: message) { }
                 if isEnroll {
                     self?.applyButton.setTitle("Cancel ".localized, for: .normal)
                     self?.applyButton.backgroundColor = .red
@@ -141,7 +148,7 @@ class courseInfoOverviewViewController: UIViewController, sendData {
         
         enrollmentViewModel.onEnrollmentFailure = { [weak self] errorMessage in
             DispatchQueue.main.async {
-                self?.showErrorAlert(message: errorMessage)
+                self?.showErrorAlert(message: errorMessage) { }
                 self?.updateApplyButtonState()
             }
         }
@@ -253,6 +260,7 @@ class courseInfoOverviewViewController: UIViewController, sendData {
         
         quizzesLabel.text = "Quizzes".localized
         quizzesLabel.textColor = tenantViewModel.primaryColor
+        quizzesLabel.numberOfLines = 0
         quizzesLabel.font = UIFont(name: "Roboto-Regular", size: 14)
         quizzesLabel.translatesAutoresizingMaskIntoConstraints = false
         button2.addSubview(imageView2)
@@ -272,7 +280,7 @@ class courseInfoOverviewViewController: UIViewController, sendData {
             imageView2.heightAnchor.constraint(equalToConstant: 20),
             
             quizzesLabel.topAnchor.constraint(equalTo: imageView2.bottomAnchor, constant: 8),
-            quizzesLabel.leadingAnchor.constraint(equalTo: button2.leadingAnchor, constant: 40),
+            quizzesLabel.leadingAnchor.constraint(equalTo: button2.leadingAnchor, constant: 30),
             quizzesLabel.trailingAnchor.constraint(equalTo: button2.trailingAnchor),
         ])
         
@@ -305,7 +313,7 @@ class courseInfoOverviewViewController: UIViewController, sendData {
             imageView3.heightAnchor.constraint(equalToConstant: 20),
             
             certificateLabel.topAnchor.constraint(equalTo: imageView3.bottomAnchor, constant: 5),
-            certificateLabel.leadingAnchor.constraint(equalTo: button3.leadingAnchor, constant: 20),
+            certificateLabel.leadingAnchor.constraint(equalTo: button3.leadingAnchor, constant: 30),
             certificateLabel.trailingAnchor.constraint(equalTo: button3.trailingAnchor),
         ])
         
@@ -329,6 +337,7 @@ class courseInfoOverviewViewController: UIViewController, sendData {
         instractorView.layer.shadowOpacity = 0.3
         instractorView.layer.shadowOffset = CGSize(width: 0, height: 5)
         instractorView.layer.shadowRadius = 8
+        instractorView.isHidden = true
         view.addSubview(instractorView)
         
         instructorProfileImageView.contentMode = .scaleAspectFill

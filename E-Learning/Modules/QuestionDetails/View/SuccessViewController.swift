@@ -40,7 +40,7 @@ class SuccessViewController: UIViewController {
         
         let viewImage = UIView()
         viewImage.translatesAutoresizingMaskIntoConstraints = false
-        viewImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        viewImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         stackView.addArrangedSubview(viewImage)
         
         imageGrowth = UIImageView()
@@ -52,8 +52,8 @@ class SuccessViewController: UIViewController {
         NSLayoutConstraint.activate([
             imageGrowth.centerXAnchor.constraint(equalTo: viewImage.centerXAnchor),
             imageGrowth.centerYAnchor.constraint(equalTo: viewImage.centerYAnchor),
-            imageGrowth.widthAnchor.constraint(equalTo: viewImage.widthAnchor, multiplier: 0.7),
-            imageGrowth.heightAnchor.constraint(equalTo: viewImage.heightAnchor, multiplier: 0.9)
+            imageGrowth.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            imageGrowth.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         scoreNum = UILabel()
@@ -112,14 +112,12 @@ class SuccessViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
             continueButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             //            reviewButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 15),
             //            reviewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             //            reviewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            continueButton.widthAnchor.constraint(equalToConstant: 340),
             continueButton.heightAnchor.constraint(equalToConstant: 50),
             //            reviewButton.widthAnchor.constraint(equalToConstant: 340),
             //            reviewButton.heightAnchor.constraint(equalToConstant: 50)

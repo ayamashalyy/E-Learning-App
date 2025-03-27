@@ -16,7 +16,7 @@ struct Course: Decodable {
     let image: String
     let slug: String
     let description: String
-    let category: CourseCategory
+    let category: CourseCategory?
     let instructor: Instructor?
     let sections: [SectionCourses]?
     let comments: [Comment]?

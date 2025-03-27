@@ -8,7 +8,7 @@
 import Foundation
 
 struct HomeResponse: Decodable {
-    let lastCourseWatched: String?
+    let lastCourseWatched: Course?
     let categories: [CourseCategory]
     let instructors: [Instructor]
     let mostPopular: [Course]?

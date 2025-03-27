@@ -9,21 +9,6 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var dataSourace: [QuestionModel] = [
-        .init(title: "Question 1 / 4", questionDatasModel: .init(id: "1", questionText: "1 - How is the waterfall method different", answers: [.init(id: "1", text: "Comprehensive documentation"),
-                                                                                                                                               .init(id: "2", text: "Comprehensive documentation"),
-                                                                                                                                               .init(id: "3", text: "Comprehensive documentation"),.init(id: "4", text: "Comprehensive documentation")], type: .singleChoice)),
-        
-            .init(title: "Question 2 / 4", questionDatasModel: .init(id: "2", questionText: "2 - How is the waterfall method different", answers: [.init(id: "1", text: "True"),
-                                                                                                                                                   .init(id: "2", text: "False")], type: .trueFalse)),
-        
-            .init(title: "Question 3 / 4", questionDatasModel: .init(id: "3", questionText: "3 - How is the waterfall method different", answers: [.init(id: "1", text: "Comprehensive documentation"),
-                                                                                                                                                   .init(id: "2", text: "Comprehensive documentation"),.init(id: "3", text: "Comprehensive documentation"),.init(id: "4",text: "Comprehensive documentation")], type: .multipleChoice)),
-        
-            .init(title: "Question 4 / 4", questionDatasModel: .init(id: "4", questionText: "4 - How is the waterfall method different", answers: [.init(id: "1", text: "Choose 1"),
-                                                                                                                                                   .init(id: "2", text: "Answer 1"),.init(id: "3", text: "Choose 2"),.init(id: "4", text: "Answer 2"),.init(id: "5", text: "Choose 3"),.init(id: "6", text: "Answer 4"),.init(id: "7", text: "Choose 4"),.init(id: "8", text: "Answer 5")], type: .matching)),
-    ]
-    
     private var subVC: [QuestionVC] = []
     var nextButton: UIButton!
     var previousButton: UIButton!
@@ -31,10 +16,13 @@ class PageViewController: UIPageViewController {
     var titleLabel: UILabel!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
+    var viewModel: CourseOverviewViewModel?
+    private var quizViewModel = QuizViewModel()
+    var onQuizCompleted: ((Bool) -> Void)?
     
-    private var score: Int = 100
-    
-    init() {
+    init(viewModel: CourseOverviewViewModel?, quizViewModel: QuizViewModel) {
+        self.viewModel = viewModel
+        self.quizViewModel = quizViewModel
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
     
@@ -46,7 +34,9 @@ class PageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.title = "Lesson1 Quiz".localized
+        let quizTitle = quizViewModel.getQuizTitle() ?? "Lesson Quiz".localized
+        print("PageViewController loaded with Quiz Title: \(quizTitle)")
+        self.title = quizTitle
         backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         
         if let backButtonImage = backButtonImage {
@@ -55,14 +45,7 @@ class PageViewController: UIPageViewController {
             self.navigationItem.leftBarButtonItem = backButton
         }
         
-        var vcs = [QuestionVC]()
-        
-        for data in dataSourace {
-            let vc = QuestionVC()
-            vc.question = data.questionDatasModel
-            vcs.append(vc)
-        }
-        self.subVC = vcs
+        setupSubViewControllers()
         setupPageController()
         setupButtonsUI()
         updateButtonStates()
@@ -71,6 +54,24 @@ class PageViewController: UIPageViewController {
     
     @objc func backButtonTapped() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func setupSubViewControllers() {
+        guard let quizResponse = quizViewModel.quizCourse,
+              let questions = quizResponse.data?.questions else {
+            print("No quiz response or questions found")
+            return
+        }
+        print("Found \(questions.count) questions for the quiz")
+        
+        var vcs = [QuestionVC]()
+        for (index, _) in questions.enumerated() {
+            let vc = QuestionVC()
+            vc.quizViewModel = quizViewModel
+            vc.questionIndex = index
+            vcs.append(vc)
+        }
+        self.subVC = vcs
     }
     
     func setupButtonsUI() {
@@ -149,10 +150,9 @@ class PageViewController: UIPageViewController {
 
 extension PageViewController {
     @objc private func nextButtonPressed() {
-        guard let currentViewController = self.viewControllers?.first as? QuestionVC,
-              let currentQuestion = currentViewController.question else { return }
+        guard let currentViewController = self.viewControllers?.first as? QuestionVC else { return }
         
-        let isAnswerSelected = currentQuestion.answers.contains { $0.isSelected }
+        let isAnswerSelected = currentViewController.quizViewModel?.getQuizQuestions()?[currentViewController.questionIndex].type.lowercased() == "matching" || !currentViewController.selectedAnswers.isEmpty
         
         if isAnswerSelected {
             goToNextPage()
@@ -178,7 +178,9 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     private func setupPageController() {
         self.delegate = self
         self.dataSource = self
-        self.setViewControllers([self.subVC[0]], direction: .forward, animated: true, completion: nil)
+        if !subVC.isEmpty {
+            self.setViewControllers([self.subVC[0]], direction: .forward, animated: true, completion: nil)
+        }
     }
     
     func updateButtonStates() {
@@ -189,7 +191,12 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         nextButton.isHidden = false
         imageView.isHidden = currentIndex > 0 && currentIndex < subVC.count
         
-        titleLabel.text = dataSourace[currentIndex].title
+        // Use viewModel to get the current question title
+        if currentViewController.quizViewModel?.getQuizQuestions()?[currentIndex] != nil {
+            titleLabel.text = "Question \(currentIndex + 1) / \(subVC.count)"
+        } else {
+            titleLabel.text = "Question \(currentIndex + 1) / \(subVC.count)"
+        }
         
         if currentIndex == subVC.count - 1 {
             nextButton.setTitle("Show Results".localized, for: .normal)
@@ -203,28 +210,60 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     }
     
     @objc private func showResults() {
-        guard let currentViewController = self.viewControllers?.first as? QuestionVC,
-              let currentQuestion = currentViewController.question else { return }
+        guard let currentViewController = self.viewControllers?.first as? QuestionVC else { return }
         
-        let isAnswerSelected = currentQuestion.answers.contains { $0.isSelected }
+        let isAnswerSelected = currentViewController.quizViewModel?.getQuizQuestions()?[currentViewController.questionIndex].type.lowercased() == "matching" || !currentViewController.selectedAnswers.isEmpty
         
         if isAnswerSelected {
-            if score > 85 {
-                let successViewController = SuccessViewController()
-                successViewController.modalPresentationStyle = .fullScreen
-                successViewController.score = score
-                present(successViewController, animated: true, completion: nil)
-            } else {
-                let failureViewController = FailureViewController()
-                failureViewController.modalPresentationStyle = .fullScreen
-                failureViewController.score = score
-                present(failureViewController, animated: true, completion: nil)
+            var answers: [[String: Any]] = []
+            for vc in subVC {
+                if let answer = vc.getAnswer() {
+                    answers.append(answer)
+                }
             }
+            
+            let courseSlug = viewModel?.getCourse()?.slug ?? ""
+            let quizId = quizViewModel.quizCourse?.data?.id ?? 1
+            let token = UserSessionManager.shared.token ?? ""
+            let isEnroll = viewModel?.isCourseEnrolled() ?? false
+            let isRequest = viewModel?.getCourseRequestStatus() ?? "UNKNOWN"
+            
+            print("isEnroll: \(isEnroll), isRequest: \(isRequest)")
+            print("Submitting quiz with courseSlug: \(courseSlug), quizId: \(quizId), Answers: \(answers)")
+            
+            quizViewModel.onQuizSubmitted = { [weak self] in
+                guard let self = self else {
+                    print("Self is nil in onQuizSubmitted")
+                    return
+                }
+                print("onQuizSubmitted called")
+                let isPassed = self.quizViewModel.isQuizPassed()
+                let score = self.quizViewModel.getQuizScore() ?? 0.0
+                print("isPassed: \(isPassed), Score: \(score)")
+                self.onQuizCompleted?(isPassed)
+                if isPassed {
+                    self.showSuccessAlert(message: "Quiz submitted successfully! Your score is \(Int(score))%.") {
+                        let successViewController = SuccessViewController()
+                        successViewController.modalPresentationStyle = .fullScreen
+                        successViewController.score = Int(score)
+                        self.present(successViewController, animated: true, completion: nil)
+                    }
+                } else {
+                    self.showErrorAlert(message: "Quiz failed. Your score is \(Int(score))%, required: \(self.quizViewModel.getPassPercentage() ?? 0)%.") {
+                        let failureViewController = FailureViewController()
+                        failureViewController.modalPresentationStyle = .fullScreen
+                        failureViewController.score = Int(score)
+                        self.present(failureViewController, animated: true, completion: nil)
+                    }
+                }
+            }
+            
+            quizViewModel.submitQuiz(courseSlug: courseSlug, quizId: quizId, answers: answers, token: token)
+            
         } else {
             showAlert(message: "Please select an answer before proceeding to the results.".localized)
         }
     }
-    
     
     func goToNextPage(animated: Bool = true) {
         guard let currentViewController = self.viewControllers?.first else { return }

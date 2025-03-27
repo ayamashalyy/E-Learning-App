@@ -43,12 +43,35 @@ class ProgressContinueCollectionViewCell: UICollectionViewCell {
         innerView.layer.borderColor = UIColor.lightGray.cgColor
         innerView.layer.borderWidth = 0.5
         
-        print("OuterView Frame after constraints: \(outerView.frame)")
-        print("InnerView Frame: \(innerView.frame)")
-        
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
+    }
+    
+    func configure(with viewModel: ProgressContinueViewModel) {
+        
+        if viewModel.course != nil {
+            titleCourse.text = viewModel.getCourseTitle()
+            constratorNameCourse.text = viewModel.getInstructorName()
+            courseProgressRaico.text = viewModel.getProgressPercentageString()
+            courseProgress.progress = viewModel.getProgressFloat()
+            
+            if let imageUrl = viewModel.getImageUrl() {
+                courseImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder")) { (image, error, cacheType, url) in
+                    if let error = error {
+                        print("Error loading image: \(error.localizedDescription)")
+                    }
+                }
+            } else {
+                courseImage.image = UIImage(named: "placeholder")
+            }
+            
+            // Show the cell
+            self.isHidden = false
+        } else {
+            // Hide the cell if there's no course
+            self.isHidden = true
+        }
     }
     
     @IBAction func arrow(_ sender: UIButton) {

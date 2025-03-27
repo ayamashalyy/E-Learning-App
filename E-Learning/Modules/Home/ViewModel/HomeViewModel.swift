@@ -71,4 +71,15 @@ class HomeViewModel {
     func getCourseCategoriesViewModels() -> [CourseCategory] {
         return courseCategories
     }
+    
+    func getLastCourseWatched() -> Course? {
+        return homeData?.lastCourseWatched
+    }
+    
+    func getLastCourseWatchedViewModel() -> ProgressContinueViewModel? {
+           guard let lastCourse = getLastCourseWatched() else {
+               return nil
+           }
+           return ProgressContinueViewModel(course: lastCourse)
+       }
 }

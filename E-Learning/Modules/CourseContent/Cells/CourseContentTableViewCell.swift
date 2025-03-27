@@ -129,29 +129,28 @@ class CourseContentTableViewCell: UITableViewCell {
     }
     
     func configure(with viewModel: CourseOverviewViewModel, indexPath: IndexPath) {
-        guard let lesson = viewModel.getLesson(at: indexPath) else {
-            return
-        }
+        guard let lesson = viewModel.getLesson(at: indexPath) else { return }
+        
         numberLabel.text = String(format: "%02d", indexPath.row + 1)
-        numberLabel.backgroundColor = lesson.isCompleted ?? false ? tenantViewModel.primaryColor : .white
-        numberLabel.textColor = lesson.isCompleted ?? false ? .white : UIColor(named: "onboradColor")
+        numberLabel.backgroundColor = lesson.isChecked ?? false ? tenantViewModel.primaryColor : .white
+        numberLabel.textColor = lesson.isChecked ?? false ? .white : UIColor(named: "onboradColor")
         
         titleLabel.text = lesson.title
-        titleLabel.textColor = lesson.isCompleted ?? false ? .black : UIColor(named: "policy2")
+        titleLabel.textColor = lesson.isChecked ?? false ? .black : UIColor(named: "policy2")
         
         durationLabel.text = viewModel.formatDuration(lesson.duration)
-        durationLabel.textColor = lesson.isCompleted ?? false ? .black : UIColor(named: "policy2")
+        durationLabel.textColor = lesson.isChecked ?? false ? .black : UIColor(named: "policy2")
         
         typeLabel.text = lesson.type
-        typeLabel.textColor = lesson.isCompleted ?? false ? .black : UIColor(named: "policy2")
+        typeLabel.textColor = lesson.isChecked ?? false ? .black : UIColor(named: "policy2")
         
-        completedIcon.image = lesson.isCompleted ?? false ? UIImage(named: "Vector (1)") : nil
+        completedIcon.image = lesson.isChecked ?? false ? UIImage(named: "Vector (1)") : nil
         
-        innerDurationLabel.backgroundColor = lesson.isCompleted ?? false ? UIColor(named: "myLearning") : .white
-        innerTypeLabel.backgroundColor = lesson.isCompleted ?? false ? UIColor(named: "myLearning") : .white
-        outerView.backgroundColor = lesson.isCompleted ?? false ? .white : UIColor(named: "myLearning")
+        innerDurationLabel.backgroundColor = lesson.isChecked ?? false ? UIColor(named: "myLearning") : .white
+        innerTypeLabel.backgroundColor = lesson.isChecked ?? false ? UIColor(named: "myLearning") : .white
+        outerView.backgroundColor = lesson.isChecked ?? false ? .white : UIColor(named: "myLearning")
         
-        outerView.layer.cornerRadius = 35
+        outerView.layer.cornerRadius = 30
         outerView.layer.borderWidth = 1.0
         outerView.layer.borderColor = UIColor(named: "border")?.cgColor ?? UIColor.lightGray.cgColor
         outerView.layer.shadowColor = UIColor.black.cgColor

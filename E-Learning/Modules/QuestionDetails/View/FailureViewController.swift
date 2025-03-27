@@ -30,7 +30,6 @@ class FailureViewController: UIViewController {
     }
     
     func setupUI() {
-        
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .fill
@@ -39,7 +38,7 @@ class FailureViewController: UIViewController {
         
         let viewImage = UIView()
         viewImage.translatesAutoresizingMaskIntoConstraints = false
-        viewImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        viewImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         stackView.addArrangedSubview(viewImage)
         
         failureImage = UIImageView()
@@ -51,8 +50,8 @@ class FailureViewController: UIViewController {
         NSLayoutConstraint.activate([
             failureImage.centerXAnchor.constraint(equalTo: viewImage.centerXAnchor),
             failureImage.centerYAnchor.constraint(equalTo: viewImage.centerYAnchor),
-            failureImage.widthAnchor.constraint(equalTo: viewImage.widthAnchor, multiplier: 0.6),
-            failureImage.heightAnchor.constraint(equalTo: viewImage.heightAnchor, multiplier: 0.9)
+            failureImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            failureImage.heightAnchor.constraint(equalToConstant: 150)
         ])
         
         scoreNum = UILabel()
@@ -92,33 +91,25 @@ class FailureViewController: UIViewController {
         tryAgainButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tryAgainButton)
         tryAgainButton.addTarget(self, action: #selector(tryAgainButtonTapped), for: .touchUpInside)
-        
-        
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
-            
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350),
             tryAgainButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             tryAgainButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             tryAgainButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             tryAgainButton.heightAnchor.constraint(equalToConstant: 50),
-            
         ])
-        
     }
     
     @objc func tryAgainButtonTapped() {
         print("Try Again")
-        
-        let nextController = PageViewController()
-        let navigationController = UINavigationController(rootViewController: nextController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+        // let nextController = PageViewController()
+        // let navigationController = UINavigationController(rootViewController: nextController)
+        // navigationController.modalPresentationStyle = .fullScreen
+        // present(navigationController, animated: true)
     }
 }

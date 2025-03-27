@@ -11,6 +11,7 @@ class CourseOverviewViewModel {
     private var apiService = APIService()
     private var course: Course?
     var onDataFetched: (() -> Void)?
+    private var selectedLesson: Lesson?
     
     func fetchCourseData(courseSlug: String, token: String) {
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
@@ -115,5 +116,15 @@ class CourseOverviewViewModel {
     
     func getComments() -> [Comment] {
         return course?.comments as? [Comment] ?? []
+    }
+    
+    func setSelectedLesson(_ lesson: Lesson) {
+        self.selectedLesson = lesson
+        print("Selected lesson set to: \(lesson.title)")
+    }
+    
+    func getSelectedLesson() -> Lesson? {
+        print("Returning selected lesson: \(selectedLesson?.title ?? "nil")")
+        return selectedLesson
     }
 }

@@ -78,12 +78,19 @@ class CourseInfoViewController: UIViewController, sendData {
         lessonsCountLabel.text = viewModel?.getLessonsCount()
         quizzesLabel.text = viewModel?.hasQuiz() ?? false ? "Quizzes Available".localized : "No Quizzes"
         certificateLabel.text = (course.certificate != nil) ? "Certificate of completion".localized : "No certificate"
-        instructorNameLabel.text = viewModel?.getInstructorName()
-        instructorTitleLabel.text = viewModel?.getInstructorTitle()
-        instructorDescriptionLabel.text = viewModel?.getInstructorBio()
-        instructorProfileImageView.sd_setImage(
-            with: viewModel?.getInstructorImageURL(),
-            placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+        
+        if let instructor = course.instructor, !instructor.name.isEmpty {
+            instractorView.isHidden = false
+            instructorNameLabel.text = viewModel?.getInstructorName()
+            instructorTitleLabel.text = viewModel?.getInstructorTitle()
+            instructorDescriptionLabel.text = viewModel?.getInstructorBio()
+            instructorProfileImageView.sd_setImage(
+                with: viewModel?.getInstructorImageURL(),
+                placeholderImage: UIImage(named: "profile_placeholder")?.imageFlippedForRightToLeftLayoutDirection())
+        } else {
+            instractorView.isHidden = true
+            print("No instructor data available, hiding instructorView")
+        }
     }
     
     private func setupUI() {
@@ -256,6 +263,7 @@ class CourseInfoViewController: UIViewController, sendData {
         instractorView.layer.shadowOpacity = 0.3
         instractorView.layer.shadowOffset = CGSize(width: 0, height: 5)
         instractorView.layer.shadowRadius = 8
+        instractorView.isHidden = true
         view.addSubview(instractorView)
         
         instructorProfileImageView.contentMode = .scaleAspectFill
@@ -338,7 +346,7 @@ class CourseInfoViewController: UIViewController, sendData {
             instractorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             instractorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
             instractorView.heightAnchor.constraint(equalToConstant: 200),
-            instractorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
+            // instractorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ])
         
     }

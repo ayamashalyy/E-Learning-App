@@ -20,12 +20,13 @@ class MatchingCell: UICollectionViewCell {
         
         outerView.layer.borderWidth = 1
         outerView.layer.borderColor = UIColor.lightGray.cgColor
-        outerView.layer.cornerRadius = 5
+        outerView.layer.cornerRadius = 8
+        outerView.layer.masksToBounds = true
     }
     
     func configure(optionText: String, isSelected: Bool) {
         optionLabel.text = optionText
-        outerView.layer.borderColor = isSelected ? tenantViewModel.primaryColor?.cgColor: UIColor.lightGray.cgColor
-        optionLabel.textColor = isSelected ? UIColor.black : UIColor(named: "policy")
+        outerView.layer.borderColor =  UIColor.lightGray.cgColor
+        optionLabel.textColor = UIColor(named: "policy")
     }
 }

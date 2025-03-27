@@ -20,7 +20,7 @@ class MyLearningCellViewModel {
         self.courseTitle = course.title
         self.courseImage = course.image
         self.instructorName = course.instructor?.name ?? "Unknown Instructor"
-        self.courseTitleCategory = course.category.name
+        self.courseTitleCategory = course.category?.name ?? ""
         self.courseProgress = course.progress ?? 0
         self.state = state
     }

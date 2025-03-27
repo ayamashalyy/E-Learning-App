@@ -20,7 +20,7 @@ extension TotalResultsBeforeFilterViewController: UITableViewDataSource, UITable
         }
         let course = viewModel.searchResults[indexPath.row]
         
-        cell.totalResultSearchCategory.text = course.category.name
+        cell.totalResultSearchCategory.text = course.category?.name
         cell.totalResultSearchNameCourse.text = course.title
         cell.totalResultSearchConstractorName.text = course.instructor?.name
         if let imageUrl = URL(string: course.image) {

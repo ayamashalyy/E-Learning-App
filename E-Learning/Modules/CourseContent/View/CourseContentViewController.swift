@@ -10,6 +10,8 @@ import UIKit
 class CourseContentViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, sendData   {
     
     private var viewModel: CourseOverviewViewModel?
+    private var progressViewModel = ProgressCourseViewModel()
+    var onProgressUpdated: (() -> Void)?
     
     var tableView = UITableView()
     private let noDataImageView: UIImageView = {
@@ -112,7 +114,7 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        return 80
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -125,10 +127,93 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
         return 40
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextViewController = PageViewController()
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+    private func updateProgressAndFetchData(courseSlug: String, token: String) {
+        progressViewModel.onProgressUpdated = { [weak self] message in
+            print("Progress updated: \(message ?? "Unknown")")
+            guard let self = self else { return }
+            
+            self.viewModel?.onDataFetched = { [weak self] in
+                DispatchQueue.main.async {
+                    if let lessons = self?.viewModel?.getSections().flatMap({ $0.lessons ?? [] }) {
+                        for lesson in lessons {
+                            print("Lesson: \(lesson.title), isChecked: \(lesson.isChecked ?? false)")
+                        }
+                    }
+                    self?.tableView.reloadData()
+                }
+            }
+            self.viewModel?.fetchCourseData(courseSlug: courseSlug, token: token)
+        }
+        
+        progressViewModel.onHomeDataRefreshNeeded = { [weak self] in
+            guard let self = self else { return }
+            HomeViewModel.shared.fetchHomeData(token: token)
+            if let homeVC = self.navigationController?.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController {
+                homeVC.fetchHomeData()
+            }
+        }
     }
-}
+            
+            func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                guard let viewModel = viewModel, let lesson = viewModel.getLesson(at: indexPath) else {
+                    print("ViewModel not found or Lesson")
+                    return
+                }
+                
+                print("Selected Lesson: \(lesson.title), Quiz: \(lesson.quiz?.title ?? "No Quiz")")
+                let lessonId = lesson.id
+                let courseSlug = viewModel.getCourse()?.slug ?? ""
+                let token = UserSessionManager.shared.token ?? ""
+                
+                viewModel.setSelectedLesson(lesson)
+                
+                if lesson.quiz != nil {
+                    let quizId = lesson.quiz?.id ?? 0
+                    let quizViewModel = QuizViewModel()
+                    
+                    quizViewModel.getQuiz(courseSlug: courseSlug, quizId: quizId, token: token) { [weak self] quizResponse, message, error in
+                        guard let self = self else { return }
+                        
+                        if let quizResponse = quizResponse {
+                            print("Quiz fetched successfully: \(quizResponse.data?.title ?? "No Title")")
+                            let nextViewController = PageViewController(viewModel: viewModel, quizViewModel: quizViewModel)
+                            nextViewController.onQuizCompleted = { [weak self] passed in
+                                guard let self = self else { return }
+                                if passed {
+                                    print("Quiz passed, updating progress")
+                                    self.progressViewModel.updateCourseProgress(courseSlug: courseSlug, lessonId: lessonId, token: token)
+                                    self.updateProgressAndFetchData(courseSlug: courseSlug, token: token)
+                                } else {
+                                    print("Quiz failed, progress not updated")
+                                }
+                            }
+                            
+                            let navigationController = UINavigationController(rootViewController: nextViewController)
+                            navigationController.modalPresentationStyle = .fullScreen
+                            self.present(navigationController, animated: true)
+                        } else if let message = message {
+                            print("Quiz message: \(message)")
+                            let alert = UIAlertController(title: "Quiz Completed", message: "You have already passed this quiz!", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                                self.progressViewModel.updateCourseProgress(courseSlug: courseSlug, lessonId: lessonId, token: token)
+                                self.updateProgressAndFetchData(courseSlug: courseSlug, token: token)
+                            })
+                            self.present(alert, animated: true)
+                        } else if let error = error {
+                            print("Failed to fetch quiz: \(error)")
+                            let alert = UIAlertController(title: "Error", message: "Failed to load quiz: \(error.localizedDescription)", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(alert, animated: true)
+                        }
+                    }
+                } else {
+                    print("No quiz, updating progress directly")
+                    progressViewModel.updateCourseProgress(courseSlug: courseSlug, lessonId: lessonId, token: token)
+                    updateProgressAndFetchData(courseSlug: courseSlug, token: token)
+                    
+                    if let courseVC = self.parent as? CourseViewController {
+                        courseVC.displayLesson()
+                    }
+                }
+            }
+        }

@@ -21,7 +21,12 @@ struct Lesson: Decodable {
     let type: String
     let content: String?
     let quiz: Quiz?
-    var isCompleted: Bool?
+    let isChecked: Bool?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, title, duration, type, content, quiz
+        case isChecked = "is_checked"
+    }
 }
 
 struct Quiz: Decodable {
@@ -29,7 +34,7 @@ struct Quiz: Decodable {
     let title: String
     let passPercentage: Int
     let questions: [QuestionCourses]
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title, questions
         case passPercentage = "pass_percentage"
@@ -44,4 +49,10 @@ struct QuestionCourses: Decodable {
     let options: [String]?
     let left: [String]?
     let right: [String]?
+}
+
+
+struct QuizResponse: Decodable {
+    let data: Quiz?
+    let message: String?
 }

@@ -68,6 +68,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         homeViewModel.onDataFetched = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
+                print("Home data updated, last course: \(self?.homeViewModel.getLastCourseWatched()?.title ?? "None")")
             }
         }
         
@@ -87,6 +88,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         collectionView.register(CoursesCategoriesSectionCell.self, forCellWithReuseIdentifier: CoursesCategoriesSectionCell.identifier)
         collectionView.register(FeaturedCoursesCollectionView.self, forCellWithReuseIdentifier: FeaturedCoursesCollectionView.identifier)
         collectionView.register(SectionHeaderView.self, forCellWithReuseIdentifier: SectionHeaderViewCell)
+        collectionView.register(NoCoursesCellCollectionViewCell.self, forCellWithReuseIdentifier: NoCoursesCellCollectionViewCell.identifier)
     }
     
     // MARK: - UICollectionViewDataSource
@@ -96,6 +98,9 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 1 {
+            return homeViewModel.getLastCourseWatched() != nil ? 1 : 0
+        }
         return 1
     }
     
@@ -108,7 +113,12 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             
         case 1:
             let continueCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier1, for: indexPath) as! ProgressContinueCollectionViewCell
-            print("Continue Cell Frame: \(continueCell.frame)")
+            if let lastCourseViewModel = homeViewModel.getLastCourseWatchedViewModel() {
+                continueCell.configure(with: lastCourseViewModel)
+                continueCell.isHidden = false
+            } else {
+                continueCell.isHidden = true
+            }
             continueCell.selectedBackgroundView = .none
             return continueCell
             
@@ -126,7 +136,8 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             } else {
                 cell.hideLoadingIndicator()
                 let courseCategories = homeViewModel.getCourseCategoriesViewModels()
-                cell.viewModel.updateCategories(courseCategories)
+                let limitedCourses = Array(courseCategories.prefix(5))
+                cell.viewModel.updateCategories(limitedCourses)
             }
             
             cell.delegate = self
@@ -140,6 +151,10 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return coursesTitleCell
             
         case 5:
+            if homeViewModel.getFeaturedCourseViewModels().isEmpty && !homeViewModel.isLoading {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCoursesCellCollectionViewCell.identifier, for: indexPath) as! NoCoursesCellCollectionViewCell
+                return cell
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.delegate = self
             if homeViewModel.isLoading {
@@ -147,7 +162,8 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             } else {
                 cell.hideLoadingIndicator()
                 let featuredCourses = homeViewModel.getFeaturedCourseViewModels()
-                cell.viewModel.updateCourses(featuredCourses)
+                let limitedCourses = Array(featuredCourses.prefix(5))
+                cell.viewModel.updateCourses(limitedCourses)
             }
             return cell
             
@@ -159,6 +175,10 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return coursesTitleCell
             
         case 7:
+            if homeViewModel.getMostCourseViewModels().isEmpty && !homeViewModel.isLoading {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCoursesCellCollectionViewCell.identifier, for: indexPath) as! NoCoursesCellCollectionViewCell
+                return cell
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.delegate = self
             if homeViewModel.isLoading {
@@ -178,6 +198,10 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
             return coursesTitleCell
             
         case 9:
+            if homeViewModel.getLatestCourseViewModels().isEmpty && !homeViewModel.isLoading {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoCoursesCellCollectionViewCell.identifier, for: indexPath) as! NoCoursesCellCollectionViewCell
+                return cell
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCoursesCollectionView.identifier, for: indexPath) as! FeaturedCoursesCollectionView
             cell.delegate = self
             if homeViewModel.isLoading {
@@ -199,19 +223,28 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.section {
         case 0:
-            return CGSize(width: collectionView.frame.width , height: 80)
+            return CGSize(width: collectionView.frame.width , height: 85)
         case 1:
-            return CGSize(width: collectionView.frame.width - 32, height: 176)
+            return homeViewModel.getLastCourseWatched() != nil ? CGSize(width: collectionView.frame.width - 32, height: 176) : .zero
         case 2 , 4 , 6 , 8:
             return CGSize(width: collectionView.frame.width - 20, height: 40)
         case 3:
             return CGSize(width: collectionView.frame.width , height: 60)
         case 5:
-            return CGSize(width: collectionView.frame.width , height: 200)
+            if homeViewModel.getFeaturedCourseViewModels().isEmpty && !homeViewModel.isLoading {
+                return CGSize(width: collectionView.frame.width, height: 100)
+            }
+            return CGSize(width: collectionView.frame.width, height: 200)
         case 7:
-            return CGSize(width: collectionView.frame.width , height: 200)
+            if homeViewModel.getMostCourseViewModels().isEmpty && !homeViewModel.isLoading {
+                return CGSize(width: collectionView.frame.width, height: 100)
+            }
+            return CGSize(width: collectionView.frame.width, height: 200)
         case 9:
-            return CGSize(width: collectionView.frame.width , height: 200)
+            if homeViewModel.getLatestCourseViewModels().isEmpty && !homeViewModel.isLoading {
+                return CGSize(width: collectionView.frame.width, height: 100)
+            }
+            return CGSize(width: collectionView.frame.width, height: 200)
         default:
             return .zero
         }
