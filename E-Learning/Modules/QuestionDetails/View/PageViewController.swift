@@ -137,7 +137,7 @@ class PageViewController: UIPageViewController {
             
             titleLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.heightAnchor.constraint(equalToConstant: 20),
             
             bigStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25),
@@ -244,16 +244,19 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
                 if isPassed {
                     self.showSuccessAlert(message: "Quiz submitted successfully! Your score is \(Int(score))%.") {
                         let successViewController = SuccessViewController()
-                        successViewController.modalPresentationStyle = .fullScreen
                         successViewController.score = Int(score)
-                        self.present(successViewController, animated: true, completion: nil)
+                        let navController = UINavigationController(rootViewController: successViewController)
+                        navController.modalPresentationStyle = .fullScreen
+                        self.present(navController, animated: true, completion: nil)
                     }
                 } else {
                     self.showErrorAlert(message: "Quiz failed. Your score is \(Int(score))%, required: \(self.quizViewModel.getPassPercentage() ?? 0)%.") {
                         let failureViewController = FailureViewController()
-                        failureViewController.modalPresentationStyle = .fullScreen
                         failureViewController.score = Int(score)
-                        self.present(failureViewController, animated: true, completion: nil)
+                        failureViewController.courseViewModel = self.viewModel
+                        let navController = UINavigationController(rootViewController: failureViewController)
+                        navController.modalPresentationStyle = .fullScreen
+                        self.present(navController, animated: true, completion: nil)
                     }
                 }
             }

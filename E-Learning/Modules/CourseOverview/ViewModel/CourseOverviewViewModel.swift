@@ -120,11 +120,36 @@ class CourseOverviewViewModel {
     
     func setSelectedLesson(_ lesson: Lesson) {
         self.selectedLesson = lesson
-        print("Selected lesson set to: \(lesson.title)")
+        print("Set selected lesson: \(lesson.title)")
     }
     
     func getSelectedLesson() -> Lesson? {
         print("Returning selected lesson: \(selectedLesson?.title ?? "nil")")
         return selectedLesson
+    }
+    
+    func getNextLesson() -> Lesson? {
+        guard let currentLesson = selectedLesson else {
+            print("No current lesson selected")
+            return nil
+        }
+        
+        let allSections = getSections()
+        for (sectionIndex, section) in allSections.enumerated() {
+            if let lessons = section.lessons {
+                for (lessonIndex, lesson) in lessons.enumerated() {
+                    if lesson.id == currentLesson.id {
+                        if lessonIndex + 1 < lessons.count {
+                            return lessons[lessonIndex + 1]
+                        } else if sectionIndex + 1 < allSections.count {
+                            return allSections[sectionIndex + 1].lessons?.first
+                        }
+                        return nil
+                    }
+                }
+            }
+        }
+        print("No next lesson found")
+        return nil
     }
 }

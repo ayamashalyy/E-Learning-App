@@ -17,6 +17,7 @@ class FailureViewController: UIViewController {
     var retryMassage = UILabel()
     var tryAgainButton = UIButton()
     var tenantViewModel = TenantViewModel.shared
+    var courseViewModel: CourseOverviewViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class FailureViewController: UIViewController {
         
         let viewImage = UIView()
         viewImage.translatesAutoresizingMaskIntoConstraints = false
-        viewImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        viewImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
         stackView.addArrangedSubview(viewImage)
         
         failureImage = UIImageView()
@@ -50,15 +51,15 @@ class FailureViewController: UIViewController {
         NSLayoutConstraint.activate([
             failureImage.centerXAnchor.constraint(equalTo: viewImage.centerXAnchor),
             failureImage.centerYAnchor.constraint(equalTo: viewImage.centerYAnchor),
-            failureImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            failureImage.heightAnchor.constraint(equalToConstant: 150)
+            failureImage.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 200),
+            failureImage.heightAnchor.constraint(equalToConstant: 200)
         ])
         
         scoreNum = UILabel()
         scoreNum.font = UIFont(name: "Roboto-Medium", size: 18)
         scoreNum.textColor = UIColor(named: "failureColor")
         scoreNum.textAlignment = .center
-        scoreNum.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        scoreNum.heightAnchor.constraint(equalToConstant: 40).isActive = true
         scoreNum.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(scoreNum)
         
@@ -95,7 +96,7 @@ class FailureViewController: UIViewController {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tryAgainButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
@@ -106,10 +107,49 @@ class FailureViewController: UIViewController {
     }
     
     @objc func tryAgainButtonTapped() {
-        print("Try Again")
-        // let nextController = PageViewController()
-        // let navigationController = UINavigationController(rootViewController: nextController)
-        // navigationController.modalPresentationStyle = .fullScreen
-        // present(navigationController, animated: true)
+        print("Try Again button tapped")
+        let quizViewModel = QuizViewModel()
+        guard let courseViewModel = courseViewModel else {
+            print("Error: CourseViewModel not available")
+            return
+        }
+        
+        let courseSlug = courseViewModel.getCourse()?.slug ?? ""
+        let quizId = quizViewModel.quizCourse?.data?.id ?? 1
+        let token = UserSessionManager.shared.token ?? ""
+        
+        print("Retrying quiz with courseSlug: \(courseSlug), quizId: \(quizId)")
+        quizViewModel.getQuiz(courseSlug: courseSlug, quizId: quizId, token: token) { [weak self] (quizResponse, message, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Failed to fetch quiz: \(error)")
+                return
+            }
+            if let message = message, message == "You have already passed this quiz" {
+                print("User already passed the quiz, no retry needed")
+                return
+            }
+            
+            print("Quiz fetched successfully for retry")
+            let pageViewController = PageViewController(viewModel: courseViewModel, quizViewModel: quizViewModel)
+            pageViewController.onQuizCompleted = { isPassed in
+                print("Quiz retry completed, isPassed: \(isPassed)")
+                if isPassed {
+                    let successVC = SuccessViewController()
+                    successVC.score = Int(quizViewModel.getQuizScore() ?? 0)
+                    successVC.modalPresentationStyle = .fullScreen
+                    self.present(successVC, animated: true, completion: nil)
+                } else {
+                    let failureVC = FailureViewController()
+                    failureVC.score = Int(quizViewModel.getQuizScore() ?? 0)
+                    failureVC.courseViewModel = courseViewModel
+                    failureVC.modalPresentationStyle = .fullScreen
+                    self.present(failureVC, animated: true, completion: nil)
+                }
+            }
+            let navigationController = UINavigationController(rootViewController: pageViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
 }

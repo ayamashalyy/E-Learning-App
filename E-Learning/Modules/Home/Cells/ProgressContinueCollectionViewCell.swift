@@ -52,7 +52,7 @@ class ProgressContinueCollectionViewCell: UICollectionViewCell {
         
         if viewModel.course != nil {
             titleCourse.text = viewModel.getCourseTitle()
-            constratorNameCourse.text = viewModel.getInstructorName()
+            constratorNameCourse.text = viewModel.getCategoryName()
             courseProgressRaico.text = viewModel.getProgressPercentageString()
             courseProgress.progress = viewModel.getProgressFloat()
             

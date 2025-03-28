@@ -130,6 +130,7 @@
 		E8B3449C2D691DC000F14EEE /* RefreshTokenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */; };
 		E8B375C62D5174ED00FC383B /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C52D5174ED00FC383B /* ResetPassword.swift */; };
 		E8B375C82D51758200FC383B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */; };
+		E8B5513C2D96FB0E00AE522D /* QuizReviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B5513B2D96FB0E00AE522D /* QuizReviewResponse.swift */; };
 		E8B668E92D6F077F00227314 /* LearningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668E82D6F077F00227314 /* LearningState.swift */; };
 		E8B668EC2D6F1BB800227314 /* MyLearningResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668EB2D6F1BB800227314 /* MyLearningResponse.swift */; };
 		E8B668EE2D6F1DA700227314 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B668ED2D6F1DA700227314 /* Course.swift */; };
@@ -306,6 +307,7 @@
 		E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenViewModel.swift; sourceTree = "<group>"; };
 		E8B375C52D5174ED00FC383B /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		E8B5513B2D96FB0E00AE522D /* QuizReviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizReviewResponse.swift; sourceTree = "<group>"; };
 		E8B668E82D6F077F00227314 /* LearningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningState.swift; sourceTree = "<group>"; };
 		E8B668EB2D6F1BB800227314 /* MyLearningResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLearningResponse.swift; sourceTree = "<group>"; };
 		E8B668ED2D6F1DA700227314 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -979,6 +981,7 @@
 			isa = PBXGroup;
 			children = (
 				E8B2B34B2D90675400B35C19 /* QuizSubmitResponse.swift */,
+				E8B5513B2D96FB0E00AE522D /* QuizReviewResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1305,6 +1308,7 @@
 				037F7DEB2D0B7165001A411A /* SuccessViewController.swift in Sources */,
 				E8C644C42D53A83400EDA483 /* ProfileUpdateViewModel.swift in Sources */,
 				E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */,
+				E8B5513C2D96FB0E00AE522D /* QuizReviewResponse.swift in Sources */,
 				E8B29E412D51252E0083C471 /*  VerifyOTPViewModel.swift in Sources */,
 				E8BAC1932D8EA04A0044B17A /* ProgressCourseViewModel.swift in Sources */,
 				E8C644BE2D5387F300EDA483 /* Profile.swift in Sources */,

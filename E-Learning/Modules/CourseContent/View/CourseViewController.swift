@@ -218,8 +218,8 @@ class CourseViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             lessonContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            lessonContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            lessonContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            lessonContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            lessonContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             lessonContentView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
@@ -251,11 +251,13 @@ class CourseViewController: UIViewController {
     }
     
     func displayLesson() {
+        print("--- Display Lesson Called ---")
         guard let viewModel = viewModel else {
-            print("ViewModel is nil in displayLesson")
+            print("ViewModel is nil")
             return
         }
         lessonContentView.configure(with: viewModel)
+        lessonContentView.layoutIfNeeded()
     }
     
     private func displayFirstLesson() {

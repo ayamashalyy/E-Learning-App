@@ -18,12 +18,12 @@ class ProgressContinueViewModel {
         return course?.title ?? "No Title"
     }
     
-    func getInstructorName() -> String {
-        return course?.instructor?.name ?? "Unknown Instructor"
+    func getCategoryName() -> String {
+        return course?.category?.name ?? "Unknown"
     }
     
     func getProgressPercentageString() -> String {
-        return "\((course?.progress ?? 0) * 100)%"
+        return "\(Int(course?.progress ?? 0))%"
     }
     
     func getProgressFloat() -> Float {

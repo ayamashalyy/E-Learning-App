@@ -8,24 +8,24 @@
 import Foundation
 
 enum LessonType: String {
-    case text = "TEXT"
-    case video = "VIDEO"
-    case audio = "AUDIO"
-    case document = "DOCUMENT"
-    case scorm = "SCORM"
-    case aicc = "AICC"
-    case quiz = "QUIZ"
-    case unknown
+    case video = "video"
+    case text = "text"
+    case audio = "audio"
+    case document = "document"
+    case scorm = "scorm"
+    case aicc = "aicc"
+    case quiz = "quiz"
+    case unknown = "unknown"
     
     init(rawValue: String) {
         switch rawValue {
-        case "TEXT": self = .text
-        case "VIDEO": self = .video
-        case "AUDIO": self = .audio
-        case "DOCUMENT": self = .document
-        case "SCORM": self = .scorm
-        case "AICC": self = .aicc
-        case "QUIZ": self = .quiz
+        case "video": self = .video
+        case "text": self = .text
+        case "audio": self = .audio
+        case "document": self = .document
+        case "scorm": self = .scorm
+        case "aicc": self = .aicc
+        case "quiz": self = .quiz
         default: self = .unknown
         }
     }

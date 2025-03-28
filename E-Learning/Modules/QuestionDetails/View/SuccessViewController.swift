@@ -26,21 +26,24 @@ class SuccessViewController: UIViewController {
         setupConstraints()
         
         if let score = score {
+            print("Score received: \(score)")
             scoreNum.text = "\(score)% Score"
+        } else {
+            print("No score available")
         }
     }
     
     func setupUI() {
         
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = 8
         stackView.alignment = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
         let viewImage = UIView()
         viewImage.translatesAutoresizingMaskIntoConstraints = false
-        viewImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        viewImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
         stackView.addArrangedSubview(viewImage)
         
         imageGrowth = UIImageView()
@@ -52,15 +55,15 @@ class SuccessViewController: UIViewController {
         NSLayoutConstraint.activate([
             imageGrowth.centerXAnchor.constraint(equalTo: viewImage.centerXAnchor),
             imageGrowth.centerYAnchor.constraint(equalTo: viewImage.centerYAnchor),
-            imageGrowth.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            imageGrowth.heightAnchor.constraint(equalToConstant: 150)
+            imageGrowth.widthAnchor.constraint(equalTo: view.widthAnchor, constant: 200),
+            imageGrowth.heightAnchor.constraint(equalToConstant: 200)
         ])
         
         scoreNum = UILabel()
         scoreNum.font = UIFont(name: "Roboto-Medium", size: 18)
         scoreNum.textColor = UIColor(named: "scoreColor")
         scoreNum.textAlignment = .center
-        scoreNum.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        scoreNum.heightAnchor.constraint(equalToConstant: 40).isActive = true
         scoreNum.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(scoreNum)
         
@@ -69,7 +72,7 @@ class SuccessViewController: UIViewController {
         congratulationLabel.font = UIFont(name: "Roboto-Medium", size: 18)
         congratulationLabel.textColor = .black
         congratulationLabel.textAlignment = .center
-        congratulationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        congratulationLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         congratulationLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(congratulationLabel)
         
@@ -94,56 +97,74 @@ class SuccessViewController: UIViewController {
         view.addSubview(continueButton)
         continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         
-        //        reviewButton = UIButton(type: .system)
-        //        reviewButton.setTitle("Review", for: .normal)
-        //        reviewButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        //        reviewButton.setTitleColor(UIColor.white, for: .normal)
-        //        reviewButton.backgroundColor = UIColor(named: "second")
-        //        reviewButton.layer.cornerRadius = 25
-        //        reviewButton.translatesAutoresizingMaskIntoConstraints = false
-        //        view.addSubview(reviewButton)
-        //        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        reviewButton = UIButton(type: .system)
+        reviewButton.setTitle("Review", for: .normal)
+        reviewButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        reviewButton.setTitleColor(UIColor.white, for: .normal)
+        reviewButton.backgroundColor = tenantViewModel.secondaryColor
+        reviewButton.layer.cornerRadius = 25
+        reviewButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(reviewButton)
+        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
     }
     
     func setupConstraints() {
         
         NSLayoutConstraint.activate([
             
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             continueButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            //            reviewButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 15),
-            //            reviewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            //            reviewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            reviewButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 15),
+            reviewButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            reviewButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             continueButton.heightAnchor.constraint(equalToConstant: 50),
-            //            reviewButton.widthAnchor.constraint(equalToConstant: 340),
-            //            reviewButton.heightAnchor.constraint(equalToConstant: 50)
+            reviewButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
     }
     
     @objc func continueButtonTapped() {
-        print("Continue")
-        let nextController = CourseViewController()
-        let navigationController = UINavigationController(rootViewController: nextController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+        print("Continue button tapped")
+        
+        guard let navController = self.navigationController else {
+            print("Error: No navigation controller found")
+            return
+        }
+        
+        if let courseVC = navController.viewControllers.first(where: { $0 is CourseViewController }) as? CourseViewController {
+            guard let viewModel = courseVC.viewModel else {
+                print("Error: CourseViewModel not available")
+                navController.popToRootViewController(animated: true)
+                return
+            }
+            
+            if let nextLesson = viewModel.getNextLesson() {
+                viewModel.setSelectedLesson(nextLesson)
+                print("Next lesson set: \(nextLesson.title)")
+            } else {
+                print("No next lesson available, staying on current lesson")
+            }
+            
+            navController.popToViewController(courseVC, animated: true)
+            DispatchQueue.main.async {
+                courseVC.displayLesson()
+                if let contentVC = courseVC.children.first(where: { $0 is CourseContentViewController }) as? CourseContentViewController {
+                    contentVC.tableView.reloadData()
+                    print("Updated CourseContentViewController table view")
+                }
+            }
+        } else {
+            print("Error: Could not find CourseViewController in navigation stack")
+            navController.popToRootViewController(animated: true)
+        }
     }
     
-    //    @objc func reviewButtonTapped() {
-    //        print("Review")
-    //        guard let quizViewModel = quizViewModel else {
-    //            print("QuizViewModel is nil")
-    //            return
-    //
-    //        }
-    //        let quizViewController = QuizViewController()
-    //        quizViewController.viewModel = quizViewModel
-    //        quizViewController.modalPresentationStyle = .fullScreen
-    //        present(quizViewController, animated: true, completion: nil)
-    //    }
+    @objc func reviewButtonTapped() {
+        print("Review")
+    }
     
 }

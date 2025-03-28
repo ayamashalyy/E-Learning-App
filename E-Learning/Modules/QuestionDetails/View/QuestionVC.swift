@@ -81,7 +81,9 @@ class QuestionVC: UIViewController {
     
     func setDataQuestion() {
         if let question = quizViewModel?.getQuizQuestions()?[questionIndex] {
-            questionText.text = "\(question.title) (\(question.points) points)"
+            let fullText = "\(question.title) (\(question.points) points)"
+            print("Setting questionText to: \(fullText)")
+            questionText.text = fullText
         } else {
             questionText.text = "No question available"
         }
