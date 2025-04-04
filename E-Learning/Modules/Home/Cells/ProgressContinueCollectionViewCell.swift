@@ -54,7 +54,7 @@ class ProgressContinueCollectionViewCell: UICollectionViewCell {
             titleCourse.text = viewModel.getCourseTitle()
             constratorNameCourse.text = viewModel.getCategoryName()
             courseProgressRaico.text = viewModel.getProgressPercentageString()
-            courseProgress.progress = viewModel.getProgressFloat()
+            courseProgress.progress = viewModel.getProgressFloat() / 100.0
             
             if let imageUrl = viewModel.getImageUrl() {
                 courseImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder")) { (image, error, cacheType, url) in

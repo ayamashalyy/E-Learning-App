@@ -85,8 +85,9 @@ class MyLearningTableViewCell: UITableViewCell {
         
         myLearningNameCourse.text = viewModel.courseTitle
         myLearningConstractorName.text = viewModel.instructorName
-        myLearningProgress.setProgress(Float(viewModel.courseProgress), animated: true)
-        myLearningProgressLabel.text = "\(Int(viewModel.courseProgress * 100))%"
+        let progressValue = Float(viewModel.courseProgress) / 100.0
+        myLearningProgress.setProgress(progressValue, animated: true)
+        myLearningProgressLabel.text = "\(viewModel.courseProgress)%"
         myLearningImage2.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         switch viewModel.state {

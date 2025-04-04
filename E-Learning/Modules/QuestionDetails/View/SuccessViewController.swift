@@ -18,10 +18,12 @@ class SuccessViewController: UIViewController {
     var continueButton = UIButton()
     var reviewButton = UIButton()
     var tenantViewModel = TenantViewModel.shared
+    var quizViewModel: QuizViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(true, animated: false)
         setupUI()
         setupConstraints()
         
@@ -135,6 +137,8 @@ class SuccessViewController: UIViewController {
             return
         }
         
+        print("Current Navigation Stack: \(navController.viewControllers.map { String(describing: type(of: $0)) })")
+        
         if let courseVC = navController.viewControllers.first(where: { $0 is CourseViewController }) as? CourseViewController {
             guard let viewModel = courseVC.viewModel else {
                 print("Error: CourseViewModel not available")
@@ -145,17 +149,32 @@ class SuccessViewController: UIViewController {
             if let nextLesson = viewModel.getNextLesson() {
                 viewModel.setSelectedLesson(nextLesson)
                 print("Next lesson set: \(nextLesson.title)")
-            } else {
-                print("No next lesson available, staying on current lesson")
-            }
-            
-            navController.popToViewController(courseVC, animated: true)
-            DispatchQueue.main.async {
-                courseVC.displayLesson()
-                if let contentVC = courseVC.children.first(where: { $0 is CourseContentViewController }) as? CourseContentViewController {
-                    contentVC.tableView.reloadData()
-                    print("Updated CourseContentViewController table view")
+                navController.popToViewController(courseVC, animated: true)
+                DispatchQueue.main.async { [weak courseVC] in
+                    courseVC?.displayLesson()
+                    if let contentVC = courseVC?.children.first(where: { $0 is CourseContentViewController }) as? CourseContentViewController {
+                        contentVC.tableView.reloadData()
+                        print("Updated CourseContentViewController table view")
+                    }
                 }
+            } else {
+                print("No next lesson available, course completed")
+                let alert = UIAlertController(
+                    title: "Course Completed".localized,
+                    message: "Congratulations 🎉! You have finished all lessons in this course.".localized,
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK".localized, style: .default) { _ in
+                    navController.popToViewController(courseVC, animated: true)
+                    DispatchQueue.main.async { [weak courseVC] in
+                        courseVC?.displayLesson()
+                        if let contentVC = courseVC?.children.first(where: { $0 is CourseContentViewController }) as? CourseContentViewController {
+                            contentVC.tableView.reloadData()
+                            print("Updated CourseContentViewController table view")
+                        }
+                    }
+                })
+                self.present(alert, animated: true)
             }
         } else {
             print("Error: Could not find CourseViewController in navigation stack")
@@ -164,7 +183,38 @@ class SuccessViewController: UIViewController {
     }
     
     @objc func reviewButtonTapped() {
-        print("Review")
+        print("Review button tapped")
+        
+        guard let navController = self.navigationController else {
+            print("Error: No navigation controller found")
+            return
+        }
+        
+        guard let quizViewModel = self.quizViewModel else {
+            print("Error: QuizViewModel is nil")
+            return
+        }
+        
+        if let courseVC = navController.viewControllers.first(where: { $0 is CourseViewController }) as? CourseViewController,
+           let courseViewModel = courseVC.viewModel {
+            let courseSlug = courseViewModel.getCourse()?.slug ?? ""
+            let quizId = quizViewModel.quizCourse?.data?.id ?? 1
+            let token = UserSessionManager.shared.token ?? ""
+            
+            quizViewModel.fetchQuizReview(courseSlug: courseSlug, quizId: quizId, token: token) { [weak self] (reviewResponse, error) in
+                guard let self = self else { return }
+                if let error = error {
+                    print("Failed to fetch quiz review: \(error)")
+                    return
+                }
+                if let reviewResponse = reviewResponse {
+                    print("Quiz review fetched: \(reviewResponse.data.quizScore)")
+                    let pageViewController = PageViewController(viewModel: courseViewModel, quizViewModel: quizViewModel, isReviewMode: true)
+                    self.navigationController?.pushViewController(pageViewController, animated: true)
+                }
+            }
+        } else {
+            print("Error: Could not find CourseViewController or viewModel")
+        }
     }
-    
 }

@@ -195,9 +195,12 @@ class CourseContentViewController: UIViewController, UITableViewDelegate, UITabl
                         }
                     }
                     
-                    let navigationController = UINavigationController(rootViewController: nextViewController)
-                    navigationController.modalPresentationStyle = .fullScreen
-                    self.present(navigationController, animated: true)
+                    if let courseVC = self.parent as? CourseViewController {
+                        courseVC.navigationController?.pushViewController(nextViewController, animated: true)
+                    } else {
+                        print("Error: Could not find parent CourseViewController")
+                        self.navigationController?.pushViewController(nextViewController, animated: true)
+                    }
                 } else if let message = message {
                     print("Quiz message: \(message)")
                     let alert = UIAlertController(title: "Quiz Completed", message: "You have already passed this quiz!", preferredStyle: .alert)

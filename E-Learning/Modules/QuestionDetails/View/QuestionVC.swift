@@ -17,21 +17,58 @@ class QuestionVC: UIViewController {
     var questionIndex: Int = 0
     var selectedRightIndex: IndexPath?
     var selectedAnswers: [String] = []
+    var isReviewMode: Bool = false
+    var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("QuestionVC viewDidLoad - Index: \(questionIndex)")
+        print("QuestionVC viewDidLoad - Index: \(questionIndex), Review Mode: \(isReviewMode)")
         setDataQuestion()
         configureCollectionView()
+        if isReviewMode {
+            collectionQuestion.allowsSelection = false
+            leftCollectionView?.allowsSelection = false
+            rightCollectionView?.allowsSelection = false
+            rightCollectionView?.dragInteractionEnabled = false
+        }
         
+        if isReviewMode, let reviewQuestion = quizViewModel?.getQuizReviewQuestions()?[questionIndex] as? ReviewQuestion {
+            let fullText = NSMutableAttributedString()
+            
+            let titleAndPoints = NSAttributedString(
+                string: "\(reviewQuestion.title) (\(reviewQuestion.points) points) - ",
+                attributes: [.foregroundColor: UIColor.black]
+            )
+            fullText.append(titleAndPoints)
+            
+            let statusText = reviewQuestion.isCorrect ? "Correct" : "Incorrect"
+            let statusColor = reviewQuestion.isCorrect ? tenantViewModel.primaryColor : UIColor.red
+            let status = NSAttributedString(
+                string: statusText,
+                attributes: [.foregroundColor: statusColor ?? .yellow]
+            )
+            fullText.append(status)
+            questionText.attributedText = fullText
+            
+        }
     }
     
+    
     func configureCollectionView() {
-        guard let type = quizViewModel?.getQuizQuestions()?[questionIndex].type.lowercased() else { return }
+        let question: Any?
+        if isReviewMode {
+            question = quizViewModel?.getQuizReviewQuestions()?[questionIndex]
+        } else {
+            question = quizViewModel?.getQuizQuestions()?[questionIndex]
+        }
+        
+        guard let question = question, let type = (question as? ReviewQuestion)?.type.lowercased() ?? (question as? QuestionCourses)?.type.lowercased() else { return }
+        
         if type == "matching" {
             setupMatchingCollections()
-            if let question = quizViewModel?.getQuizQuestions()?[questionIndex] {
-                selectedAnswers = question.right ?? [] }
+            if !isReviewMode, let quizQuestion = question as? QuestionCourses {
+                selectedAnswers = quizQuestion.right ?? []
+            }
         } else {
             collectionQuestion.delegate = self
             collectionQuestion.dataSource = self
@@ -80,12 +117,24 @@ class QuestionVC: UIViewController {
     }
     
     func setDataQuestion() {
-        if let question = quizViewModel?.getQuizQuestions()?[questionIndex] {
-            let fullText = "\(question.title) (\(question.points) points)"
-            print("Setting questionText to: \(fullText)")
-            questionText.text = fullText
+        if isReviewMode {
+            if let question = quizViewModel?.getQuizReviewQuestions()?[questionIndex] {
+                
+                if question.isMatchingType {
+                    selectedAnswers = question.answerRight ?? []
+                } else {
+                    selectedAnswers = question.answer ?? []
+                }
+            } else {
+                questionText.text = "No question available"
+            }
         } else {
-            questionText.text = "No question available"
+            if let question = quizViewModel?.getQuizQuestions()?[questionIndex] {
+                let fullText = "\(question.title) (\(question.points) points)"
+                questionText.text = fullText
+            } else {
+                questionText.text = "No question available"
+            }
         }
     }
     
@@ -117,48 +166,83 @@ class QuestionVC: UIViewController {
 
 extension QuestionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let question = quizViewModel?.getQuizQuestions()?[questionIndex] else { return 0 }
+        let question: Any?
+        if isReviewMode {
+            question = quizViewModel?.getQuizReviewQuestions()?[questionIndex]
+        } else {
+            question = quizViewModel?.getQuizQuestions()?[questionIndex]
+        }
+        
+        guard let question = question else { return 0 }
         
         if collectionView == leftCollectionView {
-            return question.left?.count ?? 0
+            return (question as? ReviewQuestion)?.leftOptions?.count ?? (question as? QuestionCourses)?.left?.count ?? 0
         } else if collectionView == rightCollectionView {
             return selectedAnswers.count
         } else {
-            return question.options?.count ?? 0
+            let options = (question as? ReviewQuestion)?.options ?? (question as? QuestionCourses)?.options
+            return options?.count ?? 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let question = quizViewModel?.getQuizQuestions()?[questionIndex] else { return UICollectionViewCell() }
+        let question: Any?
+        if isReviewMode {
+            question = quizViewModel?.getQuizReviewQuestions()?[questionIndex]
+        } else {
+            question = quizViewModel?.getQuizQuestions()?[questionIndex]
+        }
+        
+        guard let question = question else { return UICollectionViewCell() }
         
         if collectionView == leftCollectionView || collectionView == rightCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MatchingCell", for: indexPath) as? MatchingCell else {
                 return UICollectionViewCell()
             }
-            
-            let text = collectionView == leftCollectionView ? question.left?[indexPath.row] : selectedAnswers[indexPath.row]
-            let isSelected = (collectionView == rightCollectionView && selectedRightIndex == indexPath)
-            cell.configure(optionText: text ?? "", isSelected: isSelected)
+            let text = collectionView == leftCollectionView ? ((question as? ReviewQuestion)?.leftOptions?[indexPath.row] ?? (question as? QuestionCourses)?.left?[indexPath.row]) : selectedAnswers[indexPath.row]
+            let isSelected = true
+            var isCorrect = false
+            if isReviewMode, let reviewQuestion = question as? ReviewQuestion {
+                if collectionView == rightCollectionView {
+                    let correctRight = reviewQuestion.correctRightOptions ?? []
+                    isCorrect = indexPath.row < correctRight.count && correctRight[indexPath.row] == text
+                }
+                cell.configure(optionText: text ?? "", isSelected: isSelected, isReviewMode: isReviewMode && collectionView == rightCollectionView, isCorrect: isCorrect)
+            } else {
+                cell.configure(optionText: text ?? "", isSelected: isSelected, isReviewMode: false, isCorrect: isCorrect)
+            }
             return cell
         } else {
-            let type = question.type.lowercased()
-            switch type{
+            let type = (question as? ReviewQuestion)?.type.lowercased() ?? (question as? QuestionCourses)?.type.lowercased() ?? ""
+            switch type {
             case "single_choice", "true_false":
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SingleChoiceCell", for: indexPath) as? SingleChoiceCell else {
                     return UICollectionViewCell()
                 }
-                let option = question.options?[indexPath.row] ?? ""
+                let options = (question as? ReviewQuestion)?.options ?? (question as? QuestionCourses)?.options ?? []
+                let option = indexPath.row < options.count ? options[indexPath.row] : ""
                 let isSelected = selectedAnswers.contains(option)
-                cell.configure(optionText: option, isSelected: isSelected)
+                var isCorrect = false
+                if isReviewMode, let reviewQuestion = question as? ReviewQuestion {
+                    let correctAnswers = reviewQuestion.correctAnswer ?? []
+                    isCorrect = correctAnswers.contains(option)
+                }
+                cell.configure(optionText: option, isSelected: isSelected, isReviewMode: isReviewMode, isCorrect: isCorrect)
                 return cell
                 
             case "multiple_choice":
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MultipleChoiceCell", for: indexPath) as? MultipleChoiceCell else {
                     return UICollectionViewCell()
                 }
-                let option = question.options?[indexPath.row] ?? ""
+                let options = (question as? ReviewQuestion)?.options ?? (question as? QuestionCourses)?.options ?? []
+                let option = indexPath.row < options.count ? options[indexPath.row] : ""
                 let isSelected = selectedAnswers.contains(option)
-                cell.configure(optionText: option, isSelected: isSelected)
+                var isCorrect = false
+                if isReviewMode, let reviewQuestion = question as? ReviewQuestion {
+                    let correctAnswers = reviewQuestion.correctAnswer ?? []
+                    isCorrect = correctAnswers.contains(option)
+                }
+                cell.configure(optionText: option, isSelected: isSelected, isReviewMode: isReviewMode, isCorrect: isCorrect)
                 return cell
                 
             default:
@@ -168,11 +252,19 @@ extension QuestionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let question: Any?
+        if isReviewMode {
+            question = quizViewModel?.getQuizReviewQuestions()?[questionIndex]
+        } else {
+            question = quizViewModel?.getQuizQuestions()?[questionIndex]
+        }
+        
+        guard let question = question else { return CGSize.zero }
+        
         if collectionView == leftCollectionView || collectionView == rightCollectionView {
             return CGSize(width: collectionView.frame.width - 10, height: 60)
         } else {
-            guard let question = quizViewModel?.getQuizQuestions()?[questionIndex] else { return CGSize.zero }
-            let type = question.type.lowercased()
+            let type = (question as? ReviewQuestion)?.type.lowercased() ?? (question as? QuestionCourses)?.type.lowercased() ?? ""
             switch type {
             case "true_false", "single_choice", "multiple_choice":
                 return CGSize(width: collectionView.frame.width, height: 60)
@@ -183,10 +275,12 @@ extension QuestionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let question = quizViewModel?.getQuizQuestions()?[questionIndex],
-              question.type.lowercased() != "matching" else { return }
+        guard !isReviewMode,
+              let question = quizViewModel?.getQuizQuestions()?[questionIndex],
+              question.type.lowercased() != "matching",
+              let options = question.options else { return }
         
-        let option = question.options?[indexPath.row] ?? ""
+        let option = options[indexPath.row]
         
         switch question.type.lowercased() {
         case "true_false", "single_choice":

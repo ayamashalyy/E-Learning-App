@@ -26,101 +26,47 @@ struct QuizReviewData: Codable {
 }
 
 struct ReviewQuestion: Codable {
+    let id: Int
     let title: String
     let type: String
     let points: Int
-    let options: Options
-    let correctAnswer: CorrectAnswer
-    let answer: Answer
-    let isCorrect: Int
+    let options: [String]?
+    let correctAnswer: [String]?
+    let answer: [String]?
+    let isCorrect: Bool
+    let correctLeft: [String]?
+    let correctRight: [String]?
+    let answerLeft: [String]?
+    let answerRight: [String]?
     
     enum CodingKeys: String, CodingKey {
-        case title, type, points, options
+        case id, title, type, points, options
         case correctAnswer = "correct_answer"
         case answer
         case isCorrect = "is_correct"
-    }
-}
-
-enum Options: Codable {
-    case stringArray([String])
-    case dictionary([String: String])
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let array = try? container.decode([String].self) {
-            self = .stringArray(array)
-        } else if let dict = try? container.decode([String: String].self) {
-            self = .dictionary(dict)
-        } else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid options format")
-        }
+        case correctLeft = "correct_left"
+        case correctRight = "correct_right"
+        case answerLeft = "answer_left"
+        case answerRight = "answer_right"
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .stringArray(let array):
-            try container.encode(array)
-        case .dictionary(let dict):
-            try container.encode(dict)
-        }
-    }
-}
-
-enum CorrectAnswer: Codable {
-    case stringArray([String])
-    case dictionary([String: String])
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let array = try? container.decode([String].self) {
-            self = .stringArray(array)
-        } else if let dict = try? container.decode([String: String].self) {
-            self = .dictionary(dict)
-        } else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid correct_answer format")
-        }
+    var isMatchingType: Bool {
+        return type.lowercased() == "matching"
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .stringArray(let array):
-            try container.encode(array)
-        case .dictionary(let dict):
-            try container.encode(dict)
-        }
-    }
-}
-
-enum Answer: Codable {
-    case string(String)
-    case stringArray([String])
-    case dictionary([String: String])
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let string = try? container.decode(String.self) {
-            self = .string(string)
-        } else if let array = try? container.decode([String].self) {
-            self = .stringArray(array)
-        } else if let dict = try? container.decode([String: String].self) {
-            self = .dictionary(dict)
-        } else {
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid answer format")
-        }
+    var leftOptions: [String]? {
+        return isMatchingType ? answerLeft : options
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        switch self {
-        case .string(let value):
-            try container.encode(value)
-        case .stringArray(let array):
-            try container.encode(array)
-        case .dictionary(let dict):
-            try container.encode(dict)
-        }
+    var rightOptions: [String]? {
+        return isMatchingType ? answerRight : nil
+    }
+    
+    var correctLeftOptions: [String]? {
+        return isMatchingType ? correctLeft : nil
+    }
+    
+    var correctRightOptions: [String]? {
+        return isMatchingType ? correctRight : nil
     }
 }

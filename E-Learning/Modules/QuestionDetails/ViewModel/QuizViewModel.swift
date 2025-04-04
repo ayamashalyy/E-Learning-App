@@ -48,25 +48,25 @@ class QuizViewModel {
     }
     
     func fetchQuizReview(courseSlug: String, quizId: Int, token: String, completion: @escaping (QuizReviewResponse?, Error?) -> Void) {
-            let subDomain = TenantViewModel.shared.urlTenant ?? ""
-            let url = "\(subDomain)/quiz/\(courseSlug)/\(quizId)/review"
-            print("Fetching quiz review with URL: \(url), Token: \(token)")
-            
-            apiService.fetchData(from: url, token: token) { (response: QuizReviewResponse?, error: Error?) in
-                if let response = response {
-                    self.quizReview = response
-                    print("Quiz review fetched successfully: \(response.data.quizScore), Passed: \(response.data.isPassed)")
-                    DispatchQueue.main.async {
-                        completion(response, nil)
-                    }
-                } else if let error = error {
-                    print("Error fetching quiz review: \(error)")
-                    DispatchQueue.main.async {
-                        completion(nil, error)
-                    }
+        let subDomain = TenantViewModel.shared.urlTenant ?? ""
+        let url = "\(subDomain)/quiz/\(courseSlug)/\(quizId)/review"
+        print("Fetching quiz review with URL: \(url), Token: \(token)")
+        
+        apiService.fetchData(from: url, token: token) { (response: QuizReviewResponse?, error: Error?) in
+            if let response = response {
+                self.quizReview = response
+                print("Quiz review fetched successfully: \(response.data.quizScore), Passed: \(response.data.isPassed)")
+                DispatchQueue.main.async {
+                    completion(response, nil)
+                }
+            } else if let error = error {
+                print("Error fetching quiz review: \(error)")
+                DispatchQueue.main.async {
+                    completion(nil, error)
                 }
             }
         }
+    }
     
     func submitQuiz(courseSlug: String, quizId: Int, answers: [[String: Any]], token: String) {
         let subDomain = TenantViewModel.shared.urlTenant ?? ""
@@ -154,5 +154,13 @@ class QuizViewModel {
     
     func getPassPercentage() -> Int? {
         return quizResponse?.passPercentage
+    }
+    
+    func getQuizReviewQuestions() -> [ReviewQuestion]? {
+        return quizReview?.data.questions
+    }
+    
+    func isReviewMode() -> Bool {
+        return quizReview != nil
     }
 }

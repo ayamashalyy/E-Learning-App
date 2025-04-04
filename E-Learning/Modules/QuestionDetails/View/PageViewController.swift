@@ -19,10 +19,12 @@ class PageViewController: UIPageViewController {
     var viewModel: CourseOverviewViewModel?
     private var quizViewModel = QuizViewModel()
     var onQuizCompleted: ((Bool) -> Void)?
+    private var isReviewMode: Bool = false
     
-    init(viewModel: CourseOverviewViewModel?, quizViewModel: QuizViewModel) {
+    init(viewModel: CourseOverviewViewModel?, quizViewModel: QuizViewModel, isReviewMode: Bool = false) {
         self.viewModel = viewModel
         self.quizViewModel = quizViewModel
+        self.isReviewMode = isReviewMode
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
     
@@ -35,8 +37,8 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         let quizTitle = quizViewModel.getQuizTitle() ?? "Lesson Quiz".localized
+        self.title = isReviewMode ? "Quiz Review - \(quizTitle)" : quizTitle
         print("PageViewController loaded with Quiz Title: \(quizTitle)")
-        self.title = quizTitle
         backButtonImage = UIImage(named: "Icon 1")?.imageFlippedForRightToLeftLayoutDirection()
         
         if let backButtonImage = backButtonImage {
@@ -53,25 +55,42 @@ class PageViewController: UIPageViewController {
     }
     
     @objc func backButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setupSubViewControllers() {
-        guard let quizResponse = quizViewModel.quizCourse,
-              let questions = quizResponse.data?.questions else {
-            print("No quiz response or questions found")
-            return
+        if isReviewMode {
+            guard let questions = quizViewModel.getQuizReviewQuestions() else {
+                print("No review questions found")
+                return
+            }
+            print("Found \(questions.count) review questions")
+            var vcs = [QuestionVC]()
+            for (index, _) in questions.enumerated() {
+                let vc = QuestionVC()
+                vc.quizViewModel = quizViewModel
+                vc.questionIndex = index
+                vc.isReviewMode = true
+                vcs.append(vc)
+            }
+            self.subVC = vcs
+        } else {
+            
+            guard let quizResponse = quizViewModel.quizCourse,
+                  let questions = quizResponse.data?.questions else {
+                print("No quiz response or questions found")
+                return
+            }
+            print("Found \(questions.count) questions for the quiz")
+            var vcs = [QuestionVC]()
+            for (index, _) in questions.enumerated() {
+                let vc = QuestionVC()
+                vc.quizViewModel = quizViewModel
+                vc.questionIndex = index
+                vcs.append(vc)
+            }
+            self.subVC = vcs
         }
-        print("Found \(questions.count) questions for the quiz")
-        
-        var vcs = [QuestionVC]()
-        for (index, _) in questions.enumerated() {
-            let vc = QuestionVC()
-            vc.quizViewModel = quizViewModel
-            vc.questionIndex = index
-            vcs.append(vc)
-        }
-        self.subVC = vcs
     }
     
     func setupButtonsUI() {
@@ -191,22 +210,35 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         nextButton.isHidden = false
         imageView.isHidden = currentIndex > 0 && currentIndex < subVC.count
         
-        // Use viewModel to get the current question title
-        if currentViewController.quizViewModel?.getQuizQuestions()?[currentIndex] != nil {
+        if isReviewMode {
             titleLabel.text = "Question \(currentIndex + 1) / \(subVC.count)"
+            if currentIndex == subVC.count - 1 {
+                nextButton.setTitle("Finish Review".localized, for: .normal)
+                nextButton.removeTarget(self, action: #selector(showResults), for: .touchUpInside)
+                nextButton.addTarget(self, action: #selector(dismissReview), for: .touchUpInside)
+            } else {
+                nextButton.setTitle("Next".localized, for: .normal)
+                nextButton.removeTarget(self, action: #selector(showResults), for: .touchUpInside)
+                nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+            }
         } else {
-            titleLabel.text = "Question \(currentIndex + 1) / \(subVC.count)"
+            if currentViewController.quizViewModel?.getQuizQuestions()?[currentIndex] != nil {
+                titleLabel.text = "Question \(currentIndex + 1) / \(subVC.count)"
+            }
+            if currentIndex == subVC.count - 1 {
+                nextButton.setTitle("Show Results".localized, for: .normal)
+                nextButton.removeTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+                nextButton.addTarget(self, action: #selector(showResults), for: .touchUpInside)
+            } else {
+                nextButton.setTitle("Next".localized, for: .normal)
+                nextButton.removeTarget(self, action: #selector(showResults), for: .touchUpInside)
+                nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+            }
         }
-        
-        if currentIndex == subVC.count - 1 {
-            nextButton.setTitle("Show Results".localized, for: .normal)
-            nextButton.removeTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
-            nextButton.addTarget(self, action: #selector(showResults), for: .touchUpInside)
-        } else {
-            nextButton.setTitle("Next".localized, for: .normal)
-            nextButton.removeTarget(self, action: #selector(showResults), for: .touchUpInside)
-            nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
-        }
+    }
+    
+    @objc private func dismissReview() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc private func showResults() {
@@ -245,18 +277,18 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
                     self.showSuccessAlert(message: "Quiz submitted successfully! Your score is \(Int(score))%.") {
                         let successViewController = SuccessViewController()
                         successViewController.score = Int(score)
-                        let navController = UINavigationController(rootViewController: successViewController)
-                        navController.modalPresentationStyle = .fullScreen
-                        self.present(navController, animated: true, completion: nil)
+                        successViewController.quizViewModel = self.quizViewModel
+                        print("Pushing SuccessViewController, Stack before: \(String(describing: self.navigationController?.viewControllers.map { String(describing: type(of: $0)) })) ?? [])")
+                        self.navigationController?.pushViewController(successViewController, animated: true)
+                        print("Stack after: \(String(describing: self.navigationController?.viewControllers.map { String(describing: type(of: $0)) })) ?? [])")
                     }
                 } else {
                     self.showErrorAlert(message: "Quiz failed. Your score is \(Int(score))%, required: \(self.quizViewModel.getPassPercentage() ?? 0)%.") {
                         let failureViewController = FailureViewController()
                         failureViewController.score = Int(score)
                         failureViewController.courseViewModel = self.viewModel
-                        let navController = UINavigationController(rootViewController: failureViewController)
-                        navController.modalPresentationStyle = .fullScreen
-                        self.present(navController, animated: true, completion: nil)
+                        failureViewController.modalPresentationStyle = .fullScreen
+                        self.present(failureViewController, animated: true, completion: nil)
                     }
                 }
             }
