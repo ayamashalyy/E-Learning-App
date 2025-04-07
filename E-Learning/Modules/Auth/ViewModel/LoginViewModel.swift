@@ -68,6 +68,7 @@ class LoginViewModel {
                     UserSessionManager.shared.email = response.user?.email
                     UserSessionManager.shared.name = response.user?.name
                     UserSessionManager.shared.avatar = response.user?.avatar
+                    UserSessionManager.shared.role = response.role
                     
                     completion(response)
                 } else {

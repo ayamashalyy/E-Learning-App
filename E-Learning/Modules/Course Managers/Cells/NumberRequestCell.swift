@@ -49,12 +49,16 @@ class NumberRequestCell: UITableViewCell {
         approveBtn.setTitle("Approve".localized, for: .normal)
         approveBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         approveBtn.setTitleColor(UIColor.white, for: .normal)
+        approveBtn.setTitleColor(UIColor.white, for: .highlighted)
+        approveBtn.setTitleColor(UIColor.white, for: .selected)
         approveBtn.backgroundColor = tenantViewModel.primaryColor
         approveBtn.layer.cornerRadius = 20
         
         rejectBtn.setTitle("Reject".localized, for: .normal)
         rejectBtn.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
         rejectBtn.setTitleColor(UIColor.white, for: .normal)
+        rejectBtn.setTitleColor(UIColor.white, for: .highlighted)
+        rejectBtn.setTitleColor(UIColor.white, for: .selected)
         rejectBtn.backgroundColor = tenantViewModel.secondaryColor
         rejectBtn.layer.cornerRadius = 20
     }
@@ -65,11 +69,16 @@ class NumberRequestCell: UITableViewCell {
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
     
-    func configure(category: String, courseName: String, instructorName: String, image: UIImage) {
+    func configure(category: String, courseName: String, instructorName: String, image: String?) {
         myLearningCategory.text = category
         myLearningNameCourse.text = courseName
         myLearningConstractorName.text = instructorName
-        myLearningImage2.image = image
+        
+        if let urlString = image, let url = URL(string: urlString) {
+            myLearningImage2.sd_setImage(with: url, placeholderImage: UIImage(named: "myLearning"))
+        } else {
+            myLearningImage2.image = UIImage(named: "myLearning") ?? UIImage()
+        }
     }
     
     @IBAction func approveButtonTapped(_ sender: UIButton) {

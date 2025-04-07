@@ -14,11 +14,11 @@ class LearnersCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var coursesLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var detailsButton: UIButton!
-    @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var backButton: UIImageView!
     var tenantViewModel = TenantViewModel.shared
+    
+    var onDetailsTapped: (() -> Void)?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,12 +30,10 @@ class LearnersCell: UITableViewCell {
         outerView.layer.shadowRadius = 6
         outerView.layer.borderColor = UIColor.lightGray.cgColor
         outerView.layer.borderWidth = 0.5
-        progressView.progressTintColor = tenantViewModel.secondaryColor
         detailsButton.setTitle("Details".localized, for: .normal)
         detailsButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 12)
         detailsButton.setTitleColor(tenantViewModel.primaryColor, for: .normal)
-        backButton.image = UIImage(named: "navigate_next")?.imageFlippedForRightToLeftLayoutDirection()
-        backButton.tintColor = tenantViewModel.primaryColor
+        
         let highlightView = UIView()
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
@@ -48,15 +46,22 @@ class LearnersCell: UITableViewCell {
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
     
-    func configure(with learner: Learner) {
-        profileImageView.image = learner.profileImage
+    func configure(with viewModel: LearnersViewModel, at index: Int) {
+        let learner = viewModel.learner(at: index)
+        
+        if let avatarURL = learner.avatar, let url = URL(string: avatarURL) {
+            profileImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "User-100"))
+        } else {
+            profileImageView.image = UIImage(named: "User-100")
+        }
+        
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.layer.borderWidth = 0.8
         profileImageView.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         profileImageView.clipsToBounds = true
         nameLabel.text = learner.name
-        let coursesText = "\(learner.coursesCompleted) "
-        let completeText = "Course Complete"
+        let coursesText = "\(learner.courseCount) "
+        let completeText = "Course\(learner.courseCount == 1 ? "" : "s") Complete"
         
         let attributedString = NSMutableAttributedString(string: coursesText, attributes: [
             .foregroundColor: tenantViewModel.primaryColor ?? UIColor.black,
@@ -70,7 +75,8 @@ class LearnersCell: UITableViewCell {
         
         attributedString.append(completeAttributed)
         coursesLabel.attributedText = attributedString
-        progressView.progress = learner.progress
-        progressLabel.text = "\(Int(learner.progress * 100))%"
+    }
+    @IBAction func detailsButtonTapped(_ sender: UIButton) {
+        onDetailsTapped?()
     }
 }

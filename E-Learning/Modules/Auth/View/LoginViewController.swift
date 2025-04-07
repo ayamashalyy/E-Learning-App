@@ -243,14 +243,24 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
             print("Response: \(String(describing: response))")
             guard let self = self else { return }
             DispatchQueue.main.async {
-                if let token = response?.token {
+                if let token = response?.token, let role = response?.role {
                     UserDefaults.standard.set(token, forKey: UserDefaultsKeys.userToken)
                     UserSessionManager.shared.token = token
+                    print("DEBUG: Role received from API = \(role)")
                     let alert = UIAlertController(title: "Success", message: response?.message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                        self.navigateToNextScreen()
+                        print("DEBUG: Checking role condition, role = \(role)")
+                        if role == "learner" {
+                            print("DEBUG: Navigating to Learner Screen")
+                            self.navigateToLearnerScreen()
+                        } else if role == "manager" {
+                            print("DEBUG: Navigating to Manager Screen")
+                            self.navigateToManagerScreen()
+                        } else {
+                            print("DEBUG: Unknown role: \(role)")
+                        }
                     })
-                    print("Login successful, token: \(token)")
+                    print("Login successful, token: \(token), role: \(role)")
                     self.present(alert, animated: true, completion: nil)
                 }else {
                     self.showAlert(message: "Login failed: \(response?.message ?? "")")
@@ -279,15 +289,18 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         present(alert, animated: true, completion: nil)
     }
     
-    private func navigateToNextScreen() {
-        let nextViewController = TabBarViewController()
-        nextViewController.modalPresentationStyle = .fullScreen
-        present(nextViewController, animated: true, completion: nil)
-        
-        //        let nextViewController = CourseManagerViewController()
-        //        let navigationController = UINavigationController(rootViewController: nextViewController)
-        //        navigationController.modalPresentationStyle = .fullScreen
-        //        present(navigationController, animated: true, completion: nil)
+    private func navigateToLearnerScreen() {
+        let learnerViewController = TabBarViewController()
+        learnerViewController.modalPresentationStyle = .fullScreen
+        present(learnerViewController, animated: true, completion: nil)
+    }
+    
+    private func navigateToManagerScreen() {
+        print("DEBUG: Inside navigateToManagerScreen")
+        let managerViewController = CourseManagerViewController()
+        let navigationController = UINavigationController(rootViewController: managerViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     @objc func togglePasswordVisibility() {

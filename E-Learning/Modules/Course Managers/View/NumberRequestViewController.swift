@@ -14,6 +14,9 @@ class NumberRequestViewController: UIViewController {
     @IBOutlet weak var learnerName: UILabel!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
+    var learnerId: Int?
+    var viewModel: LearnerRequestsViewModel?
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,26 @@ class NumberRequestViewController: UIViewController {
         tableView.dataSource = self
         tableView.registerCell(cellClass: NumberRequestCell.self)
         
+        activityIndicator.color = .gray
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        updateUI()
+    }
+    
+    private func updateUI() {
+        if let request = viewModel?.request(at: 0) {
+            learnerName.text = request.learner.name
+            if let avatarURL = request.learner.avatar, let url = URL(string: avatarURL) {
+                learnerImage.sd_setImage(with: url, placeholderImage: UIImage(named: "User-100"))
+            } else {
+                learnerImage.image = UIImage(named: "User-100")
+            }
+        }
     }
     
     @objc func cancelTapped() {
@@ -44,35 +67,81 @@ class NumberRequestViewController: UIViewController {
 extension NumberRequestViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel?.requestCount() ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(indexPath: indexPath) as NumberRequestCell
-        cell.configure(category: "Design",
-                       courseName: "Google UX Design",
-                       instructorName: "Jacob Jones",
-                       image: UIImage(named: "myLearning") ?? UIImage())
+        if let request = viewModel?.request(at: indexPath.row) {
+            cell.configure(category: request.course.category?.name ?? "Unknown",
+                           courseName: request.course.title,
+                           instructorName: request.course.instructor?.name ?? "Unknown",
+                           image: request.course.image)
+        }
         cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 170
+        return 180
     }
 }
 
 
 extension NumberRequestViewController: NumberRequestCellDelegate {
     func didTapApproveButton(on cell: NumberRequestCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        print("Approve button tapped at row \(indexPath.row)")
+        guard let indexPath = tableView.indexPath(for: cell),
+              let request = viewModel?.request(at: indexPath.row) else { return }
+        
+        activityIndicator.startAnimating()
+        viewModel?.updateRequestStatus(requestId: request.id, status: "approved") { [weak self] result in
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
+            
+            switch result {
+            case .success(let message):
+                self.showSuccessAlert(message: message) {
+                    self.viewModel?.fetchRequests(learnerId: self.learnerId ?? 1) { result in
+                        switch result {
+                        case .success:
+                            self.tableView.reloadData()
+                        case .failure(let error):
+                            self.showErrorAlert(message: "Failed to refresh requests: \(error.localizedDescription)", completion: {})
+                        }
+                    }
+                }
+            case .failure(let error):
+                self.showErrorAlert(message: "Failed to approve request: \(error.localizedDescription)", completion: {})
+            }
+        }
     }
     
     func didTapRejectButton(on cell: NumberRequestCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else { return }
-        print("Reject button tapped at row \(indexPath.row)")
+        guard let indexPath = tableView.indexPath(for: cell),
+              let request = viewModel?.request(at: indexPath.row) else { return }
+        
+        activityIndicator.startAnimating()
+        viewModel?.updateRequestStatus(requestId: request.id, status: "rejected") { [weak self] result in
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
+            
+            switch result {
+            case .success(let message):
+                self.showSuccessAlert(message: message) {
+                    self.viewModel?.fetchRequests(learnerId: self.learnerId ?? 1) { result in
+                        switch result {
+                        case .success:
+                            self.tableView.reloadData()
+                        case .failure(let error):
+                            self.showErrorAlert(message: "Failed to refresh requests: \(error.localizedDescription)", completion: {})
+                        }
+                    }
+                }
+            case .failure(let error):
+                self.showErrorAlert(message: "Failed to reject request: \(error.localizedDescription)", completion: {})
+            }
+        }
     }
 }

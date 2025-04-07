@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,24 +30,24 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6P-f2-DpP">
                         <rect key="frame" x="16" y="8" width="434" height="206"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myLearning" translatesAutoresizingMaskIntoConstraints="NO" id="eJa-Et-Vdt">
-                                <rect key="frame" x="12" y="12" width="80" height="90"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eJa-Et-Vdt">
+                                <rect key="frame" x="12" y="12" width="80" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="AEe-3C-UI6"/>
-                                    <constraint firstAttribute="height" constant="90" id="vbd-qR-q9A"/>
+                                    <constraint firstAttribute="height" constant="100" id="vbd-qR-q9A"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FOX-90-z1C">
-                                <rect key="frame" x="108" y="12" width="326" height="90"/>
+                                <rect key="frame" x="108" y="12" width="326" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmn-U7-RLF">
-                                        <rect key="frame" x="0.0" y="0.0" width="326" height="20"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="326" height="30"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOL-1y-znz">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Design" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60J-rk-yGl">
-                                                        <rect key="frame" x="9.3333333333333428" y="3.0000000000000009" width="37.333333333333336" height="14.333333333333336"/>
+                                                        <rect key="frame" x="41.333333333333343" y="8" width="37.333333333333343" height="14.333333333333336"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="12"/>
                                                         <color key="textColor" name="myCustom"/>
                                                         <nil key="highlightedColor"/>
@@ -55,24 +55,24 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="myLearning"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="56" id="J3O-xI-dCc"/>
+                                                    <constraint firstAttribute="width" constant="120" id="J3O-xI-dCc"/>
                                                     <constraint firstItem="60J-rk-yGl" firstAttribute="centerY" secondItem="gOL-1y-znz" secondAttribute="centerY" id="Mpa-Xd-AOn"/>
                                                     <constraint firstItem="60J-rk-yGl" firstAttribute="centerX" secondItem="gOL-1y-znz" secondAttribute="centerX" id="qV5-iw-Ygb"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17M-yz-Scj">
-                                                <rect key="frame" x="56" y="0.0" width="270" height="20"/>
+                                                <rect key="frame" x="120" y="0.0" width="206" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="nJH-YY-Zfh"/>
+                                            <constraint firstAttribute="height" constant="30" id="nJH-YY-Zfh"/>
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLe-2M-HzT">
-                                        <rect key="frame" x="0.0" y="28" width="326" height="20"/>
+                                        <rect key="frame" x="0.0" y="38" width="326" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="laG-RF-QGv"/>
                                         </constraints>
@@ -81,7 +81,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW4-zh-nOF">
-                                        <rect key="frame" x="0.0" y="56" width="326" height="14"/>
+                                        <rect key="frame" x="0.0" y="66" width="326" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="a9B-7U-oBe"/>
                                         </constraints>
@@ -90,7 +90,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3vy-NG-D8l">
-                                        <rect key="frame" x="0.0" y="78" width="326" height="12"/>
+                                        <rect key="frame" x="0.0" y="88" width="326" height="12"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GU6-d2-8RM">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="12"/>
@@ -118,7 +118,7 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="bM4-AS-NJR"/>
+                                    <constraint firstAttribute="height" constant="100" id="bM4-AS-NJR"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -154,7 +154,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="myLearning" width="480" height="360"/>
         <namedColor name="myCustom">
             <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

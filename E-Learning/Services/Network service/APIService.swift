@@ -10,15 +10,22 @@ import Alamofire
 
 class APIService {
     
+    private func getHeaders(token: String?) -> HTTPHeaders {
+            var headers: HTTPHeaders = [
+                "Accept": "application/json",
+                "Accept-Language": LocalizationManager.shared.getLanguage()?.rawValue ?? "en"
+            ]
+            
+            if let token = token {
+                headers["Authorization"] = "Bearer \(token)"
+            }
+            
+            return headers
+        }
+    
     func fetchData<T: Decodable>(from url: String, token: String? = nil, completion: @escaping (T?,Error?) -> Void) {
         
-        var headers: HTTPHeaders = [
-            "Accept": "application/json"
-        ]
-        
-        if let token = token {
-            headers["Authorization"] = "Bearer \(token)"
-        }
+        let headers = getHeaders(token: token)
         
         AF.request(url, headers: headers)
             .validate()
@@ -41,14 +48,8 @@ class APIService {
     
     func postData<T: Decodable, U: Encodable>(to url: String, data: U, token: String? = nil, completion: @escaping (T?,Error?) -> Void) {
         
-        var headers: HTTPHeaders = [
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-        ]
-        
-        if let token = token {
-            headers["Authorization"] = "Bearer \(token)"
-        }
+        var headers = getHeaders(token: token)
+        headers["Content-Type"] = "application/json"
         
         AF.request(url, method: .post, parameters: data, encoder: JSONParameterEncoder.default, headers: headers)
             .validate()

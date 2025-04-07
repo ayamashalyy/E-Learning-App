@@ -54,6 +54,16 @@ class UserSessionManager {
         }
     }
     
+    var role: String? {
+        get { defaults.string(forKey: UserDefaultsKeys.userRole) }
+        set {
+            if newValue != role {
+                defaults.set(newValue, forKey: UserDefaultsKeys.userRole)
+                print("#debug: user-defaults - role: \(String(describing: newValue))")
+            }
+        }
+    }
+    
     var avatar: String? {
         get { defaults.string(forKey: UserDefaultsKeys.userAvatar) }
         set {
@@ -67,5 +77,6 @@ class UserSessionManager {
         defaults.removeObject(forKey: UserDefaultsKeys.userName)
         defaults.removeObject(forKey: UserDefaultsKeys.userEmail)
         defaults.removeObject(forKey: UserDefaultsKeys.userAvatar)
+        defaults.removeObject(forKey: UserDefaultsKeys.userRole)
     }
 }

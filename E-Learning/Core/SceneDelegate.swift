@@ -22,39 +22,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
         
         let session = UserSessionManager.shared
-        
         let selectedTenant = UserDefaults.standard.string(forKey: UserDefaultsKeys.selectedTenant)
         
         if let token = session.token, !token.isEmpty {
             print("#debug: - User Token: \(String(describing: session.token))")
             
             let refreshTokenViewModel = RefreshTokenViewModel()
-            //            print("#debug: - User Token: \(String(describing: session.token))")
-            //            print("#debug: - Refresh Token: \(String(describing: session.refreshToken))")
-            //            print("""
-            //                  #debug: ===========================
-            //                  """)
-            //            refreshTokenViewModel.refreshToken(refreshToken: session.refreshToken!) { result in
-            //                switch result {
-            //                case .success(let response):
-            //                    if let newToken = response.accessToken, let newRefreshToken = response.refreshToken {
-            //                        session.token = newToken
-            //                        session.refreshToken = newRefreshToken
-            
-            loadingVC.stopLoading()
-            let mainViewController = TabBarViewController()
-            let navigationController = UINavigationController(rootViewController: mainViewController)
-            navigationController.setNavigationBarHidden(true, animated: false)
-            self.window?.rootViewController = navigationController
-            //                    }
-            //                case .failure(let error):
-            //                    print("#debug: failure - User Token: \(String(describing: session.token))")
-            //                    print("#debug: failure - Refresh Token: \(String(describing: session.refreshToken))")
-            //                    print("#debug: failure - \(error)")
-            //                    loadingVC.stopLoading()
-            //                    self.gotoLoginPage()
-            //                }
-            //            }
+            print("#debug: - User Token: \(String(describing: session.token))")
+            print("#debug: - Refresh Token: \(String(describing: session.refreshToken))")
+            print("""
+                              #debug: ===========================
+                              """)
+            refreshTokenViewModel.refreshToken(refreshToken: session.refreshToken!) { result in
+                switch result {
+                case .success(let response):
+                    if let newToken = response.accessToken, let newRefreshToken = response.refreshToken {
+                        session.token = newToken
+                        session.refreshToken = newRefreshToken
+                        session.role = response.role
+                        
+                        loadingVC.stopLoading()
+                        
+                        if response.role == "manager" {
+                            print("DEBUG: Role is manager, navigating to CourseManagerViewController")
+                            let managerVC = CourseManagerViewController()
+                            let navigationController = UINavigationController(rootViewController: managerVC)
+                            self.window?.rootViewController = navigationController
+                        } else if response.role == "learner" {
+                            print("DEBUG: Role is learner, navigating to TabBarViewController")
+                            let mainViewController = TabBarViewController()
+                            let navigationController = UINavigationController(rootViewController: mainViewController)
+                            navigationController.setNavigationBarHidden(true, animated: false)
+                            self.window?.rootViewController = navigationController
+                        } else {
+                            print("DEBUG: Unknown role: \(String(describing: response.role)), going to login")
+                            self.gotoLoginPage()
+                        }
+                    }
+                case .failure(let error):
+                    print("#debug: failure - User Token: \(String(describing: session.token))")
+                    print("#debug: failure - Refresh Token: \(String(describing: session.refreshToken))")
+                    print("#debug: failure - \(error)")
+                    loadingVC.stopLoading()
+                    self.gotoLoginPage()
+                }
+            }
             
         } else if let tenant = selectedTenant, !tenant.isEmpty {
             loadingVC.stopLoading()

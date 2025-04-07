@@ -98,6 +98,12 @@
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		E80CC1C12D78F04900F7BA3A /* HomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */; };
 		E80CC1C32D78FDA800F7BA3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */; };
+		E87C76402DA19EDD001B04FF /* learners.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C763F2DA19EDD001B04FF /* learners.swift */; };
+		E87C76422DA1A13A001B04FF /* LearnersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C76412DA1A13A001B04FF /* LearnersViewModel.swift */; };
+		E87C76442DA1ADAC001B04FF /* LearnerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C76432DA1ADAC001B04FF /* LearnerDetails.swift */; };
+		E87C76462DA1AF33001B04FF /* LearnerDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C76452DA1AF33001B04FF /* LearnerDetailsViewModel.swift */; };
+		E886D7C32DA46A07002F6F37 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E886D7C22DA46A07002F6F37 /* Requests.swift */; };
+		E886D7C52DA46AB8002F6F37 /* LearnerRequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E886D7C42DA46AB8002F6F37 /* LearnerRequestsViewModel.swift */; };
 		E88E5FED2D44F7A4002A38C8 /* Tenant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */; };
 		E88E5FEF2D44F934002A38C8 /* TenantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */; };
 		E88E5FF12D44FA04002A38C8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88E5FF02D44FA04002A38C8 /* APIService.swift */; };
@@ -275,6 +281,12 @@
 		CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponse.swift; sourceTree = "<group>"; };
 		E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E87C763F2DA19EDD001B04FF /* learners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = learners.swift; sourceTree = "<group>"; };
+		E87C76412DA1A13A001B04FF /* LearnersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnersViewModel.swift; sourceTree = "<group>"; };
+		E87C76432DA1ADAC001B04FF /* LearnerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerDetails.swift; sourceTree = "<group>"; };
+		E87C76452DA1AF33001B04FF /* LearnerDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerDetailsViewModel.swift; sourceTree = "<group>"; };
+		E886D7C22DA46A07002F6F37 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		E886D7C42DA46AB8002F6F37 /* LearnerRequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerRequestsViewModel.swift; sourceTree = "<group>"; };
 		E88E5FEC2D44F7A4002A38C8 /* Tenant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tenant.swift; sourceTree = "<group>"; };
 		E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenantViewModel.swift; sourceTree = "<group>"; };
 		E88E5FF02D44FA04002A38C8 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -795,16 +807,16 @@
 		03B43C1A2CF0C5210018A306 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				03DDA9EB2D284C7E008115CA /* Course Managers */,
-				03F37E7C2D1C4D4D00F50C52 /* CourseOverview */,
-				03678AFA2D0E3BAC00371403 /* QuestionDetails */,
-				037F20F32CF3A0FA00691EF0 /* Auth */,
-				0341D1DE2D0093330008136C /* CourseContent */,
-				03822FF52CECE14500F96ACB /* Profile */,
-				03822FF22CECE11B00F96ACB /* MyLearning */,
-				03822FED2CECE0B000F96ACB /* Search */,
-				03822FEC2CECE0A400F96ACB /* Home */,
 				03822FF82CECE83100F96ACB /* Onboarding */,
+				037F20F32CF3A0FA00691EF0 /* Auth */,
+				03822FEC2CECE0A400F96ACB /* Home */,
+				03822FED2CECE0B000F96ACB /* Search */,
+				03822FF22CECE11B00F96ACB /* MyLearning */,
+				03822FF52CECE14500F96ACB /* Profile */,
+				03F37E7C2D1C4D4D00F50C52 /* CourseOverview */,
+				0341D1DE2D0093330008136C /* CourseContent */,
+				03678AFA2D0E3BAC00371403 /* QuestionDetails */,
+				03DDA9EB2D284C7E008115CA /* Course Managers */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -850,6 +862,9 @@
 				E8BC5E062D71FC6E0032FF84 /* Link.swift */,
 				E8C71AB02D80431200A5E4A7 /* SectionCourses.swift */,
 				E8C71AB22D80449300A5E4A7 /* Comment.swift */,
+				E87C763F2DA19EDD001B04FF /* learners.swift */,
+				E87C76432DA1ADAC001B04FF /* LearnerDetails.swift */,
+				E886D7C22DA46A07002F6F37 /* Requests.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -882,6 +897,9 @@
 		03DDA9ED2D284F1A008115CA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E87C76412DA1A13A001B04FF /* LearnersViewModel.swift */,
+				E87C76452DA1AF33001B04FF /* LearnerDetailsViewModel.swift */,
+				E886D7C42DA46AB8002F6F37 /* LearnerRequestsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1221,7 +1239,9 @@
 				E8BF8E702D732D7D0072E2B1 /* TotalResultsAfterFilterViewController.swift in Sources */,
 				E88E5FEF2D44F934002A38C8 /* TenantViewModel.swift in Sources */,
 				0377D46A2CEBBA0E006C60F6 /* SceneDelegate.swift in Sources */,
+				E886D7C32DA46A07002F6F37 /* Requests.swift in Sources */,
 				03F37E7F2D1C4DC200F50C52 /* CourseOverviewViewController.swift in Sources */,
+				E87C76462DA1AF33001B04FF /* LearnerDetailsViewModel.swift in Sources */,
 				E8D4437D2D81CB940018C6C5 /* CourseDetailsResponse.swift in Sources */,
 				03DDA9F72D285F5C008115CA /* LearnersCell.swift in Sources */,
 				E8B375C62D5174ED00FC383B /* ResetPassword.swift in Sources */,
@@ -1268,11 +1288,13 @@
 				E8B12EEC2D4FF8CC005B0E3E /* LoginViewModel.swift in Sources */,
 				0341D1E82D00D5780008136C /* CourseInteractionsViewController.swift in Sources */,
 				E8B668E92D6F077F00227314 /* LearningState.swift in Sources */,
+				E886D7C52DA46AB8002F6F37 /* LearnerRequestsViewModel.swift in Sources */,
 				E89E6C852D899D48009BF3C5 /* CourseEnrollmentResponse.swift in Sources */,
 				03822FE72CECC90900F96ACB /* MyLearningViewController.swift in Sources */,
 				E8BF8E742D73374A0072E2B1 /* FilterItemsViewController.swift in Sources */,
 				E89E6C892D89A0FA009BF3C5 /* UIViewController+Extensions.swift in Sources */,
 				03323E712CF14D36008AF673 /* MyLearningTableViewCell.swift in Sources */,
+				E87C76402DA19EDD001B04FF /* learners.swift in Sources */,
 				E8B810CB2D8CD26A00CC1B9A /* CommentViewModel.swift in Sources */,
 				037F7DED2D0B7193001A411A /* FailureViewController.swift in Sources */,
 				037F20F22CF384FF00691EF0 /* SelectOrganizationViewController.swift in Sources */,
@@ -1297,11 +1319,13 @@
 				0341D1EA2D00FBE90008136C /* UIview+Extensions.swift in Sources */,
 				E8BAC1952D8EB4F00044B17A /* QuestionVC+UICollectionViewDragAndDropDelegate.swift in Sources */,
 				03DDA9FB2D2883C5008115CA /* LearnersDetailsViewController.swift in Sources */,
+				E87C76422DA1A13A001B04FF /* LearnersViewModel.swift in Sources */,
 				E8BC5E012D71F3C30032FF84 /* SearchViewController+UITextField.swift in Sources */,
 				0341D1E62D00D52E0008136C /* CourseContentViewController.swift in Sources */,
 				E8C644C02D53883500EDA483 /* ProfileViewModel.swift in Sources */,
 				E8C6F2042D4E9ED3007D0923 /* UserDefaultsKeys.swift in Sources */,
 				036A8C882CF7A17300F01CE5 /* FilterSectionHeaderViewCollectionReusableView.swift in Sources */,
+				E87C76442DA1ADAC001B04FF /* LearnerDetails.swift in Sources */,
 				E8B668F02D6F1FAE00227314 /* CourseInstructor.swift in Sources */,
 				E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */,
 				03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */,

@@ -9,8 +9,8 @@ import Foundation
 
 struct Course: Decodable {
     let id: Int
-    let isEnroll: Bool?
-    let isRequest: String?
+    var isEnroll: Bool?
+    var isRequest: String?
     let hasQuiz: Bool?
     let title: String
     let image: String

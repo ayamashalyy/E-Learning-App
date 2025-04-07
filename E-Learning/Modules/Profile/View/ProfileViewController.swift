@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                             self?.profileImageView.image = UIImage(data: imageData)
                             print("Loaded avatar from UserDefaults")
                         } else {
-                            self?.profileImageView.image = UIImage(named: "user_Profile")
+                            self?.profileImageView.image = UIImage(named: "User-100")
                             print("No avatar found, using default")
                         }
                         
@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                             self?.profileImageView.image = UIImage(data: imageData)
                             print("Loaded avatar from UserDefaults after error")
                         } else {
-                            self?.profileImageView.image = UIImage(named: "user_Profile")
+                            self?.profileImageView.image = UIImage(named: "User-100")
                             print("No avatar found, using default after error")
                         }
                     }

@@ -47,12 +47,17 @@ class DetailsDataOfLearnersCell: UITableViewCell {
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
     
-    func configure(category: String, courseName: String, instructorName: String, progress: Float, image: UIImage) {
+    func configure(category: String, courseName: String, instructorName: String, progress: Float, image: String?) {
         myLearningCategory.text = category
         myLearningNameCourse.text = courseName
         myLearningConstractorName.text = instructorName
         myLearningProgress.setProgress(progress, animated: true)
-        myLearningImage2.image = image
+        
+        if let urlString = image, let url = URL(string: urlString) {
+            myLearningImage2.sd_setImage(with: url, placeholderImage: UIImage(named: "myLearning"))
+        } else {
+            myLearningImage2.image = UIImage(named: "myLearning") ?? UIImage()
+        }
         
         let progressPercentage = Int(progress * 100)
         myLearningProgressLabel.text = "\(progressPercentage)%"

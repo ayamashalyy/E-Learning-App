@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,20 +28,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="learnerImage" translatesAutoresizingMaskIntoConstraints="NO" id="XJU-Q5-Trd">
-                    <rect key="frame" x="131.66666666666666" y="79" width="129.99999999999997" height="130"/>
+                    <rect key="frame" x="131.66666666666666" y="59" width="129.99999999999997" height="130"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="130" id="8Vi-2V-e4L"/>
                         <constraint firstAttribute="height" constant="130" id="lYH-6p-UyX"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mohamed Ahmed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reV-n0-P1f">
-                    <rect key="frame" x="131.66666666666666" y="225" width="127.33333333333334" height="19"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mohamed Ahmed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reV-n0-P1f">
+                    <rect key="frame" x="131.66666666666666" y="205" width="129.99999999999997" height="19"/>
                     <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rrK-b4-CwP">
-                    <rect key="frame" x="0.0" y="260" width="393" height="558"/>
+                    <rect key="frame" x="0.0" y="240" width="393" height="578"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -50,11 +50,12 @@
             <constraints>
                 <constraint firstItem="reV-n0-P1f" firstAttribute="leading" secondItem="XJU-Q5-Trd" secondAttribute="leading" id="7pu-pB-BtJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rrK-b4-CwP" secondAttribute="bottom" id="Acn-Ea-BeZ"/>
+                <constraint firstItem="reV-n0-P1f" firstAttribute="trailing" secondItem="XJU-Q5-Trd" secondAttribute="trailing" id="EjO-m3-2Y9"/>
                 <constraint firstItem="reV-n0-P1f" firstAttribute="top" secondItem="XJU-Q5-Trd" secondAttribute="bottom" constant="16" id="FWG-Vj-26z"/>
                 <constraint firstItem="rrK-b4-CwP" firstAttribute="top" secondItem="reV-n0-P1f" secondAttribute="bottom" constant="16" id="KRm-Ds-N8s"/>
                 <constraint firstItem="XJU-Q5-Trd" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Upq-Fp-tbF"/>
                 <constraint firstItem="rrK-b4-CwP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fBh-0U-Nw3"/>
-                <constraint firstItem="XJU-Q5-Trd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="hkv-ce-m87"/>
+                <constraint firstItem="XJU-Q5-Trd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hkv-ce-m87"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rrK-b4-CwP" secondAttribute="trailing" id="mpd-Cf-ffn"/>
             </constraints>
             <point key="canvasLocation" x="20.610687022900763" y="-11.267605633802818"/>

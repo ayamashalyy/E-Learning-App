@@ -7,38 +7,55 @@
 
 import UIKit
 
-struct Learner {
-    let name: String
-    let coursesCompleted: Int
-    let progress: Float
-    let profileImage: UIImage
-}
 
 
 class CourseManagerViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var learners: [Learner] = [
-        Learner(name: "Mohamed Ahmed", coursesCompleted: 2, progress: 0.6, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Omar Nour", coursesCompleted: 4, progress: 0.4, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Mohamed Ahmed", coursesCompleted: 2, progress: 0.6, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Omar Nour", coursesCompleted: 4, progress: 0.3, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Mohamed Ahmed", coursesCompleted: 2, progress: 0.5, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Omar Nour", coursesCompleted: 4, progress: 0.9, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Mohamed Ahmed", coursesCompleted: 2, progress: 1.0, profileImage: UIImage(named: "learnerImage")!),
-        Learner(name: "Omar Nour", coursesCompleted: 4, progress: 0.7, profileImage: UIImage(named: "learnerImage")!),
-        
-    ]
+    private let learnersViewModel = LearnersViewModel()
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationItem.title = "Learners".localized
+        
+        // Setup Activity Indicator
+        activityIndicator.color = .gray
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerCell(cellClass: LearnersCell.self)
+        fetchLearners()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchLearners()
+    }
+    
+    private func fetchLearners() {
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
         
+        learnersViewModel.fetchLearners { [weak self] result in
+            guard let self = self else { return }
+            self.activityIndicator.stopAnimating()
+            self.tableView.isHidden = false
+            
+            switch result {
+            case .success:
+                self.tableView.reloadData()
+            case .failure(let error):
+                showErrorAlert(message:  "Failed to load learners: \(error.localizedDescription)", completion: {})
+            }
+        }
     }
 }
 
@@ -46,26 +63,29 @@ class CourseManagerViewController: UIViewController {
 extension CourseManagerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return learners.count
+        return learnersViewModel.numberOfLearners()
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(indexPath: indexPath) as LearnersCell
-        let learner = learners[indexPath.row]
-        cell.configure(with: learner)
+        cell.configure(with: learnersViewModel, at: indexPath.row)
         cell.selectionStyle = .none
+        
+        cell.onDetailsTapped = { [weak self] in
+            guard let self = self else { return }
+            let learner = self.learnersViewModel.learner(at: indexPath.row)
+            let nextViewController = LearnersDetailsViewController()
+            nextViewController.learnerId = learner.learnerId
+            let navigationController = UINavigationController(rootViewController: nextViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let nextViewController = LearnersDetailsViewController()
-        let navigationController = UINavigationController(rootViewController: nextViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
     }
 }

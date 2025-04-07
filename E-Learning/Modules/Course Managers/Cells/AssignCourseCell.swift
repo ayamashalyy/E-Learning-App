@@ -18,6 +18,8 @@ class AssignCourseCell: UITableViewCell {
     @IBOutlet weak var myLearningBtn: UIButton!
     var tenantViewModel = TenantViewModel.shared
     
+    var onAssignTapped: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         outerView.layer.cornerRadius = 10
@@ -53,10 +55,17 @@ class AssignCourseCell: UITableViewCell {
         outerView.layer.shadowPath = UIBezierPath(roundedRect: outerView.bounds, cornerRadius: outerView.layer.cornerRadius).cgPath
     }
     
-    func configure(category: String, courseName: String, instructorName: String, image: UIImage) {
+    func configure(category: String, courseName: String, instructorName: String, image: String?) {
         myLearningCategory.text = category
         myLearningNameCourse.text = courseName
         myLearningConstractorName.text = instructorName
-        myLearningImage2.image = image
+        if let urlString = image, let url = URL(string: urlString) {
+            myLearningImage2.sd_setImage(with: url, placeholderImage: UIImage(named: "myLearning"))
+        } else {
+            myLearningImage2.image = UIImage(named: "myLearning") ?? UIImage()
+        }
+    }
+    @IBAction func assignButtonTapped(_ sender: UIButton) {
+        onAssignTapped?()
     }
 }
