@@ -14,4 +14,5 @@ struct CourseCategory: Decodable {
     let icon: String
     let image: String
     let color: String
+    let text_color: String
 }

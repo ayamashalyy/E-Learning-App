@@ -29,4 +29,18 @@ class CoursesCategoriesCollectionViewCell: UICollectionViewCell {
         highlightView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
         self.selectedBackgroundView = highlightView
     }
+    
+    func configure(with category: CourseCategory) {
+            titleCourse.text = category.name
+            
+            if let textColor = UIColor(hex: category.text_color) {
+                titleCourse.textColor = textColor
+            } else {
+                titleCourse.textColor = .white
+            }
+            
+            if let backgroundColor = UIColor(hex: category.color) {
+                innerView.backgroundColor = backgroundColor
+            }
+        }
 }

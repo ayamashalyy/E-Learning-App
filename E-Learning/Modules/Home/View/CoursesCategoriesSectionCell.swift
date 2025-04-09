@@ -75,11 +75,7 @@ extension CoursesCategoriesSectionCell: UICollectionViewDataSource, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoursesCell", for: indexPath) as! CoursesCategoriesCollectionViewCell
         if let course = viewModel.getCategory(at: indexPath.item) {
-            
-            cell.titleCourse.text = course.name
-            let color = UIColor(hex: course.color)
-            cell.innerView.layer.backgroundColor = color.cgColor
-            
+            cell.configure(with: course)            
             if let imageURL = URL(string: course.image) {
                 cell.courseImage.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"))
             } else {
