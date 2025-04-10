@@ -200,7 +200,7 @@ class CourseOverviewViewController: UIViewController {
             imageCourseOverview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             imageCourseOverview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageCourseOverview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageCourseOverview.heightAnchor.constraint(equalToConstant: 250)
+            imageCourseOverview.heightAnchor.constraint(equalToConstant: 220)
         ])
         
         NSLayoutConstraint.activate([

@@ -48,7 +48,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IP8-qZ-yk9">
                                                 <rect key="frame" x="0.0" y="0.0" width="117" height="101"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myLearning" translatesAutoresizingMaskIntoConstraints="NO" id="kj7-9p-5oR">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kj7-9p-5oR">
                                                         <rect key="frame" x="0.0" y="0.0" width="117" height="101"/>
                                                     </imageView>
                                                 </subviews>
@@ -172,6 +172,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="Button" titleAlignment="center">
                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="shareCertificateButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gKg-ID-DKh"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -214,7 +217,6 @@
     </objects>
     <resources>
         <image name="check" width="16" height="16"/>
-        <image name="myLearning" width="480" height="360"/>
         <image name="uil_share" width="17" height="16"/>
         <namedColor name="myCustom">
             <color red="0.043137254901960784" green="0.21176470588235294" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -50,6 +50,7 @@ class FilterItemsViewController: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.allowsMultipleSelection = true
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(UINib(nibName: "FiltrationCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FiltrationCollectionViewCell")
         collectionView.register(FilterSectionHeaderViewCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: FilterSectionHeaderViewCollectionReusableView.identifier)
         collectionView.delegate = self

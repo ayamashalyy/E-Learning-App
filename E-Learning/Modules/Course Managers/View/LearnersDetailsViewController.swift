@@ -50,6 +50,7 @@ class LearnersDetailsViewController: UIViewController {
         setupButtons()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.registerCell(cellClass: DetailsDataOfLearnersCell.self)
         
         fetchLearnerDetails()

@@ -15,6 +15,7 @@ class MyLearningCellViewModel {
     let instructorName: String
     let courseProgress: Int
     let state: LearningState
+    let certificate: String?
     
     init(course: Course, state: LearningState) {
         self.courseTitle = course.title
@@ -23,5 +24,6 @@ class MyLearningCellViewModel {
         self.courseTitleCategory = course.category?.name ?? ""
         self.courseProgress = course.progress ?? 0
         self.state = state
+        self.certificate = course.certificate?.image
     }
 }

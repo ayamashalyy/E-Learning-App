@@ -220,7 +220,7 @@ class CourseViewController: UIViewController {
             lessonContentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             lessonContentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             lessonContentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            lessonContentView.heightAnchor.constraint(equalToConstant: 250)
+            lessonContentView.heightAnchor.constraint(equalToConstant: 220)
         ])
         
         NSLayoutConstraint.activate([

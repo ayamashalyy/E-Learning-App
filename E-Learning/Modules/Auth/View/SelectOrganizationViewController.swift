@@ -39,6 +39,24 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         organizationNameTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         organizationNameTextField.textColor = .lightGray
         organizationNameTextField.translatesAutoresizingMaskIntoConstraints = false
+        organizationNameTextField.clearButtonMode = .never
+        organizationNameTextField.autocapitalizationType = .none
+        
+        let clearButton = UIButton(type: .custom)
+        clearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        clearButton.tintColor = .lightGray
+        clearButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        clearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+        if isRTL {
+            organizationNameTextField.leftView = clearButton
+            organizationNameTextField.leftViewMode = .whileEditing
+        } else {
+            organizationNameTextField.rightView = clearButton
+            organizationNameTextField.rightViewMode = .whileEditing
+        }
+        
         view.addSubview(organizationNameTextField)
         
         
@@ -67,7 +85,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             enterOrganizationNameText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            enterOrganizationNameText.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            enterOrganizationNameText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             enterOrganizationNameText.widthAnchor.constraint(equalToConstant: 300)
         ])
         
@@ -127,10 +145,9 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             let nextViewController = LoginViewController()
-                            let navigationController = UINavigationController(rootViewController: nextViewController)
-                            navigationController.modalPresentationStyle = .fullScreen
+                            nextViewController.modalPresentationStyle = .fullScreen
                             
-                            logoViewController.present(navigationController, animated: true) {
+                            logoViewController.present(nextViewController, animated: true) {
                                 self.logoViewController = nil
                             }
                         }
@@ -142,6 +159,10 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+    }
+    
+    @objc func clearTextField() {
+        organizationNameTextField.text = ""
     }
 }
 

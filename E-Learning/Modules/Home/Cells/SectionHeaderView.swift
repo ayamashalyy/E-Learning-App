@@ -41,11 +41,6 @@ class SectionHeaderView: UICollectionViewCell {
         return button
     }()
     
-    private let actionImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,7 +48,6 @@ class SectionHeaderView: UICollectionViewCell {
         addSubview(titleLabel)
         addSubview(actionStackView)
         actionStackView.addArrangedSubview(actionButton)
-        actionStackView.addArrangedSubview(actionImageView)
         actionButton.addTarget(self, action: #selector(handleSeeAllTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -82,22 +76,12 @@ class SectionHeaderView: UICollectionViewCell {
             actionButton.setTitle("See all".localized, for: .normal)
             actionButton.titleLabel?.font = UIFont(name: "Roboto-Regular", size: 14)
             
-            let imageConfig = UIImage.SymbolConfiguration(pointSize: 8, weight: .medium)
-            let smallerImage = UIImage(named: "navigate_next", in: Bundle.main, compatibleWith: nil)?.withConfiguration(imageConfig)
-            let tintedArrowImage = smallerImage?.withRenderingMode(.alwaysTemplate)
-            actionImageView.image = tintedArrowImage?.imageFlippedForRightToLeftLayoutDirection()
-            
             if let customColor = tenantViewModel.primaryColor {
                 actionButton.tintColor = customColor
-                actionImageView.tintColor = customColor
             }
-            
             actionButton.isHidden = false
-            actionImageView.isHidden = false
-            
         } else {
             actionButton.isHidden = true
-            actionImageView.isHidden = true
         }
     }
 }

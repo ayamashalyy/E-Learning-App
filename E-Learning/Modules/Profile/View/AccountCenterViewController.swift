@@ -134,12 +134,13 @@ class AccountCenterViewController: UIViewController {
         stack.alignment = .fill
         stack.backgroundColor = UIColor.white
         stack.isLayoutMarginsRelativeArrangement = true
-        stack.layoutMargins = UIEdgeInsets(top: 30, left: 20, bottom: 0, right: 0)
+        stack.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         
         let horizontalStack = UIStackView()
         horizontalStack.axis = .horizontal
         horizontalStack.spacing = 10
         horizontalStack.isUserInteractionEnabled = true
+        horizontalStack.isLayoutMarginsRelativeArrangement = true
         horizontalStack.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         
         
@@ -174,18 +175,24 @@ class AccountCenterViewController: UIViewController {
             nameTextField.isHidden = true
             nameTextField.placeholder = userSessionManager.name
             nameTextField.backgroundColor = UIColor(named: "myLearning")
-            let paddingViewName = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            nameTextField.leftView = paddingViewName
-            nameTextField.leftViewMode = .always
             nameTextField.translatesAutoresizingMaskIntoConstraints = false
+            
+            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            
+            if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
+                nameTextField.rightView = paddingView
+                nameTextField.rightViewMode = .always
+                nameTextField.textAlignment = .right
+            } else {
+                nameTextField.leftView = paddingView
+                nameTextField.leftViewMode = .always
+                nameTextField.textAlignment = .left
+            }
             
             stack.addArrangedSubview(nameTextField)
             
             NSLayoutConstraint.activate([
-                nameTextField.heightAnchor.constraint(equalToConstant: 50),
-                nameTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                nameTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor),
-                
+                nameTextField.heightAnchor.constraint(equalToConstant: 50)
             ])
         }
         
@@ -196,17 +203,25 @@ class AccountCenterViewController: UIViewController {
             emailTextField.isHidden = true
             emailTextField.placeholder = userSessionManager.email
             emailTextField.backgroundColor = UIColor(named: "myLearning")
-            let paddingViewEmail = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            emailTextField.leftView = paddingViewEmail
-            emailTextField.leftViewMode = .always
             emailTextField.translatesAutoresizingMaskIntoConstraints = false
+            
+            let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+            
+            let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+            if isRTL {
+                emailTextField.rightView = paddingView
+                emailTextField.rightViewMode = .always
+                emailTextField.textAlignment = .right
+            } else {
+                emailTextField.leftView = paddingView
+                emailTextField.leftViewMode = .always
+                emailTextField.textAlignment = .left
+            }
             
             stack.addArrangedSubview(emailTextField)
             
             NSLayoutConstraint.activate([
-                emailTextField.heightAnchor.constraint(equalToConstant: 50),
-                emailTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                emailTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor)
+                emailTextField.heightAnchor.constraint(equalToConstant: 50)
             ])
         }
         
@@ -217,24 +232,27 @@ class AccountCenterViewController: UIViewController {
             currentPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             currentPasswordTextField.textColor = UIColor(named: "textfield")
             currentPasswordTextField.isHidden = true
-            currentPasswordTextField.placeholder = UserCredentialsManager.shared.newPassword
+            currentPasswordTextField.isSecureTextEntry = true
+            let currentPasswordPlaceholder = UserCredentialsManager.shared.newPassword ?? "Current Password"
+            currentPasswordTextField.placeholder = currentPasswordPlaceholder
             currentPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingViewCurrentPasswordTextField = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             currentPasswordTextField.leftView = paddingViewCurrentPasswordTextField
             currentPasswordTextField.leftViewMode = .always
             currentPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+            print("Current Password Placeholder: \(UserCredentialsManager.shared.newPassword ?? "nil")")
             
             let eyeButton1 = UIButton(type: .system)
             eyeButton1.tintColor = tenantViewModel.primaryColor
             eyeButton1.translatesAutoresizingMaskIntoConstraints = false
-            eyeButton1.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+            eyeButton1.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton1.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             
             eyeButton1.tag = 1
             currentPasswordTextField.rightViewMode = .always
             currentPasswordTextField.rightView = eyeButton1
             currentPasswordTextField.addSubview(eyeButton1)
-            
+            stack.spacing = 0
             stack.addArrangedSubview(currentPasswordTextField)
             
             
@@ -242,17 +260,19 @@ class AccountCenterViewController: UIViewController {
             newPasswordTextField.font = UIFont(name: "Roboto-Regular", size: 16)
             newPasswordTextField.textColor = UIColor(named: "textfield")
             newPasswordTextField.isHidden = true
-            newPasswordTextField.placeholder = UserCredentialsManager.shared.confirmPassword
+            newPasswordTextField.isSecureTextEntry = true
+            let newPasswordPlaceholder = UserCredentialsManager.shared.confirmPassword ?? "New Password"
+            newPasswordTextField.placeholder = newPasswordPlaceholder
             newPasswordTextField.backgroundColor = UIColor(named: "myLearning")
             let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             newPasswordTextField.leftView = paddingView
             newPasswordTextField.leftViewMode = .always
             newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
-            
+            print("New Password Placeholder: \(UserCredentialsManager.shared.confirmPassword ?? "nil")")
             
             let eyeButton2 = UIButton(type: .system)
             eyeButton2.tintColor = tenantViewModel.primaryColor
-            eyeButton2.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+            eyeButton2.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
             eyeButton2.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
             eyeButton2.tag = 2
             newPasswordTextField.rightViewMode = .always
@@ -262,25 +282,15 @@ class AccountCenterViewController: UIViewController {
             stack.addArrangedSubview(newPasswordTextField)
             
             NSLayoutConstraint.activate([
-                
                 currentPasswordTextField.heightAnchor.constraint(equalToConstant: 50),
-                currentPasswordTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                currentPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor),
-                
                 eyeButton1.trailingAnchor.constraint(equalTo: currentPasswordTextField.trailingAnchor, constant: -10),
-                eyeButton1.widthAnchor.constraint(equalToConstant: 90),
-                eyeButton1.heightAnchor.constraint(equalToConstant: 90),
-                
-                newPasswordTextField.topAnchor.constraint(equalTo: currentPasswordTextField.bottomAnchor, constant: 0),
+                eyeButton1.widthAnchor.constraint(equalToConstant: 50),
+                eyeButton1.heightAnchor.constraint(equalToConstant: 50),
                 newPasswordTextField.heightAnchor.constraint(equalToConstant: 50),
-                newPasswordTextField.leadingAnchor.constraint(equalTo: horizontalStack.leadingAnchor, constant: -20),
-                
-                newPasswordTextField.trailingAnchor.constraint(equalTo: horizontalStack.trailingAnchor),
-                eyeButton2.widthAnchor.constraint(equalToConstant: 90),
-                eyeButton2.heightAnchor.constraint(equalToConstant: 90)
-                
+                eyeButton2.trailingAnchor.constraint(equalTo: newPasswordTextField.trailingAnchor, constant: -10),
+                eyeButton2.widthAnchor.constraint(equalToConstant: 50),
+                eyeButton2.heightAnchor.constraint(equalToConstant: 50)
             ])
-            
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(stackTapped(_:)))

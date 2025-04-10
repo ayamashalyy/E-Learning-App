@@ -26,7 +26,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     var loginViewModel = LoginViewModel()
     private let refreshTokenViewModel = RefreshTokenViewModel()
     
-    var isPasswordVisible = true
+    var isPasswordVisible = false
     var tenantViewModel = TenantViewModel.shared
     
     override func viewDidLoad() {
@@ -65,6 +65,24 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         emailTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         emailTextField.textColor = .lightGray
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.clearButtonMode = .never
+        emailTextField.autocapitalizationType = .none
+        
+        let emailClearButton = UIButton(type: .custom)
+        emailClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        emailClearButton.tintColor = .lightGray
+        emailClearButton.addTarget(self, action: #selector(clearTextField(_:)), for: .touchUpInside)
+        emailClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+        if isRTL {
+            emailTextField.leftView = emailClearButton
+            emailTextField.leftViewMode = .whileEditing
+        } else {
+            emailTextField.rightView = emailClearButton
+            emailTextField.rightViewMode = .whileEditing
+        }
+        
         view.addSubview(emailTextField)
         
         
@@ -81,6 +99,24 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         passwordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         passwordTextField.textColor = .lightGray
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.clearButtonMode = .never
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.autocapitalizationType = .none
+        
+        let passwordClearButton = UIButton(type: .custom)
+        passwordClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        passwordClearButton.tintColor = .lightGray
+        passwordClearButton.addTarget(self, action: #selector(clearTextField(_:)), for: .touchUpInside)
+        passwordClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        if isRTL {
+            passwordTextField.leftView = passwordClearButton
+            passwordTextField.leftViewMode = .whileEditing
+        } else {
+            passwordTextField.rightView = passwordClearButton
+            passwordTextField.rightViewMode = .whileEditing
+        }
+        
         view.addSubview(passwordTextField)
         
         
@@ -94,7 +130,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         
         eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        eyeButton.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.tintColor = tenantViewModel.primaryColor ?? .red
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
@@ -141,7 +177,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         NSLayoutConstraint.activate([
             organizationNameText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            organizationNameText.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            organizationNameText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             organizationNameText.widthAnchor.constraint(equalToConstant: 300)
             
         ])
@@ -189,7 +225,7 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         
         NSLayoutConstraint.activate([
             goToYourOrgaizationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            goToYourOrgaizationButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 30),
+            goToYourOrgaizationButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 50),
             goToYourOrgaizationButton.widthAnchor.constraint(equalToConstant: 340),
             goToYourOrgaizationButton.heightAnchor.constraint(equalToConstant: 50)
         ])
@@ -327,6 +363,14 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         let navigationController = UINavigationController(rootViewController: nextViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
+    }
+    
+    @objc func clearTextField(_ sender: UIButton) {
+        if sender == emailTextField.leftView || sender == emailTextField.rightView {
+            emailTextField.text = ""
+        } else if sender == passwordTextField.leftView || sender == passwordTextField.rightView {
+            passwordTextField.text = ""
+        }
     }
 }
 

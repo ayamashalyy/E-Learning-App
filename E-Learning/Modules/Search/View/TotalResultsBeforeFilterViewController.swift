@@ -33,6 +33,7 @@ class TotalResultsBeforeFilterViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UINib(nibName: "TotalResultsTableViewCell", bundle: nil), forCellReuseIdentifier: "TotalResultsTableViewCell")
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.separatorStyle = .none
         view.addSubview(tableView)

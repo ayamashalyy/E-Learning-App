@@ -146,6 +146,7 @@ class CourseInteractionsViewController: UIViewController, UITableViewDataSource,
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(CommentCell.self, forCellReuseIdentifier: "CommentCell")
         tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false

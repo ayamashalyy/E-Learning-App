@@ -35,6 +35,7 @@ class RecentSearchesViewController: UIViewController {
         tableView.register(UINib(nibName: "RecentSearchesTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
     }

@@ -27,6 +27,7 @@ extension MyLearningViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let cellViewModel = viewModel.getCellViewModel(for: indexPath, segmentIndex: mySegmentedControl.selectedSegmentIndex)
         cell.configure(with: cellViewModel)
+        cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }

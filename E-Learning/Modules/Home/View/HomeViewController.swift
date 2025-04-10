@@ -46,6 +46,7 @@ class HomeViewController: UICollectionViewController,UICollectionViewDelegateFlo
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets.zero
+            collectionView.showsVerticalScrollIndicator = false
             layout.minimumInteritemSpacing = 0
             layout.minimumLineSpacing = 0
             layout.estimatedItemSize = .zero

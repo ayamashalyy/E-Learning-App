@@ -26,7 +26,8 @@ class KeychainManager {
         let addQuery = [
             kSecClass: kSecClassGenericPassword,
             kSecAttrAccount: key,
-            kSecValueData: data
+            kSecValueData: data,
+            kSecAttrAccessible: kSecAttrAccessibleWhenUnlocked
         ] as CFDictionary
         
         let status = SecItemAdd(addQuery, nil)

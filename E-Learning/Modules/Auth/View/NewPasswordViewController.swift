@@ -19,8 +19,8 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     var saveButton: UIButton!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
-    var isPasswordVisible = true
-    var isConfirePasswordVisible = true
+    var isPasswordVisible = false
+    var isConfirePasswordVisible = false
     var viewModel = ResetPasswordViewModel()
     var email: String = ""
     var otp: String = ""
@@ -49,6 +49,24 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         newPasswordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         newPasswordTextField.textColor = .lightGray
         newPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        newPasswordTextField.clearButtonMode = .never
+        newPasswordTextField.autocapitalizationType = .none
+        newPasswordTextField.isSecureTextEntry = true
+        
+        let newPasswordClearButton = UIButton(type: .custom)
+        newPasswordClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        newPasswordClearButton.tintColor = .lightGray
+        newPasswordClearButton.addTarget(self, action: #selector(clearTextField(_:)), for: .touchUpInside)
+        newPasswordClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+        if isRTL {
+            newPasswordTextField.leftView = newPasswordClearButton
+            newPasswordTextField.leftViewMode = .whileEditing
+        } else {
+            newPasswordTextField.rightView = newPasswordClearButton
+            newPasswordTextField.rightViewMode = .whileEditing
+        }
         view.addSubview(newPasswordTextField)
         
         
@@ -64,6 +82,24 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         confirmNewPasswordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         confirmNewPasswordTextField.textColor = .lightGray
         confirmNewPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        confirmNewPasswordTextField.clearButtonMode = .never
+        confirmNewPasswordTextField.autocapitalizationType = .none
+        confirmNewPasswordTextField.isSecureTextEntry = true
+        
+        let confirmNewPasswordClearButton = UIButton(type: .custom)
+        confirmNewPasswordClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        confirmNewPasswordClearButton.tintColor = .lightGray
+        confirmNewPasswordClearButton.addTarget(self, action: #selector(clearTextField(_:)), for: .touchUpInside)
+        confirmNewPasswordClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        let isRTLConfirmNewPassword = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+        if isRTLConfirmNewPassword {
+            confirmNewPasswordTextField.leftView = confirmNewPasswordClearButton
+            confirmNewPasswordTextField.leftViewMode = .whileEditing
+        } else {
+            confirmNewPasswordTextField.rightView = confirmNewPasswordClearButton
+            confirmNewPasswordTextField.rightViewMode = .whileEditing
+        }
         view.addSubview(confirmNewPasswordTextField)
         
         
@@ -76,7 +112,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         confirmNewPasswordController.borderRadius = 8
         
         eyeButton = UIButton(type: .custom)
-        eyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        eyeButton.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         eyeButton.tintColor = tenantViewModel.primaryColor ?? .red
@@ -84,7 +120,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         newPasswordTextField.rightViewMode = .always
         
         confireEyeButton = UIButton(type: .custom)
-        confireEyeButton.setImage(UIImage(named: "view")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
+        confireEyeButton.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
         confireEyeButton.translatesAutoresizingMaskIntoConstraints = false
         confireEyeButton.addTarget(self, action: #selector(toggleConfirePasswordVisibility), for: .touchUpInside)
         confireEyeButton.tintColor = tenantViewModel.primaryColor ?? .red
@@ -109,7 +145,7 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             newPasswordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            newPasswordTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
+            newPasswordTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             newPasswordTextField.widthAnchor.constraint(equalToConstant: 340),
             newPasswordTextField.heightAnchor.constraint(equalToConstant: 60)
             
@@ -220,5 +256,13 @@ class NewPasswordViewController: UIViewController, UITextFieldDelegate {
     
     @objc func cancelTapped() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func clearTextField(_ sender: UIButton) {
+        if sender == newPasswordTextField.leftView || sender == newPasswordTextField.rightView {
+            newPasswordTextField.text = ""
+        } else if sender == confirmNewPasswordTextField.leftView || sender == confirmNewPasswordTextField.rightView {
+            confirmNewPasswordTextField.text = ""
+        }
     }
 }

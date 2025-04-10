@@ -46,6 +46,7 @@ class TotalResultsAfterFilterViewController: UIViewController {
         tableView.register(UINib(nibName: "TotalResultsTableViewCell", bundle: nil), forCellReuseIdentifier: "TotalResultsTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         view.addSubview(tableView)
         

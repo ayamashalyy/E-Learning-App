@@ -70,6 +70,23 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         emailTextField.font = UIFont(name: "Roboto-Medium", size: 14)
         emailTextField.textColor = .lightGray
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.autocapitalizationType = .none
+        emailTextField.clearButtonMode = .never
+        
+        let emailClearButton = UIButton(type: .custom)
+        emailClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        emailClearButton.tintColor = .lightGray
+        emailClearButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        emailClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        
+        let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
+        if isRTL {
+            emailTextField.leftView = emailClearButton
+            emailTextField.leftViewMode = .whileEditing
+        } else {
+            emailTextField.rightView = emailClearButton
+            emailTextField.rightViewMode = .whileEditing
+        }
         view.addSubview(emailTextField)
         
         
@@ -99,7 +116,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             imageView.widthAnchor.constraint(equalToConstant: 100),
             imageView.heightAnchor.constraint(equalToConstant: 100)
         ])
@@ -158,5 +175,9 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func clearTextField() {
+        emailTextField.text = ""
     }
 }

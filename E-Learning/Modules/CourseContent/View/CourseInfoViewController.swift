@@ -346,7 +346,7 @@ class CourseInfoViewController: UIViewController, sendData {
             instractorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             instractorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20),
             instractorView.heightAnchor.constraint(equalToConstant: 200),
-            // instractorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
+            instractorView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)
         ])
         
     }

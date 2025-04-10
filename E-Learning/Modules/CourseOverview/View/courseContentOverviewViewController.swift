@@ -61,6 +61,7 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(CourseContentTableViewCell.self, forCellReuseIdentifier: "CourseContentTableViewCell")
         tableView.separatorStyle = .none
         
@@ -78,9 +79,9 @@ class courseContentOverviewViewController: UIViewController, UITableViewDelegate
         view.addSubview(noDataImageView)
         NSLayoutConstraint.activate([
             noDataImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            noDataImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            noDataImageView.widthAnchor.constraint(equalToConstant: 400),
-            noDataImageView.heightAnchor.constraint(equalToConstant: 400)
+            noDataImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noDataImageView.widthAnchor.constraint(equalToConstant: 300),
+            noDataImageView.heightAnchor.constraint(equalToConstant: 300)
         ])
     }
     

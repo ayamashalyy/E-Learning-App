@@ -35,6 +35,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
             let backButton = UIBarButtonItem(image: tintedImage, style: .plain, target: self, action: #selector(cancelTapped))
             self.navigationItem.leftBarButtonItem = backButton
         }
+        
+        otpFields.first?.becomeFirstResponder()
     }
     
     func setupViews() {
@@ -113,7 +115,7 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             descriptionResetPasswordText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionResetPasswordText.topAnchor.constraint(equalTo: view.topAnchor, constant: 140),
+            descriptionResetPasswordText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             descriptionResetPasswordText.widthAnchor.constraint(equalToConstant: 300),
             descriptionResetPasswordText.heightAnchor.constraint(equalToConstant: 30)
             

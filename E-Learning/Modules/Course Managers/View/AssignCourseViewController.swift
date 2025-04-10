@@ -45,6 +45,7 @@ class AssignCourseViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.registerCell(cellClass: AssignCourseCell.self)
         
         fetchNotAssignedCourses()

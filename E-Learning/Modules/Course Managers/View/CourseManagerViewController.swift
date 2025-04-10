@@ -30,6 +30,7 @@ class CourseManagerViewController: UIViewController {
         ])
         
         tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.dataSource = self
         tableView.registerCell(cellClass: LearnersCell.self)
         fetchLearners()

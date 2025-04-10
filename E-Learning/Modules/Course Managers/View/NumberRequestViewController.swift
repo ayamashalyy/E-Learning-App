@@ -34,6 +34,7 @@ class NumberRequestViewController: UIViewController {
         learnerImage.layer.borderColor = tenantViewModel.secondaryColor?.cgColor
         learnerImage.clipsToBounds = true
         tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.dataSource = self
         tableView.registerCell(cellClass: NumberRequestCell.self)
         

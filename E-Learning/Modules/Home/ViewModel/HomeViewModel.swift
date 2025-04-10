@@ -77,9 +77,9 @@ class HomeViewModel {
     }
     
     func getLastCourseWatchedViewModel() -> ProgressContinueViewModel? {
-           guard let lastCourse = getLastCourseWatched() else {
-               return nil
-           }
-           return ProgressContinueViewModel(course: lastCourse)
-       }
+        guard let lastCourse = getLastCourseWatched() else {
+            return nil
+        }
+        return ProgressContinueViewModel(course: lastCourse)
+    }
 }

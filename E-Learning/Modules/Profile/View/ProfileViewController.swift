@@ -123,6 +123,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
@@ -296,23 +297,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 self.present(navigationController, animated: true, completion: nil)
                 
             case "About VINSYS".localized:
-                let nextController = AboutViewController()
-                let navigationController = UINavigationController(rootViewController: nextController)
-                navigationController.modalPresentationStyle = .fullScreen
-                self.present(navigationController, animated: true, completion: nil)
-                
+                break
             case "Terms and Conditions".localized:
-                let nextController = TermsAndConditionsViewController()
-                let navigationController = UINavigationController(rootViewController: nextController)
-                navigationController.modalPresentationStyle = .fullScreen
-                self.present(navigationController, animated: true, completion: nil)
-                
+                break
             case "Privacy & Policy".localized:
-                let nextController = PrivacyAndPolicyViewController()
-                let navigationController = UINavigationController(rootViewController: nextController)
-                navigationController.modalPresentationStyle = .fullScreen
-                self.present(navigationController, animated: true, completion: nil)
-                
+                break
             case "Log out".localized:
                 logoutUser()
             default:

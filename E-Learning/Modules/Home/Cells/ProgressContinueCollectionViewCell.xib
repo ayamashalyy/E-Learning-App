@@ -13,7 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContinueCell" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="ProgressContinueCollectionViewCell" customModule="E_Learning" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ContinueCell" translatesAutoresizingMaskIntoConstraints="YES" id="gTV-IL-0wX" customClass="ProgressContinueCollectionViewCell" customModule="E_Learning" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="379" height="196"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="379" height="196"/>
@@ -52,7 +52,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="w9Q-fq-Or7">
                                         <rect key="frame" x="0.0" y="50" width="347" height="122"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2" translatesAutoresizingMaskIntoConstraints="NO" id="X9I-s2-JKo">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X9I-s2-JKo">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="122"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="120" id="5u5-ol-ZRf"/>
@@ -154,7 +154,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Rectangle 2" width="128" height="99"/>
         <namedColor name="onboradColor">
             <color red="0.69019607843137254" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

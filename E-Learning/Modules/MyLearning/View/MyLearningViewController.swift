@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SDWebImage
 
-class MyLearningViewController: UIViewController {
+class MyLearningViewController: UIViewController, MyLearningTableViewCellDelegate {
     
     // MARK: - Properties
     
@@ -41,6 +42,7 @@ class MyLearningViewController: UIViewController {
     private func setupTableView() {
         tabelView.delegate = self
         tabelView.dataSource = self
+        tabelView.showsVerticalScrollIndicator = false
         tabelView.register(UINib(nibName: "MyLearningTableViewCell", bundle: nil), forCellReuseIdentifier: "MyLearningTableViewCell")
     }
     
@@ -78,4 +80,37 @@ class MyLearningViewController: UIViewController {
         tabelView.reloadData()
     }
     
+    // MARK: - Delegate Method
+    
+    func didTapShareCertificate(certificateURL: String) {
+        print("Certificate URL: \(certificateURL)")
+        guard let url = URL(string: certificateURL) else {
+            print("Invalid certificate URL: \(certificateURL)")
+            return
+        }
+        
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        loadingIndicator.center = view.center
+        loadingIndicator.startAnimating()
+        view.addSubview(loadingIndicator)
+        
+        SDWebImageManager.shared.loadImage(with: url, options: .highPriority, progress: nil) { [weak self] (image, data, error, cacheType, finished, imageURL) in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                
+                loadingIndicator.stopAnimating()
+                loadingIndicator.removeFromSuperview()
+                
+                if let image = image, error == nil {
+                    let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                    activityViewController.excludedActivityTypes = [.addToReadingList, .assignToContact]
+                    self.present(activityViewController, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Failed to load certificate image", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+    }
 }

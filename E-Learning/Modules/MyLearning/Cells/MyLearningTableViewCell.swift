@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MyLearningTableViewCellDelegate: AnyObject {
+    func didTapShareCertificate(certificateURL: String)
+}
+
 class MyLearningTableViewCell: UITableViewCell {
     
     @IBOutlet weak var outerView: UIView!
@@ -22,7 +26,8 @@ class MyLearningTableViewCell: UITableViewCell {
     
     var tenantViewModel = TenantViewModel.shared
     var state: LearningState = .inProgress
-    
+    weak var delegate: MyLearningTableViewCellDelegate?
+    private var viewModel: MyLearningCellViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -73,6 +78,7 @@ class MyLearningTableViewCell: UITableViewCell {
     }
     
     func configure(with viewModel: MyLearningCellViewModel) {
+        self.viewModel = viewModel
         self.state = viewModel.state
         resetCell()
         myLearningCategory.text = viewModel.courseTitleCategory
@@ -134,5 +140,11 @@ class MyLearningTableViewCell: UITableViewCell {
         
         myLearningBtn.contentEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
         myLearningBtn.layoutIfNeeded()
+    }
+    
+    @IBAction func shareCertificateButton(_ sender: UIButton) {
+        if state == .completed, let certificateURL = viewModel?.certificate {
+            delegate?.didTapShareCertificate(certificateURL: certificateURL)
+        }
     }
 }
