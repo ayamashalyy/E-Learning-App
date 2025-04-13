@@ -45,7 +45,7 @@ extension SearchViewController: UITextFieldDelegate {
     @objc func cancelButtonTapped() {
         searchTextField.text = ""
         searchTextField.resignFirstResponder()
-        viewModel.currentState = .recentSearches
+        viewModel.currentState = viewModel.recentSearches.isEmpty ? .emptySearch : .recentSearches
         updateUIForCurrentState()
     }
     
