@@ -328,6 +328,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.secondaryColor)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.urlTenant)
                 UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.selectedTenant)
+                UserCredentialsManager.shared.clearCredentials()
+                UserSessionManager.shared.clearUserSession()
                 self?.navigateToLoginScreen()
                 
             case .failure(let error):

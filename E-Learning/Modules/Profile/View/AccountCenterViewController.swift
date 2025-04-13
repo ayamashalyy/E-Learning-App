@@ -403,17 +403,24 @@ class AccountCenterViewController: UIViewController {
             return
         }
         
-        if !profileUpdateViewModel.isValidPassword(currentPassword) {
-            showAlert(title: "Invalid Password", message: "The password field must be at least 8 characters.")
-            return
+        // Check password only if user entered something in the password fields
+        if !currentPassword.isEmpty || !confirmationPassword.isEmpty {
+            if !profileUpdateViewModel.isValidPassword(currentPassword) {
+                showAlert(title: "Invalid Password", message: "The password field must be at least 8 characters.")
+                return
+            }
+            
+            if currentPassword != confirmationPassword {
+                showAlert(title: "Password Mismatch", message: "The password field confirmation does not match.")
+                return
+            }
         }
         
-        if currentPassword != confirmationPassword {
-            showAlert(title: "Password Mismatch", message: "The password field confirmation does not match.")
-            return
-        }
+        // If no password is provided, pass the existing one or nil
+        let passwordToSend = currentPassword.isEmpty ? UserCredentialsManager.shared.newPassword : currentPassword
+        let confirmationPasswordToSend = confirmationPassword.isEmpty ? UserCredentialsManager.shared.confirmPassword : confirmationPassword
         
-        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, password: currentPassword, password_confirmation: confirmationPassword, token: token) { result in
+        profileUpdateViewModel.updateProfile(name: name, email: email, avatar: nil, password: passwordToSend ?? "", password_confirmation: confirmationPasswordToSend ?? "", token: token) { result in
             switch result {
             case .success(let data):
                 if let data = data, let responseString = String(data: data, encoding: .utf8) {
@@ -421,8 +428,10 @@ class AccountCenterViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.userSessionManager.name = name
                         self.userSessionManager.email = email
-                        UserCredentialsManager.shared.newPassword = currentPassword
-                        UserCredentialsManager.shared.confirmPassword = confirmationPassword
+                        if !currentPassword.isEmpty {
+                            UserCredentialsManager.shared.newPassword = currentPassword
+                            UserCredentialsManager.shared.confirmPassword = confirmationPassword
+                        }
                         self.dismiss(animated: true, completion: nil)
                     }
                 } else {

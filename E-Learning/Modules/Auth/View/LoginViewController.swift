@@ -282,6 +282,8 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                 if let token = response?.token, let role = response?.role {
                     UserDefaults.standard.set(token, forKey: UserDefaultsKeys.userToken)
                     UserSessionManager.shared.token = token
+                    UserCredentialsManager.shared.newPassword = password
+                    UserCredentialsManager.shared.confirmPassword = password
                     print("DEBUG: Role received from API = \(role)")
                     let alert = UIAlertController(title: "Success", message: response?.message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in

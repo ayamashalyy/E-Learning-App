@@ -52,9 +52,11 @@ class KeychainManager {
         let status = SecItemCopyMatching(query, &data)
         
         if status == errSecSuccess, let retrievedData = data as? Data {
-            return String(data: retrievedData, encoding: .utf8)
+            let password = String(data: retrievedData, encoding: .utf8)
+            print("Retrieved password for key \(key): \(password ?? "nil")")
+            return password
         } else {
-            print("Failed to retrieve password")
+            print("Failed to retrieve password for key \(key), status: \(status)")
             return nil
         }
     }
