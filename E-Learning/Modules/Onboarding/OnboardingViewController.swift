@@ -59,7 +59,7 @@ class OnboardingViewController: UIViewController {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             imageView.widthAnchor.constraint(equalToConstant: 260),
             imageView.heightAnchor.constraint(equalToConstant: 260)
         ])

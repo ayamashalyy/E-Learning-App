@@ -6,19 +6,18 @@
 //
 
 import UIKit
-import MaterialComponents
 
 class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
     
     var imageView: UIImageView!
     var ForgetPasswordText: UILabel!
     var descriptionForgetPasswordText: UITextView!
-    var emailTextField: MDCTextField!
-    var emailController: MDCTextInputControllerOutlined!
+    var emailTextField: FloatingLabelTextFieldView!
     var getVerificationCodeButton: UIButton!
     var tenantViewModel = TenantViewModel.shared
     var backButtonImage: UIImage!
     var sendOTPViewModel = SendOTPViewModel.shared
+    var loginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,37 +65,27 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
         descriptionForgetPasswordText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionForgetPasswordText)
         
-        emailTextField = MDCTextField()
-        emailTextField.font = UIFont(name: "Roboto-Medium", size: 14)
-        emailTextField.textColor = .lightGray
+        emailTextField = FloatingLabelTextFieldView()
+        emailTextField.setLabelText("Email".localized)
+        emailTextField.textField.keyboardType = .emailAddress
+        emailTextField.textField.autocapitalizationType = .none
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.autocapitalizationType = .none
-        emailTextField.clearButtonMode = .never
         
         let emailClearButton = UIButton(type: .custom)
         emailClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         emailClearButton.tintColor = .lightGray
         emailClearButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
         emailClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        
         let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
         if isRTL {
-            emailTextField.leftView = emailClearButton
-            emailTextField.leftViewMode = .whileEditing
+            emailTextField.textField.leftView = emailClearButton
+            emailTextField.textField.leftViewMode = .whileEditing
         } else {
-            emailTextField.rightView = emailClearButton
-            emailTextField.rightViewMode = .whileEditing
+            emailTextField.textField.rightView = emailClearButton
+            emailTextField.textField.rightViewMode = .whileEditing
         }
+        
         view.addSubview(emailTextField)
-        
-        
-        emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
-        emailController.placeholderText = "Email".localized
-        emailController.normalColor = .lightGray
-        emailController.activeColor = .lightGray
-        emailController.floatingPlaceholderActiveColor = .black
-        emailController.floatingPlaceholderScale = 0.8
-        emailController.borderRadius = 8
         
         getVerificationCodeButton = UIButton(type: .system)
         getVerificationCodeButton.setTitle("Get verification code".localized, for: .normal)
@@ -137,7 +126,7 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: descriptionForgetPasswordText.bottomAnchor, constant: 40),
             emailTextField.widthAnchor.constraint(equalToConstant: 340),
-            emailTextField.heightAnchor.constraint(equalToConstant: 60)
+            emailTextField.heightAnchor.constraint(equalToConstant: 56)
         ])
         
         NSLayoutConstraint.activate([
@@ -150,9 +139,13 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
     
     
     @objc func getVerificationCodeButtonTapped() {
-        
-        guard let email = emailTextField.text, !email.isEmpty else {
+        guard let email = emailTextField.textField.text, !email.isEmpty else {
             showAlert(message: "Please enter your email address.")
+            return
+        }
+        
+        guard loginViewModel.isValidEmail(email) else {
+            showAlert(message: "Please enter a valid email address.")
             return
         }
         
@@ -164,12 +157,13 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
                     let navigationController = UINavigationController(rootViewController: nextViewController)
                     navigationController.modalPresentationStyle = .fullScreen
                     self?.present(navigationController, animated: true, completion: nil)
-                }else {
-                    self?.showAlert(message: message ?? "Failed to send OTP. Please try again.")
+                } else {
+                    self?.showAlert(message: "This email is not registered. Please try again.")
                 }
             }
         }
     }
+    
     
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -178,6 +172,6 @@ class ForgetPasswordViewController: UIViewController, UITextFieldDelegate{
     }
     
     @objc func clearTextField() {
-        emailTextField.text = ""
+        emailTextField.textField.text = ""
     }
 }

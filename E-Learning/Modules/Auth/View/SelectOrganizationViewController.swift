@@ -6,15 +6,13 @@
 //
 
 import UIKit
-import MaterialComponents
 import SDWebImage
 
 class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     
     var enterOrganizationNameText: UILabel!
-    var organizationNameTextField: MDCTextField!
+    var organizationNameTextField: FloatingLabelTextFieldView!
     var goToYourOrgaizationButton: UIButton!
-    var organizationNameController: MDCTextInputControllerOutlined!
     var tenantViewModel = TenantViewModel.shared
     var logoViewController: LogoViewController?
     
@@ -35,38 +33,24 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         enterOrganizationNameText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(enterOrganizationNameText)
         
-        organizationNameTextField = MDCTextField()
-        organizationNameTextField.font = UIFont(name: "Roboto-Medium", size: 14)
-        organizationNameTextField.textColor = .lightGray
+        organizationNameTextField = FloatingLabelTextFieldView()
+        organizationNameTextField.setLabelText("Organization Name")
         organizationNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        organizationNameTextField.clearButtonMode = .never
-        organizationNameTextField.autocapitalizationType = .none
         
-        let clearButton = UIButton(type: .custom)
-        clearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-        clearButton.tintColor = .lightGray
-        clearButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
-        clearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        
+        let organizationNameClearButton = UIButton(type: .custom)
+        organizationNameClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        organizationNameClearButton.tintColor = .lightGray
+        organizationNameClearButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        organizationNameClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
         if isRTL {
-            organizationNameTextField.leftView = clearButton
-            organizationNameTextField.leftViewMode = .whileEditing
+            organizationNameTextField.textField.leftView = organizationNameClearButton
+            organizationNameTextField.textField.leftViewMode = .whileEditing
         } else {
-            organizationNameTextField.rightView = clearButton
-            organizationNameTextField.rightViewMode = .whileEditing
+            organizationNameTextField.textField.rightView = organizationNameClearButton
+            organizationNameTextField.textField.rightViewMode = .whileEditing
         }
-        
         view.addSubview(organizationNameTextField)
-        
-        
-        organizationNameController = MDCTextInputControllerOutlined(textInput: organizationNameTextField)
-        organizationNameController.placeholderText = "Organization Name".localized
-        organizationNameController.normalColor = .lightGray
-        organizationNameController.activeColor = .lightGray
-        organizationNameController.floatingPlaceholderActiveColor = .black
-        organizationNameController.floatingPlaceholderScale = 0.8
-        organizationNameController.borderRadius = 8
         
         
         goToYourOrgaizationButton = UIButton(type: .system)
@@ -91,9 +75,9 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
         
         NSLayoutConstraint.activate([
             organizationNameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            organizationNameTextField.topAnchor.constraint(equalTo: enterOrganizationNameText.bottomAnchor, constant: 40),
+            organizationNameTextField.topAnchor.constraint(equalTo: enterOrganizationNameText.bottomAnchor, constant: 50),
             organizationNameTextField.widthAnchor.constraint(equalToConstant: 340),
-            organizationNameTextField.heightAnchor.constraint(equalToConstant: 60)
+            organizationNameTextField.heightAnchor.constraint(equalToConstant: 56)
         ])
         
         NSLayoutConstraint.activate([
@@ -105,7 +89,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func goToYourOrgaizationButtonTapped() {
-        guard let organizationName = organizationNameTextField.text, !organizationName.isEmpty else {
+        guard let organizationName = organizationNameTextField.textField.text, !organizationName.isEmpty else {
             let alert = UIAlertController(title: "Error", message: "Organization name is required", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
@@ -162,7 +146,7 @@ class SelectOrganizationViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func clearTextField() {
-        organizationNameTextField.text = ""
+        organizationNameTextField.textField.text = ""
     }
 }
 

@@ -95,6 +95,7 @@
 		E80CC1C12D78F04900F7BA3A /* HomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */; };
 		E80CC1C32D78FDA800F7BA3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */; };
 		E85581222DA8497B00883CE1 /* AccountCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85581212DA8497B00883CE1 /* AccountCenterViewController.swift */; };
+		E869860C2DAC69F100518944 /* FloatingLabelTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E869860B2DAC69F100518944 /* FloatingLabelTextFieldView.swift */; };
 		E87C76402DA19EDD001B04FF /* learners.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C763F2DA19EDD001B04FF /* learners.swift */; };
 		E87C76422DA1A13A001B04FF /* LearnersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C76412DA1A13A001B04FF /* LearnersViewModel.swift */; };
 		E87C76442DA1ADAC001B04FF /* LearnerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E87C76432DA1ADAC001B04FF /* LearnerDetails.swift */; };
@@ -125,7 +126,7 @@
 		E8B219932D8D8B0B0018F70A /* ProgressContinueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B219922D8D8B0B0018F70A /* ProgressContinueViewModel.swift */; };
 		E8B29E3D2D511AF80083C471 /* SendOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E3C2D511AF80083C471 /* SendOTPViewModel.swift */; };
 		E8B29E3F2D511C370083C471 /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E3E2D511C370083C471 /* OTP.swift */; };
-		E8B29E412D51252E0083C471 /*  VerifyOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */; };
+		E8B29E412D51252E0083C471 /* VerifyOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B29E402D51252E0083C471 /* VerifyOTPViewModel.swift */; };
 		E8B2B34C2D90675400B35C19 /* QuizSubmitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B34B2D90675400B35C19 /* QuizSubmitResponse.swift */; };
 		E8B2B34F2D90770E00B35C19 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B2B34E2D90770E00B35C19 /* QuizViewModel.swift */; };
 		E8B344902D68EC3A00F14EEE /* CourseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B3448F2D68EC3A00F14EEE /* CourseCategory.swift */; };
@@ -275,6 +276,7 @@
 		E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponse.swift; sourceTree = "<group>"; };
 		E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E85581212DA8497B00883CE1 /* AccountCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCenterViewController.swift; sourceTree = "<group>"; };
+		E869860B2DAC69F100518944 /* FloatingLabelTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLabelTextFieldView.swift; sourceTree = "<group>"; };
 		E87C763F2DA19EDD001B04FF /* learners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = learners.swift; sourceTree = "<group>"; };
 		E87C76412DA1A13A001B04FF /* LearnersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnersViewModel.swift; sourceTree = "<group>"; };
 		E87C76432DA1ADAC001B04FF /* LearnerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerDetails.swift; sourceTree = "<group>"; };
@@ -305,7 +307,7 @@
 		E8B219922D8D8B0B0018F70A /* ProgressContinueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressContinueViewModel.swift; sourceTree = "<group>"; };
 		E8B29E3C2D511AF80083C471 /* SendOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOTPViewModel.swift; sourceTree = "<group>"; };
 		E8B29E3E2D511C370083C471 /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
-		E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " VerifyOTPViewModel.swift"; sourceTree = "<group>"; };
+		E8B29E402D51252E0083C471 /* VerifyOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyOTPViewModel.swift; sourceTree = "<group>"; };
 		E8B2B34B2D90675400B35C19 /* QuizSubmitResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSubmitResponse.swift; sourceTree = "<group>"; };
 		E8B2B34E2D90770E00B35C19 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		E8B3448F2D68EC3A00F14EEE /* CourseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCategory.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				0377D46B2CEBBA0E006C60F6 /* TabBarViewController.swift */,
+				E869860B2DAC69F100518944 /* FloatingLabelTextFieldView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -616,7 +619,7 @@
 				E88E5FEE2D44F934002A38C8 /* TenantViewModel.swift */,
 				E8B12EEB2D4FF8CC005B0E3E /* LoginViewModel.swift */,
 				E8B29E3C2D511AF80083C471 /* SendOTPViewModel.swift */,
-				E8B29E402D51252E0083C471 /*  VerifyOTPViewModel.swift */,
+				E8B29E402D51252E0083C471 /* VerifyOTPViewModel.swift */,
 				E8B375C72D51758200FC383B /* ResetPasswordViewModel.swift */,
 				E8B3449B2D691DC000F14EEE /* RefreshTokenViewModel.swift */,
 			);
@@ -1258,6 +1261,7 @@
 				03BCA3912D08C0C80025B833 /* MatchingCell.swift in Sources */,
 				E8B668EC2D6F1BB800227314 /* MyLearningResponse.swift in Sources */,
 				E8BF8E6E2D7329A30072E2B1 /* SearchViewController+TotalResultsBeforeFilterViewControllerDelegate.swift in Sources */,
+				E869860C2DAC69F100518944 /* FloatingLabelTextFieldView.swift in Sources */,
 				E8D4C9EB2D9182BF009CDF80 /* LessonType.swift in Sources */,
 				035A5CEB2CF8DB0300929234 /* ProfileItemCell.swift in Sources */,
 				E8BB32882D61EE08006CBB2A /* KeychainManager.swift in Sources */,
@@ -1323,7 +1327,7 @@
 				E8C644C42D53A83400EDA483 /* ProfileUpdateViewModel.swift in Sources */,
 				E88E5FF52D453A4F002A38C8 /* LogoViewController.swift in Sources */,
 				E8B5513C2D96FB0E00AE522D /* QuizReviewResponse.swift in Sources */,
-				E8B29E412D51252E0083C471 /*  VerifyOTPViewModel.swift in Sources */,
+				E8B29E412D51252E0083C471 /* VerifyOTPViewModel.swift in Sources */,
 				E8BAC1932D8EA04A0044B17A /* ProgressCourseViewModel.swift in Sources */,
 				E8C644BE2D5387F300EDA483 /* Profile.swift in Sources */,
 				E8B3449C2D691DC000F14EEE /* RefreshTokenViewModel.swift in Sources */,

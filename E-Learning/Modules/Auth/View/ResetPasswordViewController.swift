@@ -173,8 +173,8 @@ class ResetPasswordViewController: UIViewController, UITextFieldDelegate {
         let otp = otpFields.map { $0.text ?? "" }.joined()
         let viewModel =  VerifyOTPViewModel(email: emailLabel.text ?? "", otp: otp)
         viewModel.verifyOTP { errorMessage in
-            if let errorMessage = errorMessage {
-                self.showAlert(message: errorMessage)
+            if errorMessage != nil {
+                self.showAlert(message: "The code you entered is incorrect. Please try again.")
             }else {
                 let nextViewController = NewPasswordViewController()
                 nextViewController.email = self.emailLabel.text ?? ""

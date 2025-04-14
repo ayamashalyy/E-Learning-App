@@ -6,23 +6,18 @@
 //
 
 import UIKit
-import MaterialComponents
 
-class LoginViewController: UIViewController , UITextFieldDelegate{
+class LoginViewController: UIViewController {
     
     var organizationNameText: UILabel!
     var welcomeBackText: UILabel!
-    var emailTextField: MDCTextField!
-    var emailController: MDCTextInputControllerOutlined!
-    var passwordTextField: MDCTextField!
-    var passwordController: MDCTextInputControllerOutlined!
-    var goToYourOrgaizationButton: UIButton!
+    var emailTextField: FloatingLabelTextFieldView!
+    var passwordTextField: FloatingLabelTextFieldView!
+    var goToYourOrganizationButton: UIButton!
     var eyeButton: UIButton!
     var rememberMeCheckbox: UIButton!
     var rememberMeLabel: UILabel!
     var forgetPasswordButton: UIButton!
-    var alreadyHaveAccountLabel: UILabel!
-    var loginButton: UIButton!
     var loginViewModel = LoginViewModel()
     private let refreshTokenViewModel = RefreshTokenViewModel()
     
@@ -34,16 +29,11 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
         checkRememberedUser()
     }
     
-    
     func setupViews() {
-        
         organizationNameText = UILabel()
-        //organizationNameText.text = "Vinsys Academy".localized
         organizationNameText.text = tenantViewModel.organizationName
         organizationNameText.font = UIFont(name: "Roboto-Bold", size: 24)
         organizationNameText.textColor = tenantViewModel.primaryColor
@@ -61,81 +51,77 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         welcomeBackText.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(welcomeBackText)
         
-        emailTextField = MDCTextField()
-        emailTextField.font = UIFont(name: "Roboto-Medium", size: 14)
-        emailTextField.textColor = .lightGray
+        emailTextField = FloatingLabelTextFieldView()
+        emailTextField.setLabelText("Email".localized)
+        emailTextField.textField.keyboardType = .emailAddress
+        emailTextField.textField.autocapitalizationType = .none
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.clearButtonMode = .never
-        emailTextField.autocapitalizationType = .none
+        
+        emailTextField.onTextFieldShouldReturn = { [weak self] in
+            print("emailTextField should return")
+            self?.passwordTextField.textField.becomeFirstResponder()
+            return true
+        }
+        
         
         let emailClearButton = UIButton(type: .custom)
         emailClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         emailClearButton.tintColor = .lightGray
         emailClearButton.addTarget(self, action: #selector(clearTextField(_:)), for: .touchUpInside)
         emailClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        
         let isRTL = UIView.userInterfaceLayoutDirection(for: view.semanticContentAttribute) == .rightToLeft
         if isRTL {
-            emailTextField.leftView = emailClearButton
-            emailTextField.leftViewMode = .whileEditing
+            emailTextField.textField.leftView = emailClearButton
+            emailTextField.textField.leftViewMode = .whileEditing
         } else {
-            emailTextField.rightView = emailClearButton
-            emailTextField.rightViewMode = .whileEditing
+            emailTextField.textField.rightView = emailClearButton
+            emailTextField.textField.rightViewMode = .whileEditing
         }
         
         view.addSubview(emailTextField)
         
-        
-        emailController = MDCTextInputControllerOutlined(textInput: emailTextField)
-        emailController.placeholderText = "Email".localized
-        emailController.normalColor = .lightGray
-        emailController.activeColor = .lightGray
-        emailController.floatingPlaceholderActiveColor = .black
-        emailController.floatingPlaceholderScale = 0.8
-        emailController.borderRadius = 8
-        
-        
-        passwordTextField = MDCTextField()
-        passwordTextField.font = UIFont(name: "Roboto-Medium", size: 14)
-        passwordTextField.textColor = .lightGray
+        passwordTextField = FloatingLabelTextFieldView()
+        passwordTextField.setLabelText("Password".localized)
+        passwordTextField.textField.isSecureTextEntry = true
+        passwordTextField.textField.keyboardType = .default
+        passwordTextField.textField.autocapitalizationType = .none
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.clearButtonMode = .never
-        passwordTextField.isSecureTextEntry = true
-        passwordTextField.autocapitalizationType = .none
+        
+        passwordTextField.onTextFieldShouldReturn = { [weak self] in
+            guard let self = self else { return true }
+            print("passwordTextField should return called")
+            if let email = emailTextField.textField.text, !email.isEmpty,
+               let password = passwordTextField.textField.text, !password.isEmpty {
+                print("Both fields filled, calling goToYourOrganizationButtonTapped")
+                passwordTextField.textField.resignFirstResponder()
+                goToYourOrganizationButtonTapped()
+            } else {
+                print("Fields empty, resigning first responder")
+                passwordTextField.textField.resignFirstResponder()
+            }
+            return true
+        }
         
         let passwordClearButton = UIButton(type: .custom)
         passwordClearButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
         passwordClearButton.tintColor = .lightGray
         passwordClearButton.addTarget(self, action: #selector(clearTextField(_:)), for: .touchUpInside)
         passwordClearButton.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        
         if isRTL {
-            passwordTextField.leftView = passwordClearButton
-            passwordTextField.leftViewMode = .whileEditing
+            passwordTextField.textField.leftView = passwordClearButton
+            passwordTextField.textField.leftViewMode = .whileEditing
         } else {
-            passwordTextField.rightView = passwordClearButton
-            passwordTextField.rightViewMode = .whileEditing
+            passwordTextField.textField.rightView = passwordClearButton
+            passwordTextField.textField.rightViewMode = .whileEditing
         }
-        
         view.addSubview(passwordTextField)
-        
-        
-        passwordController = MDCTextInputControllerOutlined(textInput: passwordTextField)
-        passwordController.placeholderText = "Password".localized
-        passwordController.normalColor = .lightGray
-        passwordController.activeColor = .lightGray
-        passwordController.floatingPlaceholderActiveColor = .black
-        passwordController.floatingPlaceholderScale = 0.8
-        passwordController.borderRadius = 8
-        
         
         eyeButton = UIButton(type: .custom)
         eyeButton.setImage(UIImage(named: "hide")?.imageFlippedForRightToLeftLayoutDirection(), for: .normal)
-        eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.tintColor = tenantViewModel.primaryColor ?? .red
         eyeButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
-        passwordTextField.rightView = eyeButton
-        passwordTextField.rightViewMode = .always
+        passwordTextField.textField.rightView = eyeButton
+        passwordTextField.textField.rightViewMode = .always
         
         rememberMeCheckbox = UIButton(type: .custom)
         rememberMeCheckbox.setImage(UIImage(systemName: "square"), for: .normal)
@@ -160,47 +146,42 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         forgetPasswordButton.addTarget(self, action: #selector(forgetPasswordTapped), for: .touchUpInside)
         view.addSubview(forgetPasswordButton)
         
-        
-        goToYourOrgaizationButton = UIButton(type: .system)
-        goToYourOrgaizationButton.setTitle("Login".localized, for: .normal)
-        goToYourOrgaizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
-        goToYourOrgaizationButton.setTitleColor(UIColor.white, for: .normal)
-        goToYourOrgaizationButton.backgroundColor = tenantViewModel.primaryColor
-        goToYourOrgaizationButton.layer.cornerRadius = 25
-        goToYourOrgaizationButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(goToYourOrgaizationButton)
-        goToYourOrgaizationButton.addTarget(self, action: #selector(goToYourOrgaizationButtonTapped), for: .touchUpInside)
-        
+        goToYourOrganizationButton = UIButton(type: .system)
+        goToYourOrganizationButton.setTitle("Login".localized, for: .normal)
+        goToYourOrganizationButton.titleLabel?.font = UIFont(name: "Roboto-Bold", size: 16)
+        goToYourOrganizationButton.setTitleColor(UIColor.white, for: .normal)
+        goToYourOrganizationButton.backgroundColor = tenantViewModel.primaryColor
+        goToYourOrganizationButton.layer.cornerRadius = 25
+        goToYourOrganizationButton.translatesAutoresizingMaskIntoConstraints = false
+        goToYourOrganizationButton.addTarget(self, action: #selector(goToYourOrganizationButtonTapped), for: .touchUpInside)
+        view.addSubview(goToYourOrganizationButton)
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             organizationNameText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             organizationNameText.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             organizationNameText.widthAnchor.constraint(equalToConstant: 300)
-            
         ])
         
         NSLayoutConstraint.activate([
             welcomeBackText.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             welcomeBackText.topAnchor.constraint(equalTo: organizationNameText.bottomAnchor, constant: 15),
             welcomeBackText.widthAnchor.constraint(equalToConstant: 300)
-            
         ])
         
         NSLayoutConstraint.activate([
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: welcomeBackText.bottomAnchor, constant: 40),
             emailTextField.widthAnchor.constraint(equalToConstant: 340),
-            emailTextField.heightAnchor.constraint(equalToConstant: 60)
+            emailTextField.heightAnchor.constraint(equalToConstant: 56)
         ])
         
         NSLayoutConstraint.activate([
             passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
             passwordTextField.widthAnchor.constraint(equalToConstant: 340),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 60)
+            passwordTextField.heightAnchor.constraint(equalToConstant: 56)
         ])
         
         NSLayoutConstraint.activate([
@@ -220,54 +201,46 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
             forgetPasswordButton.centerYAnchor.constraint(equalTo: rememberMeCheckbox.centerYAnchor)
         ])
         
-        
-        
-        
         NSLayoutConstraint.activate([
-            goToYourOrgaizationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            goToYourOrgaizationButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 50),
-            goToYourOrgaizationButton.widthAnchor.constraint(equalToConstant: 340),
-            goToYourOrgaizationButton.heightAnchor.constraint(equalToConstant: 50)
+            goToYourOrganizationButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            goToYourOrganizationButton.topAnchor.constraint(equalTo: forgetPasswordButton.bottomAnchor, constant: 50),
+            goToYourOrganizationButton.widthAnchor.constraint(equalToConstant: 340),
+            goToYourOrganizationButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == emailTextField {
-            emailController.setErrorText(nil, errorAccessibilityValue: nil)
-        } else if textField == passwordTextField {
-            passwordController.setErrorText(nil, errorAccessibilityValue: nil)
-        }
-    }
-    
-    @objc func goToYourOrgaizationButtonTapped() {
-        
-        guard let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else {
-            if emailTextField.text?.isEmpty == true && passwordTextField.text?.isEmpty == true {
+    @objc func goToYourOrganizationButtonTapped() {
+        print("goToYourOrganizationButtonTapped called")
+        guard let email = emailTextField.textField.text, !email.isEmpty,
+              let password = passwordTextField.textField.text, !password.isEmpty else {
+            print("Validation failed")
+            if emailTextField.textField.text?.isEmpty == true && passwordTextField.textField.text?.isEmpty == true {
                 showAlert(message: "Please enter your email address & password.")
-            } else if emailTextField.text?.isEmpty == true {
+            } else if emailTextField.textField.text?.isEmpty == true {
                 showAlert(message: "Please enter your email address.")
-            } else if passwordTextField.text?.isEmpty == true {
+            } else if passwordTextField.textField.text?.isEmpty == true {
                 showAlert(message: "Please enter your password.")
             }
             return
         }
         
         guard loginViewModel.isValidEmail(email) else {
-            emailController.setErrorText("Invalid email address.", errorAccessibilityValue: nil)
+            print("Invalid email")
+            showAlert(message: "Invalid email address.")
             return
         }
         
         guard loginViewModel.isValidPassword(password) else {
-            passwordController.setErrorText("Password must be at least 8 characters.", errorAccessibilityValue: nil)
+            print("Invalid password")
+            showAlert(message: "Password must be at least 8 characters.")
             return
         }
         
+        print("Validation passed, proceeding with login")
         if rememberMeCheckbox.isSelected {
             UserDefaults.standard.set(email, forKey: UserDefaultsKeys.userEmail)
             UserDefaults.standard.set(password, forKey: UserDefaultsKeys.newPassword)
-        }else {
+        } else {
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userEmail)
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.newPassword)
         }
@@ -276,7 +249,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
         loginViewModel.password = password
         
         loginViewModel.login { [weak self] response in
-            print("Response: \(String(describing: response))")
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if let token = response?.token, let role = response?.role {
@@ -284,40 +256,31 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
                     UserSessionManager.shared.token = token
                     UserCredentialsManager.shared.newPassword = password
                     UserCredentialsManager.shared.confirmPassword = password
-                    print("DEBUG: Role received from API = \(role)")
                     let alert = UIAlertController(title: "Success", message: response?.message, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                        print("DEBUG: Checking role condition, role = \(role)")
                         if role == "learner" {
-                            print("DEBUG: Navigating to Learner Screen")
                             self.navigateToLearnerScreen()
                         } else if role == "manager" {
-                            print("DEBUG: Navigating to Manager Screen")
                             self.navigateToManagerScreen()
-                        } else {
-                            print("DEBUG: Unknown role: \(role)")
                         }
                     })
-                    print("Login successful, token: \(token), role: \(role)")
                     self.present(alert, animated: true, completion: nil)
-                }else {
+                } else {
                     self.showAlert(message: "Login failed: \(response?.message ?? "")")
                 }
             }
         }
     }
     
-    
-    
     func checkRememberedUser() {
         if let savedEmail = UserDefaults.standard.string(forKey: UserDefaultsKeys.userEmail),
            let savedPassword = UserDefaults.standard.string(forKey: UserDefaultsKeys.newPassword),
            rememberMeCheckbox.isSelected {
-            emailTextField.text = savedEmail
-            passwordTextField.text = savedPassword
+            emailTextField.textField.text = savedEmail
+            passwordTextField.textField.text = savedPassword
         } else {
-            emailTextField.text = ""
-            passwordTextField.text = ""
+            emailTextField.textField.text = ""
+            passwordTextField.textField.text = ""
         }
     }
     
@@ -334,7 +297,6 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     private func navigateToManagerScreen() {
-        print("DEBUG: Inside navigateToManagerScreen")
         let managerViewController = CourseManagerViewController()
         let navigationController = UINavigationController(rootViewController: managerViewController)
         navigationController.modalPresentationStyle = .fullScreen
@@ -343,24 +305,19 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     
     @objc func togglePasswordVisibility() {
         isPasswordVisible.toggle()
-        
-        passwordTextField.isSecureTextEntry = !isPasswordVisible
-        print("Password visibility: \(isPasswordVisible)")
+        passwordTextField.textField.isSecureTextEntry = !isPasswordVisible
         let iconName = isPasswordVisible ? "view" : "hide"
         if let iconImage = UIImage(named: iconName)?.withRenderingMode(.alwaysTemplate) {
             eyeButton.setImage(iconImage, for: .normal)
-            
         }
     }
     
     @objc func toggleRememberMe() {
         rememberMeCheckbox.isSelected.toggle()
-        print("Remember Me: \(rememberMeCheckbox.isSelected)")
     }
     
     @objc func forgetPasswordTapped() {
         print("Forget Password? tapped")
-        
         let nextViewController = ForgetPasswordViewController()
         let navigationController = UINavigationController(rootViewController: nextViewController)
         navigationController.modalPresentationStyle = .fullScreen
@@ -368,11 +325,10 @@ class LoginViewController: UIViewController , UITextFieldDelegate{
     }
     
     @objc func clearTextField(_ sender: UIButton) {
-        if sender == emailTextField.leftView || sender == emailTextField.rightView {
-            emailTextField.text = ""
-        } else if sender == passwordTextField.leftView || sender == passwordTextField.rightView {
-            passwordTextField.text = ""
+        if sender == emailTextField.textField.leftView || sender == emailTextField.textField.rightView {
+            emailTextField.textField.text = ""
+        } else if sender == passwordTextField.textField.leftView || sender == passwordTextField.textField.rightView {
+            passwordTextField.textField.text = ""
         }
     }
 }
-
