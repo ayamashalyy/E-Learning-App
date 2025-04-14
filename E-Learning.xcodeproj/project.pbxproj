@@ -90,7 +90,6 @@
 		03F37E832D1C52B300F50C52 /* courseInfoOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */; };
 		03F37E872D1C530A00F50C52 /* courseContentOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */; };
 		03F37E882D1C530A00F50C52 /* courseContentOverviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */; };
-		53873B73CE464583ECE64220 /* Pods_E_Learning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */; };
 		7D89CE932CED542800A5B64A /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D89CE922CED542800A5B64A /* SectionHeaderView.swift */; };
 		E80CC1C12D78F04900F7BA3A /* HomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */; };
 		E80CC1C32D78FDA800F7BA3A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */; };
@@ -119,6 +118,7 @@
 		E8AA1D032D6EFC7400B15E9C /* MyLearningViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AA1D022D6EFC7400B15E9C /* MyLearningViewController+TableView.swift */; };
 		E8AA3C9C2D7CE00100A43D85 /* AllCoursesCategoriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8AA3C9B2D7CE00100A43D85 /* AllCoursesCategoriesVC.xib */; };
 		E8AA3C9D2D7CE00100A43D85 /* AllCoursesCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AA3C9A2D7CE00100A43D85 /* AllCoursesCategoriesVC.swift */; };
+		E8AAAC052DAD7E2C00E999AA /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E8AAAC042DAD7E2C00E999AA /* IQKeyboardManagerSwift */; };
 		E8B04FC82D6D0B9700E84909 /* UserCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B04FC72D6D0B9700E84909 /* UserCredentialsManager.swift */; };
 		E8B0C2052D84663600F46F81 /* CourseCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B0C2042D84663600F46F81 /* CourseCategoriesViewModel.swift */; };
 		E8B12EEA2D4FF6C0005B0E3E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B12EE92D4FF6C0005B0E3E /* User.swift */; };
@@ -180,6 +180,8 @@
 		E8D4C9EB2D9182BF009CDF80 /* LessonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D4C9EA2D9182BF009CDF80 /* LessonType.swift */; };
 		E8D4C9ED2D918367009CDF80 /* LessonContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D4C9EC2D918367009CDF80 /* LessonContentView.swift */; };
 		E8D4C9F02D6F85970043DBAA /* MyLearningCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D4C9EF2D6F85970043DBAA /* MyLearningCellViewModel.swift */; };
+		E8EA36332DAD604E0097E7A2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E8EA36322DAD604E0097E7A2 /* Alamofire */; };
+		E8EA36362DAD61370097E7A2 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E8EA36352DAD61370097E7A2 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,10 +271,7 @@
 		03F37E812D1C52B300F50C52 /* courseInfoOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseInfoOverviewViewController.swift; sourceTree = "<group>"; };
 		03F37E852D1C530A00F50C52 /* courseContentOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseContentOverviewViewController.swift; sourceTree = "<group>"; };
 		03F37E862D1C530A00F50C52 /* courseContentOverviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = courseContentOverviewViewController.xib; sourceTree = "<group>"; };
-		152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.debug.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.debug.xcconfig"; sourceTree = "<group>"; };
-		4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-E-Learning.release.xcconfig"; path = "Target Support Files/Pods-E-Learning/Pods-E-Learning.release.xcconfig"; sourceTree = "<group>"; };
 		7D89CE922CED542800A5B64A /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
-		CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_E_Learning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80CC1C02D78F04900F7BA3A /* HomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponse.swift; sourceTree = "<group>"; };
 		E80CC1C22D78FDA800F7BA3A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E85581212DA8497B00883CE1 /* AccountCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCenterViewController.swift; sourceTree = "<group>"; };
@@ -368,21 +367,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53873B73CE464583ECE64220 /* Pods_E_Learning.framework in Frameworks */,
+				E8EA36362DAD61370097E7A2 /* SDWebImage in Frameworks */,
+				E8EA36332DAD604E0097E7A2 /* Alamofire in Frameworks */,
+				E8AAAC052DAD7E2C00E999AA /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0052863BC07E25CAE18E1B0A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CAC8C7522720F10959ABA1B2 /* Pods_E_Learning.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		030C79402D20C20400FFD7DD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,8 +558,6 @@
 			children = (
 				0377D4662CEBBA0E006C60F6 /* E-Learning */,
 				0377D4652CEBBA0E006C60F6 /* Products */,
-				31E775D98D1E899D09C6734B /* Pods */,
-				0052863BC07E25CAE18E1B0A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -923,15 +914,6 @@
 			path = CourseOverview;
 			sourceTree = "<group>";
 		};
-		31E775D98D1E899D09C6734B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */,
-				4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		E84A96642D46385E00097572 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,17 +1043,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0377D47B2CEBBA3D006C60F6 /* Build configuration list for PBXNativeTarget "E-Learning" */;
 			buildPhases = (
-				B6ECD4DA4E0B0AAEB0F003D7 /* [CP] Check Pods Manifest.lock */,
 				0377D4602CEBBA0E006C60F6 /* Sources */,
 				0377D4612CEBBA0E006C60F6 /* Frameworks */,
 				0377D4622CEBBA0E006C60F6 /* Resources */,
-				69F608667514FA294A5DC8F7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "E-Learning";
+			packageProductDependencies = (
+				E8EA36322DAD604E0097E7A2 /* Alamofire */,
+				E8EA36352DAD61370097E7A2 /* SDWebImage */,
+				E8AAAC042DAD7E2C00E999AA /* IQKeyboardManagerSwift */,
+			);
 			productName = "E-Learning";
 			productReference = 0377D4642CEBBA0E006C60F6 /* E-Learning.app */;
 			productType = "com.apple.product-type.application";
@@ -1101,6 +1086,11 @@
 				ar,
 			);
 			mainGroup = 0377D45B2CEBBA0C006C60F6;
+			packageReferences = (
+				E8EA36312DAD604E0097E7A2 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E8EA36342DAD61370097E7A2 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				E8AAAC032DAD7E2C00E999AA /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 0377D4652CEBBA0E006C60F6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1152,48 +1142,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		69F608667514FA294A5DC8F7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-E-Learning/Pods-E-Learning-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-E-Learning/Pods-E-Learning-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-E-Learning/Pods-E-Learning-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B6ECD4DA4E0B0AAEB0F003D7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-E-Learning-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0377D4602CEBBA0E006C60F6 /* Sources */ = {
@@ -1483,7 +1431,6 @@
 		};
 		0377D47C2CEBBA3D006C60F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 152872CB51785C1671B783F8 /* Pods-E-Learning.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1517,7 +1464,6 @@
 		};
 		0377D47D2CEBBA3D006C60F6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FC746314D0B4D2AA66461F0 /* Pods-E-Learning.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1571,6 +1517,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E8AAAC032DAD7E2C00E999AA /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
+		E8EA36312DAD604E0097E7A2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		E8EA36342DAD61370097E7A2 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E8AAAC042DAD7E2C00E999AA /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8AAAC032DAD7E2C00E999AA /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		E8EA36322DAD604E0097E7A2 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8EA36312DAD604E0097E7A2 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E8EA36352DAD61370097E7A2 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E8EA36342DAD61370097E7A2 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0377D4702CEBBA0F006C60F6 /* E_Learning.xcdatamodeld */ = {
